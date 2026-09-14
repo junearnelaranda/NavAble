@@ -1,0 +1,2317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Meet NavAble, the Android accessibility navigation app for finding verified routes, entrances, elevators, ramps, and mobility-friendly places.">
+  <meta name="theme-color" content="#f4faf5">
+  <title>NavAble — Accessibility mapped for real life</title>
+  <link rel="icon" type="image/png" href="logOnly.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --green: #17884a;
+      --green-dark: #0b6937;
+      --green-soft: #d9f5e2;
+      --green-pale: #ecf9f0;
+      --navy: #061b38;
+      --muted: #657267;
+      --surface: #f4faf5;
+      --surface-light: #fbfefb;
+      --white: #ffffff;
+      --line: rgba(14, 83, 47, 0.12);
+      --shadow-raised: 14px 14px 34px rgba(37, 75, 50, 0.10),
+                       -14px -14px 34px rgba(255, 255, 255, 0.95);
+      --shadow-soft: 7px 7px 18px rgba(37, 75, 50, 0.09),
+                     -7px -7px 18px rgba(255, 255, 255, 0.94);
+      --shadow-inset: inset 4px 4px 9px rgba(37, 75, 50, 0.09),
+                      inset -4px -4px 9px rgba(255, 255, 255, 0.95);
+      --radius-xl: 32px;
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --page: min(1160px, calc(100% - 40px));
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      background: var(--surface);
+      color: var(--navy);
+      font-family: "Manrope", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body.menu-open {
+      overflow: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .navable-word {
+      white-space: nowrap;
+    }
+
+    .navable-able {
+      color: var(--green);
+    }
+
+    .button-dark .navable-able,
+    .cta-card .navable-able {
+      color: #72dd91;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    img,
+    svg {
+      display: block;
+      max-width: 100%;
+    }
+
+    :focus-visible {
+      outline: 3px solid rgba(23, 136, 74, 0.35);
+      outline-offset: 4px;
+    }
+
+    .skip-link {
+      position: fixed;
+      top: 12px;
+      left: 12px;
+      z-index: 100;
+      transform: translateY(-150%);
+      padding: 10px 16px;
+      border-radius: 12px;
+      background: var(--navy);
+      color: white;
+      font-weight: 700;
+      transition: transform 180ms ease;
+    }
+
+    .skip-link:focus {
+      transform: translateY(0);
+    }
+
+    .shell {
+      width: var(--page);
+      margin-inline: auto;
+    }
+
+    .site-header {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 50;
+      background: rgba(244, 250, 245, 0.82);
+      border-bottom: 1px solid transparent;
+      backdrop-filter: blur(18px);
+      transition: box-shadow 180ms ease, border-color 180ms ease;
+    }
+
+    .site-header.scrolled {
+      border-color: var(--line);
+      box-shadow: 0 8px 24px rgba(17, 53, 31, 0.06);
+    }
+
+    .nav {
+      height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      flex-shrink: 0;
+    }
+
+    .brand-mark {
+      width: 43px;
+      height: 43px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: var(--surface);
+      color: var(--green);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .brand-mark img {
+      width: 36px;
+      height: 36px;
+      object-fit: cover;
+      mix-blend-mode: multiply;
+      height: 27px;
+    }
+
+    .brand-name {
+      display: flex;
+      flex-direction: column;
+      font-size: 1.1rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+    }
+
+    .brand-name small {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 0.59rem;
+      font-weight: 600;
+      letter-spacing: 0;
+    }
+
+    .desktop-nav {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-left: auto;
+    }
+
+    .desktop-nav a {
+      position: relative;
+      color: #4b5c51;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .desktop-nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 100%;
+      bottom: -8px;
+      height: 2px;
+      border-radius: 2px;
+      background: var(--green);
+      transition: right 180ms ease;
+    }
+
+    .desktop-nav a:hover {
+      color: var(--navy);
+    }
+
+    .desktop-nav a:hover::after {
+      right: 0;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .button {
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 0 21px;
+      border: 0;
+      border-radius: 15px;
+      cursor: pointer;
+      font-size: 0.87rem;
+      font-weight: 800;
+      transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+    }
+
+    .button:active {
+      transform: translateY(0);
+    }
+
+    .button-dark {
+      background: var(--navy);
+      color: white;
+      box-shadow: 7px 8px 18px rgba(6, 27, 56, 0.20), -4px -4px 12px white;
+    }
+
+    .button-dark:hover {
+      box-shadow: 4px 5px 12px rgba(6, 27, 56, 0.22), -3px -3px 9px white;
+    }
+
+    .button-soft {
+      background: var(--surface);
+      color: var(--navy);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .button-ghost {
+      min-height: 42px;
+      padding-inline: 14px;
+      background: transparent;
+      color: var(--navy);
+    }
+
+    .arrow {
+      font-size: 1.1rem;
+      line-height: 1;
+      transition: transform 160ms ease;
+    }
+
+    .button:hover .arrow {
+      transform: translateX(3px);
+    }
+
+    .menu-toggle {
+      width: 46px;
+      height: 46px;
+      display: none;
+      place-items: center;
+      padding: 0;
+      border: 0;
+      border-radius: 14px;
+      background: var(--surface);
+      box-shadow: var(--shadow-soft);
+      cursor: pointer;
+    }
+
+    .menu-lines,
+    .menu-lines::before,
+    .menu-lines::after {
+      width: 20px;
+      height: 2px;
+      display: block;
+      border-radius: 3px;
+      background: var(--navy);
+      transition: transform 180ms ease, opacity 180ms ease;
+    }
+
+    .menu-lines {
+      position: relative;
+    }
+
+    .menu-lines::before,
+    .menu-lines::after {
+      content: "";
+      position: absolute;
+      left: 0;
+    }
+
+    .menu-lines::before {
+      transform: translateY(-6px);
+    }
+
+    .menu-lines::after {
+      transform: translateY(6px);
+    }
+
+    .menu-toggle[aria-expanded="true"] .menu-lines {
+      background: transparent;
+    }
+
+    .menu-toggle[aria-expanded="true"] .menu-lines::before {
+      transform: rotate(45deg);
+    }
+
+    .menu-toggle[aria-expanded="true"] .menu-lines::after {
+      transform: rotate(-45deg);
+    }
+
+    .mobile-menu {
+      display: none;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 760px;
+      padding: 150px 0 92px;
+      overflow: hidden;
+    }
+
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      border-radius: 50%;
+      filter: blur(2px);
+    }
+
+    .hero::before {
+      width: 470px;
+      height: 470px;
+      top: 80px;
+      right: -180px;
+      background: radial-gradient(circle, rgba(192, 246, 210, 0.65), rgba(236, 249, 240, 0));
+    }
+
+    .hero::after {
+      width: 360px;
+      height: 360px;
+      bottom: -130px;
+      left: -160px;
+      background: radial-gradient(circle, rgba(207, 240, 218, 0.55), transparent 70%);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.04fr) minmax(400px, 0.96fr);
+      align-items: center;
+      gap: 68px;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      max-width: 690px;
+      margin-bottom: 22px;
+      font-size: clamp(3.25rem, 6.2vw, 5.6rem);
+      line-height: 0.99;
+      letter-spacing: -0.065em;
+    }
+
+    h1 span {
+      color: var(--green);
+    }
+
+    .hero-copy > p {
+      max-width: 580px;
+      margin-bottom: 31px;
+      color: var(--muted);
+      font-size: clamp(1rem, 1.5vw, 1.12rem);
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .hero-actions .button {
+      min-height: 56px;
+      padding-inline: 25px;
+    }
+
+    .trust-row {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      margin-top: 32px;
+      color: var(--muted);
+      font-size: 0.77rem;
+      font-weight: 650;
+    }
+
+    .avatars {
+      display: flex;
+      padding-left: 8px;
+    }
+
+    .avatar {
+      width: 33px;
+      height: 33px;
+      display: grid;
+      place-items: center;
+      margin-left: -8px;
+      border: 3px solid var(--surface);
+      border-radius: 50%;
+      background: var(--green-soft);
+      color: var(--green-dark);
+      font-size: 0.65rem;
+      font-weight: 800;
+    }
+
+    .avatar:nth-child(2) {
+      background: #e4ebfa;
+      color: #345078;
+    }
+
+    .avatar:nth-child(3) {
+      background: #fae9ce;
+      color: #805b25;
+    }
+
+    .avatar:nth-child(4) {
+      background: var(--navy);
+      color: white;
+    }
+
+    .hero-visual {
+      position: relative;
+      min-height: 550px;
+      display: grid;
+      place-items: center;
+    }
+
+    .orbit {
+      position: absolute;
+      width: 470px;
+      height: 470px;
+      border: 1px dashed rgba(23, 136, 74, 0.20);
+      border-radius: 50%;
+    }
+
+    .orbit::before {
+      content: "";
+      position: absolute;
+      inset: 38px;
+      border: 1px solid rgba(23, 136, 74, 0.09);
+      border-radius: inherit;
+    }
+
+    .phone {
+      position: relative;
+      z-index: 2;
+      width: 266px;
+      height: 536px;
+      padding: 10px;
+      border: 1px solid rgba(10, 74, 39, 0.12);
+      border-radius: 39px;
+      background: #edf5ef;
+      box-shadow: 25px 28px 55px rgba(31, 69, 44, 0.20),
+                  -18px -18px 42px rgba(255, 255, 255, 0.95);
+      transform: rotate(4deg);
+    }
+
+    .phone-screen {
+      position: relative;
+      height: 100%;
+      overflow: hidden;
+      border-radius: 31px;
+      background: linear-gradient(145deg, #f8fff9 0%, #ecf8ef 100%);
+    }
+
+    .phone-speaker {
+      position: absolute;
+      z-index: 4;
+      top: 16px;
+      left: 50%;
+      width: 72px;
+      height: 20px;
+      transform: translateX(-50%);
+      border-radius: 20px;
+      background: var(--navy);
+    }
+
+    .app-top {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 49px 20px 14px;
+    }
+
+    .app-logo {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 0.82rem;
+      font-weight: 800;
+    }
+
+    .app-logo img {
+      width: 25px;
+      height: 25px;
+      object-fit: cover;
+      mix-blend-mode: multiply;
+    }
+
+    .app-avatar {
+      width: 29px;
+      height: 29px;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      background: var(--surface);
+      box-shadow: var(--shadow-soft);
+      color: var(--green);
+      font-size: 0.66rem;
+      font-weight: 800;
+    }
+
+    .map {
+      position: relative;
+      height: 278px;
+      margin: 0 13px;
+      overflow: hidden;
+      border-radius: 24px;
+      background-color: #eef5ed;
+      background-image:
+        linear-gradient(32deg, transparent 47%, rgba(255,255,255,0.9) 48%, rgba(255,255,255,0.9) 52%, transparent 53%),
+        linear-gradient(115deg, transparent 43%, rgba(210,221,211,0.75) 44%, rgba(210,221,211,0.75) 47%, transparent 48%);
+      box-shadow: var(--shadow-inset);
+    }
+
+    .map svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .map-label {
+      position: absolute;
+      padding: 5px 8px;
+      border-radius: 7px;
+      background: rgba(255,255,255,0.9);
+      color: var(--muted);
+      font-size: 0.47rem;
+      font-weight: 800;
+      box-shadow: 2px 2px 5px rgba(37, 75, 50, 0.08);
+    }
+
+    .label-a { top: 45px; left: 22px; }
+    .label-b { right: 15px; bottom: 41px; }
+
+    .location-pin {
+      position: absolute;
+      top: 57%;
+      left: 53%;
+      width: 30px;
+      height: 30px;
+      display: grid;
+      place-items: center;
+      transform: translate(-50%, -50%);
+      border: 5px solid white;
+      border-radius: 50% 50% 50% 4px;
+      background: var(--green);
+      box-shadow: 4px 5px 10px rgba(23, 136, 74, 0.25);
+      rotate: -45deg;
+    }
+
+    .location-pin::after {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: white;
+    }
+
+    .route-card {
+      position: relative;
+      z-index: 3;
+      margin: -23px 22px 0;
+      padding: 17px;
+      border-radius: 20px;
+      background: rgba(250, 254, 250, 0.96);
+      box-shadow: 9px 10px 24px rgba(37, 75, 50, 0.15), -5px -5px 14px white;
+    }
+
+    .route-card small {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--green);
+      font-size: 0.52rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .route-card strong {
+      display: block;
+      font-size: 0.78rem;
+    }
+
+    .route-meta {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 9px;
+      color: var(--muted);
+      font-size: 0.52rem;
+      font-weight: 700;
+    }
+
+    .app-tabs {
+      display: flex;
+      justify-content: space-around;
+      margin: 20px 17px 0;
+      padding: 12px 9px;
+      border-radius: 16px;
+      background: var(--surface);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .app-tab {
+      display: grid;
+      place-items: center;
+      gap: 3px;
+      color: #8b958d;
+      font-size: 0.45rem;
+      font-weight: 800;
+    }
+
+    .app-tab i {
+      width: 17px;
+      height: 17px;
+      display: block;
+      border-radius: 6px;
+      background: #dce6de;
+    }
+
+    .app-tab.active {
+      color: var(--green);
+    }
+
+    .app-tab.active i {
+      background: var(--green);
+      box-shadow: 0 0 0 5px rgba(23, 136, 74, 0.09);
+    }
+
+    .float-card {
+      position: absolute;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 16px;
+      border: 1px solid rgba(255,255,255,0.55);
+      border-radius: 17px;
+      background: rgba(246, 252, 247, 0.90);
+      box-shadow: 10px 12px 26px rgba(37, 75, 50, 0.13), -8px -8px 20px white;
+      backdrop-filter: blur(12px);
+    }
+
+    .float-card strong {
+      display: block;
+      font-size: 0.72rem;
+    }
+
+    .float-card span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.57rem;
+    }
+
+    .float-icon {
+      width: 35px;
+      height: 35px;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      border-radius: 11px;
+      background: var(--green-soft);
+      color: var(--green-dark);
+      font-size: 1rem;
+      font-weight: 800;
+      box-shadow: var(--shadow-inset);
+    }
+
+    .float-card.rating {
+      top: 82px;
+      left: 4px;
+    }
+
+    .float-card.access {
+      right: -4px;
+      bottom: 86px;
+    }
+
+    .section {
+      padding: 105px 0;
+    }
+
+    section[id] {
+      scroll-margin-top: 96px;
+    }
+
+    .section-heading {
+      max-width: 650px;
+      margin-bottom: 48px;
+    }
+
+    .section-heading.centered {
+      margin-inline: auto;
+      text-align: center;
+    }
+
+    .kicker {
+      display: block;
+      margin-bottom: 11px;
+      color: var(--green);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      margin-bottom: 15px;
+      font-size: clamp(2.15rem, 4.5vw, 3.65rem);
+      line-height: 1.1;
+      letter-spacing: -0.05em;
+    }
+
+    .section-heading p,
+    .split-copy > p {
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .stats {
+      position: relative;
+      z-index: 5;
+      margin-top: -38px;
+    }
+
+    .stats-card {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      padding: 22px;
+      border: 1px solid rgba(255,255,255,0.7);
+      border-radius: var(--radius-lg);
+      background: var(--surface);
+      box-shadow: var(--shadow-raised);
+    }
+
+    .stat {
+      padding: 16px 24px;
+      text-align: center;
+    }
+
+    .stat + .stat {
+      border-left: 1px solid var(--line);
+    }
+
+    .stat strong {
+      display: block;
+      margin-bottom: 2px;
+      color: var(--green-dark);
+      font-size: clamp(1.55rem, 3vw, 2.2rem);
+      line-height: 1.2;
+      letter-spacing: -0.04em;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      align-items: center;
+      gap: 76px;
+    }
+
+    .about-copy p {
+      max-width: 560px;
+      color: var(--muted);
+    }
+
+    .audience-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .audience-card {
+      min-height: 154px;
+      padding: 23px;
+      border: 1px solid rgba(255,255,255,0.72);
+      border-radius: 20px;
+      background: var(--surface);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .audience-card span {
+      width: 39px;
+      height: 39px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 18px;
+      border-radius: 12px;
+      background: var(--green-soft);
+      color: var(--green-dark);
+      font-size: 0.78rem;
+      font-weight: 800;
+      box-shadow: var(--shadow-inset);
+    }
+
+    .audience-card h3 {
+      margin-bottom: 5px;
+      font-size: 0.94rem;
+    }
+
+    .audience-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.75rem;
+    }
+
+    .team-block {
+      margin-top: 105px;
+      padding-top: 82px;
+      border-top: 1px solid var(--line);
+    }
+
+    .team-heading {
+      max-width: 660px;
+      margin: 0 auto 44px;
+      text-align: center;
+    }
+
+    .team-heading h3 {
+      margin-bottom: 12px;
+      font-size: clamp(2rem, 4vw, 3.15rem);
+      line-height: 1.1;
+      letter-spacing: -0.05em;
+    }
+
+    .team-heading p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .team-card {
+      position: relative;
+      min-height: 250px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 30px 22px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.76);
+      border-radius: 24px;
+      background: var(--surface);
+      box-shadow: var(--shadow-soft);
+      text-align: center;
+      transition: transform 180ms ease, box-shadow 180ms ease;
+    }
+
+    .team-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-raised);
+    }
+
+    .team-number {
+      position: absolute;
+      top: 18px;
+      right: 20px;
+      color: rgba(6,27,56,0.22);
+      font-size: 0.66rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+    }
+
+    .team-avatar {
+      width: 68px;
+      height: 68px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 24px;
+      border-radius: 50%;
+      background: var(--surface);
+      color: var(--navy);
+      box-shadow: var(--shadow-soft);
+      font-size: 1rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .team-card h4 {
+      margin: 0 0 8px;
+      font-size: 0.98rem;
+      line-height: 1.35;
+      letter-spacing: -0.02em;
+    }
+
+    .team-role {
+      margin: 0;
+      color: var(--green-dark);
+      font-size: 0.72rem;
+      font-weight: 800;
+      line-height: 1.45;
+    }
+
+    .feature-card {
+      position: relative;
+      min-height: 285px;
+      padding: 30px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.72);
+      border-radius: var(--radius-lg);
+      background: var(--surface);
+      box-shadow: var(--shadow-soft);
+      transition: transform 180ms ease, box-shadow 180ms ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-raised);
+    }
+
+    .feature-card::after {
+      content: "";
+      position: absolute;
+      right: -35px;
+      bottom: -45px;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: var(--green-pale);
+      box-shadow: var(--shadow-inset);
+    }
+
+    .feature-icon {
+      width: 54px;
+      height: 54px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 26px;
+      border-radius: 17px;
+      background: var(--surface);
+      color: var(--green);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .feature-icon svg {
+      width: 28px;
+      height: 28px;
+    }
+
+    .feature-card h3 {
+      margin-bottom: 10px;
+      font-size: 1.14rem;
+      letter-spacing: -0.025em;
+    }
+
+    .feature-card p {
+      position: relative;
+      z-index: 2;
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 0.86rem;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      align-items: center;
+      gap: 90px;
+    }
+
+    .discover-panel {
+      position: relative;
+      min-height: 510px;
+      display: grid;
+      place-items: center;
+      border-radius: var(--radius-xl);
+      background: var(--green-pale);
+      box-shadow: var(--shadow-inset);
+    }
+
+    .mini-map {
+      position: relative;
+      width: calc(100% - 62px);
+      height: 388px;
+      overflow: hidden;
+      border: 10px solid var(--surface);
+      border-radius: 27px;
+      background: #e7f1e9;
+      box-shadow: var(--shadow-raised);
+    }
+
+    .mini-map svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .map-result {
+      position: absolute;
+      right: 7px;
+      bottom: 35px;
+      width: 218px;
+      padding: 17px;
+      border-radius: 18px;
+      background: rgba(251, 254, 251, 0.95);
+      box-shadow: 10px 12px 30px rgba(37, 75, 50, 0.16), -5px -5px 16px white;
+      backdrop-filter: blur(12px);
+    }
+
+    .map-result-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .map-result strong {
+      font-size: 0.76rem;
+      line-height: 1.35;
+    }
+
+    .score {
+      padding: 4px 7px;
+      border-radius: 8px;
+      background: var(--green-soft);
+      color: var(--green-dark);
+      font-size: 0.58rem;
+      font-weight: 800;
+    }
+
+    .amenities {
+      display: flex;
+      gap: 6px;
+    }
+
+    .amenities span {
+      padding: 5px 7px;
+      border-radius: 8px;
+      background: var(--surface);
+      color: var(--muted);
+      box-shadow: var(--shadow-inset);
+      font-size: 0.5rem;
+      font-weight: 700;
+    }
+
+    .check-list {
+      display: grid;
+      gap: 18px;
+      margin: 28px 0 34px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .check-list li {
+      display: grid;
+      grid-template-columns: 39px 1fr;
+      align-items: center;
+      gap: 14px;
+      color: #394a3e;
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .check {
+      width: 39px;
+      height: 39px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: var(--surface);
+      color: var(--green);
+      box-shadow: var(--shadow-soft);
+      font-weight: 900;
+    }
+
+    .steps {
+      counter-reset: step;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .step {
+      counter-increment: step;
+      position: relative;
+      padding: 31px;
+      border-radius: var(--radius-lg);
+      background: var(--surface);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .step::before {
+      content: "0" counter(step);
+      display: block;
+      margin-bottom: 33px;
+      color: var(--green);
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+    }
+
+    .step:not(:last-child)::after {
+      content: "→";
+      position: absolute;
+      top: 44px;
+      right: -21px;
+      z-index: 2;
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--surface);
+      color: var(--green);
+      box-shadow: var(--shadow-soft);
+      font-weight: 900;
+    }
+
+    .step h3 {
+      margin-bottom: 9px;
+      font-size: 1.05rem;
+    }
+
+    .step p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 0.84rem;
+    }
+
+    .faq-section {
+      padding-top: 45px;
+    }
+
+    .faq-list {
+      display: grid;
+      gap: 16px;
+      max-width: 850px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.72);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .faq-item summary {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      min-height: 64px;
+      padding: 18px 22px;
+      cursor: pointer;
+      list-style: none;
+      color: var(--navy);
+      font-size: 0.92rem;
+      font-weight: 800;
+    }
+
+    .faq-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-item summary::after {
+      content: "+";
+      width: 30px;
+      height: 30px;
+      display: grid;
+      place-items: center;
+      flex: 0 0 30px;
+      border-radius: 10px;
+      background: var(--green-soft);
+      color: var(--green-dark);
+      font-size: 1.15rem;
+      line-height: 1;
+    }
+
+    .faq-item[open] summary::after {
+      content: "−";
+    }
+
+    .faq-item p {
+      margin: 0;
+      padding: 0 22px 22px;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .cta {
+      padding: 60px 0 105px;
+    }
+
+    .cta-card {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 35px;
+      padding: 60px;
+      overflow: hidden;
+      border-radius: var(--radius-xl);
+      background: var(--navy);
+      color: white;
+      box-shadow: 20px 22px 50px rgba(6, 27, 56, 0.20), -14px -14px 35px white;
+    }
+
+    .cta-card::before,
+    .cta-card::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .cta-card::before {
+      width: 270px;
+      height: 270px;
+      top: -150px;
+      right: 23%;
+      border: 44px solid rgba(91, 211, 133, 0.10);
+    }
+
+    .cta-card::after {
+      width: 150px;
+      height: 150px;
+      right: -55px;
+      bottom: -65px;
+      background: rgba(23, 136, 74, 0.35);
+    }
+
+    .cta-copy {
+      position: relative;
+      z-index: 2;
+      max-width: 630px;
+    }
+
+    .cta-copy h2 {
+      margin-bottom: 12px;
+      font-size: clamp(2rem, 4vw, 3.1rem);
+    }
+
+    .cta-copy p {
+      margin-bottom: 0;
+      color: rgba(255,255,255,0.72);
+    }
+
+    .cta .button {
+      position: relative;
+      z-index: 2;
+      min-height: 57px;
+      padding-inline: 25px;
+      background: #d7f5df;
+      color: var(--navy);
+      box-shadow: 7px 8px 18px rgba(0,0,0,0.22);
+    }
+
+    .release-action {
+      position: relative;
+      z-index: 2;
+      min-width: 245px;
+    }
+
+    .release-action .button {
+      width: 100%;
+    }
+
+    .release-note {
+      display: block;
+      margin-top: 11px;
+      color: rgba(255,255,255,0.62);
+      font-size: 0.68rem;
+      font-weight: 650;
+      text-align: center;
+    }
+
+    .contact-section {
+      padding: 18px 0 105px;
+    }
+
+    .contact-card {
+      display: grid;
+      grid-template-columns: minmax(0, 0.8fr) minmax(420px, 1.2fr);
+      gap: 82px;
+      padding: clamp(42px, 6vw, 72px);
+      border: 1px solid rgba(255,255,255,0.78);
+      border-radius: var(--radius-xl);
+      background: var(--surface);
+      box-shadow: var(--shadow-raised);
+    }
+
+    .contact-copy h2 {
+      max-width: 470px;
+      margin-bottom: 20px;
+    }
+
+    .contact-copy > p {
+      max-width: 500px;
+      margin-bottom: 30px;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .contact-email {
+      display: inline-flex;
+      align-items: center;
+      color: var(--green-dark);
+      font-size: 0.84rem;
+      font-weight: 800;
+    }
+
+    .contact-form {
+      display: grid;
+      gap: 18px;
+    }
+
+    .contact-field label {
+      display: block;
+      margin: 0 0 7px;
+      color: #425247;
+      font-size: 0.73rem;
+      font-weight: 800;
+    }
+
+    .contact-field input,
+    .contact-field textarea {
+      width: 100%;
+      border: 1px solid transparent;
+      border-radius: 15px;
+      background: var(--surface);
+      color: var(--navy);
+      box-shadow: var(--shadow-inset);
+      font: inherit;
+      font-size: 0.84rem;
+      transition: border-color 160ms ease, box-shadow 160ms ease;
+    }
+
+    .contact-field input {
+      min-height: 54px;
+      padding: 0 17px;
+    }
+
+    .contact-field textarea {
+      min-height: 126px;
+      padding: 15px 17px;
+      resize: vertical;
+    }
+
+    .contact-field input::placeholder,
+    .contact-field textarea::placeholder {
+      color: #88938b;
+    }
+
+    .contact-field input:focus,
+    .contact-field textarea:focus {
+      border-color: rgba(23,136,74,0.28);
+      outline: none;
+      box-shadow: var(--shadow-inset), 0 0 0 3px rgba(23,136,74,0.08);
+    }
+
+    .contact-submit {
+      width: 100%;
+      min-height: 56px;
+      margin-top: 2px;
+    }
+
+    footer {
+      padding: 22px 0 34px;
+      border-top: 1px solid var(--line);
+    }
+
+    .footer-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .footer-copy {
+      color: var(--muted);
+      font-size: 0.72rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      color: var(--muted);
+      font-size: 0.72rem;
+      font-weight: 700;
+    }
+
+    .footer-links a:hover {
+      color: var(--green);
+    }
+
+    .footer-links .staff-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--navy);
+    }
+
+    .footer-links .staff-link::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      display: inline-block;
+      border: 1.5px solid currentColor;
+      border-radius: 2px;
+      box-shadow: 0 -4px 0 -2.4px var(--surface), 0 -4px 0 -1px currentColor;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 600ms ease, transform 600ms ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 980px) {
+      .desktop-nav,
+      .nav-actions .button-ghost,
+      .nav-actions .button-dark {
+        display: none;
+      }
+
+      .menu-toggle {
+        display: grid;
+      }
+
+      .mobile-menu {
+        position: fixed;
+        inset: 78px 0 0;
+        z-index: 45;
+        display: flex;
+        flex-direction: column;
+        gap: 9px;
+        padding: 26px 20px;
+        background: rgba(244, 250, 245, 0.98);
+        visibility: hidden;
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: opacity 180ms ease, transform 180ms ease, visibility 180ms;
+      }
+
+      .mobile-menu.open {
+        visibility: visible;
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .mobile-menu a {
+        padding: 15px 18px;
+        border-radius: 14px;
+        color: var(--navy);
+        font-weight: 800;
+      }
+
+      .mobile-menu a:not(.button) {
+        background: var(--surface);
+        box-shadow: var(--shadow-soft);
+      }
+
+      .mobile-menu .button {
+        margin-top: 10px;
+        color: white;
+      }
+
+      .hero {
+        padding-top: 130px;
+      }
+
+      .hero-grid,
+      .split,
+      .about-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 55px;
+      }
+
+      .hero-copy,
+      .hero-visual,
+      .split-copy,
+      .discover-panel {
+        min-width: 0;
+      }
+
+      .hero-copy {
+        max-width: 720px;
+      }
+
+      .hero-visual {
+        min-height: 590px;
+      }
+
+      .feature-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .team-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .feature-card:last-child {
+        grid-column: 1 / -1;
+      }
+
+      .split-copy {
+        order: -1;
+      }
+
+      .cta-card {
+        grid-template-columns: 1fr;
+        padding: 48px;
+      }
+
+      .contact-card {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 48px;
+      }
+    }
+
+    @media (max-width: 680px) {
+      :root {
+        --page: min(1160px, calc(100% - 28px));
+      }
+
+      .nav {
+        height: 70px;
+      }
+
+      .brand-name small {
+        display: none;
+      }
+
+      .mobile-menu {
+        inset-block-start: 70px;
+      }
+
+      .hero {
+        min-height: auto;
+        padding: 116px 0 75px;
+      }
+
+      h1 {
+        font-size: clamp(2.7rem, 15vw, 4.1rem);
+      }
+
+      .hero-actions {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .hero-actions .button {
+        width: 100%;
+      }
+
+      .trust-row {
+        align-items: flex-start;
+      }
+
+      .trust-row > span {
+        min-width: 0;
+      }
+
+      .hero-visual {
+        min-height: 525px;
+        transform: scale(0.90);
+        margin: -22px -20px -42px;
+      }
+
+      .orbit {
+        width: 390px;
+        height: 390px;
+      }
+
+      .phone {
+        width: 238px;
+        height: 492px;
+      }
+
+      .float-card.rating {
+        left: 0;
+      }
+
+      .float-card.access {
+        right: 0;
+      }
+
+      .stats {
+        margin-top: 0;
+        padding-top: 12px;
+      }
+
+      .stats-card {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .stat {
+        padding: 17px 10px;
+      }
+
+      .stat + .stat {
+        border-left: 0;
+      }
+
+      .stat:nth-child(even) {
+        border-left: 1px solid var(--line);
+      }
+
+      .stat:nth-child(n+3) {
+        border-top: 1px solid var(--line);
+      }
+
+      .section {
+        padding: 80px 0;
+      }
+
+      .section-heading {
+        margin-bottom: 34px;
+      }
+
+      .feature-grid,
+      .steps {
+        grid-template-columns: 1fr;
+      }
+
+      .audience-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .team-block {
+        margin-top: 78px;
+        padding-top: 65px;
+      }
+
+      .team-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .team-card {
+        min-height: 220px;
+      }
+
+      .feature-card:last-child {
+        grid-column: auto;
+      }
+
+      .step:not(:last-child)::after {
+        top: auto;
+        right: 25px;
+        bottom: -20px;
+        rotate: 90deg;
+      }
+
+      .discover-panel {
+        min-height: 430px;
+      }
+
+      .mini-map {
+        width: calc(100% - 34px);
+        height: 344px;
+      }
+
+      .map-result {
+        right: 1px;
+        bottom: 18px;
+      }
+
+      .cta {
+        padding-top: 35px;
+      }
+
+      .contact-section {
+        padding-bottom: 80px;
+      }
+
+      .contact-card {
+        padding: 34px 22px;
+        border-radius: 24px;
+      }
+
+      .cta-card {
+        padding: 36px 27px;
+        text-align: center;
+      }
+
+      .cta .button {
+        width: 100%;
+      }
+
+      .release-action {
+        width: 100%;
+        min-width: 0;
+      }
+
+      .footer-row,
+      .footer-links {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .footer-links {
+        gap: 12px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="site-header" id="siteHeader">
+    <div class="shell nav">
+      <a class="brand" href="#" aria-label="NavAble home">
+        <span class="brand-mark" aria-hidden="true"><img src="logOnly.png" alt=""></span>
+        <span class="brand-name">
+          NavAble
+          <small>Accessible navigation for everyone</small>
+        </span>
+      </a>
+
+      <nav class="desktop-nav" aria-label="Primary navigation">
+        <a href="#main-content">Home</a>
+        <a href="#about">About</a>
+        <a href="#features">Features</a>
+        <a href="#how-it-works">How it works</a>
+        <a href="#discover">Locations</a>
+        <a href="#download">Download</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a class="button button-dark" href="#download">Get NavAble <span class="arrow" aria-hidden="true">↓</span></a>
+        <button class="menu-toggle" id="menuToggle" type="button" aria-controls="mobileMenu" aria-expanded="false" aria-label="Open navigation">
+          <span class="menu-lines" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+
+    <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
+      <a href="#main-content">Home</a>
+      <a href="#about">About NavAble</a>
+      <a href="#features">Accessibility features</a>
+      <a href="#how-it-works">How it works</a>
+      <a href="#discover">Accessible locations</a>
+      <a href="#faq">Frequently asked questions</a>
+      <a href="#download">Download app</a>
+      <a href="#contact">Contact</a>
+      <a class="button button-dark" href="#download">Get NavAble <span class="arrow" aria-hidden="true">↓</span></a>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="shell hero-grid">
+        <div class="hero-copy reveal">
+          <h1 id="hero-title">Accessibility, mapped for <span>real life.</span></h1>
+          <p>NavAble helps PWDs, older adults, caregivers, and everyday travelers find routes and places that match their mobility needs—before the journey begins.</p>
+          <div class="hero-actions">
+            <a class="button button-dark" href="#features">Discover NavAble <span class="arrow" aria-hidden="true">→</span></a>
+            <a class="button button-soft" href="#how-it-works">How the app works</a>
+          </div>
+          <div class="trust-row" aria-label="Trusted by more than 14,000 community members">
+            <div class="avatars" aria-hidden="true">
+              <span class="avatar">AR</span>
+              <span class="avatar">MJ</span>
+              <span class="avatar">SK</span>
+              <span class="avatar">+</span>
+            </div>
+            <span>Built with accessibility, community insight, and verified data at its core.</span>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal" aria-label="Preview of the NavAble mobile route finder">
+          <div class="orbit" aria-hidden="true"></div>
+
+          <div class="float-card rating" aria-hidden="true">
+            <div class="float-icon">✓</div>
+            <div>
+              <strong>Human verified</strong>
+              <span>AI-assisted community data</span>
+            </div>
+          </div>
+
+          <div class="phone" aria-hidden="true">
+            <div class="phone-screen">
+              <span class="phone-speaker"></span>
+              <div class="app-top">
+                <div class="app-logo">
+                  <img src="logOnly.png" alt="">
+                  NavAble
+                </div>
+                <span class="app-avatar">JD</span>
+              </div>
+              <div class="map">
+                <svg viewBox="0 0 250 300" preserveAspectRatio="none">
+                  <path d="M-20 248 C43 205 39 153 91 128 C145 103 177 134 270 53" fill="none" stroke="#ffffff" stroke-width="19" stroke-linecap="round"/>
+                  <path d="M-20 248 C43 205 39 153 91 128 C145 103 177 134 270 53" fill="none" stroke="#38a961" stroke-width="6" stroke-linecap="round" stroke-dasharray="2 1"/>
+                  <path d="M61 -10 C75 58 129 53 133 111 C139 191 205 190 218 310" fill="none" stroke="#d5e2d6" stroke-width="13"/>
+                  <path d="M-20 57 C41 65 50 100 96 91 C157 79 197 31 270 36" fill="none" stroke="#dbe6dc" stroke-width="11"/>
+                  <rect x="18" y="19" width="46" height="32" rx="6" fill="#dceadd"/>
+                  <rect x="162" y="201" width="62" height="48" rx="7" fill="#dceadd"/>
+                  <rect x="19" y="138" width="39" height="44" rx="6" fill="#e0ebe1"/>
+                </svg>
+                <span class="map-label label-a">Central Park</span>
+                <span class="map-label label-b">Civic Center</span>
+                <span class="location-pin"></span>
+              </div>
+              <div class="route-card">
+                <small>Best accessible route</small>
+                <strong>12 min · Step-free all the way</strong>
+                <div class="route-meta">
+                  <span>0.8 km</span>
+                  <span>Low incline</span>
+                  <span>2 elevators</span>
+                </div>
+              </div>
+              <div class="app-tabs">
+                <span class="app-tab active"><i></i>Explore</span>
+                <span class="app-tab"><i></i>Routes</span>
+                <span class="app-tab"><i></i>Saved</span>
+                <span class="app-tab"><i></i>Profile</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="float-card access" aria-hidden="true">
+            <div class="float-icon">↗</div>
+            <div>
+              <strong>Accessible route found</strong>
+              <span>Step-free · Low incline</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats shell" aria-label="NavAble community statistics">
+      <div class="stats-card reveal">
+        <div class="stat"><strong>One app</strong><span>for routes, places, and reports</span></div>
+        <div class="stat"><strong>AI+</strong><span>photo feature detection</span></div>
+        <div class="stat"><strong>Verified</strong><span>through human moderation</span></div>
+        <div class="stat"><strong>Community</strong><span>powered accessibility updates</span></div>
+      </div>
+    </section>
+
+    <section class="section" id="about" aria-labelledby="about-title">
+      <div class="shell about-grid">
+        <div class="about-copy reveal">
+          <span class="kicker">About NavAble</span>
+          <h2 id="about-title">Navigation shaped around people.</h2>
+          <p>NavAble is an Android accessibility mapping and navigation app created to make everyday travel easier to understand and plan. It combines useful place information, community contributions, AI-assisted photo analysis, and human verification in one experience.</p>
+          <p>The goal is simple: help more people know what to expect before they arrive.</p>
+        </div>
+        <div class="audience-grid" aria-label="People who can benefit from NavAble">
+          <article class="audience-card reveal">
+            <span aria-hidden="true">PWD</span>
+            <h3>People with disabilities</h3>
+            <p>Plan around ramps, elevators, entrances, surfaces, and mobility needs.</p>
+          </article>
+          <article class="audience-card reveal">
+            <span aria-hidden="true">60+</span>
+            <h3>Older adults</h3>
+            <p>Find routes and destinations with clearer, more practical access details.</p>
+          </article>
+          <article class="audience-card reveal">
+            <span aria-hidden="true">CARE</span>
+            <h3>Caregivers and families</h3>
+            <p>Prepare trips with reliable information before leaving home.</p>
+          </article>
+          <article class="audience-card reveal">
+            <span aria-hidden="true">YOU</span>
+            <h3>Community contributors</h3>
+            <p>Report changes and help keep local accessibility information useful.</p>
+          </article>
+        </div>
+      </div>
+
+      <div class="shell team-block">
+        <div class="team-heading reveal">
+          <span class="kicker">The people behind NavAble</span>
+          <h3>Meet our project team.</h3>
+          <p>A focused group combining product direction, interface design, software development, quality assurance, and data architecture.</p>
+        </div>
+
+        <div class="team-grid" aria-label="NavAble project team">
+          <article class="team-card reveal">
+            <span class="team-number" aria-hidden="true">01</span>
+            <div class="team-avatar" aria-hidden="true">JA</div>
+            <h4>Aranda, June Arnel</h4>
+            <p class="team-role">Project Manager / UI UX</p>
+          </article>
+
+          <article class="team-card reveal">
+            <span class="team-number" aria-hidden="true">02</span>
+            <div class="team-avatar" aria-hidden="true">MV</div>
+            <h4>Villarin, Mark Virgil</h4>
+            <p class="team-role">Lead Programmer</p>
+          </article>
+
+          <article class="team-card reveal">
+            <span class="team-number" aria-hidden="true">03</span>
+            <div class="team-avatar" aria-hidden="true">EY</div>
+            <h4>Yordan, Emil Bryan</h4>
+            <p class="team-role">Programmer / QA Tester</p>
+          </article>
+
+          <article class="team-card reveal">
+            <span class="team-number" aria-hidden="true">04</span>
+            <div class="team-avatar" aria-hidden="true">LF</div>
+            <h4>Fernandez, Larry</h4>
+            <p class="team-role">Database Designer</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="features" aria-labelledby="features-title">
+      <div class="shell">
+        <div class="section-heading centered reveal">
+          <span class="kicker">The mobile app for everyday access</span>
+          <h2 id="features-title">Plan around what matters to you.</h2>
+          <p>NavAble brings practical accessibility information into one focused Android experience—from discovery to arrival.</p>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature-card reveal">
+            <div class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M4 19c3-6 4-7 7-7s4 2 6-2 2-4 3-5"/>
+                <circle cx="5" cy="18" r="2.2"/>
+                <circle cx="20" cy="5" r="2.2"/>
+              </svg>
+            </div>
+            <h3>Smart accessible routing</h3>
+            <p>Choose step-free paths and filter by incline, curb cuts, elevators, surface type, and personal mobility needs.</p>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M12 3 4.8 6v5.1c0 4.5 3 8.6 7.2 9.9 4.2-1.3 7.2-5.4 7.2-9.9V6L12 3Z"/>
+                <path d="m8.5 12 2.2 2.2 4.8-5"/>
+              </svg>
+            </div>
+            <h3>Verified by people</h3>
+            <p>Real community members and trained auditors review access details, helping information stay current and dependable.</p>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M4 15a8 8 0 1 1 16 0"/>
+                <path d="M7 15v4H5a2 2 0 0 1-2-2v-1a2 2 0 0 1 2-2h2Zm10 0v4h2a2 2 0 0 0 2-2v-1a2 2 0 0 0-2-2h-2Z"/>
+                <path d="M17 19c0 1.1-.9 2-2 2h-2"/>
+              </svg>
+            </div>
+            <h3>AI accessibility scanner</h3>
+            <p>Photograph a ramp, entrance, or pathway and let AI identify possible features before a moderator verifies the result.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="discover" aria-labelledby="discover-title">
+      <div class="shell split">
+        <div class="discover-panel reveal" aria-hidden="true">
+          <div class="mini-map">
+            <svg viewBox="0 0 520 390" preserveAspectRatio="none">
+              <rect width="520" height="390" fill="#e8f1e9"/>
+              <path d="M-30 320C75 291 92 220 176 220s112 61 197 18 85-93 177-110" fill="none" stroke="#fff" stroke-width="31"/>
+              <path d="M-30 320C75 291 92 220 176 220s112 61 197 18 85-93 177-110" fill="none" stroke="#2ca35b" stroke-width="9" stroke-linecap="round"/>
+              <path d="M88-20c-9 78 55 102 48 176-6 62-55 93-41 254" fill="none" stroke="#d2dfd4" stroke-width="22"/>
+              <path d="M-20 75c95 6 141 41 227 12S386 27 550 42" fill="none" stroke="#d5e2d6" stroke-width="18"/>
+              <path d="M320-20c-33 100 11 130-7 201-19 75-65 111-44 229" fill="none" stroke="#d7e3d8" stroke-width="18"/>
+              <g fill="#dbe7dc">
+                <rect x="25" y="101" width="77" height="58" rx="11"/>
+                <rect x="169" y="119" width="91" height="71" rx="12"/>
+                <rect x="372" y="67" width="108" height="72" rx="12"/>
+                <rect x="350" y="278" width="112" height="79" rx="12"/>
+                <rect x="113" y="284" width="68" height="67" rx="11"/>
+              </g>
+              <g fill="#17884a" stroke="#fff" stroke-width="5">
+                <circle cx="175" cy="220" r="13"/>
+                <circle cx="374" cy="237" r="13"/>
+                <circle cx="470" cy="157" r="13"/>
+              </g>
+            </svg>
+          </div>
+          <div class="map-result">
+            <div class="map-result-top">
+              <strong>Riverside Community Library</strong>
+              <span class="score">98%</span>
+            </div>
+            <div class="amenities">
+              <span>Ramp</span>
+              <span>Elevator</span>
+              <span>Parking</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="split-copy reveal">
+          <span class="kicker">Know before you go</span>
+          <h2 id="discover-title">Access details you can actually use.</h2>
+          <p>Every place profile focuses on the information that shapes a real visit—not just a generic accessibility label.</p>
+          <ul class="check-list">
+            <li><span class="check" aria-hidden="true">✓</span><span>Entrance widths, ramps, surfaces, and gradients</span></li>
+            <li><span class="check" aria-hidden="true">✓</span><span>Accessible restrooms, elevators, and parking</span></li>
+            <li><span class="check" aria-hidden="true">✓</span><span>Community photos and recent verification dates</span></li>
+          </ul>
+          <a class="button button-dark" href="#how-it-works">See the journey <span class="arrow" aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="how-it-works" aria-labelledby="steps-title">
+      <div class="shell">
+        <div class="section-heading centered reveal">
+          <span class="kicker">Simple from the start</span>
+          <h2 id="steps-title">Your next route in three steps.</h2>
+          <p>Tell NavAble what matters to you, choose a destination, and get a route shaped around your needs.</p>
+        </div>
+
+        <div class="steps">
+          <article class="step reveal">
+            <h3>Set your access preferences</h3>
+            <p>Choose the mobility features and route conditions that make travel comfortable for you.</p>
+          </article>
+          <article class="step reveal">
+            <h3>Search a destination</h3>
+            <p>Find a place or explore what is nearby with clear accessibility scores and useful filters.</p>
+          </article>
+          <article class="step reveal">
+            <h3>Follow a verified route</h3>
+            <p>Navigate with step-by-step guidance and contribute an update when conditions change.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section faq-section" id="faq" aria-labelledby="faq-title">
+      <div class="shell">
+        <div class="section-heading centered reveal">
+          <span class="kicker">Good to know</span>
+          <h2 id="faq-title">Frequently asked questions.</h2>
+          <p>Quick answers about NavAble, its accessibility information, and the upcoming app.</p>
+        </div>
+
+        <div class="faq-list">
+          <details class="faq-item reveal">
+            <summary>Is the NavAble app available now?</summary>
+            <p>The Android app is still being prepared for release. You can explore the features on this site now and check back for availability updates.</p>
+          </details>
+          <details class="faq-item reveal">
+            <summary>How is accessibility information verified?</summary>
+            <p>NavAble combines community-submitted details and photos with automated checks and staff review so that useful information can be confirmed before publication.</p>
+          </details>
+          <details class="faq-item reveal">
+            <summary>Can I report information that is outdated?</summary>
+            <p>Yes. Community updates are an important part of NavAble. The app is designed to let people report changed entrances, routes, facilities, and other access conditions.</p>
+          </details>
+          <details class="faq-item reveal">
+            <summary>What kinds of accessibility needs does NavAble support?</summary>
+            <p>Place and route details can cover step-free access, ramps, elevators, curb cuts, parking, restrooms, surface conditions, and other mobility-related needs.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="download" aria-labelledby="cta-title">
+      <div class="shell">
+        <div class="cta-card reveal">
+          <div class="cta-copy">
+            <span class="kicker">Designed for Android</span>
+            <h2 id="cta-title">Take accessible navigation with you.</h2>
+            <p>The NavAble mobile app is being prepared for Android. Explore locations, follow accessible routes, scan features, and help improve the map.</p>
+          </div>
+          <div class="release-action">
+            <a class="button" href="#features">Preview the mobile experience <span class="arrow" aria-hidden="true">→</span></a>
+            <span class="release-note">Android release coming soon</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-section" id="contact" aria-labelledby="contact-title">
+      <div class="shell">
+        <div class="contact-card reveal">
+          <div class="contact-copy">
+            <span class="kicker">Talk with the NavAble team</span>
+            <h2 id="contact-title">Help us make every journey clearer.</h2>
+            <p>Have a question, accessibility suggestion, partnership idea, or project feedback? Tell us what is on your mind and our team will get back to you.</p>
+            <a class="contact-email" href="mailto:nav4ble@gmail.com">nav4ble@gmail.com</a>
+          </div>
+
+          <form class="contact-form" action="mailto:nav4ble@gmail.com" method="post" enctype="text/plain">
+            <div class="contact-field">
+              <label for="contactName">Name</label>
+              <input id="contactName" name="name" type="text" autocomplete="name" placeholder="Your name or organization" required>
+            </div>
+
+            <div class="contact-field">
+              <label for="contactEmail">Email</label>
+              <input id="contactEmail" name="email" type="email" autocomplete="email" placeholder="you@example.com" required>
+            </div>
+
+            <div class="contact-field">
+              <label for="contactMessage">How can we help?</label>
+              <textarea id="contactMessage" name="message" placeholder="Tell us about your question, idea, or accessibility feedback…" required></textarea>
+            </div>
+
+            <button class="button button-dark contact-submit" type="submit">Send message <span class="arrow" aria-hidden="true">→</span></button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell footer-row">
+      <a class="brand" href="#" aria-label="Back to top">
+        <span class="brand-mark" aria-hidden="true"><img src="logOnly.png" alt=""></span>
+        <span class="brand-name">NavAble</span>
+      </a>
+      <p class="footer-copy">© <span id="year"></span> NavAble. Accessibility for every journey.<br>Project inquiries and accessibility feedback are welcome.</p>
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="#about">About</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a class="staff-link" href="staff-login.html">Staff Login</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    function applyNavAbleWordmark(root = document.body) {
+      const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+        acceptNode(node) {
+          const parent = node.parentElement;
+          if (!parent || !node.nodeValue.includes("NavAble") || parent.closest("script, style, textarea, option")) {
+            return NodeFilter.FILTER_REJECT;
+          }
+          return NodeFilter.FILTER_ACCEPT;
+        }
+      });
+      const matches = [];
+      while (walker.nextNode()) matches.push(walker.currentNode);
+      matches.forEach((node) => {
+        const container = document.createElement("span");
+        node.nodeValue.split(/(NavAble)/g).forEach((part) => {
+          if (part !== "NavAble") {
+            container.append(part);
+            return;
+          }
+          const word = document.createElement("span");
+          word.className = "navable-word";
+          word.append("Nav");
+          const accent = document.createElement("span");
+          accent.className = "navable-able";
+          accent.textContent = "Able";
+          word.append(accent);
+          container.append(word);
+        });
+        node.replaceWith(container);
+      });
+    }
+
+    applyNavAbleWordmark();
+
+    const menuToggle = document.getElementById("menuToggle");
+    const mobileMenu = document.getElementById("mobileMenu");
+    const siteHeader = document.getElementById("siteHeader");
+
+    function closeMenu(returnFocus = false) {
+      mobileMenu.classList.remove("open");
+      menuToggle.setAttribute("aria-expanded", "false");
+      menuToggle.setAttribute("aria-label", "Open navigation");
+      document.body.classList.remove("menu-open");
+      if (returnFocus) menuToggle.focus();
+    }
+
+    menuToggle.addEventListener("click", () => {
+      const willOpen = !mobileMenu.classList.contains("open");
+      mobileMenu.classList.toggle("open", willOpen);
+      menuToggle.setAttribute("aria-expanded", String(willOpen));
+      menuToggle.setAttribute("aria-label", willOpen ? "Close navigation" : "Open navigation");
+      document.body.classList.toggle("menu-open", willOpen);
+    });
+
+    mobileMenu.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", closeMenu);
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && mobileMenu.classList.contains("open")) {
+        closeMenu(true);
+      }
+    });
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 980 && mobileMenu.classList.contains("open")) closeMenu();
+    });
+
+    window.addEventListener("scroll", () => {
+      siteHeader.classList.toggle("scrolled", window.scrollY > 8);
+    }, { passive: true });
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const revealItems = document.querySelectorAll(".reveal");
+
+    if (reducedMotion || !("IntersectionObserver" in window)) {
+      revealItems.forEach((item) => item.classList.add("visible"));
+    } else {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+
+      revealItems.forEach((item) => observer.observe(item));
+    }
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

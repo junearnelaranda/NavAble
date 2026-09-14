@@ -1,0 +1,721 @@
+<!DOCTYPE html><html lang="en" style=""><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><title>NavAble Admin</title><link href="https://fonts.googleapis.com" rel="preconnect"><link href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>*,*::before,*::after{box-sizing:border-box;}@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "primary-fixed-dim": "#71dd7f", "secondary-fixed-dim": "#afc8f2", "surface-container-lowest": "#ffffff", "outline": "#6e7a6c", "secondary": "#475f84", "surface": "#f3fcf5", "on-surface-variant": "#3f4a3d", "on-secondary-fixed": "#001c3b", "on-error": "#ffffff", "error": "#ba1a1a", "background": "#f3fcf5", "surface-container-high": "#e1eae4", "secondary-fixed": "#d5e3ff", "on-background": "#151d19", "surface-tint": "#006e28", "primary": "#006e28", "on-tertiary": "#ffffff", "surface-variant": "#dce5de", "surface-bright": "#f3fcf5", "tertiary-fixed-dim": "#b4c5ff", "inverse-primary": "#71dd7f", "tertiary-fixed": "#dbe1ff", "on-secondary-fixed-variant": "#2f486b", "on-primary-fixed-variant": "#00531c", "surface-container-low": "#edf6ef", "on-tertiary-fixed": "#00174b", "surface-container-highest": "#dce5de", "secondary-container": "#bad3fe", "on-secondary-container": "#425b7f", "surface-container": "#e7f0e9", "inverse-on-surface": "#eaf3ec", "on-primary-container": "#004f1b", "on-primary": "#ffffff", "inverse-surface": "#2a322e", "on-tertiary-container": "#003ba1", "on-error-container": "#93000a", "on-secondary": "#ffffff", "on-surface": "#151d19", "outline-variant": "#becaba", "surface-dim": "#d3dcd5", "on-tertiary-fixed-variant": "#003ea8", "primary-fixed": "#8dfa98", "on-primary-fixed": "#002107", "tertiary-container": "#94aeff", "tertiary": "#0053db", "primary-container": "#5bc66b", "error-container": "#ffdad6" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "gutter": "1.5rem", "gutter-mobile": "1rem", "space-sm": "0.5rem", "space-xs": "0.25rem", "space-lg": "1.5rem", "margin": "2rem", "space-xl": "2rem", "space-md": "1rem", "margin-mobile": "1rem" }, "fontFamily": { "body-md": [ "Plus Jakarta Sans" ], "headline-sm": [ "Plus Jakarta Sans" ], "body-lg": [ "Plus Jakarta Sans" ], "headline-lg": [ "Plus Jakarta Sans" ], "headline-xl-mobile": [ "Plus Jakarta Sans" ], "label-lg": [ "Plus Jakarta Sans" ], "label-sm": [ "Plus Jakarta Sans" ], "headline-md": [ "Plus Jakarta Sans" ], "label-md": [ "Plus Jakarta Sans" ], "headline-lg-mobile": [ "Plus Jakarta Sans" ], "body-sm": [ "Plus Jakarta Sans" ], "headline-xl": [ "Plus Jakarta Sans" ] }, "fontSize": { "body-md": [ "1rem", { "lineHeight": "1.5rem", "letterSpacing": "0em", "fontWeight": "400" } ], "headline-sm": [ "1.125rem", { "lineHeight": "1.5rem", "letterSpacing": "0em", "fontWeight": "600" } ], "body-lg": [ "1.125rem", { "lineHeight": "1.75rem", "letterSpacing": "0em", "fontWeight": "400" } ], "headline-lg": [ "1.75rem", { "lineHeight": "2.25rem", "letterSpacing": "-0.02em", "fontWeight": "700" } ], "headline-xl-mobile": [ "1.75rem", { "lineHeight": "2.25rem", "letterSpacing": "-0.01em", "fontWeight": "700" } ], "label-lg": [ "0.875rem", { "lineHeight": "1.25rem", "letterSpacing": "0.01em", "fontWeight": "600" } ], "label-sm": [ "0.6875rem", { "lineHeight": "0.875rem", "letterSpacing": "0.04em", "fontWeight": "700" } ], "headline-md": [ "1.375rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.01em", "fontWeight": "600" } ], "label-md": [ "0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.02em", "fontWeight": "600" } ], "headline-lg-mobile": [ "1.375rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.01em", "fontWeight": "700" } ], "body-sm": [ "0.875rem", { "lineHeight": "1.25rem", "letterSpacing": "0.01em", "fontWeight": "400" } ], "headline-xl": [ "2.25rem", { "lineHeight": "2.75rem", "letterSpacing": "-0.02em", "fontWeight": "700" } ] } } } };</script></head><body class="bg-background font-body-md text-body-md text-on-background">
+<aside id="staffSidebar" class="fixed left-0 top-0 z-50 flex h-full w-72 -translate-x-full flex-col justify-between overflow-y-auto bg-surface-container-low shadow-[6px_0_16px_rgba(15,43,77,0.08)] transition-transform duration-300 lg:translate-x-0" aria-label="Staff navigation">
+<div class="p-space-lg">
+<div class="mb-space-xl flex items-center justify-between gap-space-sm">
+<a class="flex min-w-0 items-center gap-space-sm" href="dashboard.html" aria-label="NavAble staff dashboard">
+<div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-surface shadow-[4px_4px_10px_rgba(15,43,77,0.08),-4px_-4px_10px_rgba(255,255,255,0.9)]"><img class="h-9 w-9 object-cover mix-blend-multiply" src="logOnly.png" alt=""></div>
+<div class="min-w-0"><div class="font-headline-sm text-headline-sm leading-tight text-on-surface">Nav<span class="text-primary">Able</span></div><div class="truncate font-label-sm text-label-sm text-on-surface-variant">Accessibility &amp; Verification</div></div>
+</a>
+<button id="sidebarClose" class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface lg:hidden" type="button" aria-label="Close navigation"><span class="material-symbols-outlined">close</span></button>
+</div>
+<nav class="flex flex-col gap-space-sm">
+<a class="flex items-center justify-between rounded-xl px-space-md py-3 font-label-lg text-label-lg text-on-surface-variant transition-all hover:bg-surface-container-high hover:text-on-surface" href="dashboard.html"><span>Dashboard</span><span class="material-symbols-outlined text-[19px]">dashboard</span></a>
+<a class="flex items-center justify-between rounded-xl px-space-md py-3 font-label-lg text-label-lg text-on-surface-variant transition-all hover:bg-surface-container-high hover:text-on-surface" href="user.html"><span>Users</span><span class="material-symbols-outlined text-[19px]">group</span></a>
+<a class="flex items-center justify-between rounded-xl px-space-md py-3 font-label-lg text-label-lg text-on-surface-variant transition-all hover:bg-surface-container-high hover:text-on-surface" href="location.html"><span>Locations</span><span class="material-symbols-outlined text-[19px]">location_on</span></a>
+<a class="flex items-center justify-between rounded-xl px-space-md py-3 font-label-lg text-label-lg text-on-surface-variant transition-all hover:bg-surface-container-high hover:text-on-surface" href="accss-data.html"><span>Accessibility Data</span><span class="material-symbols-outlined text-[19px]">accessible</span></a>
+<a class="flex items-center justify-between rounded-xl px-space-md py-3 font-label-lg text-label-lg text-on-surface-variant transition-all hover:bg-surface-container-high hover:text-on-surface" href="verification.html"><span>AI Verification</span><span class="material-symbols-outlined text-[19px]">verified</span></a>
+<a class="flex items-center justify-between rounded-xl px-space-md py-3 font-label-lg text-label-lg text-on-surface-variant transition-all hover:bg-surface-container-high hover:text-on-surface" href="reports.html"><span>Reports</span><span class="material-symbols-outlined text-[19px]">description</span></a>
+<a aria-current="page" class="flex items-center justify-between rounded-xl bg-surface px-space-md py-3 font-label-lg text-label-lg font-bold text-on-secondary-fixed shadow-[4px_4px_12px_rgba(91,198,107,0.22),-4px_-4px_12px_rgba(255,255,255,0.95),inset_4px_0_0_#5bc66b]" href="ratings.html"><span>Ratings &amp; Reviews</span><span class="material-symbols-outlined text-[19px]">reviews</span></a>
+<a class="flex items-center justify-between rounded-xl px-space-md py-3 font-label-lg text-label-lg text-on-surface-variant transition-all hover:bg-surface-container-high hover:text-on-surface" href="notifications.html"><span>Notifications</span><span class="material-symbols-outlined text-[19px]">notifications</span></a>
+<a class="flex items-center justify-between rounded-xl px-space-md py-3 font-label-lg text-label-lg text-on-surface-variant transition-all hover:bg-surface-container-high hover:text-on-surface" href="analytics.html"><span>Analytics</span><span class="material-symbols-outlined text-[19px]">analytics</span></a>
+<a class="flex items-center justify-between rounded-xl px-space-md py-3 font-label-lg text-label-lg text-on-surface-variant transition-all hover:bg-surface-container-high hover:text-on-surface" href="settings.html"><span>Settings</span><span class="material-symbols-outlined text-[19px]">settings</span></a>
+</nav>
+</div>
+<div class="p-space-lg">
+<div class="mb-space-md rounded-xl bg-surface p-space-md shadow-[4px_4px_12px_rgba(15,43,77,0.06),-4px_-4px_12px_rgba(255,255,255,0.9)]"><div class="flex items-center gap-space-sm"><div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary"><span class="material-symbols-outlined text-[18px] text-on-primary">person</span></div><div class="overflow-hidden"><div class="truncate font-label-lg text-label-lg text-on-surface">Sarah Jenkins</div><div class="truncate font-label-sm text-label-sm text-on-surface-variant">Senior Moderator</div></div></div></div>
+<button id="staffLogout" class="flex w-full items-center justify-center gap-space-xs rounded-xl bg-surface-container py-space-sm font-label-lg text-label-lg text-on-surface-variant shadow-[inset_2px_2px_5px_rgba(15,43,77,0.08),inset_-2px_-2px_5px_rgba(255,255,255,0.8)] transition-all hover:text-on-surface" type="button"><span class="material-symbols-outlined text-[18px]">logout</span><span>Log Out</span></button>
+</div>
+</aside>
+<div id="sidebarBackdrop" class="fixed inset-0 z-40 hidden bg-inverse-surface/40 backdrop-blur-sm lg:hidden" aria-hidden="true"></div>
+<div class="min-h-screen overflow-x-hidden bg-background lg:pl-72"><header class="fixed left-0 right-0 top-0 h-20 lg:left-72 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(15,43,77,0.04)] z-30 px-space-md lg:px-space-xl flex items-center justify-between gap-space-sm lg:gap-space-lg"><button id="sidebarToggle" class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-surface text-on-surface-variant shadow-[4px_4px_10px_rgba(15,43,77,0.07),-4px_-4px_10px_rgba(255,255,255,0.95)] lg:hidden" type="button" aria-controls="staffSidebar" aria-expanded="false" aria-label="Open navigation"><span class="material-symbols-outlined">menu</span></button><div class="hidden sm:flex items-center gap-space-sm text-on-surface-variant font-label-md text-label-md"><span class="material-symbols-outlined text-[18px]">home</span><span class="">/</span><span class="text-on-surface font-label-lg text-label-lg">Admin Cockpit</span></div><div class="hidden flex-1 md:block md:max-w-md"><div class="relative flex items-center"><span class="material-symbols-outlined absolute left-space-md text-on-surface-variant text-[20px]">search</span><input class="w-full bg-surface-container-high/60 rounded-xl pl-11 pr-16 py-2.5 text-on-surface font-body-sm text-body-sm shadow-[inset_2px_2px_4px_rgba(15,43,77,0.07),inset_-2px_-2px_4px_rgba(255,255,255,0.85)] placeholder:text-on-surface-variant focus:outline-none focus:ring-2 focus:ring-secondary transition-all" placeholder="Search ramps, IDs, locations..." type="text"><kbd class="absolute right-space-md font-label-sm text-label-sm bg-surface-container px-space-xs py-0.5 rounded shadow-sm text-on-surface-variant">Ctrl K</kbd></div></div><div class="flex items-center gap-space-xs sm:gap-space-md"><div class="hidden xl:flex items-center gap-space-xs px-space-md py-1.5 rounded-full bg-surface shadow-[inset_2px_2px_4px_rgba(15,43,77,0.05),inset_-2px_-2px_4px_rgba(255,255,255,0.8)]"><span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span><span class="font-label-sm text-label-sm text-on-surface-variant">Live: Firebase Online</span></div><button class="w-10 h-10 rounded-xl bg-surface flex items-center justify-center text-on-surface-variant hover:text-on-surface shadow-[4px_4px_10px_rgba(15,43,77,0.07),-4px_-4px_10px_rgba(255,255,255,0.95)] hover:shadow-[2px_2px_5px_rgba(15,43,77,0.07),-2px_-2px_5px_rgba(255,255,255,0.95)] transition-all relative"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-error"></span></button><button class="hidden w-10 h-10 rounded-xl bg-surface sm:flex items-center justify-center text-on-surface-variant hover:text-on-surface shadow-[4px_4px_10px_rgba(15,43,77,0.07),-4px_-4px_10px_rgba(255,255,255,0.95)] transition-all" title="High Contrast &amp; Accessibility Mode"><span class="material-symbols-outlined text-[20px]">contrast</span></button><div class="hidden items-center gap-space-sm pl-space-sm sm:flex"><div class="relative"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-primary ring-2 ring-surface"></span></div><div class="hidden md:block text-left"><div class="font-label-lg text-label-lg text-on-surface leading-none">Sarah Jenkins</div><div class="font-label-sm text-label-sm text-on-surface-variant mt-0.5">Lead Verifier</div></div></div></div></header><main class="w-full min-w-0 px-space-md pt-20 lg:px-space-xl pb-space-xl bg-background flex-1"><div class="flex min-w-0 w-full flex-col gap-space-xl">
+<!-- Dynamic Action Header & Metrics Cluster -->
+<section class="flex flex-col gap-space-lg">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md">
+<div>
+<div class="flex items-center gap-space-xs text-primary font-label-md text-label-md uppercase tracking-wider mb-1">
+<span class="material-symbols-outlined text-[16px]">verified_user</span>
+<span class="">Quality Assurance &amp; Community Trust</span>
+</div>
+<div class="font-headline-xl text-headline-xl text-on-surface tracking-tight">Ratings &amp; Reviews Moderation</div>
+<div class="font-body-md text-body-md text-on-surface-variant max-w-2xl mt-1">
+          Audit crowd-sourced accessibility appraisals, inspect geo-tagged photographic evidence, and resolve civic compliance disputes.
+        </div>
+</div>
+<div class="flex items-center gap-space-sm shrink-0">
+<button class="flex items-center gap-space-xs px-space-md py-2.5 rounded-xl bg-surface text-on-surface font-label-lg text-label-lg shadow-[4px_4px_10px_rgba(15,43,77,0.08),-4px_-4px_10px_rgba(255,255,255,0.95)] hover:bg-surface-container-high transition-all" id="batch-action-btn">
+<span class="material-symbols-outlined text-[18px]">checklist</span>
+<span class="">Batch Triage</span>
+</button>
+<button class="flex items-center gap-space-xs px-space-md py-2.5 rounded-xl bg-primary-container text-on-primary-container font-label-lg text-label-lg font-bold shadow-[4px_4px_12px_rgba(91,198,107,0.3),-2px_-2px_8px_rgba(255,255,255,0.9)] hover:brightness-105 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[18px]">file_download</span>
+<span class="">Export Reviews (.CSV)</span>
+</button>
+</div>
+</div>
+<!-- Metrics Bento Banner -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md">
+<!-- Metric 1: Avg Platform Accessibility Rating -->
+<div class="relative overflow-hidden bg-surface-container-low rounded-xl p-space-lg shadow-[6px_6px_14px_rgba(15,43,77,0.06),-6px_-6px_14px_rgba(255,255,255,0.95)] flex flex-col justify-between">
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="font-label-md text-label-md uppercase tracking-wider font-semibold">Avg Accessibility Score</span>
+<span class="w-8 h-8 rounded-lg bg-surface flex items-center justify-center text-primary shadow-[2px_2px_6px_rgba(15,43,77,0.07),-2px_-2px_6px_rgba(255,255,255,0.9)]">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: &quot;FILL&quot; 1;">star</span>
+</span>
+</div>
+<div class="mt-4 flex items-baseline gap-space-sm">
+<span class="font-headline-xl text-headline-xl text-on-surface font-bold">4.6</span>
+<span class="font-label-lg text-label-lg text-on-surface-variant">/ 5.0</span>
+<span class="ml-auto inline-flex items-center gap-0.5 text-primary font-label-sm text-label-sm font-bold bg-primary-fixed/40 px-2 py-0.5 rounded-full">
+<span class="material-symbols-outlined text-[14px]">arrow_upward</span> +0.2 this mo
+          </span>
+</div>
+<div class="mt-3 w-full bg-surface-container rounded-full h-1.5 overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 92%"></div>
+</div>
+</div>
+<!-- Metric 2: Total Verified Reviews -->
+<div class="relative overflow-hidden bg-surface-container-low rounded-xl p-space-lg shadow-[6px_6px_14px_rgba(15,43,77,0.06),-6px_-6px_14px_rgba(255,255,255,0.95)] flex flex-col justify-between">
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="font-label-md text-label-md uppercase tracking-wider font-semibold">Total Verified Reviews</span>
+<span class="w-8 h-8 rounded-lg bg-surface flex items-center justify-center text-secondary shadow-[2px_2px_6px_rgba(15,43,77,0.07),-2px_-2px_6px_rgba(255,255,255,0.9)]">
+<span class="material-symbols-outlined text-[20px]">rate_review</span>
+</span>
+</div>
+<div class="mt-4 flex items-baseline justify-between">
+<span class="font-headline-xl text-headline-xl text-on-surface font-bold">12,840</span>
+<span class="inline-flex items-center gap-0.5 text-secondary font-label-sm text-label-sm font-bold bg-secondary-fixed/50 px-2 py-0.5 rounded-full">
+            +314 today
+          </span>
+</div>
+<div class="mt-3 font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-primary text-[16px]">check_circle</span>
+<span class="">94.8% photo verification rate</span>
+</div>
+</div>
+<!-- Metric 3: Flagged by Community -->
+<div class="relative overflow-hidden bg-surface-container-low rounded-xl p-space-lg shadow-[6px_6px_14px_rgba(15,43,77,0.06),-6px_-6px_14px_rgba(255,255,255,0.95)] flex flex-col justify-between">
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="font-label-md text-label-md uppercase tracking-wider font-semibold">Flagged By Community</span>
+<span class="w-8 h-8 rounded-lg bg-error-container text-on-error-container flex items-center justify-center shadow-[2px_2px_6px_rgba(15,43,77,0.07),-2px_-2px_6px_rgba(255,255,255,0.9)]">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: &quot;FILL&quot; 1;">flag</span>
+</span>
+</div>
+<div class="mt-4 flex items-baseline justify-between">
+<span class="font-headline-xl text-headline-xl text-error font-bold">38</span>
+<span class="inline-flex items-center gap-0.5 text-error font-label-sm text-label-sm font-bold bg-error-container px-2 py-0.5 rounded-full">
+            Needs action
+          </span>
+</div>
+<div class="mt-3 font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-error text-[16px]">schedule</span>
+<span class="">Avg resolution time: 24m</span>
+</div>
+</div>
+<!-- Metric 4: Auto-moderation Accuracy -->
+<div class="relative overflow-hidden bg-surface-container-low rounded-xl p-space-lg shadow-[6px_6px_14px_rgba(15,43,77,0.06),-6px_-6px_14px_rgba(255,255,255,0.95)] flex flex-col justify-between">
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="font-label-md text-label-md uppercase tracking-wider font-semibold">AI Pre-Filter Accuracy</span>
+<span class="w-8 h-8 rounded-lg bg-surface flex items-center justify-center text-tertiary shadow-[2px_2px_6px_rgba(15,43,77,0.07),-2px_-2px_6px_rgba(255,255,255,0.9)]">
+<span class="material-symbols-outlined text-[20px]">smart_toy</span>
+</span>
+</div>
+<div class="mt-4 flex items-baseline justify-between">
+<span class="font-headline-xl text-headline-xl text-on-surface font-bold">99.2%</span>
+<span class="inline-flex items-center gap-0.5 text-tertiary font-label-sm text-label-sm font-bold bg-tertiary-fixed/60 px-2 py-0.5 rounded-full">
+            V3.4 Active
+          </span>
+</div>
+<div class="mt-3 font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-primary text-[16px]">bolt</span>
+<span class="">87 spam models suppressed auto</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Filter & Query Control Cockpit -->
+<section class="bg-surface-container-low rounded-xl p-space-lg shadow-[6px_6px_16px_rgba(15,43,77,0.05),-6px_-6px_16px_rgba(255,255,255,0.95)] flex flex-col gap-space-md">
+<!-- Search Bar & Primary Status Toggles -->
+<div class="flex flex-col lg:flex-row gap-space-md items-stretch lg:items-center justify-between">
+<div class="relative flex-1 max-w-xl">
+<span class="material-symbols-outlined absolute left-space-md top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">search</span>
+<input class="w-full bg-surface-container rounded-xl pl-11 pr-10 py-3 text-on-surface font-body-sm text-body-sm shadow-[inset_3px_3px_6px_rgba(15,43,77,0.08),inset_-3px_-3px_6px_rgba(255,255,255,0.85)] placeholder:text-on-surface-variant focus:outline-none focus:ring-2 focus:ring-secondary transition-all" id="venue-search" placeholder="Search reviews by venue name, address, or contributor..." type="text">
+<button class="absolute right-space-sm top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-on-surface p-1">
+<span class="material-symbols-outlined text-[18px]">clear</span>
+</button>
+</div>
+<!-- Moderation Status Pills -->
+<div class="flex items-center gap-1.5 overflow-x-auto p-1 bg-surface-container rounded-xl shadow-[inset_2px_2px_5px_rgba(15,43,77,0.08),inset_-2px_-2px_5px_rgba(255,255,255,0.8)]">
+<button class="status-filter-btn active px-space-md py-1.5 rounded-lg font-label-md text-label-md transition-all font-semibold bg-surface text-on-surface shadow-[2px_2px_6px_rgba(15,43,77,0.08),-2px_-2px_6px_rgba(255,255,255,0.9)]" data-status="all">
+          All <span class="ml-1 text-on-surface-variant font-normal">1,240</span>
+</button>
+<button class="status-filter-btn px-space-md py-1.5 rounded-lg font-label-md text-label-md transition-all font-semibold text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high" data-status="published">
+          Published <span class="ml-1 text-on-surface-variant font-normal">1,180</span>
+</button>
+<button class="status-filter-btn px-space-md py-1.5 rounded-lg font-label-md text-label-md transition-all font-semibold text-error hover:bg-surface-container-high relative" data-status="flagged">
+          Flagged for Review <span class="ml-1 px-1.5 py-0.2 rounded-full bg-error-container text-on-error-container font-bold text-label-sm">38</span>
+</button>
+<button class="status-filter-btn px-space-md py-1.5 rounded-lg font-label-md text-label-md transition-all font-semibold text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high" data-status="hidden">
+          Hidden / Archived <span class="ml-1 text-on-surface-variant font-normal">22</span>
+</button>
+</div>
+</div>
+<!-- Rating Tier Chip Row & Sort Controls -->
+<div class="flex flex-wrap items-center justify-between gap-space-md pt-2">
+<div class="flex flex-wrap items-center gap-2">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant font-bold mr-1">Star Filter:</span>
+<button class="rating-chip active flex items-center gap-1 px-3 py-1 rounded-full font-label-md text-label-md bg-surface text-on-surface shadow-[2px_2px_5px_rgba(15,43,77,0.07),-2px_-2px_5px_rgba(255,255,255,0.9)] font-semibold" data-rating="all">
+<span class="">All Stars</span>
+</button>
+<button class="rating-chip flex items-center gap-1 px-3 py-1 rounded-full font-label-md text-label-md bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface transition-all" data-rating="5">
+<span class="material-symbols-outlined text-[16px] text-primary" style="font-variation-settings: &quot;FILL&quot; 1;">star</span>
+<span class="">5 Stars</span>
+</button>
+<button class="rating-chip flex items-center gap-1 px-3 py-1 rounded-full font-label-md text-label-md bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface transition-all" data-rating="4">
+<span class="material-symbols-outlined text-[16px] text-primary" style="font-variation-settings: &quot;FILL&quot; 1;">star</span>
+<span class="">4 Stars</span>
+</button>
+<button class="rating-chip flex items-center gap-1 px-3 py-1 rounded-full font-label-md text-label-md bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface transition-all" data-rating="3">
+<span class="material-symbols-outlined text-[16px] text-secondary" style="font-variation-settings: &quot;FILL&quot; 1;">star</span>
+<span class="">3 Stars</span>
+</button>
+<button class="rating-chip flex items-center gap-1 px-3 py-1 rounded-full font-label-md text-label-md bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface transition-all" data-rating="1-2">
+<span class="material-symbols-outlined text-[16px] text-error" style="font-variation-settings: &quot;FILL&quot; 1;">star</span>
+<span class="">1-2 Stars (High Friction)</span>
+</button>
+</div>
+<div class="flex items-center gap-space-sm text-on-surface-variant font-label-sm text-label-sm">
+<span class="">Sorted by:</span>
+<div class="relative">
+<select class="bg-surface px-space-md py-1.5 rounded-xl font-label-md text-label-md text-on-surface shadow-[2px_2px_6px_rgba(15,43,77,0.06),-2px_-2px_6px_rgba(255,255,255,0.9)] focus:outline-none cursor-pointer pr-8 appearance-none">
+<option>Severity &amp; Risk First</option>
+<option>Most Recent Submissions</option>
+<option>Highest Contributor Trust</option>
+<option>Photos Pending Verification</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none text-[16px]">expand_more</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Review Moderation Feed -->
+<section class="flex flex-col gap-space-lg" id="reviews-container">
+<!-- Card 1: Critical Flagged Review (Metropolitan General Hospital) -->
+<article class="review-card group bg-surface-container-low rounded-xl p-space-lg shadow-[6px_6px_16px_rgba(15,43,77,0.07),-6px_-6px_16px_rgba(255,255,255,0.95)] flex flex-col gap-space-md transition-all hover:shadow-[8px_8px_20px_rgba(15,43,77,0.09),-8px_-8px_20px_rgba(255,255,255,1)]">
+<!-- Flag Notice Banner (Neumorphic Inset with Semantic Warning Tone) -->
+<div class="flex items-start gap-space-sm bg-error-container/70 p-space-md rounded-xl text-on-error-container shadow-[inset_2px_2px_5px_rgba(186,26,26,0.15),inset_-2px_-2px_5px_rgba(255,255,255,0.8)]">
+<span class="material-symbols-outlined text-[22px] shrink-0 text-error" style="font-variation-settings: &quot;FILL&quot; 1;">warning</span>
+<div class="flex-1">
+<div class="flex items-center justify-between">
+<span class="font-label-lg text-label-lg font-bold text-error">Action Required: Flagged by 4 Community Auditors</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">Flagged 28 mins ago</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface mt-0.5">
+<strong>Reason:</strong> Suspected inaccurate ramp slope report or potential commercial spam claim. Contributor reports 1:4 dangerously steep grade on newly remodeled North Pavilion ramp.
+          </p>
+</div>
+</div>
+<!-- Reviewer & Venue Header -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+<!-- User Bio & Attribution -->
+<div class="flex items-center gap-space-md">
+<div class="relative">
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center font-bold text-primary shadow-[inset_2px_2px_4px_rgba(15,43,77,0.08),inset_-2px_-2px_4px_rgba(255,255,255,0.8)] overflow-hidden">
+<span class="material-symbols-outlined text-[28px]">swipe_left_alt</span>
+</div>
+<span class="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center text-[11px] font-bold shadow-sm" title="Tier 3 Contributor">3</span>
+</div>
+<div>
+<div class="flex flex-wrap items-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm text-on-surface">Maria Santos</span>
+<span class="text-on-surface-variant font-body-sm text-body-sm">— Power Chair User</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-secondary font-label-sm text-label-sm font-semibold shadow-[1px_1px_3px_rgba(15,43,77,0.06),-1px_-1px_3px_rgba(255,255,255,0.9)]">
+                Trust Score: 98%
+              </span>
+</div>
+<div class="flex items-center gap-space-xs text-on-surface-variant font-label-md text-label-md mt-0.5">
+<span class="material-symbols-outlined text-primary text-[18px]">local_hospital</span>
+<span class="font-semibold text-on-surface">Metropolitan General Hospital</span>
+<span class="">•</span>
+<span class="">North Emergency Entrance, Zone B</span>
+<span class="">•</span>
+<span class="">Submitted today at 09:42 AM</span>
+</div>
+</div>
+</div>
+<!-- Rating Overview Pill -->
+<div class="bg-surface rounded-xl p-space-sm px-space-md shadow-[3px_3px_8px_rgba(15,43,77,0.07),-3px_-3px_8px_rgba(255,255,255,0.9)] flex items-center gap-space-md self-start md:self-auto">
+<div class="text-center pr-3 border-r-0">
+<div class="flex items-center gap-1 text-error font-headline-sm text-headline-sm font-bold">
+<span class="">2.0</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: &quot;FILL&quot; 1;">star</span>
+</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Sub-Standard</div>
+</div>
+<div class="flex flex-col gap-1 font-label-sm text-label-sm">
+<div class="flex items-center justify-between gap-3">
+<span class="text-on-surface-variant">Entrance Ramp:</span>
+<span class="font-bold text-error">1.0 / 5 (Severe Incline)</span>
+</div>
+<div class="flex items-center justify-between gap-3">
+<span class="text-on-surface-variant">Powered Doors:</span>
+<span class="font-bold text-primary">5.0 / 5 (38" Automatic)</span>
+</div>
+<div class="flex items-center justify-between gap-3">
+<span class="text-on-surface-variant">Accessible Restroom:</span>
+<span class="font-bold text-primary">4.5 / 5 (Braille + Grab bars)</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Review Body & Content Narrative -->
+<div class="bg-surface rounded-xl p-space-md shadow-[inset_2px_2px_5px_rgba(15,43,77,0.04),inset_-2px_-2px_5px_rgba(255,255,255,0.7)]">
+<p class="font-body-md text-body-md text-on-surface leading-relaxed">
+          "The temporary ramp constructed outside the North Emergency Pavilion is actively dangerous for unassisted power wheelchairs. The incline is roughly 14 degrees (well beyond the 1:12 ADA limit), and the transition lip catches 3-inch front casters violently. Automatic motion sensors on the main sliding doors operate smoothly, but getting up to the threshold required two bystanders pushing my chair. Urgent maintenance notice needed before someone tips backward."
+        </p>
+</div>
+<!-- Visual Verification Evidence (Photo Showcase) -->
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider font-semibold">
+<span class="">Attached Field Verification Evidence (2 Media Files)</span>
+<span class="text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">location_on</span> EXIF GPS Verified: 40.7306° N, 73.9352° W
+          </span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-space-md">
+<div class="relative group/photo overflow-hidden rounded-xl bg-surface-container aspect-video shadow-[3px_3px_8px_rgba(15,43,77,0.08),-3px_-3px_8px_rgba(255,255,255,0.9)]">
+<img class="w-full h-full object-cover transition-transform duration-300 group-hover/photo:scale-105" data-alt="A steep temporary wooden wheelchair ramp leading up to a hospital emergency entrance, showing severe gradient angle measured with a digital level app displaying 14.2 degrees slope in bright daylight." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCajBCWBkulOw5nij2ag5bCHKnWnurRuE8d3LP6_FcKaOglDb1ihGAiHP_-9Tn-_MZdCf1wMgP4mMvzVQNaMYmupJGUBkzmDwtZ9vvBAYqpCu6rFTPIOVlMqg2HUTkXqUUBivSxGAgRYB9ipFiujc64ADHzsKexdQvN-XDpU1IBixflWjL_wzEZGgclTH4czAMSLIyNiTdA63j-Y4uxgPgAiz_rlJawQ2Fxefts443GjisOpQC6UxXSZg">
+<div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-on-background/80 via-on-background/40 to-transparent p-2 text-on-primary">
+<div class="font-label-sm text-label-sm font-semibold">Ramp Gradient &amp; Transition Plate</div>
+<div class="text-[10px] text-surface-variant opacity-80">Photo taken 09:38 AM • 4032 x 3024px</div>
+</div>
+<button class="absolute top-2 right-2 w-8 h-8 rounded-lg bg-surface/90 text-on-surface flex items-center justify-center shadow-md opacity-0 group-hover/photo:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-[18px]">zoom_in</span>
+</button>
+</div>
+<div class="relative group/photo overflow-hidden rounded-xl bg-surface-container aspect-video shadow-[3px_3px_8px_rgba(15,43,77,0.08),-3px_-3px_8px_rgba(255,255,255,0.9)]">
+<img class="w-full h-full object-cover transition-transform duration-300 group-hover/photo:scale-105" data-alt="A close-up photograph of a threshold transition lip at a hospital entrance sliding door showing a 1.5 inch sharp vertical obstruction dangerous for wheelchair casters." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAzlZ1vv2vS8u-snQkbEv3IEzW5auhU8IEtb3v7X2W7WmCE9NhWGrzCzKy32Ru4If8PDfBrofvaq8kdDnMO99RhJnRNtMDvub3SCjd7YXi64SSHF6xSkuRdBSZanQaI46OAxsL_igGMlEalTbYk4g6D_-MxnE9IQJ7VYVP-cFyVzdOTBFu6fP6t3eSjrITsIABjTCxmdfZdVCvVx-wyfnwgSCHVvCsNPHTLx9Y97OK1qTiys093BUNiQ">
+<div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-on-background/80 via-on-background/40 to-transparent p-2 text-on-primary">
+<div class="font-label-sm text-label-sm font-semibold">Threshold Lip Gap Obstacle</div>
+<div class="text-[10px] text-surface-variant opacity-80">Photo taken 09:40 AM • Macro zoom</div>
+</div>
+<button class="absolute top-2 right-2 w-8 h-8 rounded-lg bg-surface/90 text-on-surface flex items-center justify-center shadow-md opacity-0 group-hover/photo:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-[18px]">zoom_in</span>
+</button>
+</div>
+<div class="rounded-xl bg-surface-container p-space-md flex flex-col justify-between shadow-[inset_2px_2px_4px_rgba(15,43,77,0.06),inset_-2px_-2px_4px_rgba(255,255,255,0.7)]">
+<div>
+<div class="font-label-sm text-label-sm uppercase text-on-surface-variant font-bold">AI Computer Vision Audit</div>
+<div class="mt-2 flex items-center gap-1.5 text-error font-label-md text-label-md font-semibold">
+<span class="material-symbols-outlined text-[18px]">warning</span>
+<span class="">Ramp Grade: 13.8° (1:4.1)</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+                Visual angle estimation confirms slope significantly violates ADA Standard 405.2 maximum of 1:12 (4.76°).
+              </p>
+</div>
+<div class="mt-2">
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm font-bold text-primary">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+<span class="">Claim Verified by Vision AI</span>
+</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Moderation Actions Toolbar -->
+<div class="pt-space-sm border-t-0 flex flex-wrap items-center justify-between gap-space-md">
+<div class="flex flex-wrap items-center gap-space-xs">
+<!-- Action: Approve & Keep Public -->
+<button class="action-btn flex items-center gap-space-xs px-space-md py-2.5 rounded-xl bg-primary-container text-on-primary-container font-label-lg text-label-lg font-bold shadow-[3px_3px_8px_rgba(91,198,107,0.3),-2px_-2px_6px_rgba(255,255,255,0.9)] hover:brightness-105 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span class="">Approve &amp; Keep Public</span>
+</button>
+<!-- Action: Request Photo Verification -->
+<button class="action-btn flex items-center gap-space-xs px-space-md py-2.5 rounded-xl bg-surface text-on-surface font-label-lg text-label-lg shadow-[3px_3px_8px_rgba(15,43,77,0.06),-3px_-3px_8px_rgba(255,255,255,0.9)] hover:bg-surface-container-high transition-all">
+<span class="material-symbols-outlined text-tertiary text-[18px]">add_a_photo</span>
+<span class="">Request Inclinometer Photo</span>
+</button>
+<!-- Action: Hide Review -->
+<button class="action-btn flex items-center gap-space-xs px-space-md py-2.5 rounded-xl bg-surface text-error font-label-lg text-label-lg shadow-[3px_3px_8px_rgba(15,43,77,0.06),-3px_-3px_8px_rgba(255,255,255,0.9)] hover:bg-error-container/40 transition-all">
+<span class="material-symbols-outlined text-[18px]">visibility_off</span>
+<span class="">Hide Review</span>
+</button>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="flex items-center gap-space-xs px-space-md py-2.5 rounded-xl bg-surface text-on-surface-variant hover:text-on-surface font-label-lg text-label-lg shadow-[3px_3px_8px_rgba(15,43,77,0.06),-3px_-3px_8px_rgba(255,255,255,0.9)] transition-all" title="Send direct moderator inquiry">
+<span class="material-symbols-outlined text-[18px]">mail</span>
+<span class="">Direct Message User</span>
+</button>
+<button class="p-2.5 rounded-xl bg-surface text-on-surface-variant hover:text-on-surface shadow-[3px_3px_8px_rgba(15,43,77,0.06),-3px_-3px_8px_rgba(255,255,255,0.9)] transition-all">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Card 2: 5-Star Exemplary Accessible Venue (Central Public Library) -->
+<article class="review-card group bg-surface-container-low rounded-xl p-space-lg shadow-[6px_6px_16px_rgba(15,43,77,0.07),-6px_-6px_16px_rgba(255,255,255,0.95)] flex flex-col gap-space-md transition-all hover:shadow-[8px_8px_20px_rgba(15,43,77,0.09),-8px_-8px_20px_rgba(255,255,255,1)]">
+<!-- Status Badge Strip -->
+<div class="flex items-center justify-between">
+<div class="inline-flex items-center gap-space-xs px-3 py-1 rounded-full bg-primary-fixed/50 text-on-primary-fixed-variant font-label-sm text-label-sm font-bold">
+<span class="material-symbols-outlined text-[16px] text-primary">check_circle</span>
+<span class="">Auto-Approved &amp; Published</span>
+</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Review ID: #REV-88402 • 3 hours ago</div>
+</div>
+<!-- Reviewer & Venue Header -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-md">
+<div class="relative">
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center font-bold text-secondary shadow-[inset_2px_2px_4px_rgba(15,43,77,0.08),inset_-2px_-2px_4px_rgba(255,255,255,0.8)] overflow-hidden">
+<span class="material-symbols-outlined text-[28px]">family_restroom</span>
+</div>
+<span class="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-secondary text-on-secondary flex items-center justify-center text-[11px] font-bold shadow-sm" title="Gold Volunteer">★</span>
+</div>
+<div>
+<div class="flex flex-wrap items-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm text-on-surface">David L.</span>
+<span class="text-on-surface-variant font-body-sm text-body-sm">— Caregiver for Elderly Parent</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-primary font-label-sm text-label-sm font-semibold shadow-[1px_1px_3px_rgba(15,43,77,0.06),-1px_-1px_3px_rgba(255,255,255,0.9)]">
+                142 Verified Audits
+              </span>
+</div>
+<div class="flex items-center gap-space-xs text-on-surface-variant font-label-md text-label-md mt-0.5">
+<span class="material-symbols-outlined text-secondary text-[18px]">local_library</span>
+<span class="font-semibold text-on-surface">Central Public Library</span>
+<span class="">•</span>
+<span class="">South Plaza &amp; Multi-Story Elevator Bank</span>
+</div>
+</div>
+</div>
+<!-- Rating Pill -->
+<div class="bg-surface rounded-xl p-space-sm px-space-md shadow-[3px_3px_8px_rgba(15,43,77,0.07),-3px_-3px_8px_rgba(255,255,255,0.9)] flex items-center gap-space-md self-start md:self-auto">
+<div class="text-center pr-3">
+<div class="flex items-center gap-1 text-primary font-headline-sm text-headline-sm font-bold">
+<span class="">5.0</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: &quot;FILL&quot; 1;">star</span>
+</div>
+<div class="font-label-sm text-label-sm text-primary font-semibold uppercase tracking-wider">Gold Standard</div>
+</div>
+<div class="flex flex-col gap-1 font-label-sm text-label-sm">
+<div class="flex items-center justify-between gap-3">
+<span class="text-on-surface-variant">Gentle Incline:</span>
+<span class="font-bold text-primary">5.0 / 5 (1:20 grade)</span>
+</div>
+<div class="flex items-center justify-between gap-3">
+<span class="text-on-surface-variant">Elevator Audio:</span>
+<span class="font-bold text-primary">5.0 / 5 (Crisp chime &amp; Braille)</span>
+</div>
+<div class="flex items-center justify-between gap-3">
+<span class="text-on-surface-variant">Restroom Turn Radius:</span>
+<span class="font-bold text-primary">5.0 / 5 (&gt;60" diameter)</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Review Body -->
+<div class="bg-surface rounded-xl p-space-md shadow-[inset_2px_2px_5px_rgba(15,43,77,0.04),inset_-2px_-2px_5px_rgba(255,255,255,0.7)]">
+<p class="font-body-md text-body-md text-on-surface leading-relaxed">
+          "Outstanding model for municipal infrastructure. The South Plaza gentle ramp has smooth handrails at both standard and lower junior/seated heights. Inside, elevator doors stay open for a generous 12 seconds with gentle voice announcements. Adult changing table in the 2nd-floor companion restroom is motorized and impeccably clean. High recommend for caregivers managing heavy wheeled equipment."
+        </p>
+</div>
+<!-- Photographic Verification Assets -->
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-space-md">
+<div class="relative group/photo overflow-hidden rounded-xl bg-surface-container aspect-video shadow-[3px_3px_8px_rgba(15,43,77,0.08),-3px_-3px_8px_rgba(255,255,255,0.9)]">
+<img class="w-full h-full object-cover transition-transform duration-300 group-hover/photo:scale-105" data-alt="A brightly lit modern library interior showing a wide glass elevator with tactile braille buttons and dual-height stainless steel handrails." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUBgeNAfffpLOCtBUt367w2RPIygG1zoGkIA1P6JhuWYHK-Io86M5ApdAaD429fPiBIAv7MvvItz7eWq4tNtcoKDWUVt53YdWWKHGTwdDCf7wVI7UEkYeM5BTv-YEm4qlteFNmGs30RiF_EiBMR-GWei344OyACvT4zwfiSH8xN7SnSeXiMuQHUVebmQSVozK4w2gcDKBVfDU4QfMBp3Yna9sD4oV_nwnF_vJIhBh4EWvB_3NHa387zw">
+<div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-on-background/80 via-on-background/40 to-transparent p-2 text-on-primary">
+<div class="font-label-sm text-label-sm font-semibold">Elevator Cabin &amp; Dual Rails</div>
+</div>
+</div>
+<div class="relative group/photo overflow-hidden rounded-xl bg-surface-container aspect-video shadow-[3px_3px_8px_rgba(15,43,77,0.08),-3px_-3px_8px_rgba(255,255,255,0.9)]">
+<img class="w-full h-full object-cover transition-transform duration-300 group-hover/photo:scale-105" data-alt="A clean modern universal accessible restroom showing motorized height-adjustable adult changing bench and contrasting non-slip flooring with perimeter grab bars." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTLJ7th5TBy-VftKQlMaWuhQBmic3Ynewufxg5ZzZbbcRRixlfFS16gtosh8YO-Ck3oHBAv2p0j18yI5N-Vxhk2BYap_WCu9YaJVtnCeOHjKbmemRglW9Zd_mcjCRBDbyss5KMb3qPzJVZB_4WaWylC1QbLWBvjMRkyGQgGi81x-2WVDMStW741bEHqZurfK3CmOV2VUSrmbOiDYQJBQkuw0Yonoh5OGFzd9TUZNgQGnZqQf1aA2uN-g">
+<div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-on-background/80 via-on-background/40 to-transparent p-2 text-on-primary">
+<div class="font-label-sm text-label-sm font-semibold">Universal Companion Restroom</div>
+</div>
+</div>
+<div class="rounded-xl bg-surface-container p-space-md flex flex-col justify-between shadow-[inset_2px_2px_4px_rgba(15,43,77,0.06),inset_-2px_-2px_4px_rgba(255,255,255,0.7)]">
+<div>
+<div class="font-label-sm text-label-sm uppercase text-on-surface-variant font-bold">Metadata Cross-Check</div>
+<div class="mt-2 text-body-sm font-body-sm text-on-surface">
+              Matched against city asset <strong>LIB-PLZ-04</strong>. Facility awarded Municipal Universal Access seal March 2024.
+            </div>
+</div>
+<div class="flex items-center gap-1 font-label-sm text-label-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-primary">thumb_up</span>
+<span class="">42 users found this helpful</span>
+</div>
+</div>
+</div>
+<!-- Actions Toolbar -->
+<div class="pt-space-sm flex flex-wrap items-center justify-between gap-space-md">
+<div class="flex flex-wrap items-center gap-space-xs">
+<button class="action-btn flex items-center gap-space-xs px-space-md py-2.5 rounded-xl bg-surface text-on-surface-variant hover:text-on-surface font-label-lg text-label-lg shadow-[3px_3px_8px_rgba(15,43,77,0.06),-3px_-3px_8px_rgba(255,255,255,0.9)] hover:bg-surface-container-high transition-all">
+<span class="material-symbols-outlined text-primary text-[18px]">verified</span>
+<span class="">Promote to Feature Review</span>
+</button>
+<button class="action-btn flex items-center gap-space-xs px-space-md py-2.5 rounded-xl bg-surface text-error font-label-lg text-label-lg shadow-[3px_3px_8px_rgba(15,43,77,0.06),-3px_-3px_8px_rgba(255,255,255,0.9)] hover:bg-error-container/40 transition-all">
+<span class="material-symbols-outlined text-[18px]">visibility_off</span>
+<span class="">Hide Review</span>
+</button>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="flex items-center gap-space-xs px-space-md py-2.5 rounded-xl bg-surface text-on-surface-variant hover:text-on-surface font-label-lg text-label-lg shadow-[3px_3px_8px_rgba(15,43,77,0.06),-3px_-3px_8px_rgba(255,255,255,0.9)] transition-all">
+<span class="material-symbols-outlined text-[18px]">mail</span>
+<span class="">Direct Message User</span>
+</button>
+<button class="p-2.5 rounded-xl bg-surface text-on-surface-variant hover:text-on-surface shadow-[3px_3px_8px_rgba(15,43,77,0.06),-3px_-3px_8px_rgba(255,255,255,0.9)] transition-all">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Card 3: Urban Pedestrian Safety Hazard (Pine St Crossing) -->
+<article class="review-card group bg-surface-container-low rounded-xl p-space-lg shadow-[6px_6px_16px_rgba(15,43,77,0.07),-6px_-6px_16px_rgba(255,255,255,0.95)] flex flex-col gap-space-md transition-all hover:shadow-[8px_8px_20px_rgba(15,43,77,0.09),-8px_-8px_20px_rgba(255,255,255,1)]">
+<!-- Hidden / Pending Status Ribbon -->
+<div class="flex items-start gap-space-sm bg-secondary-fixed/40 p-space-md rounded-xl text-on-secondary-fixed shadow-[inset_2px_2px_5px_rgba(15,43,77,0.06),inset_-2px_-2px_5px_rgba(255,255,255,0.8)]">
+<span class="material-symbols-outlined text-[22px] shrink-0 text-secondary" style="font-variation-settings: &quot;FILL&quot; 1;">info</span>
+<div class="flex-1">
+<div class="flex items-center justify-between">
+<span class="font-label-lg text-label-lg font-bold text-secondary">Status: Currently Archived (Pending Department of Transportation Feedback)</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">Submitted Yesterday</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface mt-0.5">
+<strong>Audit Note:</strong> Flagged for review after contractor repaved sidewalk. Tactile blister pavers reported severed.
+          </p>
+</div>
+</div>
+<!-- Reviewer & Venue Header -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-md">
+<div class="relative">
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center font-bold text-tertiary shadow-[inset_2px_2px_4px_rgba(15,43,77,0.08),inset_-2px_-2px_4px_rgba(255,255,255,0.8)] overflow-hidden">
+<span class="material-symbols-outlined text-[28px]">blind</span>
+</div>
+<span class="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed flex items-center justify-center text-[11px] font-bold shadow-sm" title="Orientation &amp; Mobility Specialist">M</span>
+</div>
+<div>
+<div class="flex flex-wrap items-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm text-on-surface">Robert Chang</span>
+<span class="text-on-surface-variant font-body-sm text-body-sm">— Blind Commuter &amp; Guide Dog Handler</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-secondary font-label-sm text-label-sm font-semibold shadow-[1px_1px_3px_rgba(15,43,77,0.06),-1px_-1px_3px_rgba(255,255,255,0.9)]">
+                Trust Score: 95%
+              </span>
+</div>
+<div class="flex items-center gap-space-xs text-on-surface-variant font-label-md text-label-md mt-0.5">
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">traffic</span>
+<span class="font-semibold text-on-surface">Pine St Crossing (Northwest Intersection)</span>
+<span class="">•</span>
+<span class="">Near 4th Avenue Corner</span>
+</div>
+</div>
+</div>
+<!-- Rating Pill -->
+<div class="bg-surface rounded-xl p-space-sm px-space-md shadow-[3px_3px_8px_rgba(15,43,77,0.07),-3px_-3px_8px_rgba(255,255,255,0.9)] flex items-center gap-space-md self-start md:self-auto">
+<div class="text-center pr-3">
+<div class="flex items-center gap-1 text-error font-headline-sm text-headline-sm font-bold">
+<span class="">1.5</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: &quot;FILL&quot; 1;">star</span>
+</div>
+<div class="font-label-sm text-label-sm text-error font-semibold uppercase tracking-wider">Hazardous</div>
+</div>
+<div class="flex flex-col gap-1 font-label-sm text-label-sm">
+<div class="flex items-center justify-between gap-3">
+<span class="text-on-surface-variant">Tactile Paving:</span>
+<span class="font-bold text-error">0.5 / 5 (Completely missing)</span>
+</div>
+<div class="flex items-center justify-between gap-3">
+<span class="text-on-surface-variant">Acoustic Signal:</span>
+<span class="font-bold text-error">2.0 / 5 (Volume muted / broken)</span>
+</div>
+<div class="flex items-center justify-between gap-3">
+<span class="text-on-surface-variant">Curb Cut Alignment:</span>
+<span class="font-bold text-secondary">3.0 / 5 (Flushed but angled)</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Review Body -->
+<div class="bg-surface rounded-xl p-space-md shadow-[inset_2px_2px_5px_rgba(15,43,77,0.04),inset_-2px_-2px_5px_rgba(255,255,255,0.7)]">
+<p class="font-body-md text-body-md text-on-surface leading-relaxed">
+          "The roadwork team removed the yellow truncated dome warning tiles at the curb drop-off and merely poured smooth gray asphalt over the gap. Without tactile feedback underfoot or white cane tip recognition, my guide dog stepped directly into live traffic during a green arrow cycle. Furthermore, the audible chirp button on the crosswalk pole is completely silent when pressed."
+        </p>
+</div>
+<!-- Attached Photographic Verification -->
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-space-md">
+<div class="relative group/photo overflow-hidden rounded-xl bg-surface-container aspect-video shadow-[3px_3px_8px_rgba(15,43,77,0.08),-3px_-3px_8px_rgba(255,255,255,0.9)]">
+<img class="w-full h-full object-cover transition-transform duration-300 group-hover/photo:scale-105" data-alt="A city street corner intersection showing fresh black asphalt poured flush with the curb where bright yellow truncated tactile warning domes are missing right before the pedestrian crosswalk striping." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKEvwilwhZRUoMafZ8JwlyQO1He8ZhZvfhYTVoSZHMippBLgLuhduRWkjP504_fijW-Fg1IUTIabW_Mo-0SnyqkNgH-XiPt0Jl-pkQgY_500-CFidYLbXar5dIDnlbHroxonNe1jKBMhZ7cuKULDCs5ArbJeKnJTGcCCRJScSON_Tmyvm0iVehoI_3bEAAcBHrju1ewtrR6k3oX14QnQN88ll0i4CZlD1QkN_-dltCtDZdmjNMlAIojw">
+<div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-on-background/80 via-on-background/40 to-transparent p-2 text-on-primary">
+<div class="font-label-sm text-label-sm font-semibold">Missing Tactile Warning Tile</div>
+<div class="text-[10px] text-surface-variant opacity-80">Photo submitted by mobility specialist</div>
+</div>
+</div>
+<div class="relative group/photo overflow-hidden rounded-xl bg-surface-container aspect-video shadow-[3px_3px_8px_rgba(15,43,77,0.08),-3px_-3px_8px_rgba(255,255,255,0.9)]">
+<img class="w-full h-full object-cover transition-transform duration-300 group-hover/photo:scale-105" data-alt="A pedestrian crossing push button pole with an acoustic speaker housing showing severed internal copper wiring and vandalized speaker mesh on a city street corner." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCeUCaiARvjowbAGQwhibBynTF_e-HwOxpyX4MeDzgUfIsbLxuTSUev8Qs_vVeL9_yg2zWxUMMVS5gJ2xQC5wznXqSXwAVthXLouvJ6Dh6VoQUmjN4T8khUYWOlfvX5onWxgyFUrW0olCQ-p7yrnEnN9IKvuMOgeuFW4aQNpVX6s-Jva1CzK7Y8P9MtLFcTUDQB8vC9e22Ps8yyR-Jt2NS0iJaDWMZ87-dgUzSxyufnxtdPbytY9HlFLg">
+<div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-on-background/80 via-on-background/40 to-transparent p-2 text-on-primary">
+<div class="font-label-sm text-label-sm font-semibold">Severed Acoustic Speaker Unit</div>
+</div>
+</div>
+<div class="rounded-xl bg-surface-container p-space-md flex flex-col justify-between shadow-[inset_2px_2px_4px_rgba(15,43,77,0.06),inset_-2px_-2px_4px_rgba(255,255,255,0.7)]">
+<div>
+<div class="font-label-sm text-label-sm uppercase text-on-surface-variant font-bold">Public Works Escalation</div>
+<div class="mt-2 text-body-sm font-body-sm text-on-surface">
+              Automated 311 municipal ticket <span class="font-mono font-bold text-secondary">#PW-9041</span> generated. Work crew scheduled within 48 hours.
+            </div>
+</div>
+<div class="text-label-sm font-label-sm text-error font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">priority_high</span> High Urgency Incident
+          </div>
+</div>
+</div>
+<!-- Action Toolbar -->
+<div class="pt-space-sm flex flex-wrap items-center justify-between gap-space-md">
+<div class="flex flex-wrap items-center gap-space-xs">
+<!-- Action: Restore Review -->
+<button class="action-btn flex items-center gap-space-xs px-space-md py-2.5 rounded-xl bg-primary-container text-on-primary-container font-label-lg text-label-lg font-bold shadow-[3px_3px_8px_rgba(91,198,107,0.3),-2px_-2px_6px_rgba(255,255,255,0.9)] hover:brightness-105 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[18px]">restore_from_trash</span>
+<span class="">Restore Review &amp; Mark Urgent Warning</span>
+</button>
+<!-- Action: Request Photo Verification -->
+<button class="action-btn flex items-center gap-space-xs px-space-md py-2.5 rounded-xl bg-surface text-on-surface font-label-lg text-label-lg shadow-[3px_3px_8px_rgba(15,43,77,0.06),-3px_-3px_8px_rgba(255,255,255,0.9)] hover:bg-surface-container-high transition-all">
+<span class="material-symbols-outlined text-secondary text-[18px]">add_a_photo</span>
+<span class="">Request Additional Audio Clip</span>
+</button>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="flex items-center gap-space-xs px-space-md py-2.5 rounded-xl bg-surface text-on-surface-variant hover:text-on-surface font-label-lg text-label-lg shadow-[3px_3px_8px_rgba(15,43,77,0.06),-3px_-3px_8px_rgba(255,255,255,0.9)] transition-all">
+<span class="material-symbols-outlined text-[18px]">mail</span>
+<span class="">Direct Message User</span>
+</button>
+<button class="p-2.5 rounded-xl bg-surface text-on-surface-variant hover:text-on-surface shadow-[3px_3px_8px_rgba(15,43,77,0.06),-3px_-3px_8px_rgba(255,255,255,0.9)] transition-all">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+</article>
+</section>
+<!-- Pagination & Queue Count Summary -->
+<footer class="flex flex-col sm:flex-row items-center justify-between gap-space-md p-space-md bg-surface-container-low rounded-xl shadow-[4px_4px_12px_rgba(15,43,77,0.05),-4px_-4px_12px_rgba(255,255,255,0.9)] text-on-surface-variant font-label-md text-label-md">
+<div class="flex items-center gap-2">
+<span class="">Showing <strong>3</strong> of <strong>38</strong> urgent queue items (Filtered from 1,240 records)</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="w-9 h-9 rounded-lg bg-surface flex items-center justify-center text-on-surface-variant hover:text-on-surface shadow-[2px_2px_5px_rgba(15,43,77,0.06),-2px_-2px_5px_rgba(255,255,255,0.9)] disabled:opacity-40" disabled="">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<button class="w-9 h-9 rounded-lg bg-primary text-on-primary font-bold shadow-[2px_2px_5px_rgba(91,198,107,0.3)]">1</button>
+<button class="w-9 h-9 rounded-lg bg-surface text-on-surface font-semibold shadow-[2px_2px_5px_rgba(15,43,77,0.06),-2px_-2px_5px_rgba(255,255,255,0.9)] hover:bg-surface-container-high">2</button>
+<button class="w-9 h-9 rounded-lg bg-surface text-on-surface font-semibold shadow-[2px_2px_5px_rgba(15,43,77,0.06),-2px_-2px_5px_rgba(255,255,255,0.9)] hover:bg-surface-container-high">3</button>
+<span class="px-1 text-on-surface-variant">...</span>
+<button class="w-9 h-9 rounded-lg bg-surface text-on-surface font-semibold shadow-[2px_2px_5px_rgba(15,43,77,0.06),-2px_-2px_5px_rgba(255,255,255,0.9)] hover:bg-surface-container-high">13</button>
+<button class="w-9 h-9 rounded-lg bg-surface flex items-center justify-center text-on-surface-variant hover:text-on-surface shadow-[2px_2px_5px_rgba(15,43,77,0.06),-2px_-2px_5px_rgba(255,255,255,0.9)]">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</footer>
+<!-- Inline Micro-Interactions Client Logic -->
+<script>
+    // Tab switching for moderation status filters
+    document.querySelectorAll('.status-filter-btn').forEach(button => {
+      button.addEventListener('click', () => {
+        document.querySelectorAll('.status-filter-btn').forEach(btn => {
+          btn.classList.remove('active', 'bg-surface', 'text-on-surface', 'shadow-[2px_2px_6px_rgba(15,43,77,0.08),-2px_-2px_6px_rgba(255,255,255,0.9)]');
+          btn.classList.add('text-on-surface-variant');
+        });
+        button.classList.add('active', 'bg-surface', 'text-on-surface', 'shadow-[2px_2px_6px_rgba(15,43,77,0.08),-2px_-2px_6px_rgba(255,255,255,0.9)]');
+        button.classList.remove('text-on-surface-variant');
+      });
+    });
+
+    // Rating chips toggle
+    document.querySelectorAll('.rating-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        document.querySelectorAll('.rating-chip').forEach(c => {
+          c.classList.remove('active', 'bg-surface', 'text-on-surface', 'shadow-[2px_2px_5px_rgba(15,43,77,0.07),-2px_-2px_5px_rgba(255,255,255,0.9)]', 'font-semibold');
+          c.classList.add('bg-surface-container', 'text-on-surface-variant');
+        });
+        chip.classList.add('active', 'bg-surface', 'text-on-surface', 'shadow-[2px_2px_5px_rgba(15,43,77,0.07),-2px_-2px_5px_rgba(255,255,255,0.9)]', 'font-semibold');
+        chip.classList.remove('bg-surface-container', 'text-on-surface-variant');
+      });
+    });
+
+    // Button click tactile animation & simulated resolution action
+    document.querySelectorAll('.action-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const originalHtml = this.innerHTML;
+        const textSpan = this.querySelector('span:not(.material-symbols-outlined)');
+        const actionName = textSpan ? textSpan.textContent.trim() : 'Updated';
+
+        this.innerHTML = `<span class="material-symbols-outlined text-[18px] animate-spin">sync</span><span>Processing...</span>`;
+        this.disabled = true;
+
+        setTimeout(() => {
+          this.innerHTML = `<span class="material-symbols-outlined text-[18px] text-primary">done</span><span>Resolved</span>`;
+          const card = this.closest('.review-card');
+          if (card && (actionName.includes('Hide') || actionName.includes('Approve'))) {
+            card.style.opacity = '0.4';
+            card.style.pointerEvents = 'none';
+          }
+        }, 600);
+      });
+    });
+  </script>
+</div></main></div>
+
+<script>
+  const staffSidebar = document.getElementById('staffSidebar');
+  const sidebarToggle = document.getElementById('sidebarToggle');
+  const sidebarClose = document.getElementById('sidebarClose');
+  const sidebarBackdrop = document.getElementById('sidebarBackdrop');
+  const desktopSidebar = window.matchMedia('(min-width: 1024px)');
+  let sidebarWasOpen = false;
+
+  function setSidebar(open, returnFocus = false) {
+    const mobileOpen = open && !desktopSidebar.matches;
+    staffSidebar.classList.toggle('-translate-x-full', !open);
+    sidebarBackdrop.classList.toggle('hidden', !mobileOpen);
+    sidebarToggle.setAttribute('aria-expanded', String(mobileOpen));
+    sidebarToggle.setAttribute('aria-label', mobileOpen ? 'Close navigation' : 'Open navigation');
+    document.body.classList.toggle('overflow-hidden', mobileOpen);
+    staffSidebar.inert = !open;
+
+    if (mobileOpen) {
+      sidebarWasOpen = true;
+      window.requestAnimationFrame(() => sidebarClose.focus());
+    } else if (returnFocus && sidebarWasOpen) {
+      sidebarToggle.focus();
+      sidebarWasOpen = false;
+    }
+  }
+
+  function syncSidebarLayout() {
+    if (desktopSidebar.matches) {
+      setSidebar(true);
+      staffSidebar.inert = false;
+    } else {
+      setSidebar(false);
+    }
+  }
+
+  sidebarToggle.addEventListener('click', () => setSidebar(sidebarToggle.getAttribute('aria-expanded') !== 'true'));
+  sidebarClose.addEventListener('click', () => setSidebar(false, true));
+  sidebarBackdrop.addEventListener('click', () => setSidebar(false, true));
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && sidebarToggle.getAttribute('aria-expanded') === 'true') setSidebar(false, true);
+  });
+  desktopSidebar.addEventListener('change', syncSidebarLayout);
+  syncSidebarLayout();
+
+  document.querySelectorAll('[data-unavailable="true"]').forEach((link) => {
+    link.addEventListener('click', (event) => {
+      event.preventDefault();
+      alert(link.querySelector('span').textContent.trim() + ' is not available in this preview yet.');
+    });
+  });
+
+  document.getElementById('staffLogout').addEventListener('click', () => {
+    sessionStorage.removeItem('navableStaffPreview');
+    window.location.href = 'staff-login.html';
+  });
+</script>
+</body>
+</html>

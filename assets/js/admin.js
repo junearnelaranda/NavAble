@@ -1,0 +1,346 @@
+(() => {
+  "use strict";
+
+  const ICON_LABELS = {
+    notifications: "Open notifications",
+    contrast: "Toggle high contrast mode",
+    close: "Close",
+    clear: "Clear",
+    delete: "Delete record",
+    edit: "Edit record",
+    filter_list: "Filter options",
+    more_horiz: "More actions",
+    more_vert: "More actions",
+    near_me: "Filter by geographic area",
+    photo_camera: "Filter by media verification status",
+    search: "Search",
+    tune: "Filter options",
+    visibility: "View details",
+    zoom_in: "Zoom in",
+    zoom_out: "Zoom out",
+    rotate_right: "Rotate image",
+    center_focus_strong: "Center image",
+    view_in_ar: "Open spatial preview"
+  };
+
+  const ADMIN_PAGES = new Set([
+    "dashboard.html", "user.html", "location.html", "accss-data.html",
+    "verification.html", "reports.html", "ratings.html", "notifications.html",
+    "analytics.html", "settings.html"
+  ]);
+
+  function textLabel(element) {
+    return element.textContent.replace(/\s+/g, " ").trim();
+  }
+
+  function showToast(message, options = {}) {
+    let region = document.querySelector(".admin-toast-region");
+    if (!region) {
+      region = document.createElement("div");
+      region.className = "admin-toast-region";
+      region.setAttribute("aria-live", options.assertive ? "assertive" : "polite");
+      region.setAttribute("aria-atomic", "true");
+      document.body.append(region);
+    }
+
+    const toast = document.createElement("div");
+    toast.className = "admin-toast";
+    toast.setAttribute("role", options.assertive ? "alert" : "status");
+    toast.textContent = message;
+    region.append(toast);
+    requestAnimationFrame(() => toast.classList.add("is-visible"));
+    window.setTimeout(() => {
+      toast.classList.remove("is-visible");
+      window.setTimeout(() => toast.remove(), 220);
+    }, options.duration || 3200);
+  }
+
+  function confirmAction(message) {
+    return window.confirm(message);
+  }
+
+  function downloadCsv(filename, rows) {
+    const escapeCell = (value) => `"${String(value ?? "").replace(/"/g, '""')}"`;
+    const csv = rows.map((row) => row.map(escapeCell).join(",")).join("\r\n");
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = filename;
+    document.body.append(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(url);
+    showToast(`${filename} downloaded.`);
+  }
+
+  function ensureSkipLink(main) {
+    if (!main.id) main.id = "main-content";
+    if (document.querySelector(".admin-skip-link")) return;
+    const skipLink = document.createElement("a");
+    skipLink.className = "admin-skip-link";
+    skipLink.href = `#${main.id}`;
+    skipLink.textContent = "Skip to main content";
+    document.body.prepend(skipLink);
+  }
+
+  function ensureEnvironmentBanner(main) {
+    if (main.querySelector(".admin-environment-banner")) return;
+    const banner = document.createElement("div");
+    banner.className = "admin-environment-banner";
+    banner.setAttribute("role", "status");
+    banner.textContent = "Prototype mode: Firebase, database, and backend services are not connected in this workspace.";
+    main.prepend(banner);
+  }
+
+  function setupSidebar() {
+    const sidebar = document.getElementById("staffSidebar") || document.querySelector("body > aside");
+    const header = document.querySelector("body > div > header, body > aside + div header, header");
+    if (!sidebar || !header) return;
+
+    sidebar.id = "staffSidebar";
+    sidebar.classList.add("admin-sidebar");
+
+    let closeButton = document.getElementById("sidebarClose");
+    if (!closeButton) {
+      closeButton = document.createElement("button");
+      closeButton.id = "sidebarClose";
+      closeButton.type = "button";
+      closeButton.className = "admin-sidebar-close";
+      closeButton.setAttribute("aria-label", "Close navigation");
+      closeButton.innerHTML = '<span class="material-symbols-outlined" aria-hidden="true">close</span>';
+      sidebar.prepend(closeButton);
+    }
+
+    let toggle = document.getElementById("sidebarToggle");
+    if (!toggle) {
+      toggle = document.createElement("button");
+      toggle.id = "sidebarToggle";
+      toggle.type = "button";
+      toggle.className = "admin-menu-toggle";
+      toggle.setAttribute("aria-controls", sidebar.id);
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.setAttribute("aria-label", "Open navigation");
+      toggle.innerHTML = '<span class="material-symbols-outlined" aria-hidden="true">menu</span>';
+      header.prepend(toggle);
+    }
+
+    let backdrop = document.getElementById("sidebarBackdrop");
+    if (!backdrop) {
+      backdrop = document.createElement("div");
+      backdrop.id = "sidebarBackdrop";
+      backdrop.className = "admin-sidebar-backdrop hidden";
+      backdrop.setAttribute("aria-hidden", "true");
+      sidebar.insertAdjacentElement("afterend", backdrop);
+    } else {
+      backdrop.classList.add("admin-sidebar-backdrop");
+    }
+
+    const desktop = window.matchMedia("(min-width: 1024px)");
+    let wasOpen = false;
+
+    const setSidebar = (open, returnFocus = false) => {
+      const mobileOpen = open && !desktop.matches;
+      sidebar.dataset.open = String(open);
+      sidebar.classList.toggle("-translate-x-full", !open);
+      backdrop.classList.toggle("hidden", !mobileOpen);
+      toggle.setAttribute("aria-expanded", String(mobileOpen));
+      toggle.setAttribute("aria-label", mobileOpen ? "Close navigation" : "Open navigation");
+      document.body.classList.toggle("overflow-hidden", mobileOpen);
+      sidebar.inert = !open;
+
+      if (mobileOpen) {
+        wasOpen = true;
+        requestAnimationFrame(() => closeButton.focus());
+      } else if (returnFocus && wasOpen) {
+        toggle.focus();
+        wasOpen = false;
+      }
+    };
+
+    const syncLayout = () => {
+      setSidebar(desktop.matches);
+      if (desktop.matches) sidebar.inert = false;
+    };
+
+    toggle.addEventListener("click", () => setSidebar(toggle.getAttribute("aria-expanded") !== "true"));
+    closeButton.addEventListener("click", () => setSidebar(false, true));
+    backdrop.addEventListener("click", () => setSidebar(false, true));
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && toggle.getAttribute("aria-expanded") === "true") setSidebar(false, true);
+      if (event.key !== "Tab" || desktop.matches || toggle.getAttribute("aria-expanded") !== "true") return;
+      const focusable = [...sidebar.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])')];
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    });
+
+    if (desktop.addEventListener) desktop.addEventListener("change", syncLayout);
+    else desktop.addListener(syncLayout);
+
+    sidebar.querySelectorAll("nav a").forEach((link) => {
+      const href = link.getAttribute("href");
+      if (!href || !ADMIN_PAGES.has(href)) return;
+      const current = href === (window.location.pathname.split("/").pop() || "dashboard.html");
+      link.classList.toggle("admin-current-link", current);
+      if (current) link.setAttribute("aria-current", "page");
+      else link.removeAttribute("aria-current");
+      link.addEventListener("click", () => {
+        if (!desktop.matches) setSidebar(false);
+      });
+    });
+
+    syncLayout();
+  }
+
+  function setupSessionControls() {
+    const logout = document.getElementById("staffLogout");
+    if (!logout) return;
+    logout.addEventListener("click", () => {
+      try {
+        sessionStorage.removeItem("navableStaffPreview");
+      } catch (error) {
+        console.warn("Could not clear the preview session.", error);
+      }
+      window.location.href = "staff-login.html";
+    });
+  }
+
+  function setupGlobalControls() {
+    const header = document.querySelector("body > div > header, body > aside + div header, header");
+    if (!header) return;
+    const globalSearch = header.querySelector('input[type="text"], input[type="search"]');
+    if (globalSearch) {
+      globalSearch.setAttribute("aria-label", "Search the admin dashboard");
+      document.addEventListener("keydown", (event) => {
+        if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") {
+          event.preventDefault();
+          globalSearch.focus();
+          globalSearch.select();
+        }
+      });
+      globalSearch.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") globalSearch.blur();
+      });
+    }
+
+    const notificationButton = [...header.querySelectorAll("button")].find((button) => button.querySelector(".material-symbols-outlined")?.textContent.trim() === "notifications");
+    if (notificationButton) {
+      notificationButton.setAttribute("aria-label", "Open notifications");
+      notificationButton.addEventListener("click", () => {
+        window.location.href = "notifications.html";
+      });
+    }
+
+    const contrastButton = [...header.querySelectorAll("button")].find((button) => button.querySelector(".material-symbols-outlined")?.textContent.trim() === "contrast");
+    if (contrastButton) {
+      let enabled = false;
+      try {
+        enabled = localStorage.getItem("navableHighContrast") === "true";
+      } catch (_) {}
+      document.body.classList.toggle("admin-high-contrast", enabled);
+      contrastButton.setAttribute("aria-label", "Toggle high contrast mode");
+      contrastButton.setAttribute("aria-pressed", String(enabled));
+      contrastButton.addEventListener("click", () => {
+        enabled = !document.body.classList.contains("admin-high-contrast");
+        document.body.classList.toggle("admin-high-contrast", enabled);
+        contrastButton.setAttribute("aria-pressed", String(enabled));
+        try {
+          localStorage.setItem("navableHighContrast", String(enabled));
+        } catch (_) {}
+        showToast(`High contrast mode ${enabled ? "enabled" : "disabled"}.`);
+      });
+    }
+  }
+
+  function improveControlNames() {
+    const labelsByFor = new Map([...document.querySelectorAll("label[for]")].map((label) => [label.htmlFor, textLabel(label)]));
+    let selectionIndex = 0;
+
+    document.querySelectorAll("input, select, textarea").forEach((control) => {
+      if (control.type === "hidden" || control.getAttribute("aria-label") || control.getAttribute("aria-labelledby")) return;
+      if (control.id && labelsByFor.has(control.id)) return;
+      const wrappingLabel = control.closest("label");
+      if (wrappingLabel) return;
+
+      let label = control.getAttribute("placeholder") || "";
+      if (!label && control.tagName === "SELECT") label = control.options[0]?.textContent.trim() || "Select an option";
+      if (!label && control.type === "range") label = "Adjust value";
+      if (!label && control.type === "checkbox") label = `Select record ${++selectionIndex}`;
+      if (!label) label = `${control.type || control.tagName.toLowerCase()} field`;
+      control.setAttribute("aria-label", label);
+    });
+
+    document.querySelectorAll("button").forEach((button) => {
+      if (!button.type) button.type = "button";
+      if (button.getAttribute("aria-label") || button.getAttribute("aria-labelledby") || button.title) return;
+      const icon = button.querySelector(".material-symbols-outlined");
+      const iconName = icon?.textContent.trim();
+      const clone = button.cloneNode(true);
+      clone.querySelectorAll(".material-symbols-outlined").forEach((item) => item.remove());
+      const visibleText = textLabel(clone);
+      if (!visibleText && iconName) button.setAttribute("aria-label", ICON_LABELS[iconName] || iconName.replace(/_/g, " "));
+      if (!visibleText && iconName) button.classList.add("admin-icon-button");
+    });
+
+    document.querySelectorAll("img").forEach((image) => {
+      if (image.hasAttribute("alt")) return;
+      image.alt = image.dataset.alt || "";
+    });
+  }
+
+  function improveStructuredContent() {
+    document.querySelectorAll("table").forEach((table) => {
+      table.querySelectorAll("thead th").forEach((heading) => heading.setAttribute("scope", "col"));
+      if (!table.querySelector("caption")) {
+        const caption = document.createElement("caption");
+        caption.className = "sr-only";
+        caption.textContent = table.closest("div")?.parentElement?.querySelector("h2")?.textContent.trim() || "Administrative records";
+        table.prepend(caption);
+      }
+      table.parentElement?.classList.add("admin-table-wrap");
+    });
+
+    const dialogDefinitions = [
+      ["inviteDrawer", "Invite auditor or add staff"],
+      ["inspectorDrawer", "Location telemetry inspector"]
+    ];
+    dialogDefinitions.forEach(([id, name]) => {
+      const dialog = document.getElementById(id);
+      if (!dialog) return;
+      dialog.setAttribute("role", "dialog");
+      dialog.setAttribute("aria-modal", "true");
+      dialog.setAttribute("aria-label", name);
+    });
+
+    const existingToast = document.getElementById("dispatchToast");
+    if (existingToast) {
+      existingToast.setAttribute("role", "status");
+      existingToast.setAttribute("aria-live", "polite");
+      existingToast.setAttribute("aria-atomic", "true");
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    document.body.classList.add("admin-page");
+    const main = document.querySelector("main");
+    if (main) {
+      ensureSkipLink(main);
+      ensureEnvironmentBanner(main);
+    }
+    setupSidebar();
+    setupSessionControls();
+    setupGlobalControls();
+    improveControlNames();
+    improveStructuredContent();
+  });
+
+  window.NavAbleAdmin = Object.freeze({ showToast, confirmAction, downloadCsv });
+})();

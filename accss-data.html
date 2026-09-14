@@ -1,0 +1,729 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><title>NavAble Admin</title><link href="https://fonts.googleapis.com" rel="preconnect"><link href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>*,*::before,*::after{box-sizing:border-box;}@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "primary-fixed-dim": "#71dd7f", "secondary-fixed-dim": "#afc8f2", "surface-container-lowest": "#ffffff", "outline": "#6e7a6c", "secondary": "#475f84", "surface": "#f3fcf5", "on-surface-variant": "#3f4a3d", "on-secondary-fixed": "#001c3b", "on-error": "#ffffff", "error": "#ba1a1a", "background": "#f3fcf5", "surface-container-high": "#e1eae4", "secondary-fixed": "#d5e3ff", "on-background": "#151d19", "surface-tint": "#006e28", "primary": "#006e28", "on-tertiary": "#ffffff", "surface-variant": "#dce5de", "surface-bright": "#f3fcf5", "tertiary-fixed-dim": "#b4c5ff", "inverse-primary": "#71dd7f", "tertiary-fixed": "#dbe1ff", "on-secondary-fixed-variant": "#2f486b", "on-primary-fixed-variant": "#00531c", "surface-container-low": "#edf6ef", "on-tertiary-fixed": "#00174b", "surface-container-highest": "#dce5de", "secondary-container": "#bad3fe", "on-secondary-container": "#425b7f", "surface-container": "#e7f0e9", "inverse-on-surface": "#eaf3ec", "on-primary-container": "#004f1b", "on-primary": "#ffffff", "inverse-surface": "#2a322e", "on-tertiary-container": "#003ba1", "on-error-container": "#93000a", "on-secondary": "#ffffff", "on-surface": "#151d19", "outline-variant": "#becaba", "surface-dim": "#d3dcd5", "on-tertiary-fixed-variant": "#003ea8", "primary-fixed": "#8dfa98", "on-primary-fixed": "#002107", "tertiary-container": "#94aeff", "tertiary": "#0053db", "primary-container": "#5bc66b", "error-container": "#ffdad6" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "gutter": "1.5rem", "gutter-mobile": "1rem", "space-sm": "0.5rem", "space-xs": "0.25rem", "space-lg": "1.5rem", "margin": "2rem", "space-xl": "2rem", "space-md": "1rem", "margin-mobile": "1rem" }, "fontFamily": { "body-md": [ "Plus Jakarta Sans" ], "headline-sm": [ "Plus Jakarta Sans" ], "body-lg": [ "Plus Jakarta Sans" ], "headline-lg": [ "Plus Jakarta Sans" ], "headline-xl-mobile": [ "Plus Jakarta Sans" ], "label-lg": [ "Plus Jakarta Sans" ], "label-sm": [ "Plus Jakarta Sans" ], "headline-md": [ "Plus Jakarta Sans" ], "label-md": [ "Plus Jakarta Sans" ], "headline-lg-mobile": [ "Plus Jakarta Sans" ], "body-sm": [ "Plus Jakarta Sans" ], "headline-xl": [ "Plus Jakarta Sans" ] }, "fontSize": { "body-md": [ "1rem", { "lineHeight": "1.5rem", "letterSpacing": "0em", "fontWeight": "400" } ], "headline-sm": [ "1.125rem", { "lineHeight": "1.5rem", "letterSpacing": "0em", "fontWeight": "600" } ], "body-lg": [ "1.125rem", { "lineHeight": "1.75rem", "letterSpacing": "0em", "fontWeight": "400" } ], "headline-lg": [ "1.75rem", { "lineHeight": "2.25rem", "letterSpacing": "-0.02em", "fontWeight": "700" } ], "headline-xl-mobile": [ "1.75rem", { "lineHeight": "2.25rem", "letterSpacing": "-0.01em", "fontWeight": "700" } ], "label-lg": [ "0.875rem", { "lineHeight": "1.25rem", "letterSpacing": "0.01em", "fontWeight": "600" } ], "label-sm": [ "0.6875rem", { "lineHeight": "0.875rem", "letterSpacing": "0.04em", "fontWeight": "700" } ], "headline-md": [ "1.375rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.01em", "fontWeight": "600" } ], "label-md": [ "0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.02em", "fontWeight": "600" } ], "headline-lg-mobile": [ "1.375rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.01em", "fontWeight": "700" } ], "body-sm": [ "0.875rem", { "lineHeight": "1.25rem", "letterSpacing": "0.01em", "fontWeight": "400" } ], "headline-xl": [ "2.25rem", { "lineHeight": "2.75rem", "letterSpacing": "-0.02em", "fontWeight": "700" } ] } } } };</script></head><body class="bg-background font-body-md text-body-md text-on-background"><aside id="staffSidebar" class="fixed left-0 top-0 z-50 flex h-full w-72 -translate-x-full flex-col justify-between overflow-y-auto bg-surface-container-low shadow-[6px_0_16px_rgba(15,43,77,0.08)] transition-transform duration-300 lg:translate-x-0" aria-label="Staff navigation">
+<div class="p-space-lg">
+<div class="mb-space-xl flex items-center justify-between gap-space-sm">
+<a class="flex min-w-0 items-center gap-space-sm" href="dashboard.html" aria-label="NavAble staff dashboard">
+<div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-surface shadow-[4px_4px_10px_rgba(15,43,77,0.08),-4px_-4px_10px_rgba(255,255,255,0.9)]"><img class="h-9 w-9 object-cover mix-blend-multiply" src="logOnly.png" alt=""></div>
+<div class="min-w-0"><div class="font-headline-sm text-headline-sm leading-tight text-on-surface">Nav<span class="text-primary">Able</span></div><div class="truncate font-label-sm text-label-sm text-on-surface-variant">Accessibility &amp; Verification</div></div>
+</a>
+<button id="sidebarClose" class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface lg:hidden" type="button" aria-label="Close navigation"><span class="material-symbols-outlined">close</span></button>
+</div>
+<nav class="flex flex-col gap-space-sm">
+<a class="flex items-center justify-between rounded-xl px-space-md py-3 font-label-lg text-label-lg text-on-surface-variant transition-all hover:bg-surface-container-high hover:text-on-surface" href="dashboard.html"><span>Dashboard</span><span class="material-symbols-outlined text-[19px]">dashboard</span></a>
+<a class="flex items-center justify-between rounded-xl px-space-md py-3 font-label-lg text-label-lg text-on-surface-variant transition-all hover:bg-surface-container-high hover:text-on-surface" href="user.html"><span>Users</span><span class="material-symbols-outlined text-[19px]">group</span></a>
+<a class="flex items-center justify-between rounded-xl px-space-md py-3 font-label-lg text-label-lg text-on-surface-variant transition-all hover:bg-surface-container-high hover:text-on-surface" href="location.html"><span>Locations</span><span class="material-symbols-outlined text-[19px]">location_on</span></a>
+<a aria-current="page" class="flex items-center justify-between rounded-xl bg-surface px-space-md py-3 font-label-lg text-label-lg font-bold text-on-secondary-fixed shadow-[4px_4px_12px_rgba(91,198,107,0.22),-4px_-4px_12px_rgba(255,255,255,0.95),inset_4px_0_0_#5bc66b]" href="accss-data.html"><span>Accessibility Data</span><span class="material-symbols-outlined text-[19px]">accessible</span></a>
+<a class="flex items-center justify-between rounded-xl px-space-md py-3 font-label-lg text-label-lg text-on-surface-variant transition-all hover:bg-surface-container-high hover:text-on-surface" href="verification.html"><span>AI Verification</span><span class="material-symbols-outlined text-[19px]">verified</span></a>
+<a class="flex items-center justify-between rounded-xl px-space-md py-3 font-label-lg text-label-lg text-on-surface-variant transition-all hover:bg-surface-container-high hover:text-on-surface" href="reports.html"><span>Reports</span><span class="material-symbols-outlined text-[19px]">description</span></a>
+<a class="flex items-center justify-between rounded-xl px-space-md py-3 font-label-lg text-label-lg text-on-surface-variant transition-all hover:bg-surface-container-high hover:text-on-surface" href="ratings.html"><span>Ratings &amp; Reviews</span><span class="material-symbols-outlined text-[19px]">reviews</span></a>
+<a class="flex items-center justify-between rounded-xl px-space-md py-3 font-label-lg text-label-lg text-on-surface-variant transition-all hover:bg-surface-container-high hover:text-on-surface" href="notifications.html"><span>Notifications</span><span class="material-symbols-outlined text-[19px]">notifications</span></a>
+<a class="flex items-center justify-between rounded-xl px-space-md py-3 font-label-lg text-label-lg text-on-surface-variant transition-all hover:bg-surface-container-high hover:text-on-surface" href="analytics.html"><span>Analytics</span><span class="material-symbols-outlined text-[19px]">analytics</span></a>
+<a class="flex items-center justify-between rounded-xl px-space-md py-3 font-label-lg text-label-lg text-on-surface-variant transition-all hover:bg-surface-container-high hover:text-on-surface" href="settings.html"><span>Settings</span><span class="material-symbols-outlined text-[19px]">settings</span></a>
+</nav>
+</div>
+<div class="p-space-lg">
+<div class="mb-space-md rounded-xl bg-surface p-space-md shadow-[4px_4px_12px_rgba(15,43,77,0.06),-4px_-4px_12px_rgba(255,255,255,0.9)]"><div class="flex items-center gap-space-sm"><div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary"><span class="material-symbols-outlined text-[18px] text-on-primary">person</span></div><div class="overflow-hidden"><div class="truncate font-label-lg text-label-lg text-on-surface">Sarah Jenkins</div><div class="truncate font-label-sm text-label-sm text-on-surface-variant">Senior Moderator</div></div></div></div>
+<button id="staffLogout" class="flex w-full items-center justify-center gap-space-xs rounded-xl bg-surface-container py-space-sm font-label-lg text-label-lg text-on-surface-variant shadow-[inset_2px_2px_5px_rgba(15,43,77,0.08),inset_-2px_-2px_5px_rgba(255,255,255,0.8)] transition-all hover:text-on-surface" type="button"><span class="material-symbols-outlined text-[18px]">logout</span><span>Log Out</span></button>
+</div>
+</aside>
+<div id="sidebarBackdrop" class="fixed inset-0 z-40 hidden bg-inverse-surface/40 backdrop-blur-sm lg:hidden" aria-hidden="true"></div><div class="min-h-screen overflow-x-hidden bg-background lg:pl-72"><header class="fixed left-0 right-0 top-0 h-20 lg:left-72 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(15,43,77,0.04)] z-30 px-space-md lg:px-space-xl flex items-center justify-between gap-space-sm lg:gap-space-lg"><button id="sidebarToggle" class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-surface text-on-surface-variant shadow-[4px_4px_10px_rgba(15,43,77,0.07),-4px_-4px_10px_rgba(255,255,255,0.95)] lg:hidden" type="button" aria-controls="staffSidebar" aria-expanded="false" aria-label="Open navigation"><span class="material-symbols-outlined">menu</span></button><div class="hidden sm:flex items-center gap-space-sm text-on-surface-variant font-label-md text-label-md"><span class="material-symbols-outlined text-[18px]">home</span><span>/</span><span class="text-on-surface font-label-lg text-label-lg">Admin Cockpit</span></div><div class="hidden flex-1 md:block md:max-w-md"><div class="relative flex items-center"><span class="material-symbols-outlined absolute left-space-md text-on-surface-variant text-[20px]">search</span><input class="w-full bg-surface-container-high/60 rounded-xl pl-11 pr-16 py-2.5 text-on-surface font-body-sm text-body-sm shadow-[inset_2px_2px_4px_rgba(15,43,77,0.07),inset_-2px_-2px_4px_rgba(255,255,255,0.85)] placeholder:text-on-surface-variant focus:outline-none focus:ring-2 focus:ring-secondary transition-all" placeholder="Search ramps, IDs, locations..." type="text"><kbd class="absolute right-space-md font-label-sm text-label-sm bg-surface-container px-space-xs py-0.5 rounded shadow-sm text-on-surface-variant">Ctrl K</kbd></div></div><div class="flex items-center gap-space-xs sm:gap-space-md"><div class="hidden xl:flex items-center gap-space-xs px-space-md py-1.5 rounded-full bg-surface shadow-[inset_2px_2px_4px_rgba(15,43,77,0.05),inset_-2px_-2px_4px_rgba(255,255,255,0.8)]"><span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span><span class="font-label-sm text-label-sm text-on-surface-variant">Live: Firebase Online</span></div><button class="w-10 h-10 rounded-xl bg-surface flex items-center justify-center text-on-surface-variant hover:text-on-surface shadow-[4px_4px_10px_rgba(15,43,77,0.07),-4px_-4px_10px_rgba(255,255,255,0.95)] hover:shadow-[2px_2px_5px_rgba(15,43,77,0.07),-2px_-2px_5px_rgba(255,255,255,0.95)] transition-all relative"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-error"></span></button><button class="hidden w-10 h-10 rounded-xl bg-surface sm:flex items-center justify-center text-on-surface-variant hover:text-on-surface shadow-[4px_4px_10px_rgba(15,43,77,0.07),-4px_-4px_10px_rgba(255,255,255,0.95)] transition-all" title="High Contrast &amp; Accessibility Mode"><span class="material-symbols-outlined text-[20px]">contrast</span></button><div class="hidden items-center gap-space-sm pl-space-sm sm:flex"><div class="relative"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-primary ring-2 ring-surface"></span></div><div class="hidden md:block text-left"><div class="font-label-lg text-label-lg text-on-surface leading-none">Sarah Jenkins</div><div class="font-label-sm text-label-sm text-on-surface-variant mt-0.5">Lead Verifier</div></div></div></div></header><main class="w-full min-w-0 px-space-md pt-20 lg:px-space-xl pb-space-xl bg-background flex-1"><div class="flex min-w-0 w-full flex-col gap-space-xl">
+<!-- Top Control Canvas -->
+<div class="bg-surface-container-low p-space-lg rounded-xl shadow-[6px_6px_16px_rgba(15,43,77,0.06),-6px_-6px_16px_rgba(255,255,255,0.95)] flex flex-col gap-space-lg">
+<div class="flex flex-col xl:flex-row items-start xl:items-center justify-between gap-space-md">
+<div>
+<div class="flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm tracking-wider uppercase">
+<span>Municipal Registry</span>
+<span>•</span>
+<span class="text-primary font-bold">Live Synced (v4.8)</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface">Accessibility Infrastructure Catalog</h1>
+</div>
+<div class="flex flex-wrap items-center gap-space-sm w-full xl:w-auto">
+<!-- Compliance Standard Dropdown Selector -->
+<div class="relative flex-1 sm:flex-initial">
+<label class="sr-only" for="compliance-standard">Select Compliance Standard</label>
+<div class="flex items-center bg-surface px-space-md py-2.5 rounded-xl shadow-[inset_2px_2px_5px_rgba(15,43,77,0.08),inset_-2px_-2px_5px_rgba(255,255,255,0.85)]">
+<span class="material-symbols-outlined text-secondary text-[20px] mr-2">verified_user</span>
+<select class="bg-transparent text-on-surface font-label-lg text-label-lg outline-none cursor-pointer pr-4" id="compliance-standard">
+<option value="ada">Standard: ADA Standards 2010</option>
+<option value="iso">Standard: ISO 21542:2021</option>
+<option value="universal">Standard: Universal Design Guidelines</option>
+</select>
+</div>
+</div>
+<!-- Export Action Button -->
+<button class="flex items-center gap-space-xs px-space-lg py-2.5 rounded-xl bg-primary text-on-primary font-label-lg text-label-lg shadow-[4px_4px_12px_rgba(0,110,40,0.25),-2px_-2px_8px_rgba(255,255,255,0.9)] hover:bg-primary-container hover:text-on-primary-container active:shadow-[inset_2px_2px_5px_rgba(0,33,7,0.3)] transition-all" id="export-btn">
+<span class="material-symbols-outlined text-[18px]">download</span>
+<span>Export Data Spec</span>
+</button>
+</div>
+</div>
+<!-- Search Input & Active Filters -->
+<div class="flex flex-col md:flex-row gap-space-md items-stretch md:items-center">
+<div class="relative flex-1">
+<span class="material-symbols-outlined absolute left-space-md top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">search</span>
+<input class="w-full bg-surface-container rounded-xl pl-11 pr-space-md py-3 text-on-surface font-body-sm text-body-sm shadow-[inset_3px_3px_6px_rgba(15,43,77,0.08),inset_-3px_-3px_6px_rgba(255,255,255,0.8)] placeholder:text-on-surface-variant focus:outline-none focus:ring-2 focus:ring-secondary transition-all" id="catalog-search" placeholder="Search feature type, geo-boundary, or municipal zone code (e.g. Zone 4B, Curb Ramp)..." type="text">
+</div>
+<div class="flex items-center gap-space-xs shrink-0">
+<button class="px-space-md py-3 rounded-xl bg-surface text-on-surface font-label-md text-label-md shadow-[3px_3px_8px_rgba(15,43,77,0.06),-3px_-3px_8px_rgba(255,255,255,0.9)] hover:bg-surface-container-high transition-all flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px] text-secondary">tune</span>
+<span>Attributes</span>
+</button>
+<button class="px-space-md py-3 rounded-xl bg-surface text-on-surface font-label-md text-label-md shadow-[3px_3px_8px_rgba(15,43,77,0.06),-3px_-3px_8px_rgba(255,255,255,0.9)] hover:bg-surface-container-high transition-all flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px] text-secondary">place</span>
+<span>Zone Matrix</span>
+</button>
+</div>
+</div>
+<!-- Categorical Filters / Tabs -->
+<div class="flex items-center gap-space-sm overflow-x-auto pb-1" role="tablist">
+<button aria-selected="true" class="cat-tab px-space-md py-2 rounded-xl bg-surface-container font-label-lg text-label-lg text-on-surface shadow-[inset_2px_2px_4px_rgba(15,43,77,0.08),inset_-2px_-2px_4px_rgba(255,255,255,0.9)] font-bold shrink-0 flex items-center gap-2" role="tab">
+<span>All Features</span>
+<span class="bg-primary text-on-primary font-label-sm text-label-sm px-2 py-0.5 rounded-full">18,450</span>
+</button>
+<button aria-selected="false" class="cat-tab px-space-md py-2 rounded-xl bg-surface font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface shadow-[3px_3px_8px_rgba(15,43,77,0.06),-3px_-3px_8px_rgba(255,255,255,0.9)] shrink-0 flex items-center gap-2 transition-all" role="tab">
+<span class="material-symbols-outlined text-[18px] text-primary">accessible_forward</span>
+<span>Ramps &amp; Gradients</span>
+<span class="bg-surface-container text-on-surface-variant font-label-sm text-label-sm px-2 py-0.5 rounded-full">7,011</span>
+</button>
+<button aria-selected="false" class="cat-tab px-space-md py-2 rounded-xl bg-surface font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface shadow-[3px_3px_8px_rgba(15,43,77,0.06),-3px_-3px_8px_rgba(255,255,255,0.9)] shrink-0 flex items-center gap-2 transition-all" role="tab">
+<span class="material-symbols-outlined text-[18px] text-secondary">elevator</span>
+<span>Elevators &amp; Lifts</span>
+<span class="bg-surface-container text-on-surface-variant font-label-sm text-label-sm px-2 py-0.5 rounded-full">4,428</span>
+</button>
+<button aria-selected="false" class="cat-tab px-space-md py-2 rounded-xl bg-surface font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface shadow-[3px_3px_8px_rgba(15,43,77,0.06),-3px_-3px_8px_rgba(255,255,255,0.9)] shrink-0 flex items-center gap-2 transition-all" role="tab">
+<span class="material-symbols-outlined text-[18px] text-primary">blind</span>
+<span>Tactile Paving</span>
+<span class="bg-surface-container text-on-surface-variant font-label-sm text-label-sm px-2 py-0.5 rounded-full">2,952</span>
+</button>
+<button aria-selected="false" class="cat-tab px-space-md py-2 rounded-xl bg-surface font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface shadow-[3px_3px_8px_rgba(15,43,77,0.06),-3px_-3px_8px_rgba(255,255,255,0.9)] shrink-0 flex items-center gap-2 transition-all" role="tab">
+<span class="material-symbols-outlined text-[18px] text-secondary">sensor_door</span>
+<span>Accessible Entrances</span>
+<span class="bg-surface-container text-on-surface-variant font-label-sm text-label-sm px-2 py-0.5 rounded-full">2,583</span>
+</button>
+<button aria-selected="false" class="cat-tab px-space-md py-2 rounded-xl bg-surface font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface shadow-[3px_3px_8px_rgba(15,43,77,0.06),-3px_-3px_8px_rgba(255,255,255,0.9)] shrink-0 flex items-center gap-2 transition-all" role="tab">
+<span class="material-symbols-outlined text-[18px] text-primary">sign_language</span>
+<span>Braille Signage</span>
+<span class="bg-surface-container text-on-surface-variant font-label-sm text-label-sm px-2 py-0.5 rounded-full">1,476</span>
+</button>
+</div>
+</div>
+<!-- Feature Summary Cards Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-space-lg">
+<!-- Card 1: Ramps -->
+<div class="bg-surface-container-low p-space-lg rounded-xl shadow-[6px_6px_14px_rgba(15,43,77,0.07),-6px_-6px_14px_rgba(255,255,255,0.95)] flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-md">
+<div class="w-12 h-12 rounded-xl bg-surface flex items-center justify-center shadow-[inset_2px_2px_5px_rgba(15,43,77,0.07),inset_-2px_-2px_5px_rgba(255,255,255,0.9)] text-primary">
+<span class="material-symbols-outlined text-[26px]">accessible_forward</span>
+</div>
+<span class="font-label-sm text-label-sm px-2.5 py-1 rounded-full bg-primary-fixed text-on-primary-fixed font-bold">98.1% Dual Handrails</span>
+</div>
+<div class="font-headline-sm text-headline-sm text-on-surface">Ramps &amp; Inclines</div>
+<div class="font-headline-xl text-headline-xl text-primary mt-1">7,011</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2">Verified installations meeting transit criteria.</p>
+</div>
+<div class="mt-space-lg pt-space-md bg-surface-container-high/40 rounded-xl p-3">
+<div class="flex items-center justify-between font-label-sm text-label-sm mb-1.5">
+<span class="text-on-surface-variant">Average Incline Ratio</span>
+<span class="font-bold text-on-surface">1:13.2 (ADA Optimal)</span>
+</div>
+<!-- Incline Meter -->
+<div class="h-2 w-full bg-surface-container-highest rounded-full overflow-hidden shadow-[inset_1px_1px_3px_rgba(15,43,77,0.1)]">
+<div class="h-full bg-primary-container rounded-full" style="width: 88%;"></div>
+</div>
+</div>
+</div>
+<!-- Card 2: Elevators -->
+<div class="bg-surface-container-low p-space-lg rounded-xl shadow-[6px_6px_14px_rgba(15,43,77,0.07),-6px_-6px_14px_rgba(255,255,255,0.95)] flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-md">
+<div class="w-12 h-12 rounded-xl bg-surface flex items-center justify-center shadow-[inset_2px_2px_5px_rgba(15,43,77,0.07),inset_-2px_-2px_5px_rgba(255,255,255,0.9)] text-secondary">
+<span class="material-symbols-outlined text-[26px]">elevator</span>
+</div>
+<span class="font-label-sm text-label-sm px-2.5 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed font-bold">89% Braille Buttons</span>
+</div>
+<div class="font-headline-sm text-headline-sm text-on-surface">Elevators &amp; Lifts</div>
+<div class="font-headline-xl text-headline-xl text-secondary mt-1">4,428</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2">Vertical connectivity &amp; platform units.</p>
+</div>
+<div class="mt-space-lg pt-space-md bg-surface-container-high/40 rounded-xl p-3">
+<div class="flex items-center justify-between font-label-sm text-label-sm mb-1.5">
+<span class="text-on-surface-variant">Audio Feedback Coverage</span>
+<span class="font-bold text-on-surface">72% Active Synthesizer</span>
+</div>
+<div class="h-2 w-full bg-surface-container-highest rounded-full overflow-hidden shadow-[inset_1px_1px_3px_rgba(15,43,77,0.1)]">
+<div class="h-full bg-secondary rounded-full" style="width: 72%;"></div>
+</div>
+</div>
+</div>
+<!-- Card 3: Tactile Paths -->
+<div class="bg-surface-container-low p-space-lg rounded-xl shadow-[6px_6px_14px_rgba(15,43,77,0.07),-6px_-6px_14px_rgba(255,255,255,0.95)] flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-md">
+<div class="w-12 h-12 rounded-xl bg-surface flex items-center justify-center shadow-[inset_2px_2px_5px_rgba(15,43,77,0.07),inset_-2px_-2px_5px_rgba(255,255,255,0.9)] text-primary">
+<span class="material-symbols-outlined text-[26px]">blind</span>
+</div>
+<span class="font-label-sm text-label-sm px-2.5 py-1 rounded-full bg-surface-container-highest text-on-surface font-bold">ISO Warning Arrays</span>
+</div>
+<div class="font-headline-sm text-headline-sm text-on-surface">Tactile Paths</div>
+<div class="font-headline-xl text-headline-xl text-on-surface mt-1">2,952 <span class="font-headline-sm text-headline-sm text-on-surface-variant font-normal">km</span></div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2">Continuous directional &amp; truncated domes.</p>
+</div>
+<div class="mt-space-lg pt-space-md bg-surface-container-high/40 rounded-xl p-3">
+<div class="flex items-center justify-between font-label-sm text-label-sm mb-1.5">
+<span class="text-on-surface-variant">High-Contrast Yellow Domes</span>
+<span class="font-bold text-primary">94.8% Contrast Ratio</span>
+</div>
+<div class="h-2 w-full bg-surface-container-highest rounded-full overflow-hidden shadow-[inset_1px_1px_3px_rgba(15,43,77,0.1)]">
+<div class="h-full bg-primary rounded-full" style="width: 95%;"></div>
+</div>
+</div>
+</div>
+<!-- Card 4: Accessible Entrances -->
+<div class="bg-surface-container-low p-space-lg rounded-xl shadow-[6px_6px_14px_rgba(15,43,77,0.07),-6px_-6px_14px_rgba(255,255,255,0.95)] flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-md">
+<div class="w-12 h-12 rounded-xl bg-surface flex items-center justify-center shadow-[inset_2px_2px_5px_rgba(15,43,77,0.07),inset_-2px_-2px_5px_rgba(255,255,255,0.9)] text-primary">
+<span class="material-symbols-outlined text-[26px]">sensor_door</span>
+</div>
+<span class="font-label-sm text-label-sm px-2.5 py-1 rounded-full bg-primary-fixed text-on-primary-fixed font-bold">Motion Sensor/Plate</span>
+</div>
+<div class="font-headline-sm text-headline-sm text-on-surface">Accessible Entrances</div>
+<div class="font-headline-xl text-headline-xl text-on-surface mt-1">2,583</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2">Zero-threshold powered ingress points.</p>
+</div>
+<div class="mt-space-lg pt-space-md bg-surface-container-high/40 rounded-xl p-3">
+<div class="flex items-center justify-between font-label-sm text-label-sm mb-1.5">
+<span class="text-on-surface-variant">Push-Plate Actuation Speed</span>
+<span class="font-bold text-on-surface">&lt; 3.0s (Compliant)</span>
+</div>
+<div class="h-2 w-full bg-surface-container-highest rounded-full overflow-hidden shadow-[inset_1px_1px_3px_rgba(15,43,77,0.1)]">
+<div class="h-full bg-primary-container rounded-full" style="width: 91%;"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Detailed Feature Catalog Table Surface -->
+<div class="bg-surface-container-low rounded-xl p-space-lg shadow-[6px_6px_16px_rgba(15,43,77,0.06),-6px_-6px_16px_rgba(255,255,255,0.95)]">
+<!-- Table Header Controls -->
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-space-md mb-space-lg">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-lg bg-surface flex items-center justify-center text-primary shadow-[inset_2px_2px_4px_rgba(15,43,77,0.06),inset_-2px_-2px_4px_rgba(255,255,255,0.85)]">
+<span class="material-symbols-outlined text-[20px]">dataset</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Verification Records &amp; Physical Specifications</h2>
+</div>
+<div class="flex items-center gap-space-xs font-label-sm text-label-sm text-on-surface-variant">
+<span>Displaying</span>
+<span class="font-bold text-on-surface">5 of 18,450 records</span>
+<div class="flex items-center ml-space-sm gap-1">
+<button class="w-8 h-8 rounded-lg bg-surface flex items-center justify-center text-on-surface-variant shadow-[2px_2px_6px_rgba(15,43,77,0.06),-2px_-2px_6px_rgba(255,255,255,0.8)] opacity-50 cursor-not-allowed">
+<span class="material-symbols-outlined text-[16px]">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded-lg bg-surface flex items-center justify-center text-on-surface shadow-[2px_2px_6px_rgba(15,43,77,0.06),-2px_-2px_6px_rgba(255,255,255,0.8)] hover:bg-surface-container-high transition-all">
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Data Table Container -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-high/50 text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider">
+<th class="py-3.5 px-space-md rounded-l-lg">Feature ID &amp; Type</th>
+<th class="py-3.5 px-space-md">Location &amp; Municipal Zone</th>
+<th class="py-3.5 px-space-md">Detailed Physical Specs</th>
+<th class="py-3.5 px-space-md">Audit Status</th>
+<th class="py-3.5 px-space-md">Last Verified / Auditor</th>
+<th class="py-3.5 px-space-md text-right rounded-r-lg">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y-0 space-y-2">
+<!-- Row 1: Compliant Ramp -->
+<tr class="hover:bg-surface-container-high/40 transition-colors">
+<td class="py-4 px-space-md align-top">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-xl bg-surface flex items-center justify-center text-primary shadow-[inset_2px_2px_4px_rgba(15,43,77,0.06),inset_-2px_-2px_4px_rgba(255,255,255,0.8)]">
+<span class="material-symbols-outlined text-[20px]">accessible_forward</span>
+</div>
+<div>
+<div class="font-label-lg text-label-lg font-bold text-on-surface">#ACC-3921</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Switchback Ramp</div>
+</div>
+</div>
+</td>
+<td class="py-4 px-space-md align-top">
+<div class="font-label-lg text-label-lg text-on-surface font-semibold">Civic Center Transit Hub</div>
+<div class="flex items-center gap-1 font-label-sm text-label-sm text-on-surface-variant mt-0.5">
+<span class="material-symbols-outlined text-[14px]">location_on</span>
+<span>Zone 4B • North Concourse</span>
+</div>
+</td>
+<td class="py-4 px-space-md align-top">
+<div class="grid grid-cols-2 gap-x-4 gap-y-1 font-body-sm text-body-sm text-on-surface">
+<div><span class="text-on-surface-variant">Clear Width:</span> <strong class="font-semibold">42.4 in</strong></div>
+<div><span class="text-on-surface-variant">Slope:</span> <strong class="font-semibold text-primary">1:12 (ADA)</strong></div>
+<div><span class="text-on-surface-variant">Landing:</span> <strong class="font-semibold">60 x 60 in</strong></div>
+<div><span class="text-on-surface-variant">Handrail:</span> <strong class="font-semibold">34 in Dual</strong></div>
+</div>
+</td>
+<td class="py-4 px-space-md align-top">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm font-bold shadow-sm">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+<span>Compliant</span>
+</span>
+</td>
+<td class="py-4 px-space-md align-top">
+<div class="font-label-md text-label-md text-on-surface font-medium">May 18, 2024</div>
+<div class="flex items-center gap-1 mt-1 font-label-sm text-label-sm text-on-surface-variant">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span>Marcus Thorne (Auditor #09)</span>
+</div>
+</td>
+<td class="py-4 px-space-md align-top text-right">
+<div class="flex items-center justify-end gap-1.5">
+<button class="w-8 h-8 rounded-lg bg-surface flex items-center justify-center text-on-surface-variant hover:text-on-surface shadow-[2px_2px_5px_rgba(15,43,77,0.06),-2px_-2px_5px_rgba(255,255,255,0.8)] active:shadow-[inset_2px_2px_4px_rgba(15,43,77,0.1)] transition-all" title="Audit History">
+<span class="material-symbols-outlined text-[18px]">history</span>
+</button>
+<button class="w-8 h-8 rounded-lg bg-surface flex items-center justify-center text-on-surface-variant hover:text-on-surface shadow-[2px_2px_5px_rgba(15,43,77,0.06),-2px_-2px_5px_rgba(255,255,255,0.8)] active:shadow-[inset_2px_2px_4px_rgba(15,43,77,0.1)] transition-all" title="Update Specs">
+<span class="material-symbols-outlined text-[18px]">edit_note</span>
+</button>
+<button class="w-8 h-8 rounded-lg bg-surface flex items-center justify-center text-secondary hover:text-on-surface shadow-[2px_2px_5px_rgba(15,43,77,0.06),-2px_-2px_5px_rgba(255,255,255,0.8)] active:shadow-[inset_2px_2px_4px_rgba(15,43,77,0.1)] transition-all" title="View Geo-coordinates (37.7791° N, 122.4172° W)">
+<span class="material-symbols-outlined text-[18px]">near_me</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2: Non-Compliant Alert Ramp -->
+<tr class="hover:bg-surface-container-high/40 transition-colors">
+<td class="py-4 px-space-md align-top">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-xl bg-surface flex items-center justify-center text-error shadow-[inset_2px_2px_4px_rgba(15,43,77,0.06),inset_-2px_-2px_4px_rgba(255,255,255,0.8)]">
+<span class="material-symbols-outlined text-[20px]">warning</span>
+</div>
+<div>
+<div class="font-label-lg text-label-lg font-bold text-on-surface">#ACC-3922</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Sidewalk Curb Ramp</div>
+</div>
+</div>
+</td>
+<td class="py-4 px-space-md align-top">
+<div class="font-label-lg text-label-lg text-on-surface font-semibold">Grand Library West Entrance</div>
+<div class="flex items-center gap-1 font-label-sm text-label-sm text-on-surface-variant mt-0.5">
+<span class="material-symbols-outlined text-[14px]">location_on</span>
+<span>Zone 1A • Market St Crossing</span>
+</div>
+</td>
+<td class="py-4 px-space-md align-top">
+<div class="grid grid-cols-2 gap-x-4 gap-y-1 font-body-sm text-body-sm text-on-surface">
+<div><span class="text-on-surface-variant">Clear Width:</span> <strong class="font-semibold text-error">32.0 in (Deficient)</strong></div>
+<div><span class="text-on-surface-variant">Slope:</span> <strong class="font-semibold text-error">1:9.4 (&gt; 1:12 ADA Max)</strong></div>
+<div><span class="text-on-surface-variant">Landing:</span> <strong class="font-semibold">44 x 48 in</strong></div>
+<div><span class="text-on-surface-variant">Handrail:</span> <strong class="font-semibold text-error">Single Sided</strong></div>
+</div>
+</td>
+<td class="py-4 px-space-md align-top">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm font-bold shadow-sm">
+<span class="material-symbols-outlined text-[14px]">error</span>
+<span>Non-Compliant Alert</span>
+</span>
+</td>
+<td class="py-4 px-space-md align-top">
+<div class="font-label-md text-label-md text-on-surface font-medium">May 19, 2024</div>
+<div class="flex items-center gap-1 mt-1 font-label-sm text-label-sm text-on-surface-variant">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+<span>AI Automated Survey Drone</span>
+</div>
+</td>
+<td class="py-4 px-space-md align-top text-right">
+<div class="flex items-center justify-end gap-1.5">
+<button class="w-8 h-8 rounded-lg bg-surface flex items-center justify-center text-on-surface-variant hover:text-on-surface shadow-[2px_2px_5px_rgba(15,43,77,0.06),-2px_-2px_5px_rgba(255,255,255,0.8)] transition-all" title="Audit History">
+<span class="material-symbols-outlined text-[18px]">history</span>
+</button>
+<button class="w-8 h-8 rounded-lg bg-surface flex items-center justify-center text-on-surface-variant hover:text-on-surface shadow-[2px_2px_5px_rgba(15,43,77,0.06),-2px_-2px_5px_rgba(255,255,255,0.8)] transition-all" title="Update Specs">
+<span class="material-symbols-outlined text-[18px]">edit_note</span>
+</button>
+<button class="w-8 h-8 rounded-lg bg-surface flex items-center justify-center text-secondary hover:text-on-surface shadow-[2px_2px_5px_rgba(15,43,77,0.06),-2px_-2px_5px_rgba(255,255,255,0.8)] transition-all" title="View Geo-coordinates">
+<span class="material-symbols-outlined text-[18px]">near_me</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3: Elevator Lift System -->
+<tr class="hover:bg-surface-container-high/40 transition-colors">
+<td class="py-4 px-space-md align-top">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-xl bg-surface flex items-center justify-center text-secondary shadow-[inset_2px_2px_4px_rgba(15,43,77,0.06),inset_-2px_-2px_4px_rgba(255,255,255,0.8)]">
+<span class="material-symbols-outlined text-[20px]">elevator</span>
+</div>
+<div>
+<div class="font-label-lg text-label-lg font-bold text-on-surface">#ACC-3923</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Passenger Lift #3</div>
+</div>
+</div>
+</td>
+<td class="py-4 px-space-md align-top">
+<div class="font-label-lg text-label-lg text-on-surface font-semibold">Union Rail Intermodal Terminal</div>
+<div class="flex items-center gap-1 font-label-sm text-label-sm text-on-surface-variant mt-0.5">
+<span class="material-symbols-outlined text-[14px]">location_on</span>
+<span>Zone 2C • Platform Level B</span>
+</div>
+</td>
+<td class="py-4 px-space-md align-top">
+<div class="grid grid-cols-2 gap-x-4 gap-y-1 font-body-sm text-body-sm text-on-surface">
+<div><span class="text-on-surface-variant">Door Clear:</span> <strong class="font-semibold">36.0 in</strong></div>
+<div><span class="text-on-surface-variant">Cabin Dim:</span> <strong class="font-semibold">68 x 54 in</strong></div>
+<div><span class="text-on-surface-variant">Tactile Buttons:</span> <strong class="font-semibold text-primary">Braille &amp; Relief</strong></div>
+<div><span class="text-on-surface-variant">Audio Cues:</span> <strong class="font-semibold text-primary">Floor Vocalizer</strong></div>
+</div>
+</td>
+<td class="py-4 px-space-md align-top">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm font-bold shadow-sm">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+<span>Compliant</span>
+</span>
+</td>
+<td class="py-4 px-space-md align-top">
+<div class="font-label-md text-label-md text-on-surface font-medium">May 14, 2024</div>
+<div class="flex items-center gap-1 mt-1 font-label-sm text-label-sm text-on-surface-variant">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span>Elena Rostova (Lead Inspector)</span>
+</div>
+</td>
+<td class="py-4 px-space-md align-top text-right">
+<div class="flex items-center justify-end gap-1.5">
+<button class="w-8 h-8 rounded-lg bg-surface flex items-center justify-center text-on-surface-variant hover:text-on-surface shadow-[2px_2px_5px_rgba(15,43,77,0.06),-2px_-2px_5px_rgba(255,255,255,0.8)] transition-all" title="Audit History">
+<span class="material-symbols-outlined text-[18px]">history</span>
+</button>
+<button class="w-8 h-8 rounded-lg bg-surface flex items-center justify-center text-on-surface-variant hover:text-on-surface shadow-[2px_2px_5px_rgba(15,43,77,0.06),-2px_-2px_5px_rgba(255,255,255,0.8)] transition-all" title="Update Specs">
+<span class="material-symbols-outlined text-[18px]">edit_note</span>
+</button>
+<button class="w-8 h-8 rounded-lg bg-surface flex items-center justify-center text-secondary hover:text-on-surface shadow-[2px_2px_5px_rgba(15,43,77,0.06),-2px_-2px_5px_rgba(255,255,255,0.8)] transition-all" title="View Geo-coordinates">
+<span class="material-symbols-outlined text-[18px]">near_me</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4: Pending Re-measure Tactile Paving -->
+<tr class="hover:bg-surface-container-high/40 transition-colors">
+<td class="py-4 px-space-md align-top">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-xl bg-surface flex items-center justify-center text-on-surface-variant shadow-[inset_2px_2px_4px_rgba(15,43,77,0.06),inset_-2px_-2px_4px_rgba(255,255,255,0.8)]">
+<span class="material-symbols-outlined text-[20px]">blind</span>
+</div>
+<div>
+<div class="font-label-lg text-label-lg font-bold text-on-surface">#ACC-3924</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Directional Warning Path</div>
+</div>
+</div>
+</td>
+<td class="py-4 px-space-md align-top">
+<div class="font-label-lg text-label-lg text-on-surface font-semibold">Harbor Boardwalk Esplanade</div>
+<div class="flex items-center gap-1 font-label-sm text-label-sm text-on-surface-variant mt-0.5">
+<span class="material-symbols-outlined text-[14px]">location_on</span>
+<span>Zone 6A • Pier Promenade</span>
+</div>
+</td>
+<td class="py-4 px-space-md align-top">
+<div class="grid grid-cols-2 gap-x-4 gap-y-1 font-body-sm text-body-sm text-on-surface">
+<div><span class="text-on-surface-variant">Dome Height:</span> <strong class="font-semibold text-secondary">0.18 in (Wear Alert)</strong></div>
+<div><span class="text-on-surface-variant">Center Spacing:</span> <strong class="font-semibold">2.35 in</strong></div>
+<div><span class="text-on-surface-variant">Color Contrast:</span> <strong class="font-semibold">Safety Yellow (Fed-Std)</strong></div>
+<div><span class="text-on-surface-variant">Path Span:</span> <strong class="font-semibold">120 meters</strong></div>
+</div>
+</td>
+<td class="py-4 px-space-md align-top">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm font-bold shadow-sm">
+<span class="material-symbols-outlined text-[14px]">hourglass_top</span>
+<span>Pending Re-measure</span>
+</span>
+</td>
+<td class="py-4 px-space-md align-top">
+<div class="font-label-md text-label-md text-on-surface font-medium">May 11, 2024</div>
+<div class="flex items-center gap-1 mt-1 font-label-sm text-label-sm text-on-surface-variant">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span>Li Wei (Field Auditor #14)</span>
+</div>
+</td>
+<td class="py-4 px-space-md align-top text-right">
+<div class="flex items-center justify-end gap-1.5">
+<button class="w-8 h-8 rounded-lg bg-surface flex items-center justify-center text-on-surface-variant hover:text-on-surface shadow-[2px_2px_5px_rgba(15,43,77,0.06),-2px_-2px_5px_rgba(255,255,255,0.8)] transition-all" title="Audit History">
+<span class="material-symbols-outlined text-[18px]">history</span>
+</button>
+<button class="w-8 h-8 rounded-lg bg-surface flex items-center justify-center text-on-surface-variant hover:text-on-surface shadow-[2px_2px_5px_rgba(15,43,77,0.06),-2px_-2px_5px_rgba(255,255,255,0.8)] transition-all" title="Update Specs">
+<span class="material-symbols-outlined text-[18px]">edit_note</span>
+</button>
+<button class="w-8 h-8 rounded-lg bg-surface flex items-center justify-center text-secondary hover:text-on-surface shadow-[2px_2px_5px_rgba(15,43,77,0.06),-2px_-2px_5px_rgba(255,255,255,0.8)] transition-all" title="View Geo-coordinates">
+<span class="material-symbols-outlined text-[18px]">near_me</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 5: Compliant Accessible Automated Entrance -->
+<tr class="hover:bg-surface-container-high/40 transition-colors">
+<td class="py-4 px-space-md align-top">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-xl bg-surface flex items-center justify-center text-primary shadow-[inset_2px_2px_4px_rgba(15,43,77,0.06),inset_-2px_-2px_4px_rgba(255,255,255,0.8)]">
+<span class="material-symbols-outlined text-[20px]">sensor_door</span>
+</div>
+<div>
+<div class="font-label-lg text-label-lg font-bold text-on-surface">#ACC-3925</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Power Sliding Ingress</div>
+</div>
+</div>
+</td>
+<td class="py-4 px-space-md align-top">
+<div class="font-label-lg text-label-lg text-on-surface font-semibold">Memorial Community Hospital</div>
+<div class="flex items-center gap-1 font-label-sm text-label-sm text-on-surface-variant mt-0.5">
+<span class="material-symbols-outlined text-[14px]">location_on</span>
+<span>Zone 3A • Emergency Pavilion</span>
+</div>
+</td>
+<td class="py-4 px-space-md align-top">
+<div class="grid grid-cols-2 gap-x-4 gap-y-1 font-body-sm text-body-sm text-on-surface">
+<div><span class="text-on-surface-variant">Door Clear:</span> <strong class="font-semibold text-primary">48.0 in (Optimal)</strong></div>
+<div><span class="text-on-surface-variant">Threshold:</span> <strong class="font-semibold">0.0 in (Flush Bevel)</strong></div>
+<div><span class="text-on-surface-variant">Trigger Mode:</span> <strong class="font-semibold">Dual Optical + 36" Plate</strong></div>
+<div><span class="text-on-surface-variant">Open Cycle:</span> <strong class="font-semibold">6.2 sec Hold</strong></div>
+</div>
+</td>
+<td class="py-4 px-space-md align-top">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm font-bold shadow-sm">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+<span>Compliant</span>
+</span>
+</td>
+<td class="py-4 px-space-md align-top">
+<div class="font-label-md text-label-md text-on-surface font-medium">May 17, 2024</div>
+<div class="flex items-center gap-1 mt-1 font-label-sm text-label-sm text-on-surface-variant">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span>Marcus Thorne (Auditor #09)</span>
+</div>
+</td>
+<td class="py-4 px-space-md align-top text-right">
+<div class="flex items-center justify-end gap-1.5">
+<button class="w-8 h-8 rounded-lg bg-surface flex items-center justify-center text-on-surface-variant hover:text-on-surface shadow-[2px_2px_5px_rgba(15,43,77,0.06),-2px_-2px_5px_rgba(255,255,255,0.8)] transition-all" title="Audit History">
+<span class="material-symbols-outlined text-[18px]">history</span>
+</button>
+<button class="w-8 h-8 rounded-lg bg-surface flex items-center justify-center text-on-surface-variant hover:text-on-surface shadow-[2px_2px_5px_rgba(15,43,77,0.06),-2px_-2px_5px_rgba(255,255,255,0.8)] transition-all" title="Update Specs">
+<span class="material-symbols-outlined text-[18px]">edit_note</span>
+</button>
+<button class="w-8 h-8 rounded-lg bg-surface flex items-center justify-center text-secondary hover:text-on-surface shadow-[2px_2px_5px_rgba(15,43,77,0.06),-2px_-2px_5px_rgba(255,255,255,0.8)] transition-all" title="View Geo-coordinates">
+<span class="material-symbols-outlined text-[18px]">near_me</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Bottom Table Pagination & Status Legend -->
+<div class="flex flex-col sm:flex-row items-center justify-between gap-space-md pt-space-lg mt-space-md border-t-0 bg-surface-container-high/30 -mx-space-lg -mb-space-lg p-space-lg rounded-b-xl">
+<div class="flex items-center gap-space-md flex-wrap font-label-sm text-label-sm">
+<span class="text-on-surface-variant font-semibold">Audit Key:</span>
+<span class="flex items-center gap-1 text-on-surface"><span class="w-2.5 h-2.5 rounded-full bg-primary-container"></span> ADA / ISO Passed</span>
+<span class="flex items-center gap-1 text-on-surface"><span class="w-2.5 h-2.5 rounded-full bg-error"></span> Immediate Correction Req</span>
+<span class="flex items-center gap-1 text-on-surface"><span class="w-2.5 h-2.5 rounded-full bg-secondary-fixed-dim"></span> Verification in Progress</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="px-space-md py-1.5 rounded-lg bg-surface text-on-surface font-label-md text-label-md shadow-[inset_2px_2px_4px_rgba(15,43,77,0.08),inset_-2px_-2px_4px_rgba(255,255,255,0.9)] font-bold">1</button>
+<button class="px-space-md py-1.5 rounded-lg bg-surface text-on-surface-variant hover:text-on-surface font-label-md text-label-md shadow-[2px_2px_5px_rgba(15,43,77,0.06),-2px_-2px_5px_rgba(255,255,255,0.8)] transition-all">2</button>
+<button class="px-space-md py-1.5 rounded-lg bg-surface text-on-surface-variant hover:text-on-surface font-label-md text-label-md shadow-[2px_2px_5px_rgba(15,43,77,0.06),-2px_-2px_5px_rgba(255,255,255,0.8)] transition-all">3</button>
+<span class="px-2 text-on-surface-variant">...</span>
+<button class="px-space-md py-1.5 rounded-lg bg-surface text-on-surface-variant hover:text-on-surface font-label-md text-label-md shadow-[2px_2px_5px_rgba(15,43,77,0.06),-2px_-2px_5px_rgba(255,255,255,0.8)] transition-all">369</button>
+</div>
+</div>
+</div>
+<!-- Physical Audit Detail Context Visualizer (Dual Panel) -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-space-lg">
+<!-- Visual Measurement Verification -->
+<div class="lg:col-span-2 bg-surface-container-low p-space-lg rounded-xl shadow-[6px_6px_14px_rgba(15,43,77,0.07),-6px_-6px_14px_rgba(255,255,255,0.95)] flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-md">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[22px]">photo_camera</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Field Audit Evidence &amp; Visual Calibration</span>
+</div>
+<span class="font-label-sm text-label-sm px-2.5 py-1 rounded-full bg-surface-container text-on-surface font-bold">Selected: #ACC-3921</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-md">
+          Stereoscopic photogrammetry overlaid with digital inclinometer reading and ADA threshold line for Civic Center Transit Hub.
+        </p>
+<!-- Mock Field Photograph with Inclinometer Overlay -->
+<div class="relative w-full h-64 rounded-xl overflow-hidden shadow-[inset_2px_2px_6px_rgba(15,43,77,0.15)]">
+<img class="w-full h-full object-cover" data-alt="Field audit photograph of a wide modern wheelchair ramp at Civic Center transit hub with brushed stainless steel dual handrails, high contrast yellow tactile paving at base, soft mint concrete finish under clear morning daylight." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjfkBBGmO60uShJQRdTrGWb1QWWu4JutK-J44hj81XkXCHSgJGXJKD-09t3PGvMH9D0G6r7R4nidFzXNMhjYFmHgcGNFhYqVBnW5hp6Zyda0ITOl3rDxlyaFMkHNSCnfb4-t2xgfLynek3_ZibuhYX95E4LJMvS8O3G4gmTehecjG0i2aFpuYQX53YCCIJGU3q7-aDFJggnk62k0X1oKsEmPDOYm1be4dQ_jSicXHDsG1y--3HBQSVyA">
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30 p-space-md flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="px-2.5 py-1 rounded-full bg-surface/90 backdrop-blur-md text-on-surface font-label-sm text-label-sm font-bold flex items-center gap-1 shadow">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                Incline Slope: 4.76° (1:12.0)
+              </span>
+<span class="px-2.5 py-1 rounded-full bg-surface/90 backdrop-blur-md text-on-surface font-label-sm text-label-sm font-semibold">
+                LiDAR Cross-Section Verified
+              </span>
+</div>
+<div class="bg-surface/90 backdrop-blur-md p-3 rounded-xl flex items-center justify-between text-on-surface">
+<div class="flex items-center gap-space-md">
+<div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Cross-Slope</div>
+<div class="font-label-lg text-label-lg font-bold">1:48 (Within 1:48 max)</div>
+</div>
+<div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Railing Grip Diam.</div>
+<div class="font-label-lg text-label-lg font-bold">1.50 in</div>
+</div>
+<div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Continuous Run</div>
+<div class="font-label-lg text-label-lg font-bold">28.4 ft</div>
+</div>
+</div>
+<button class="px-space-md py-1.5 rounded-lg bg-primary text-on-primary font-label-sm text-label-sm font-bold shadow hover:bg-primary-container hover:text-on-primary-container transition-all">
+                Full Telemetry
+              </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Quick Compliance Audit Tools -->
+<div class="bg-surface-container-low p-space-lg rounded-xl shadow-[6px_6px_14px_rgba(15,43,77,0.07),-6px_-6px_14px_rgba(255,255,255,0.95)] flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-space-xs mb-space-md">
+<span class="material-symbols-outlined text-primary text-[22px]">policy</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Compliance Checklist</span>
+</div>
+<div class="space-y-space-md">
+<div class="p-space-md rounded-xl bg-surface shadow-[inset_2px_2px_4px_rgba(15,43,77,0.06),inset_-2px_-2px_4px_rgba(255,255,255,0.8)]">
+<div class="flex items-center justify-between font-label-md text-label-md font-bold text-on-surface mb-1">
+<span>Section 405 (Ramps)</span>
+<span class="text-primary">100% Pass</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Handrail extensions meet 12-inch top and bottom horizontal criteria.</p>
+</div>
+<div class="p-space-md rounded-xl bg-surface shadow-[inset_2px_2px_4px_rgba(15,43,77,0.06),inset_-2px_-2px_4px_rgba(255,255,255,0.8)]">
+<div class="flex items-center justify-between font-label-md text-label-md font-bold text-on-surface mb-1">
+<span>Section 705 (Tactile Warning)</span>
+<span class="text-primary">Validated</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Truncated domes positioned across full egress entry point width.</p>
+</div>
+<div class="p-space-md rounded-xl bg-surface shadow-[inset_2px_2px_4px_rgba(15,43,77,0.06),inset_-2px_-2px_4px_rgba(255,255,255,0.8)]">
+<div class="flex items-center justify-between font-label-md text-label-md font-bold text-on-surface mb-1">
+<span>Municipal Audit Schedule</span>
+<span class="text-on-surface-variant">Q3 2024</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Next automated lidar drone pass queued in 62 days.</p>
+</div>
+</div>
+</div>
+<div class="mt-space-lg flex items-center gap-space-sm">
+<button class="flex-1 py-2.5 rounded-xl bg-surface-container font-label-lg text-label-lg text-on-surface shadow-[2px_2px_6px_rgba(15,43,77,0.08),-2px_-2px_6px_rgba(255,255,255,0.9)] hover:bg-surface-container-high transition-all">
+          Re-evaluate
+        </button>
+<button class="flex-1 py-2.5 rounded-xl bg-primary text-on-primary font-label-lg text-label-lg shadow-[3px_3px_10px_rgba(0,110,40,0.3)] hover:bg-primary-container hover:text-on-primary-container transition-all">
+          Sign Off Audit
+        </button>
+</div>
+</div>
+</div>
+</div>
+<script>
+  // Tab micro-interaction
+  const tabs = document.querySelectorAll('.cat-tab');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => {
+        t.setAttribute('aria-selected', 'false');
+        t.classList.remove('bg-surface-container', 'font-bold');
+        t.classList.add('bg-surface', 'text-on-surface-variant');
+      });
+      tab.setAttribute('aria-selected', 'true');
+      tab.classList.remove('bg-surface', 'text-on-surface-variant');
+      tab.classList.add('bg-surface-container', 'font-bold', 'text-on-surface');
+    });
+  });
+
+  // Search filter micro-interaction
+  const searchInput = document.getElementById('catalog-search');
+  searchInput.addEventListener('input', (e) => {
+    const q = e.target.value.toLowerCase();
+    const rows = document.querySelectorAll('tbody tr');
+    rows.forEach(row => {
+      const text = row.innerText.toLowerCase();
+      row.style.display = text.includes(q) ? '' : 'none';
+    });
+  });
+
+  // Export Feedback
+  const exportBtn = document.getElementById('export-btn');
+  exportBtn.addEventListener('click', () => {
+    const orig = exportBtn.innerHTML;
+    exportBtn.innerHTML = '<span class="material-symbols-outlined text-[18px] animate-spin">sync</span><span>Preparing Export...</span>';
+    setTimeout(() => {
+      exportBtn.innerHTML = '<span class="material-symbols-outlined text-[18px]">check</span><span>Downloaded Spec</span>';
+      setTimeout(() => {
+        exportBtn.innerHTML = orig;
+      }, 2000);
+    }, 800);
+  });
+</script></main></div>
+<script>
+  const staffSidebar = document.getElementById('staffSidebar');
+  const sidebarToggle = document.getElementById('sidebarToggle');
+  const sidebarClose = document.getElementById('sidebarClose');
+  const sidebarBackdrop = document.getElementById('sidebarBackdrop');
+  const desktopSidebar = window.matchMedia('(min-width: 1024px)');
+  let sidebarWasOpen = false;
+
+  function setSidebar(open, returnFocus = false) {
+    const mobileOpen = open && !desktopSidebar.matches;
+    staffSidebar.classList.toggle('-translate-x-full', !open);
+    sidebarBackdrop.classList.toggle('hidden', !mobileOpen);
+    sidebarToggle.setAttribute('aria-expanded', String(mobileOpen));
+    sidebarToggle.setAttribute('aria-label', mobileOpen ? 'Close navigation' : 'Open navigation');
+    document.body.classList.toggle('overflow-hidden', mobileOpen);
+    staffSidebar.inert = !open;
+
+    if (mobileOpen) {
+      sidebarWasOpen = true;
+      window.requestAnimationFrame(() => sidebarClose.focus());
+    } else if (returnFocus && sidebarWasOpen) {
+      sidebarToggle.focus();
+      sidebarWasOpen = false;
+    }
+  }
+
+  function syncSidebarLayout() {
+    if (desktopSidebar.matches) {
+      setSidebar(true);
+      staffSidebar.inert = false;
+    } else {
+      setSidebar(false);
+    }
+  }
+
+  sidebarToggle.addEventListener('click', () => setSidebar(sidebarToggle.getAttribute('aria-expanded') !== 'true'));
+  sidebarClose.addEventListener('click', () => setSidebar(false, true));
+  sidebarBackdrop.addEventListener('click', () => setSidebar(false, true));
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && sidebarToggle.getAttribute('aria-expanded') === 'true') setSidebar(false, true);
+  });
+  desktopSidebar.addEventListener('change', syncSidebarLayout);
+  syncSidebarLayout();
+
+  document.querySelectorAll('[data-unavailable="true"]').forEach((link) => {
+    link.addEventListener('click', (event) => {
+      event.preventDefault();
+      alert(link.querySelector('span').textContent.trim() + ' is not available in this preview yet.');
+    });
+  });
+
+  document.getElementById('staffLogout').addEventListener('click', () => {
+    sessionStorage.removeItem('navableStaffPreview');
+    window.location.href = 'staff-login.html';
+  });
+</script>
+</body>
+</html>

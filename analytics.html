@@ -1,0 +1,666 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><title>NavAble Admin</title><link href="https://fonts.googleapis.com" rel="preconnect"><link href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>*,*::before,*::after{box-sizing:border-box;}@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "primary-fixed-dim": "#71dd7f", "secondary-fixed-dim": "#afc8f2", "surface-container-lowest": "#ffffff", "outline": "#6e7a6c", "secondary": "#475f84", "surface": "#f3fcf5", "on-surface-variant": "#3f4a3d", "on-secondary-fixed": "#001c3b", "on-error": "#ffffff", "error": "#ba1a1a", "background": "#f3fcf5", "surface-container-high": "#e1eae4", "secondary-fixed": "#d5e3ff", "on-background": "#151d19", "surface-tint": "#006e28", "primary": "#006e28", "on-tertiary": "#ffffff", "surface-variant": "#dce5de", "surface-bright": "#f3fcf5", "tertiary-fixed-dim": "#b4c5ff", "inverse-primary": "#71dd7f", "tertiary-fixed": "#dbe1ff", "on-secondary-fixed-variant": "#2f486b", "on-primary-fixed-variant": "#00531c", "surface-container-low": "#edf6ef", "on-tertiary-fixed": "#00174b", "surface-container-highest": "#dce5de", "secondary-container": "#bad3fe", "on-secondary-container": "#425b7f", "surface-container": "#e7f0e9", "inverse-on-surface": "#eaf3ec", "on-primary-container": "#004f1b", "on-primary": "#ffffff", "inverse-surface": "#2a322e", "on-tertiary-container": "#003ba1", "on-error-container": "#93000a", "on-secondary": "#ffffff", "on-surface": "#151d19", "outline-variant": "#becaba", "surface-dim": "#d3dcd5", "on-tertiary-fixed-variant": "#003ea8", "primary-fixed": "#8dfa98", "on-primary-fixed": "#002107", "tertiary-container": "#94aeff", "tertiary": "#0053db", "primary-container": "#5bc66b", "error-container": "#ffdad6" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "gutter": "1.5rem", "gutter-mobile": "1rem", "space-sm": "0.5rem", "space-xs": "0.25rem", "space-lg": "1.5rem", "margin": "2rem", "space-xl": "2rem", "space-md": "1rem", "margin-mobile": "1rem" }, "fontFamily": { "body-md": [ "Plus Jakarta Sans" ], "headline-sm": [ "Plus Jakarta Sans" ], "body-lg": [ "Plus Jakarta Sans" ], "headline-lg": [ "Plus Jakarta Sans" ], "headline-xl-mobile": [ "Plus Jakarta Sans" ], "label-lg": [ "Plus Jakarta Sans" ], "label-sm": [ "Plus Jakarta Sans" ], "headline-md": [ "Plus Jakarta Sans" ], "label-md": [ "Plus Jakarta Sans" ], "headline-lg-mobile": [ "Plus Jakarta Sans" ], "body-sm": [ "Plus Jakarta Sans" ], "headline-xl": [ "Plus Jakarta Sans" ] }, "fontSize": { "body-md": [ "1rem", { "lineHeight": "1.5rem", "letterSpacing": "0em", "fontWeight": "400" } ], "headline-sm": [ "1.125rem", { "lineHeight": "1.5rem", "letterSpacing": "0em", "fontWeight": "600" } ], "body-lg": [ "1.125rem", { "lineHeight": "1.75rem", "letterSpacing": "0em", "fontWeight": "400" } ], "headline-lg": [ "1.75rem", { "lineHeight": "2.25rem", "letterSpacing": "-0.02em", "fontWeight": "700" } ], "headline-xl-mobile": [ "1.75rem", { "lineHeight": "2.25rem", "letterSpacing": "-0.01em", "fontWeight": "700" } ], "label-lg": [ "0.875rem", { "lineHeight": "1.25rem", "letterSpacing": "0.01em", "fontWeight": "600" } ], "label-sm": [ "0.6875rem", { "lineHeight": "0.875rem", "letterSpacing": "0.04em", "fontWeight": "700" } ], "headline-md": [ "1.375rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.01em", "fontWeight": "600" } ], "label-md": [ "0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.02em", "fontWeight": "600" } ], "headline-lg-mobile": [ "1.375rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.01em", "fontWeight": "700" } ], "body-sm": [ "0.875rem", { "lineHeight": "1.25rem", "letterSpacing": "0.01em", "fontWeight": "400" } ], "headline-xl": [ "2.25rem", { "lineHeight": "2.75rem", "letterSpacing": "-0.02em", "fontWeight": "700" } ] } } } };</script></head><body class="bg-background font-body-md text-body-md text-on-background"><aside id="staffSidebar" class="fixed left-0 top-0 z-50 flex h-full w-72 -translate-x-full flex-col justify-between overflow-y-auto bg-surface-container-low shadow-[6px_0_16px_rgba(15,43,77,0.08)] transition-transform duration-300 lg:translate-x-0" aria-label="Staff navigation">
+<div class="p-space-lg">
+<div class="mb-space-xl flex items-center justify-between gap-space-sm">
+<a class="flex min-w-0 items-center gap-space-sm" href="dashboard.html" aria-label="NavAble staff dashboard">
+<div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-surface shadow-[4px_4px_10px_rgba(15,43,77,0.08),-4px_-4px_10px_rgba(255,255,255,0.9)]"><img class="h-9 w-9 object-cover mix-blend-multiply" src="logOnly.png" alt=""></div>
+<div class="min-w-0"><div class="font-headline-sm text-headline-sm leading-tight text-on-surface">Nav<span class="text-primary">Able</span></div><div class="truncate font-label-sm text-label-sm text-on-surface-variant">Accessibility &amp; Verification</div></div>
+</a>
+<button id="sidebarClose" class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface lg:hidden" type="button" aria-label="Close navigation"><span class="material-symbols-outlined">close</span></button>
+</div>
+<nav class="flex flex-col gap-space-sm">
+<a class="flex items-center justify-between rounded-xl px-space-md py-3 font-label-lg text-label-lg text-on-surface-variant transition-all hover:bg-surface-container-high hover:text-on-surface" href="dashboard.html"><span>Dashboard</span><span class="material-symbols-outlined text-[19px]">dashboard</span></a>
+<a class="flex items-center justify-between rounded-xl px-space-md py-3 font-label-lg text-label-lg text-on-surface-variant transition-all hover:bg-surface-container-high hover:text-on-surface" href="user.html"><span>Users</span><span class="material-symbols-outlined text-[19px]">group</span></a>
+<a class="flex items-center justify-between rounded-xl px-space-md py-3 font-label-lg text-label-lg text-on-surface-variant transition-all hover:bg-surface-container-high hover:text-on-surface" href="location.html"><span>Locations</span><span class="material-symbols-outlined text-[19px]">location_on</span></a>
+<a class="flex items-center justify-between rounded-xl px-space-md py-3 font-label-lg text-label-lg text-on-surface-variant transition-all hover:bg-surface-container-high hover:text-on-surface" href="accss-data.html"><span>Accessibility Data</span><span class="material-symbols-outlined text-[19px]">accessible</span></a>
+<a class="flex items-center justify-between rounded-xl px-space-md py-3 font-label-lg text-label-lg text-on-surface-variant transition-all hover:bg-surface-container-high hover:text-on-surface" href="verification.html"><span>AI Verification</span><span class="material-symbols-outlined text-[19px]">verified</span></a>
+<a class="flex items-center justify-between rounded-xl px-space-md py-3 font-label-lg text-label-lg text-on-surface-variant transition-all hover:bg-surface-container-high hover:text-on-surface" href="reports.html"><span>Reports</span><span class="material-symbols-outlined text-[19px]">description</span></a>
+<a class="flex items-center justify-between rounded-xl px-space-md py-3 font-label-lg text-label-lg text-on-surface-variant transition-all hover:bg-surface-container-high hover:text-on-surface" href="ratings.html"><span>Ratings &amp; Reviews</span><span class="material-symbols-outlined text-[19px]">reviews</span></a>
+<a class="flex items-center justify-between rounded-xl px-space-md py-3 font-label-lg text-label-lg text-on-surface-variant transition-all hover:bg-surface-container-high hover:text-on-surface" href="notifications.html"><span>Notifications</span><span class="material-symbols-outlined text-[19px]">notifications</span></a>
+<a aria-current="page" class="flex items-center justify-between rounded-xl bg-surface px-space-md py-3 font-label-lg text-label-lg font-bold text-on-secondary-fixed shadow-[4px_4px_12px_rgba(91,198,107,0.22),-4px_-4px_12px_rgba(255,255,255,0.95),inset_4px_0_0_#5bc66b]" href="analytics.html"><span>Analytics</span><span class="material-symbols-outlined text-[19px]">analytics</span></a>
+<a class="flex items-center justify-between rounded-xl px-space-md py-3 font-label-lg text-label-lg text-on-surface-variant transition-all hover:bg-surface-container-high hover:text-on-surface" href="settings.html"><span>Settings</span><span class="material-symbols-outlined text-[19px]">settings</span></a>
+</nav>
+</div>
+<div class="p-space-lg">
+<div class="mb-space-md rounded-xl bg-surface p-space-md shadow-[4px_4px_12px_rgba(15,43,77,0.06),-4px_-4px_12px_rgba(255,255,255,0.9)]"><div class="flex items-center gap-space-sm"><div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary"><span class="material-symbols-outlined text-[18px] text-on-primary">person</span></div><div class="overflow-hidden"><div class="truncate font-label-lg text-label-lg text-on-surface">Sarah Jenkins</div><div class="truncate font-label-sm text-label-sm text-on-surface-variant">Senior Moderator</div></div></div></div>
+<button id="staffLogout" class="flex w-full items-center justify-center gap-space-xs rounded-xl bg-surface-container py-space-sm font-label-lg text-label-lg text-on-surface-variant shadow-[inset_2px_2px_5px_rgba(15,43,77,0.08),inset_-2px_-2px_5px_rgba(255,255,255,0.8)] transition-all hover:text-on-surface" type="button"><span class="material-symbols-outlined text-[18px]">logout</span><span>Log Out</span></button>
+</div>
+</aside>
+<div id="sidebarBackdrop" class="fixed inset-0 z-40 hidden bg-inverse-surface/40 backdrop-blur-sm lg:hidden" aria-hidden="true"></div><div class="min-h-screen overflow-x-hidden bg-background lg:pl-72"><header class="fixed left-0 right-0 top-0 h-20 lg:left-72 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(15,43,77,0.04)] z-30 px-space-md lg:px-space-xl flex items-center justify-between gap-space-sm lg:gap-space-lg"><button id="sidebarToggle" class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-surface text-on-surface-variant shadow-[4px_4px_10px_rgba(15,43,77,0.07),-4px_-4px_10px_rgba(255,255,255,0.95)] lg:hidden" type="button" aria-controls="staffSidebar" aria-expanded="false" aria-label="Open navigation"><span class="material-symbols-outlined">menu</span></button><div class="hidden sm:flex items-center gap-space-sm text-on-surface-variant font-label-md text-label-md"><span class="material-symbols-outlined text-[18px]">home</span><span>/</span><span class="text-on-surface font-label-lg text-label-lg">Admin Cockpit</span></div><div class="hidden flex-1 md:block md:max-w-md"><div class="relative flex items-center"><span class="material-symbols-outlined absolute left-space-md text-on-surface-variant text-[20px]">search</span><input class="w-full bg-surface-container-high/60 rounded-xl pl-11 pr-16 py-2.5 text-on-surface font-body-sm text-body-sm shadow-[inset_2px_2px_4px_rgba(15,43,77,0.07),inset_-2px_-2px_4px_rgba(255,255,255,0.85)] placeholder:text-on-surface-variant focus:outline-none focus:ring-2 focus:ring-secondary transition-all" placeholder="Search ramps, IDs, locations..." type="text"><kbd class="absolute right-space-md font-label-sm text-label-sm bg-surface-container px-space-xs py-0.5 rounded shadow-sm text-on-surface-variant">Ctrl K</kbd></div></div><div class="flex items-center gap-space-xs sm:gap-space-md"><div class="hidden xl:flex items-center gap-space-xs px-space-md py-1.5 rounded-full bg-surface shadow-[inset_2px_2px_4px_rgba(15,43,77,0.05),inset_-2px_-2px_4px_rgba(255,255,255,0.8)]"><span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span><span class="font-label-sm text-label-sm text-on-surface-variant">Live: Firebase Online</span></div><button class="w-10 h-10 rounded-xl bg-surface flex items-center justify-center text-on-surface-variant hover:text-on-surface shadow-[4px_4px_10px_rgba(15,43,77,0.07),-4px_-4px_10px_rgba(255,255,255,0.95)] hover:shadow-[2px_2px_5px_rgba(15,43,77,0.07),-2px_-2px_5px_rgba(255,255,255,0.95)] transition-all relative"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-error"></span></button><button class="hidden w-10 h-10 rounded-xl bg-surface sm:flex items-center justify-center text-on-surface-variant hover:text-on-surface shadow-[4px_4px_10px_rgba(15,43,77,0.07),-4px_-4px_10px_rgba(255,255,255,0.95)] transition-all" title="High Contrast &amp; Accessibility Mode"><span class="material-symbols-outlined text-[20px]">contrast</span></button><div class="hidden items-center gap-space-sm pl-space-sm sm:flex"><div class="relative"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-primary ring-2 ring-surface"></span></div><div class="hidden md:block text-left"><div class="font-label-lg text-label-lg text-on-surface leading-none">Sarah Jenkins</div><div class="font-label-sm text-label-sm text-on-surface-variant mt-0.5">Lead Verifier</div></div></div></div></header><main class="w-full min-w-0 px-space-md pt-20 lg:px-space-xl pb-space-xl bg-background flex-1"><div class="flex min-w-0 w-full flex-col gap-space-xl">
+<!-- Top Cockpit Control Ribbon -->
+<div class="flex flex-col xl:flex-row xl:items-center justify-between gap-space-lg">
+<div>
+<div class="flex items-center gap-space-xs text-on-surface-variant font-label-md text-label-md uppercase tracking-wider mb-1">
+<span class="w-2 h-2 rounded-full bg-primary-container inline-block"></span>
+<span>Operational Telemetry • Real-Time Sync</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface tracking-tight">Accessibility Analytics &amp; Coverage</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Spatial audit velocity, transit node compliance, and AI-assisted verification diagnostics.</p>
+</div>
+<!-- Interactive Filters & Export Trigger -->
+<div class="flex flex-wrap items-center gap-space-md">
+<!-- Date Range Button with Cavity Inset Field -->
+<div class="flex items-center bg-surface-container-high rounded-xl px-space-md py-2.5 shadow-[inset_2px_2px_5px_rgba(15,43,77,0.08),inset_-2px_-2px_5px_rgba(255,255,255,0.85)]">
+<span class="material-symbols-outlined text-secondary text-[20px] mr-space-sm">calendar_month</span>
+<div class="flex flex-col text-left">
+<span class="font-label-sm text-label-sm text-on-surface-variant">TIMEFRAME</span>
+<select class="bg-transparent font-label-lg text-label-lg text-on-surface font-semibold focus:outline-none cursor-pointer pr-space-sm">
+<option value="30d">Last 30 Days: Oct 1 - Oct 31</option>
+<option value="90d">Q3 Benchmark (Jul - Sep)</option>
+<option value="ytd">Year-to-Date (2024)</option>
+<option value="custom">Custom Fiscal Range...</option>
+</select>
+</div>
+</div>
+<!-- Sector Selector Dropdown -->
+<div class="flex items-center bg-surface-container-high rounded-xl px-space-md py-2.5 shadow-[inset_2px_2px_5px_rgba(15,43,77,0.08),inset_-2px_-2px_5px_rgba(255,255,255,0.85)]">
+<span class="material-symbols-outlined text-secondary text-[20px] mr-space-sm">domain</span>
+<div class="flex flex-col text-left">
+<span class="font-label-sm text-label-sm text-on-surface-variant">GEOGRAPHIC ZONE</span>
+<select class="bg-transparent font-label-lg text-label-lg text-on-surface font-semibold focus:outline-none cursor-pointer pr-space-sm">
+<option value="all">All Municipal Zones (Sector 1-8)</option>
+<option value="downtown">Downtown Metro Core</option>
+<option value="transit">Transit Corridor District</option>
+<option value="suburban">Suburban Mobility Hubs</option>
+</select>
+</div>
+</div>
+<!-- Export Action -->
+<button class="flex items-center gap-space-sm px-space-lg py-3 rounded-xl bg-primary text-on-primary font-label-lg text-label-lg shadow-[4px_4px_14px_rgba(0,110,40,0.28),-2px_-2px_8px_rgba(255,255,255,0.9)] hover:bg-on-primary-container active:shadow-[inset_2px_2px_6px_rgba(0,0,0,0.3)] transition-all cursor-pointer">
+<span class="material-symbols-outlined text-[20px]">download</span>
+<span>Export Report (PDF / CSV)</span>
+</button>
+</div>
+</div>
+<!-- Key Metric Summary Cards -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-space-lg">
+<!-- Card 1: Total Users -->
+<div class="bg-surface rounded-xl p-space-lg shadow-[6px_6px_16px_rgba(15,43,77,0.06),-6px_-6px_16px_rgba(255,255,255,0.95)] flex flex-col justify-between transition-all hover:shadow-[10px_10px_22px_rgba(15,43,77,0.09),-10px_-10px_22px_rgba(255,255,255,1)]">
+<div class="flex items-center justify-between mb-space-md">
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center shadow-[inset_2px_2px_4px_rgba(15,43,77,0.06),inset_-2px_-2px_4px_rgba(255,255,255,0.9)]">
+<span class="material-symbols-outlined text-primary text-[24px]">group</span>
+</div>
+<span class="px-space-sm py-1 rounded-full bg-surface-container font-label-sm text-label-sm text-primary font-bold flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[14px]">trending_up</span> +12.4% MoM
+        </span>
+</div>
+<div>
+<div class="font-headline-xl text-headline-xl text-on-surface font-bold">14,820</div>
+<div class="font-label-lg text-label-lg text-on-surface-variant mt-1 font-semibold">Total Active Navigators</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant/80 mt-1">9,410 Wheelchair • 3,240 Vision-Impaired</div>
+</div>
+<div class="w-full bg-surface-container-high rounded-full h-1.5 mt-space-md overflow-hidden">
+<div class="bg-primary h-1.5 rounded-full" style="width: 72%"></div>
+</div>
+</div>
+<!-- Card 2: Field Submissions -->
+<div class="bg-surface rounded-xl p-space-lg shadow-[6px_6px_16px_rgba(15,43,77,0.06),-6px_-6px_16px_rgba(255,255,255,0.95)] flex flex-col justify-between transition-all hover:shadow-[10px_10px_22px_rgba(15,43,77,0.09),-10px_-10px_22px_rgba(255,255,255,1)]">
+<div class="flex items-center justify-between mb-space-md">
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center shadow-[inset_2px_2px_4px_rgba(15,43,77,0.06),inset_-2px_-2px_4px_rgba(255,255,255,0.9)]">
+<span class="material-symbols-outlined text-secondary text-[24px]">assignment_turned_in</span>
+</div>
+<span class="px-space-sm py-1 rounded-full bg-surface-container font-label-sm text-label-sm text-secondary font-bold flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[14px]">verified</span> 93.1% Verified
+        </span>
+</div>
+<div>
+<div class="font-headline-xl text-headline-xl text-on-surface font-bold">8,924</div>
+<div class="font-label-lg text-label-lg text-on-surface-variant mt-1 font-semibold">Field Submissions Logged</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant/80 mt-1">618 In-Flight Audit Queue</div>
+</div>
+<div class="w-full bg-surface-container-high rounded-full h-1.5 mt-space-md overflow-hidden">
+<div class="bg-primary-container h-1.5 rounded-full" style="width: 93.1%"></div>
+</div>
+</div>
+<!-- Card 3: Regional Transit Coverage -->
+<div class="bg-surface rounded-xl p-space-lg shadow-[6px_6px_16px_rgba(15,43,77,0.06),-6px_-6px_16px_rgba(255,255,255,0.95)] flex flex-col justify-between transition-all hover:shadow-[10px_10px_22px_rgba(15,43,77,0.09),-10px_-10px_22px_rgba(255,255,255,1)]">
+<div class="flex items-center justify-between mb-space-md">
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center shadow-[inset_2px_2px_4px_rgba(15,43,77,0.06),inset_-2px_-2px_4px_rgba(255,255,255,0.9)]">
+<span class="material-symbols-outlined text-primary text-[24px]">map</span>
+</div>
+<span class="px-space-sm py-1 rounded-full bg-surface-container font-label-sm text-label-sm text-primary font-bold flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[14px]">flag</span> ADA Grade A
+        </span>
+</div>
+<div>
+<div class="font-headline-xl text-headline-xl text-on-surface font-bold">84.6%</div>
+<div class="font-label-lg text-label-lg text-on-surface-variant mt-1 font-semibold">Public Transit Node Coverage</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant/80 mt-1">428 of 506 Hubs Fully Verified</div>
+</div>
+<div class="w-full bg-surface-container-high rounded-full h-1.5 mt-space-md overflow-hidden">
+<div class="bg-primary h-1.5 rounded-full" style="width: 84.6%"></div>
+</div>
+</div>
+<!-- Card 4: Hazard Verification SLA -->
+<div class="bg-surface rounded-xl p-space-lg shadow-[6px_6px_16px_rgba(15,43,77,0.06),-6px_-6px_16px_rgba(255,255,255,0.95)] flex flex-col justify-between transition-all hover:shadow-[10px_10px_22px_rgba(15,43,77,0.09),-10px_-10px_22px_rgba(255,255,255,1)]">
+<div class="flex items-center justify-between mb-space-md">
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center shadow-[inset_2px_2px_4px_rgba(15,43,77,0.06),inset_-2px_-2px_4px_rgba(255,255,255,0.9)]">
+<span class="material-symbols-outlined text-tertiary text-[24px]">bolt</span>
+</div>
+<span class="px-space-sm py-1 rounded-full bg-surface-container font-label-sm text-label-sm text-tertiary font-bold flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[14px]">timer</span> -35m vs Target
+        </span>
+</div>
+<div>
+<div class="font-headline-xl text-headline-xl text-on-surface font-bold">1.4 hrs</div>
+<div class="font-label-lg text-label-lg text-on-surface-variant mt-1 font-semibold">Community Response SLA</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant/80 mt-1">Broken Lifts • Blocked Pathways</div>
+</div>
+<div class="w-full bg-surface-container-high rounded-full h-1.5 mt-space-md overflow-hidden">
+<div class="bg-tertiary h-1.5 rounded-full" style="width: 88%"></div>
+</div>
+</div>
+</div>
+<!-- Row 2: Split Grid Chart Section -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-space-lg">
+<!-- Visualization 1: Interactive Coverage & Submissions Timeline (8 cols) -->
+<div class="xl:col-span-8 bg-surface rounded-xl p-space-lg shadow-[6px_6px_16px_rgba(15,43,77,0.06),-6px_-6px_16px_rgba(255,255,255,0.95)] flex flex-col justify-between">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-md mb-space-lg">
+<div>
+<div class="font-label-sm text-label-sm text-on-surface-variant uppercase font-bold tracking-wider">Temporal Dynamics</div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Active App Users vs. Contributor Submissions</h2>
+</div>
+<div class="flex items-center gap-space-md text-label-md font-label-md">
+<div class="flex items-center gap-space-xs">
+<span class="w-3 h-3 rounded-full bg-secondary inline-block"></span>
+<span class="text-on-surface-variant">Active Mobile Navigators</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="w-3 h-3 rounded-full bg-primary inline-block"></span>
+<span class="text-on-surface-variant">Verified Field Uploads</span>
+</div>
+</div>
+</div>
+<!-- Clean SVG Trend Chart -->
+<div class="w-full bg-surface-container-low rounded-xl p-space-md shadow-[inset_2px_2px_6px_rgba(15,43,77,0.05),inset_-2px_-2px_6px_rgba(255,255,255,0.85)]">
+<svg class="w-full h-64 overflow-visible" preserveAspectRatio="none" viewBox="0 0 800 280">
+<defs>
+<linearGradient id="primaryAreaGrad" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#006e28" stop-opacity="0.25"></stop>
+<stop offset="100%" stop-color="#006e28" stop-opacity="0.0"></stop>
+</linearGradient>
+<linearGradient id="secondaryAreaGrad" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#475f84" stop-opacity="0.18"></stop>
+<stop offset="100%" stop-color="#475f84" stop-opacity="0.0"></stop>
+</linearGradient>
+</defs>
+<!-- Subtle Horizontal Grid Lines -->
+<line stroke="#becaba" stroke-dasharray="4,4" stroke-opacity="0.3" x1="50" x2="780" y1="30" y2="30"></line>
+<line stroke="#becaba" stroke-dasharray="4,4" stroke-opacity="0.3" x1="50" x2="780" y1="90" y2="90"></line>
+<line stroke="#becaba" stroke-dasharray="4,4" stroke-opacity="0.3" x1="50" x2="780" y1="150" y2="150"></line>
+<line stroke="#becaba" stroke-dasharray="4,4" stroke-opacity="0.3" x1="50" x2="780" y1="210" y2="210"></line>
+<!-- Y-Axis labels -->
+<text fill="#6e7a6c" font-family="Plus Jakarta Sans" font-size="10" text-anchor="end" x="40" y="34">16k</text>
+<text fill="#6e7a6c" font-family="Plus Jakarta Sans" font-size="10" text-anchor="end" x="40" y="94">12k</text>
+<text fill="#6e7a6c" font-family="Plus Jakarta Sans" font-size="10" text-anchor="end" x="40" y="154">8k</text>
+<text fill="#6e7a6c" font-family="Plus Jakarta Sans" font-size="10" text-anchor="end" x="40" y="214">4k</text>
+<!-- User Trend Area & Line (Secondary Color) -->
+<polygon fill="url(#secondaryAreaGrad)" points="60,190 150,165 240,140 330,150 420,110 510,95 600,75 690,55 770,42 770,240 60,240"></polygon>
+<polyline fill="none" points="60,190 150,165 240,140 330,150 420,110 510,95 600,75 690,55 770,42" stroke="#475f84" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></polyline>
+<!-- Submission Trend Area & Line (Primary Color) -->
+<polygon fill="url(#primaryAreaGrad)" points="60,220 150,205 240,185 330,170 420,145 510,130 600,105 690,85 770,72 770,240 60,240"></polygon>
+<polyline fill="none" points="60,220 150,205 240,185 330,170 420,145 510,130 600,105 690,85 770,72" stroke="#006e28" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5"></polyline>
+<!-- Focus Anchor Callout Node -->
+<circle cx="690" cy="85" fill="#006e28" r="5" stroke="#ffffff" stroke-width="2"></circle>
+<circle cx="690" cy="55" fill="#475f84" r="5" stroke="#ffffff" stroke-width="2"></circle>
+<!-- X-Axis Labels -->
+<text fill="#6e7a6c" font-family="Plus Jakarta Sans" font-size="11" text-anchor="middle" x="60" y="260">Oct 01</text>
+<text fill="#6e7a6c" font-family="Plus Jakarta Sans" font-size="11" text-anchor="middle" x="150" y="260">Oct 05</text>
+<text fill="#6e7a6c" font-family="Plus Jakarta Sans" font-size="11" text-anchor="middle" x="240" y="260">Oct 09</text>
+<text fill="#6e7a6c" font-family="Plus Jakarta Sans" font-size="11" text-anchor="middle" x="330" y="260">Oct 13</text>
+<text fill="#6e7a6c" font-family="Plus Jakarta Sans" font-size="11" text-anchor="middle" x="420" y="260">Oct 17</text>
+<text fill="#6e7a6c" font-family="Plus Jakarta Sans" font-size="11" text-anchor="middle" x="510" y="260">Oct 21</text>
+<text fill="#6e7a6c" font-family="Plus Jakarta Sans" font-size="11" text-anchor="middle" x="600" y="260">Oct 25</text>
+<text fill="#6e7a6c" font-family="Plus Jakarta Sans" font-size="11" text-anchor="middle" x="690" y="260">Oct 29</text>
+<text fill="#6e7a6c" font-family="Plus Jakarta Sans" font-size="11" text-anchor="middle" x="770" y="260">Oct 31</text>
+</svg>
+</div>
+<div class="grid grid-cols-3 gap-space-md mt-space-md pt-space-sm">
+<div class="p-space-sm bg-surface-container rounded-xl">
+<div class="font-label-sm text-label-sm text-on-surface-variant">Daily Peak Volume</div>
+<div class="font-headline-sm text-headline-sm text-on-surface font-bold">482 submissions</div>
+<div class="font-body-sm text-body-sm text-primary font-medium">Oct 29 Citywide Sprint</div>
+</div>
+<div class="p-space-sm bg-surface-container rounded-xl">
+<div class="font-label-sm text-label-sm text-on-surface-variant">Active Mobile Navigators</div>
+<div class="font-headline-sm text-headline-sm text-on-surface font-bold">14.8k 30-Day MAU</div>
+<div class="font-body-sm text-body-sm text-secondary font-medium">Consistently +3.1% weekly</div>
+</div>
+<div class="p-space-sm bg-surface-container rounded-xl">
+<div class="font-label-sm text-label-sm text-on-surface-variant">Volunteer Conversion Rate</div>
+<div class="font-headline-sm text-headline-sm text-on-surface font-bold">60.2%</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Users flagging &gt;1 node</div>
+</div>
+</div>
+</div>
+<!-- Visualization 2: Accessibility Feature Breakdown Donut (4 cols) -->
+<div class="xl:col-span-4 bg-surface rounded-xl p-space-lg shadow-[6px_6px_16px_rgba(15,43,77,0.06),-6px_-6px_16px_rgba(255,255,255,0.95)] flex flex-col justify-between">
+<div>
+<div class="font-label-sm text-label-sm text-on-surface-variant uppercase font-bold tracking-wider">Asset Distribution</div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface mb-space-md">Accessibility Feature Breakdown</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-md">Classification of validated micro-mobility attributes across public rights-of-way.</p>
+<!-- Donut Chart -->
+<div class="relative flex items-center justify-center my-space-sm">
+<svg class="w-48 h-48 -rotate-90" viewBox="0 0 100 100">
+<!-- Background Ring -->
+<circle cx="50" cy="50" fill="none" r="38" stroke="#e1eae4" stroke-width="12"></circle>
+<!-- Segment 1: Ramps 38% (#006e28) -->
+<circle cx="50" cy="50" fill="none" r="38" stroke="#006e28" stroke-dasharray="90.7 238.7" stroke-dashoffset="0" stroke-width="12"></circle>
+<!-- Segment 2: Elevators 24% (#5bc66b) -->
+<circle cx="50" cy="50" fill="none" r="38" stroke="#5bc66b" stroke-dasharray="57.3 238.7" stroke-dashoffset="-90.7" stroke-width="12"></circle>
+<!-- Segment 3: Tactile Paths 16% (#475f84) -->
+<circle cx="50" cy="50" fill="none" r="38" stroke="#475f84" stroke-dasharray="38.2 238.7" stroke-dashoffset="-148" stroke-width="12"></circle>
+<!-- Segment 4: Level Entrances 14% (#0053db) -->
+<circle cx="50" cy="50" fill="none" r="38" stroke="#0053db" stroke-dasharray="33.4 238.7" stroke-dashoffset="-186.2" stroke-width="12"></circle>
+<!-- Segment 5: Braille Wayfinding 8% (#94aeff) -->
+<circle cx="50" cy="50" fill="none" r="38" stroke="#94aeff" stroke-dasharray="19.1 238.7" stroke-dashoffset="-219.6" stroke-width="12"></circle>
+</svg>
+<div class="absolute flex flex-col items-center justify-center text-center">
+<span class="font-headline-md text-headline-md text-on-surface font-bold">8,924</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Validated Assets</span>
+</div>
+</div>
+</div>
+<!-- Custom Data Legend Table -->
+<div class="flex flex-col gap-space-xs mt-space-sm pt-space-xs">
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-high/50 text-on-surface">
+<div class="flex items-center gap-space-xs">
+<span class="w-3 h-3 rounded-md bg-primary"></span>
+<span class="font-label-md text-label-md font-medium">Wheelchair Curb Ramps</span>
+</div>
+<span class="font-label-lg text-label-lg font-bold">38% <span class="font-body-sm text-body-sm text-on-surface-variant font-normal">(3,391)</span></span>
+</div>
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-high/50 text-on-surface">
+<div class="flex items-center gap-space-xs">
+<span class="w-3 h-3 rounded-md bg-primary-container"></span>
+<span class="font-label-md text-label-md font-medium">Public Elevators &amp; Lifts</span>
+</div>
+<span class="font-label-lg text-label-lg font-bold">24% <span class="font-body-sm text-body-sm text-on-surface-variant font-normal">(2,142)</span></span>
+</div>
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-high/50 text-on-surface">
+<div class="flex items-center gap-space-xs">
+<span class="w-3 h-3 rounded-md bg-secondary"></span>
+<span class="font-label-md text-label-md font-medium">Tactile Ground Indicators</span>
+</div>
+<span class="font-label-lg text-label-lg font-bold">16% <span class="font-body-sm text-body-sm text-on-surface-variant font-normal">(1,428)</span></span>
+</div>
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-high/50 text-on-surface">
+<div class="flex items-center gap-space-xs">
+<span class="w-3 h-3 rounded-md bg-tertiary"></span>
+<span class="font-label-md text-label-md font-medium">Zero-Threshold Entrances</span>
+</div>
+<span class="font-label-lg text-label-lg font-bold">14% <span class="font-body-sm text-body-sm text-on-surface-variant font-normal">(1,249)</span></span>
+</div>
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-high/50 text-on-surface">
+<div class="flex items-center gap-space-xs">
+<span class="w-3 h-3 rounded-md bg-tertiary-container"></span>
+<span class="font-label-md text-label-md font-medium">Braille &amp; Acoustic Beacons</span>
+</div>
+<span class="font-label-lg text-label-lg font-bold">8% <span class="font-body-sm text-body-sm text-on-surface-variant font-normal">(714)</span></span>
+</div>
+</div>
+</div>
+</div>
+<!-- Row 3: Visualization 3 & Verification Engine Metrics -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-space-lg">
+<!-- Verification Throughput & Accuracy Breakdown (6 cols) -->
+<div class="xl:col-span-6 bg-surface rounded-xl p-space-lg shadow-[6px_6px_16px_rgba(15,43,77,0.06),-6px_-6px_16px_rgba(255,255,255,0.95)] flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-xs">
+<div>
+<div class="font-label-sm text-label-sm text-on-surface-variant uppercase font-bold tracking-wider">Quality Assurance Audit</div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">AI-Assisted vs. Manual Auditor Throughput</h2>
+</div>
+<div class="px-space-sm py-1 rounded-full bg-primary/10 text-primary font-label-sm text-label-sm font-bold">
+            99.2% Combined Accuracy
+          </div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-lg">Comparing daily audit resolution velocity and false-positive rejections across verification tiers.</p>
+<!-- Comparative Progress & Throughput Bars -->
+<div class="space-y-space-md">
+<!-- Item 1: Ramp Incline Verification -->
+<div class="p-space-md bg-surface-container rounded-xl">
+<div class="flex items-center justify-between font-label-md text-label-md mb-2">
+<span class="font-bold text-on-surface">Ramp Slope &amp; Gradient Angles</span>
+<span class="text-on-surface-variant">AI: 88.4% auto-cleared • Auditor: 11.6% audited</span>
+</div>
+<div class="w-full bg-surface-container-high h-4 rounded-full flex overflow-hidden shadow-[inset_1px_1px_3px_rgba(15,43,77,0.08)]">
+<div class="bg-primary-container h-full rounded-l-full" style="width: 88.4%" title="AI Verification"></div>
+<div class="bg-secondary h-full rounded-r-full" style="width: 11.6%" title="Manual Auditor Escalation"></div>
+</div>
+<div class="flex justify-between font-label-sm text-label-sm text-on-surface-variant mt-1.5">
+<span class="text-primary font-semibold">4,120 Automated Checks</span>
+<span class="text-secondary font-semibold">542 Human Spot-Checks</span>
+</div>
+</div>
+<!-- Item 2: Tactile Paving Texture Continuity -->
+<div class="p-space-md bg-surface-container rounded-xl">
+<div class="flex items-center justify-between font-label-md text-label-md mb-2">
+<span class="font-bold text-on-surface">Tactile Paving Surface Integrity</span>
+<span class="text-on-surface-variant">AI: 74.2% auto-cleared • Auditor: 25.8% audited</span>
+</div>
+<div class="w-full bg-surface-container-high h-4 rounded-full flex overflow-hidden shadow-[inset_1px_1px_3px_rgba(15,43,77,0.08)]">
+<div class="bg-primary-container h-full rounded-l-full" style="width: 74.2%"></div>
+<div class="bg-secondary h-full rounded-r-full" style="width: 25.8%"></div>
+</div>
+<div class="flex justify-between font-label-sm text-label-sm text-on-surface-variant mt-1.5">
+<span class="text-primary font-semibold">1,060 Automated Checks</span>
+<span class="text-secondary font-semibold">368 Human Spot-Checks</span>
+</div>
+</div>
+<!-- Item 3: Lift & Out-of-Order Status -->
+<div class="p-space-md bg-surface-container rounded-xl">
+<div class="flex items-center justify-between font-label-md text-label-md mb-2">
+<span class="font-bold text-on-surface">Elevator Mechanical Status &amp; Signage</span>
+<span class="text-on-surface-variant">AI: 62.0% auto-cleared • Auditor: 38.0% audited</span>
+</div>
+<div class="w-full bg-surface-container-high h-4 rounded-full flex overflow-hidden shadow-[inset_1px_1px_3px_rgba(15,43,77,0.08)]">
+<div class="bg-primary-container h-full rounded-l-full" style="width: 62.0%"></div>
+<div class="bg-secondary h-full rounded-r-full" style="width: 38.0%"></div>
+</div>
+<div class="flex justify-between font-label-sm text-label-sm text-on-surface-variant mt-1.5">
+<span class="text-primary font-semibold">1,328 Automated Checks</span>
+<span class="text-secondary font-semibold">814 Human Escalations</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Footnote Pill Ribbon -->
+<div class="flex items-center gap-space-md mt-space-md pt-space-xs text-on-surface-variant font-label-sm text-label-sm">
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-primary-container"></span>
+<span>Computer Vision Inference (MobileNetV4 ADA)</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary"></span>
+<span>Field Verifier Physical Certification</span>
+</div>
+</div>
+</div>
+<!-- Spatial Node Inspection Spotlight & Live Map (6 cols) -->
+<div class="xl:col-span-6 bg-surface rounded-xl p-space-lg shadow-[6px_6px_16px_rgba(15,43,77,0.06),-6px_-6px_16px_rgba(255,255,255,0.95)] flex flex-col justify-between">
+<div class="flex items-center justify-between mb-space-xs">
+<div>
+<div class="font-label-sm text-label-sm text-on-surface-variant uppercase font-bold tracking-wider">Spatial Geospatial View</div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Transit Hub Real-Time Verification Density</h2>
+</div>
+<span class="px-space-sm py-1 rounded-full bg-surface-container-high font-label-sm text-label-sm text-on-surface-variant font-semibold">
+          Downtown Core Node #418
+        </span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-md">Live GPS cluster for auditors operating in high-priority multimodal transfers.</p>
+<!-- Map with data-location -->
+<div class="w-full h-56 bg-cover bg-center rounded-xl relative shadow-[inset_2px_2px_6px_rgba(15,43,77,0.1)] overflow-hidden flex items-end p-space-md" data-location="Grand Central Terminal, New York" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDC1EF5JYxKJMJaU-Xd0MY_lDb5iN6hW2Ug-Kmwm38I1lKsyiOaUU79pcRJTVNbsnMv7IzgUgazu2e3E7J74YoAHHkYkShBshgDSOnOATGn_5JKisylDIVxXyT8TTGVY-4pXKCmHna-8Nfsy615rRVvGruFw99ejJHg0urn0nmMpdMPCBiNN8LjFA0GbctAvKGNk8ACjJrOSSlssgH1mo3RzLvutfl_iPUe78igzWAcVs99ibVdAu6WmA')">
+<!-- Floating Neumorphic Node Tooltip -->
+<div class="bg-surface/95 backdrop-blur-md rounded-xl p-space-md shadow-[4px_4px_14px_rgba(15,43,77,0.12),-4px_-4px_14px_rgba(255,255,255,0.9)] max-w-sm">
+<div class="flex items-center justify-between gap-space-md mb-1">
+<div class="font-label-lg text-label-lg font-bold text-on-surface">Central Station Plaza (North Gate)</div>
+<span class="px-2 py-0.5 rounded-full bg-primary text-on-primary font-label-sm text-label-sm">Active Field Audit</span>
+</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">3 Field Auditors on site. Ramp slope: 1:14 (ADA Compliant). Audio beacon signal verified.</div>
+</div>
+</div>
+<!-- Quick Snapshot Status Badges -->
+<div class="grid grid-cols-3 gap-space-md mt-space-md">
+<div class="p-space-sm rounded-xl bg-surface-container text-center">
+<div class="font-label-sm text-label-sm text-on-surface-variant">Active Mobile Units</div>
+<div class="font-headline-sm text-headline-sm text-primary font-bold">24 Auditors</div>
+</div>
+<div class="p-space-sm rounded-xl bg-surface-container text-center">
+<div class="font-label-sm text-label-sm text-on-surface-variant">Average Inspection Time</div>
+<div class="font-headline-sm text-headline-sm text-secondary font-bold">6.2 mins</div>
+</div>
+<div class="p-space-sm rounded-xl bg-surface-container text-center">
+<div class="font-label-sm text-label-sm text-on-surface-variant">Confidence Score</div>
+<div class="font-headline-sm text-headline-sm text-on-surface font-bold">98.4%</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Row 4: Municipal Compliance Heatmap & Zone Breakdown Table -->
+<div class="bg-surface rounded-xl p-space-lg shadow-[6px_6px_16px_rgba(15,43,77,0.06),-6px_-6px_16px_rgba(255,255,255,0.95)] flex flex-col">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md mb-space-lg">
+<div>
+<div class="font-label-sm text-label-sm text-on-surface-variant uppercase font-bold tracking-wider">Geographic Zone Telemetry</div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Municipal Compliance &amp; Coverage Audit Table</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Cross-referencing transit station density, auditor coverage ratios, and active accessibility alerts.</p>
+</div>
+<!-- Quick Filter Buttons -->
+<div class="flex items-center gap-space-xs bg-surface-container rounded-xl p-1 shadow-[inset_2px_2px_4px_rgba(15,43,77,0.07)]">
+<button class="px-space-md py-1.5 rounded-lg bg-surface text-on-surface font-label-md text-label-md font-bold shadow-sm cursor-pointer">All Sectors</button>
+<button class="px-space-md py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface font-label-md text-label-md cursor-pointer">Pending Gaps (&gt;15%)</button>
+<button class="px-space-md py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface font-label-md text-label-md cursor-pointer">Auditor Shortage</button>
+</div>
+</div>
+<!-- Data Table Container -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="font-label-sm text-label-sm text-on-surface-variant uppercase border-b-0 bg-surface-container-high/40 rounded-xl">
+<th class="py-space-md px-space-md rounded-l-xl">Municipal Zone</th>
+<th class="py-space-md px-space-md">Transit Nodes</th>
+<th class="py-space-md px-space-md">Coverage Index</th>
+<th class="py-space-md px-space-md">Pending Gaps</th>
+<th class="py-space-md px-space-md">Auditor Density</th>
+<th class="py-space-md px-space-md">Mean SLA Time</th>
+<th class="py-space-md px-space-md rounded-r-xl text-right">Audit Status</th>
+</tr>
+</thead>
+<tbody class="divide-y-0 text-on-surface font-body-sm text-body-sm">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-high/30 transition-colors">
+<td class="py-space-md px-space-md font-label-lg text-label-lg font-bold">
+<div class="flex items-center gap-space-sm">
+<span class="w-2.5 h-2.5 rounded-full bg-primary"></span>
+<span>Downtown Metro Core (Sector 1)</span>
+</div>
+</td>
+<td class="py-space-md px-space-md font-semibold">142 Hubs</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-24 bg-surface-container-high rounded-full h-2 overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 96.4%"></div>
+</div>
+<span class="font-bold text-primary">96.4%</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="px-space-sm py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm">5 Unchecked Entrances</span>
+</td>
+<td class="py-space-md px-space-md font-medium">8 Field Certifiers</td>
+<td class="py-space-md px-space-md font-bold text-on-surface">42 mins</td>
+<td class="py-space-md px-space-md text-right">
+<span class="px-space-md py-1 rounded-full bg-primary/10 text-primary font-label-sm text-label-sm font-bold inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">check_circle</span> Complete
+              </span>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-high/30 transition-colors">
+<td class="py-space-md px-space-md font-label-lg text-label-lg font-bold">
+<div class="flex items-center gap-space-sm">
+<span class="w-2.5 h-2.5 rounded-full bg-primary"></span>
+<span>Transit Corridor District (Sector 2)</span>
+</div>
+</td>
+<td class="py-space-md px-space-md font-semibold">118 Hubs</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-24 bg-surface-container-high rounded-full h-2 overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 88.1%"></div>
+</div>
+<span class="font-bold text-primary">88.1%</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="px-space-sm py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm">14 Tactile Breaks</span>
+</td>
+<td class="py-space-md px-space-md font-medium">6 Field Certifiers</td>
+<td class="py-space-md px-space-md font-bold text-on-surface">1.1 hrs</td>
+<td class="py-space-md px-space-md text-right">
+<span class="px-space-md py-1 rounded-full bg-primary/10 text-primary font-label-sm text-label-sm font-bold inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">sync</span> In Progress
+              </span>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-high/30 transition-colors">
+<td class="py-space-md px-space-md font-label-lg text-label-lg font-bold">
+<div class="flex items-center gap-space-sm">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary"></span>
+<span>Westside Intermodal Terminal (Sector 3)</span>
+</div>
+</td>
+<td class="py-space-md px-space-md font-semibold">84 Hubs</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-24 bg-surface-container-high rounded-full h-2 overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 79.5%"></div>
+</div>
+<span class="font-bold text-secondary">79.5%</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="px-space-sm py-0.5 rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm font-semibold">17 Steep Ramps (&gt;8.33%)</span>
+</td>
+<td class="py-space-md px-space-md font-medium">4 Field Certifiers</td>
+<td class="py-space-md px-space-md font-bold text-on-surface">1.8 hrs</td>
+<td class="py-space-md px-space-md text-right">
+<span class="px-space-md py-1 rounded-full bg-secondary/15 text-secondary font-label-sm text-label-sm font-bold inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">pending</span> Audit Queued
+              </span>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-high/30 transition-colors">
+<td class="py-space-md px-space-md font-label-lg text-label-lg font-bold">
+<div class="flex items-center gap-space-sm">
+<span class="w-2.5 h-2.5 rounded-full bg-tertiary"></span>
+<span>Suburban Mobility Hubs (Sector 4 &amp; 5)</span>
+</div>
+</td>
+<td class="py-space-md px-space-md font-semibold">92 Hubs</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-24 bg-surface-container-high rounded-full h-2 overflow-hidden">
+<div class="bg-tertiary h-full rounded-full" style="width: 71.2%"></div>
+</div>
+<span class="font-bold text-tertiary">71.2%</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="px-space-sm py-0.5 rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm font-semibold">26 Unverified Crossings</span>
+</td>
+<td class="py-space-md px-space-md font-medium">3 Field Certifiers</td>
+<td class="py-space-md px-space-md font-bold text-on-surface">2.4 hrs</td>
+<td class="py-space-md px-space-md text-right">
+<span class="px-space-md py-1 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm font-bold inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">warning</span> Needs Auditors
+              </span>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-surface-container-high/30 transition-colors">
+<td class="py-space-md px-space-md font-label-lg text-label-lg font-bold">
+<div class="flex items-center gap-space-sm">
+<span class="w-2.5 h-2.5 rounded-full bg-primary-container"></span>
+<span>Harbor &amp; Ferry Terminals (Sector 6)</span>
+</div>
+</td>
+<td class="py-space-md px-space-md font-semibold">70 Hubs</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-24 bg-surface-container-high rounded-full h-2 overflow-hidden">
+<div class="bg-primary-container h-full rounded-full" style="width: 91.8%"></div>
+</div>
+<span class="font-bold text-on-primary-container">91.8%</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="px-space-sm py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm">6 Elevator Telemetry Inactive</span>
+</td>
+<td class="py-space-md px-space-md font-medium">3 Field Certifiers</td>
+<td class="py-space-md px-space-md font-bold text-on-surface">54 mins</td>
+<td class="py-space-md px-space-md text-right">
+<span class="px-space-md py-1 rounded-full bg-primary/10 text-primary font-label-sm text-label-sm font-bold inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">verified</span> ADA Compliant
+              </span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Footer Meta & Pagination Controls -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-md mt-space-lg pt-space-md bg-surface-container/50 rounded-xl px-space-md py-space-sm">
+<div class="flex items-center gap-space-xs font-label-sm text-label-sm text-on-surface-variant">
+<span>Showing 5 of 8 Municipal Sectors</span>
+<span>•</span>
+<span class="text-primary font-semibold">Next Scheduled Drone LIDAR Scan: Tomorrow 04:00 AM</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="px-space-md py-1.5 rounded-lg bg-surface text-on-surface font-label-md text-label-md shadow-sm hover:shadow active:shadow-inner">Previous</button>
+<button class="w-8 h-8 rounded-lg bg-primary text-on-primary font-label-md text-label-md font-bold shadow-sm">1</button>
+<button class="w-8 h-8 rounded-lg bg-surface text-on-surface font-label-md text-label-md hover:bg-surface-container-high">2</button>
+<button class="px-space-md py-1.5 rounded-lg bg-surface text-on-surface font-label-md text-label-md shadow-sm hover:shadow active:shadow-inner">Next</button>
+</div>
+</div>
+</div>
+</div></main></div>
+<script>
+  const staffSidebar = document.getElementById('staffSidebar');
+  const sidebarToggle = document.getElementById('sidebarToggle');
+  const sidebarClose = document.getElementById('sidebarClose');
+  const sidebarBackdrop = document.getElementById('sidebarBackdrop');
+  const desktopSidebar = window.matchMedia('(min-width: 1024px)');
+  let sidebarWasOpen = false;
+
+  function setSidebar(open, returnFocus = false) {
+    const mobileOpen = open && !desktopSidebar.matches;
+    staffSidebar.classList.toggle('-translate-x-full', !open);
+    sidebarBackdrop.classList.toggle('hidden', !mobileOpen);
+    sidebarToggle.setAttribute('aria-expanded', String(mobileOpen));
+    sidebarToggle.setAttribute('aria-label', mobileOpen ? 'Close navigation' : 'Open navigation');
+    document.body.classList.toggle('overflow-hidden', mobileOpen);
+    staffSidebar.inert = !open;
+
+    if (mobileOpen) {
+      sidebarWasOpen = true;
+      window.requestAnimationFrame(() => sidebarClose.focus());
+    } else if (returnFocus && sidebarWasOpen) {
+      sidebarToggle.focus();
+      sidebarWasOpen = false;
+    }
+  }
+
+  function syncSidebarLayout() {
+    if (desktopSidebar.matches) {
+      setSidebar(true);
+      staffSidebar.inert = false;
+    } else {
+      setSidebar(false);
+    }
+  }
+
+  sidebarToggle.addEventListener('click', () => setSidebar(sidebarToggle.getAttribute('aria-expanded') !== 'true'));
+  sidebarClose.addEventListener('click', () => setSidebar(false, true));
+  sidebarBackdrop.addEventListener('click', () => setSidebar(false, true));
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && sidebarToggle.getAttribute('aria-expanded') === 'true') setSidebar(false, true);
+  });
+  desktopSidebar.addEventListener('change', syncSidebarLayout);
+  syncSidebarLayout();
+
+  document.querySelectorAll('[data-unavailable="true"]').forEach((link) => {
+    link.addEventListener('click', (event) => {
+      event.preventDefault();
+      alert(link.querySelector('span').textContent.trim() + ' is not available in this preview yet.');
+    });
+  });
+
+  document.getElementById('staffLogout').addEventListener('click', () => {
+    sessionStorage.removeItem('navableStaffPreview');
+    window.location.href = 'staff-login.html';
+  });
+</script>
+</body>
+</html>

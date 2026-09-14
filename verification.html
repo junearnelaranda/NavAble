@@ -1,0 +1,517 @@
+<!DOCTYPE html><html lang="en" style=""><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><title>NavAble Admin</title><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>*,*::before,*::after{box-sizing:border-box;}@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "primary-fixed-dim": "#71dd7f", "secondary-fixed-dim": "#afc8f2", "surface-container-lowest": "#ffffff", "outline": "#6e7a6c", "secondary": "#475f84", "surface": "#f3fcf5", "on-surface-variant": "#3f4a3d", "on-secondary-fixed": "#001c3b", "on-error": "#ffffff", "error": "#ba1a1a", "background": "#f3fcf5", "surface-container-high": "#e1eae4", "secondary-fixed": "#d5e3ff", "on-background": "#151d19", "surface-tint": "#006e28", "primary": "#006e28", "on-tertiary": "#ffffff", "surface-variant": "#dce5de", "surface-bright": "#f3fcf5", "tertiary-fixed-dim": "#b4c5ff", "inverse-primary": "#71dd7f", "tertiary-fixed": "#dbe1ff", "on-secondary-fixed-variant": "#2f486b", "on-primary-fixed-variant": "#00531c", "surface-container-low": "#edf6ef", "on-tertiary-fixed": "#00174b", "surface-container-highest": "#dce5de", "secondary-container": "#bad3fe", "on-secondary-container": "#425b7f", "surface-container": "#e7f0e9", "inverse-on-surface": "#eaf3ec", "on-primary-container": "#004f1b", "on-primary": "#ffffff", "inverse-surface": "#2a322e", "on-tertiary-container": "#003ba1", "on-error-container": "#93000a", "on-secondary": "#ffffff", "on-surface": "#151d19", "outline-variant": "#becaba", "surface-dim": "#d3dcd5", "on-tertiary-fixed-variant": "#003ea8", "primary-fixed": "#8dfa98", "on-primary-fixed": "#002107", "tertiary-container": "#94aeff", "tertiary": "#0053db", "primary-container": "#5bc66b", "error-container": "#ffdad6" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "gutter": "1.5rem", "gutter-mobile": "1rem", "space-sm": "0.5rem", "space-xs": "0.25rem", "space-lg": "1.5rem", "margin": "2rem", "space-xl": "2rem", "space-md": "1rem", "margin-mobile": "1rem" }, "fontFamily": { "body-md": [ "Plus Jakarta Sans" ], "headline-sm": [ "Plus Jakarta Sans" ], "body-lg": [ "Plus Jakarta Sans" ], "headline-lg": [ "Plus Jakarta Sans" ], "headline-xl-mobile": [ "Plus Jakarta Sans" ], "label-lg": [ "Plus Jakarta Sans" ], "label-sm": [ "Plus Jakarta Sans" ], "headline-md": [ "Plus Jakarta Sans" ], "label-md": [ "Plus Jakarta Sans" ], "headline-lg-mobile": [ "Plus Jakarta Sans" ], "body-sm": [ "Plus Jakarta Sans" ], "headline-xl": [ "Plus Jakarta Sans" ] }, "fontSize": { "body-md": [ "1rem", { "lineHeight": "1.5rem", "letterSpacing": "0em", "fontWeight": "400" } ], "headline-sm": [ "1.125rem", { "lineHeight": "1.5rem", "letterSpacing": "0em", "fontWeight": "600" } ], "body-lg": [ "1.125rem", { "lineHeight": "1.75rem", "letterSpacing": "0em", "fontWeight": "400" } ], "headline-lg": [ "1.75rem", { "lineHeight": "2.25rem", "letterSpacing": "-0.02em", "fontWeight": "700" } ], "headline-xl-mobile": [ "1.75rem", { "lineHeight": "2.25rem", "letterSpacing": "-0.01em", "fontWeight": "700" } ], "label-lg": [ "0.875rem", { "lineHeight": "1.25rem", "letterSpacing": "0.01em", "fontWeight": "600" } ], "label-sm": [ "0.6875rem", { "lineHeight": "0.875rem", "letterSpacing": "0.04em", "fontWeight": "700" } ], "headline-md": [ "1.375rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.01em", "fontWeight": "600" } ], "label-md": [ "0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.02em", "fontWeight": "600" } ], "headline-lg-mobile": [ "1.375rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.01em", "fontWeight": "700" } ], "body-sm": [ "0.875rem", { "lineHeight": "1.25rem", "letterSpacing": "0.01em", "fontWeight": "400" } ], "headline-xl": [ "2.25rem", { "lineHeight": "2.75rem", "letterSpacing": "-0.02em", "fontWeight": "700" } ] } } } };</script></head><body class="bg-background font-body-md text-body-md text-on-background"><aside id="staffSidebar" class="fixed left-0 top-0 z-50 flex h-full w-72 -translate-x-full flex-col justify-between overflow-y-auto bg-surface-container-low shadow-[6px_0_16px_rgba(15,43,77,0.08)] transition-transform duration-300 lg:translate-x-0" aria-label="Staff navigation">
+<div class="p-space-lg">
+<div class="mb-space-xl flex items-center justify-between gap-space-sm">
+<a class="flex min-w-0 items-center gap-space-sm" href="dashboard.html" aria-label="NavAble staff dashboard">
+<div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-surface shadow-[4px_4px_10px_rgba(15,43,77,0.08),-4px_-4px_10px_rgba(255,255,255,0.9)]"><img class="h-9 w-9 object-cover mix-blend-multiply" src="logOnly.png" alt=""></div>
+<div class="min-w-0"><div class="font-headline-sm text-headline-sm leading-tight text-on-surface">Nav<span class="text-primary">Able</span></div><div class="truncate font-label-sm text-label-sm text-on-surface-variant">Accessibility &amp; Verification</div></div>
+</a>
+<button id="sidebarClose" class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface lg:hidden" type="button" aria-label="Close navigation"><span class="material-symbols-outlined">close</span></button>
+</div>
+<nav class="flex flex-col gap-space-sm">
+<a class="flex items-center justify-between rounded-xl px-space-md py-3 font-label-lg text-label-lg text-on-surface-variant transition-all hover:bg-surface-container-high hover:text-on-surface" href="dashboard.html"><span>Dashboard</span><span class="material-symbols-outlined text-[19px]">dashboard</span></a>
+<a class="flex items-center justify-between rounded-xl px-space-md py-3 font-label-lg text-label-lg text-on-surface-variant transition-all hover:bg-surface-container-high hover:text-on-surface" href="user.html"><span>Users</span><span class="material-symbols-outlined text-[19px]">group</span></a>
+<a class="flex items-center justify-between rounded-xl px-space-md py-3 font-label-lg text-label-lg text-on-surface-variant transition-all hover:bg-surface-container-high hover:text-on-surface" href="location.html"><span>Locations</span><span class="material-symbols-outlined text-[19px]">location_on</span></a>
+<a class="flex items-center justify-between rounded-xl px-space-md py-3 font-label-lg text-label-lg text-on-surface-variant transition-all hover:bg-surface-container-high hover:text-on-surface" href="accss-data.html"><span>Accessibility Data</span><span class="material-symbols-outlined text-[19px]">accessible</span></a>
+<a aria-current="page" class="flex items-center justify-between rounded-xl bg-surface px-space-md py-3 font-label-lg text-label-lg font-bold text-on-secondary-fixed shadow-[4px_4px_12px_rgba(91,198,107,0.22),-4px_-4px_12px_rgba(255,255,255,0.95),inset_4px_0_0_#5bc66b]" href="verification.html"><span>AI Verification</span><span class="material-symbols-outlined text-[19px]">verified</span></a>
+<a class="flex items-center justify-between rounded-xl px-space-md py-3 font-label-lg text-label-lg text-on-surface-variant transition-all hover:bg-surface-container-high hover:text-on-surface" href="reports.html"><span>Reports</span><span class="material-symbols-outlined text-[19px]">description</span></a>
+<a class="flex items-center justify-between rounded-xl px-space-md py-3 font-label-lg text-label-lg text-on-surface-variant transition-all hover:bg-surface-container-high hover:text-on-surface" href="ratings.html"><span>Ratings &amp; Reviews</span><span class="material-symbols-outlined text-[19px]">reviews</span></a>
+<a class="flex items-center justify-between rounded-xl px-space-md py-3 font-label-lg text-label-lg text-on-surface-variant transition-all hover:bg-surface-container-high hover:text-on-surface" href="notifications.html"><span>Notifications</span><span class="material-symbols-outlined text-[19px]">notifications</span></a>
+<a class="flex items-center justify-between rounded-xl px-space-md py-3 font-label-lg text-label-lg text-on-surface-variant transition-all hover:bg-surface-container-high hover:text-on-surface" href="analytics.html"><span>Analytics</span><span class="material-symbols-outlined text-[19px]">analytics</span></a>
+<a class="flex items-center justify-between rounded-xl px-space-md py-3 font-label-lg text-label-lg text-on-surface-variant transition-all hover:bg-surface-container-high hover:text-on-surface" href="settings.html"><span>Settings</span><span class="material-symbols-outlined text-[19px]">settings</span></a>
+</nav>
+</div>
+<div class="p-space-lg">
+<div class="mb-space-md rounded-xl bg-surface p-space-md shadow-[4px_4px_12px_rgba(15,43,77,0.06),-4px_-4px_12px_rgba(255,255,255,0.9)]"><div class="flex items-center gap-space-sm"><div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary"><span class="material-symbols-outlined text-[18px] text-on-primary">person</span></div><div class="overflow-hidden"><div class="truncate font-label-lg text-label-lg text-on-surface">Sarah Jenkins</div><div class="truncate font-label-sm text-label-sm text-on-surface-variant">Senior Moderator</div></div></div></div>
+<button id="staffLogout" class="flex w-full items-center justify-center gap-space-xs rounded-xl bg-surface-container py-space-sm font-label-lg text-label-lg text-on-surface-variant shadow-[inset_2px_2px_5px_rgba(15,43,77,0.08),inset_-2px_-2px_5px_rgba(255,255,255,0.8)] transition-all hover:text-on-surface" type="button"><span class="material-symbols-outlined text-[18px]">logout</span><span>Log Out</span></button>
+</div>
+</aside>
+<div id="sidebarBackdrop" class="fixed inset-0 z-40 hidden bg-inverse-surface/40 backdrop-blur-sm lg:hidden" aria-hidden="true"></div><div class="min-h-screen overflow-x-hidden bg-background lg:pl-72"><header class="fixed left-0 right-0 top-0 h-20 lg:left-72 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(15,43,77,0.04)] z-30 px-space-md lg:px-space-xl flex items-center justify-between gap-space-sm lg:gap-space-lg"><button id="sidebarToggle" class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-surface text-on-surface-variant shadow-[4px_4px_10px_rgba(15,43,77,0.07),-4px_-4px_10px_rgba(255,255,255,0.95)] lg:hidden" type="button" aria-controls="staffSidebar" aria-expanded="false" aria-label="Open navigation"><span class="material-symbols-outlined">menu</span></button><div class="hidden sm:flex items-center gap-space-sm text-on-surface-variant font-label-md text-label-md"><a href="#" class="flex items-center text-on-surface-variant hover:text-primary transition-all"><span class="material-symbols-outlined text-[18px]">home</span></a><span class="text-outline-variant text-label-md">/</span><a href="#" class="text-on-surface-variant hover:text-primary transition-all font-label-md text-label-md">Admin Cockpit</a><span class="text-outline-variant text-label-md">/</span><span class="text-primary font-label-lg text-label-lg font-bold">AI Verification Queue</span></div><div class="hidden flex-1 md:block md:max-w-md"><div class="relative flex items-center"><span class="material-symbols-outlined absolute left-space-md text-on-surface-variant text-[20px]">search</span><input class="w-full bg-surface-container-high/60 rounded-xl pl-11 pr-16 py-2.5 text-on-surface font-body-sm text-body-sm shadow-[inset_2px_2px_4px_rgba(15,43,77,0.07),inset_-2px_-2px_4px_rgba(255,255,255,0.85)] placeholder:text-on-surface-variant focus:outline-none focus:ring-2 focus:ring-secondary transition-all" placeholder="Search ramps, IDs, locations..." type="text"><kbd class="absolute right-space-md font-label-sm text-label-sm bg-surface-container px-space-xs py-0.5 rounded shadow-sm text-on-surface-variant">Ctrl K</kbd></div></div><div class="flex items-center gap-space-xs sm:gap-space-md"><div class="hidden xl:flex items-center gap-space-xs px-space-md py-1.5 rounded-full bg-surface shadow-[inset_2px_2px_4px_rgba(15,43,77,0.05),inset_-2px_-2px_4px_rgba(255,255,255,0.8)]"><span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span><span class="font-label-sm text-label-sm text-on-surface-variant">Live: Firebase Online</span></div><button class="w-10 h-10 rounded-xl bg-surface flex items-center justify-center text-on-surface-variant hover:text-on-surface shadow-[4px_4px_10px_rgba(15,43,77,0.07),-4px_-4px_10px_rgba(255,255,255,0.95)] hover:shadow-[2px_2px_5px_rgba(15,43,77,0.07),-2px_-2px_5px_rgba(255,255,255,0.95)] transition-all relative"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-error"></span></button><button class="hidden w-10 h-10 rounded-xl bg-surface sm:flex items-center justify-center text-on-surface-variant hover:text-on-surface shadow-[4px_4px_10px_rgba(15,43,77,0.07),-4px_-4px_10px_rgba(255,255,255,0.95)] transition-all" title="High Contrast &amp; Accessibility Mode"><span class="material-symbols-outlined text-[20px]">contrast</span></button><div class="hidden items-center gap-space-sm pl-space-sm sm:flex"><div class="relative"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-primary ring-2 ring-surface"></span></div><div class="hidden md:block text-left"><div class="font-label-lg text-label-lg text-on-surface leading-none">Sarah Jenkins</div><div class="font-label-sm text-label-sm text-on-surface-variant mt-0.5">Lead Verifier</div></div></div></div></header><main class="w-full min-w-0 px-space-md pt-20 lg:px-space-xl pb-space-xl bg-background flex-1"><div class="flex min-w-0 w-full flex-col">
+<div class="flex flex-col gap-space-lg w-full">
+<!-- Top Action & Filter Deck -->
+<div class="flex flex-col xl:flex-row items-stretch xl:items-center justify-between gap-space-md bg-surface-container-low p-space-lg rounded-[24px] shadow-[6px_6px_16px_rgba(15,43,77,0.06),-6px_-6px_16px_rgba(255,255,255,0.9)]">
+<!-- Filter Nav Tabs -->
+<div class="flex flex-wrap items-center gap-space-xs">
+<button class="flex items-center gap-space-xs px-space-md py-2.5 rounded-full bg-surface text-primary shadow-[inset_2px_2px_4px_rgba(15,43,77,0.08),inset_-2px_-2px_4px_rgba(255,255,255,0.9)] font-label-lg text-label-lg transition-all">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="">All Pending</span>
+<span class="px-space-xs py-0.5 rounded-full font-label-sm text-label-sm bg-primary-container text-on-primary-container">14</span>
+</button>
+<button class="flex items-center gap-space-xs px-space-md py-2.5 rounded-full bg-surface text-on-surface-variant hover:text-on-surface shadow-[4px_4px_10px_rgba(15,43,77,0.06),-4px_-4px_10px_rgba(255,255,255,0.95)] hover:shadow-[2px_2px_5px_rgba(15,43,77,0.05),-2px_-2px_5px_rgba(255,255,255,0.9)] font-label-lg text-label-lg transition-all">
+<span class="material-symbols-outlined text-[16px] text-primary">verified</span>
+<span class="">High Confidence (90%+)</span>
+<span class="px-space-xs py-0.5 rounded-full font-label-sm text-label-sm bg-surface-container text-on-surface-variant">8</span>
+</button>
+<button class="flex items-center gap-space-xs px-space-md py-2.5 rounded-full bg-surface text-on-surface-variant hover:text-on-surface shadow-[4px_4px_10px_rgba(15,43,77,0.06),-4px_-4px_10px_rgba(255,255,255,0.95)] hover:shadow-[2px_2px_5px_rgba(15,43,77,0.05),-2px_-2px_5px_rgba(255,255,255,0.9)] font-label-lg text-label-lg transition-all">
+<span class="material-symbols-outlined text-[16px] text-error">priority_high</span>
+<span class="">Low Confidence (&lt;70%)</span>
+<span class="px-space-xs py-0.5 rounded-full font-label-sm text-label-sm bg-error-container text-on-error-container">3</span>
+</button>
+<button class="flex items-center gap-space-xs px-space-md py-2.5 rounded-full bg-surface text-on-surface-variant hover:text-on-surface shadow-[4px_4px_10px_rgba(15,43,77,0.06),-4px_-4px_10px_rgba(255,255,255,0.95)] hover:shadow-[2px_2px_5px_rgba(15,43,77,0.05),-2px_-2px_5px_rgba(255,255,255,0.9)] font-label-lg text-label-lg transition-all">
+<span class="material-symbols-outlined text-[16px] text-secondary">contact_support</span>
+<span class="">Manual Review</span>
+<span class="px-space-xs py-0.5 rounded-full font-label-sm text-label-sm bg-secondary-container text-on-secondary-container">3</span>
+</button>
+<button class="flex items-center gap-space-xs px-space-md py-2.5 rounded-full bg-surface text-on-surface-variant hover:text-on-surface shadow-[4px_4px_10px_rgba(15,43,77,0.06),-4px_-4px_10px_rgba(255,255,255,0.95)] hover:shadow-[2px_2px_5px_rgba(15,43,77,0.05),-2px_-2px_5px_rgba(255,255,255,0.9)] font-label-lg text-label-lg transition-all">
+<span class="material-symbols-outlined text-[16px]">history</span>
+<span class="">Resolved History</span>
+</button>
+</div>
+<!-- Quick Control Actions -->
+<div class="flex items-center flex-wrap gap-space-sm">
+<button class="flex items-center gap-space-xs px-space-md py-2.5 rounded-xl bg-surface text-on-surface hover:text-primary shadow-[4px_4px_10px_rgba(15,43,77,0.07),-4px_-4px_10px_rgba(255,255,255,0.95)] active:shadow-[inset_2px_2px_5px_rgba(15,43,77,0.1),inset_-2px_-2px_5px_rgba(255,255,255,0.8)] font-label-lg text-label-lg transition-all" id="batchApproveBtn">
+<span class="material-symbols-outlined text-[18px] text-primary">done_all</span>
+<span class="">Batch Approve (&gt;95%)</span>
+</button>
+<button class="flex items-center gap-space-xs px-space-md py-2.5 rounded-xl bg-surface text-on-surface-variant hover:text-on-surface shadow-[4px_4px_10px_rgba(15,43,77,0.07),-4px_-4px_10px_rgba(255,255,255,0.95)] active:shadow-[inset_2px_2px_5px_rgba(15,43,77,0.1),inset_-2px_-2px_5px_rgba(255,255,255,0.8)] font-label-lg text-label-lg transition-all">
+<span class="material-symbols-outlined text-[18px]">file_download</span>
+<span class="">Export Queue</span>
+</button>
+</div>
+</div>
+<!-- Search & Feature Selector Bar -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-space-md">
+<div class="md:col-span-8">
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-space-md text-on-surface-variant text-[20px]">search</span>
+<input class="w-full bg-surface-container rounded-xl pl-11 pr-4 py-3 text-on-surface font-body-sm text-body-sm shadow-[inset_3px_3px_6px_rgba(15,43,77,0.07),inset_-3px_-3px_6px_rgba(255,255,255,0.9)] placeholder:text-on-surface-variant focus:outline-none transition-all" id="queueSearch" placeholder="Filter queue by facility name, address, or contributor tag..." type="text">
+</div>
+</div>
+<div class="md:col-span-4 flex items-center gap-space-sm">
+<div class="relative w-full">
+<select class="w-full appearance-none bg-surface rounded-xl px-space-md py-3 pr-10 text-on-surface font-label-lg text-label-lg shadow-[4px_4px_10px_rgba(15,43,77,0.06),-4px_-4px_10px_rgba(255,255,255,0.9)] focus:outline-none cursor-pointer">
+<option>All Features (Ramps, Elevators, Entrances, Paving)</option>
+<option>Wheelchair Ramps</option>
+<option>Accessible Entrances</option>
+<option>Elevators &amp; Lifts</option>
+<option>Tactile Ground Surfaces</option>
+</select>
+<span class="material-symbols-outlined absolute right-space-md top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant text-[20px]">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Main Workspace Split Grid -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-space-xl items-start">
+<!-- LEFT COLUMN: Verification List (5 cols) -->
+<div class="xl:col-span-5 flex flex-col gap-space-md">
+<div class="flex items-center justify-between px-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm text-on-surface">Submissions</span>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container">14 In Queue</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Realtime Computer Vision v4.2</span>
+</div>
+<div class="flex flex-col gap-space-md max-h-[calc(100vh-280px)] overflow-y-auto pr-1">
+<!-- ITEM 1: Active Focus Item #VER-8942 -->
+<div class="relative p-space-md rounded-[20px] bg-surface shadow-[inset_2px_2px_4px_rgba(15,43,77,0.06),inset_-2px_-2px_4px_rgba(255,255,255,0.9)] cursor-pointer transition-all">
+<div class="absolute left-0 top-3 bottom-3 w-1.5 rounded-r-full bg-primary"></div>
+<div class="flex gap-space-md">
+<div class="relative w-20 h-20 rounded-xl overflow-hidden shrink-0 shadow-[2px_2px_6px_rgba(15,43,77,0.08)]">
+<img class="w-full h-full object-cover" data-alt="Close-up crisp photo of concrete accessibility ramp with safety handrails and yellow tactile paving tiles at modern hospital entrance under bright natural sunlight." src="https://lh3.googleusercontent.com/aida-public/AB6AXuACWnQSzevSHImM8Hz4sRToyjLw2MzNJ25XiSeJi2e8bqnHJP2cXryN9Pva5SnIhgyFupMZO-5Lrh1HY2zwew6sXdcKf6YCzw8Ar2b92dlda76ybom9kmi0BNt3BAgv8HUQL4JZ4yLWAOJZtZ-NkMAuKtzSBJ1eBjEEZKHCIcUPwkcLmUc_MOatndO43GcOhYUc4xBEm11tGQlFF2FsacCJMHsADILh51Dum1mJGGa1IbJlaC6DaEvFGQ">
+<span class="absolute bottom-1 right-1 bg-surface/90 backdrop-blur-sm px-1 rounded font-label-sm text-label-sm text-primary">94.2%</span>
+</div>
+<div class="flex-1 min-w-0 flex flex-col justify-between">
+<div class="flex items-center justify-between gap-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-lg text-label-lg text-primary font-bold">#VER-8942</span>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-primary-container/20 text-primary font-semibold">Ramp</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">3m ago</span>
+</div>
+<div class="font-label-lg text-label-lg text-on-surface truncate">St. Jude Community Hospital</div>
+<div class="flex items-center justify-between pt-1">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">June Ramirez (Lvl 4)</span>
+</div>
+<span class="font-label-sm text-label-sm text-primary font-bold">Slope: 1:12 ADA OK</span>
+</div>
+</div>
+</div>
+<!-- Inset Confidence Gauge Bar -->
+<div class="mt-space-sm pt-space-xs">
+<div class="w-full h-2 rounded-full bg-surface-container shadow-[inset_1px_1px_3px_rgba(15,43,77,0.12)] overflow-hidden">
+<div class="h-full bg-primary-container rounded-full" style="width: 94.2%"></div>
+</div>
+</div>
+</div>
+<!-- ITEM 2: #VER-8941 -->
+<div class="p-space-md rounded-[20px] bg-surface shadow-[4px_4px_12px_rgba(15,43,77,0.06),-4px_-4px_12px_rgba(255,255,255,0.95)] hover:shadow-[2px_2px_6px_rgba(15,43,77,0.06),-2px_-2px_6px_rgba(255,255,255,0.95)] cursor-pointer transition-all">
+<div class="flex gap-space-md">
+<div class="relative w-20 h-20 rounded-xl overflow-hidden shrink-0 shadow-[2px_2px_6px_rgba(15,43,77,0.08)]">
+<img class="w-full h-full object-cover" data-alt="Automatic sliding glass entrance doors with wide threshold and Braille push plate at public civic library, soft daylight lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAaJHSUwhXgFY9gOW8qGGvUogzw1B_r75Szn3w91zb5dWck9hjO93Bu7a2ncjt7dnioaLIjvuneU5ue3cHCg5dcvF77C9S9FQmJPDhwi0awegMq5KDocY_8AXUMQ0cuV_fPnjtHprtbs4wFCuyegeT2n0k3P2Qlfhe_7BpVcIVKS4Dl_0kUeX6WQ0xsHtiDzibJMI8SwpzuJOdvsVfEs6qk-qgxhg0iwJts3TAfLji1MKN1UvsFySyS3g">
+<span class="absolute bottom-1 right-1 bg-surface/90 backdrop-blur-sm px-1 rounded font-label-sm text-label-sm text-primary">91.8%</span>
+</div>
+<div class="flex-1 min-w-0 flex flex-col justify-between">
+<div class="flex items-center justify-between gap-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-lg text-label-lg text-on-surface font-semibold">#VER-8941</span>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container">Entrance</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">14m ago</span>
+</div>
+<div class="font-label-lg text-label-lg text-on-surface truncate">Central Public Library - North Wing</div>
+<div class="flex items-center justify-between pt-1">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Marcus Chen (Verified)</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Width: 38" Validated</span>
+</div>
+</div>
+</div>
+<div class="mt-space-sm pt-space-xs">
+<div class="w-full h-2 rounded-full bg-surface-container shadow-[inset_1px_1px_3px_rgba(15,43,77,0.12)] overflow-hidden">
+<div class="h-full bg-primary-container rounded-full" style="width: 91.8%"></div>
+</div>
+</div>
+</div>
+<!-- ITEM 3: #VER-8940 (Low Confidence Alert) -->
+<div class="p-space-md rounded-[20px] bg-surface shadow-[4px_4px_12px_rgba(15,43,77,0.06),-4px_-4px_12px_rgba(255,255,255,0.95)] hover:shadow-[2px_2px_6px_rgba(15,43,77,0.06),-2px_-2px_6px_rgba(255,255,255,0.95)] cursor-pointer transition-all">
+<div class="flex gap-space-md">
+<div class="relative w-20 h-20 rounded-xl overflow-hidden shrink-0 shadow-[2px_2px_6px_rgba(15,43,77,0.08)]">
+<img class="w-full h-full object-cover" data-alt="Grainy photograph of steep brick ramp near subway entrance at night with partial glare obscuring slope angle and no visible handrail." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCk60xuAlSuCSdvY5QxB5qAGpg1HCytxgnXRC-wjexCSXJmplW7QHAlcwZhpFmiH_myJC2OAmx8XcBrHcvu2Wkbj7qYBG4eej52zEAqMPun5tB5YR2PYoJZgDxJ4NRBPGTyFju45uCEhIegpdg3Eh9roIIlv2c3xE_jmQYDwWmuH8Vw_auWg3FEumL63TavXlNDNmY5KbiDlqbZr_vfCx9wUbzqE_doipZAFnyP6_7pDiy5H6_ZzmOxaw">
+<span class="absolute bottom-1 right-1 bg-surface/90 backdrop-blur-sm px-1 rounded font-label-sm text-label-sm text-error">58.4%</span>
+</div>
+<div class="flex-1 min-w-0 flex flex-col justify-between">
+<div class="flex items-center justify-between gap-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-lg text-label-lg text-on-surface font-semibold">#VER-8940</span>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-error-container text-on-error-container">Low Conf</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">29m ago</span>
+</div>
+<div class="font-label-lg text-label-lg text-on-surface truncate">Metro Station 8th Ave Underpass</div>
+<div class="flex items-center justify-between pt-1">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Guest User #1092</span>
+</div>
+<span class="font-label-sm text-label-sm text-error font-semibold">Incline &gt; 1:8 Warning</span>
+</div>
+</div>
+</div>
+<div class="mt-space-sm pt-space-xs">
+<div class="w-full h-2 rounded-full bg-surface-container shadow-[inset_1px_1px_3px_rgba(15,43,77,0.12)] overflow-hidden">
+<div class="h-full bg-error rounded-full" style="width: 58.4%"></div>
+</div>
+</div>
+</div>
+<!-- ITEM 4: #VER-8939 -->
+<div class="p-space-md rounded-[20px] bg-surface shadow-[4px_4px_12px_rgba(15,43,77,0.06),-4px_-4px_12px_rgba(255,255,255,0.95)] hover:shadow-[2px_2px_6px_rgba(15,43,77,0.06),-2px_-2px_6px_rgba(255,255,255,0.95)] cursor-pointer transition-all">
+<div class="flex gap-space-md">
+<div class="relative w-20 h-20 rounded-xl overflow-hidden shrink-0 shadow-[2px_2px_6px_rgba(15,43,77,0.08)]">
+<img class="w-full h-full object-cover" data-alt="High quality overhead view of clean yellow blister tactile warning paving studs aligned along sidewalk pedestrian crossing curb edge." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBo1UIovpeaWKfAMF3upgl10y3oVopArxclTL_7ruEudMdpjxDME4ehhwPEst09zsp-yAOeekUddRE6O2G8vFMde-RCxzySiyOs3IHTWTwJba6k6Je1z_YYPrnyXJ0NmcsPZKJsDShm16n6y_B1Km2s9XUgWHMEB7D4wI3cPkhBX8BDud7_0VRKe_mSSbGyM5G2bbeHtgZXGuinZgLgQAr5IceklF7DAQjWg-NQfIQVI8_qrmJaSrMeew">
+<span class="absolute bottom-1 right-1 bg-surface/90 backdrop-blur-sm px-1 rounded font-label-sm text-label-sm text-primary">96.5%</span>
+</div>
+<div class="flex-1 min-w-0 flex flex-col justify-between">
+<div class="flex items-center justify-between gap-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-lg text-label-lg text-on-surface font-semibold">#VER-8939</span>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container">Tactile</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">48m ago</span>
+</div>
+<div class="font-label-lg text-label-lg text-on-surface truncate">Pine &amp; 4th St Pedestrian Crossing</div>
+<div class="flex items-center justify-between pt-1">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Elena Rostova (Lvl 5)</span>
+</div>
+<span class="font-label-sm text-label-sm text-primary font-bold">Contrast: 84%</span>
+</div>
+</div>
+</div>
+<div class="mt-space-sm pt-space-xs">
+<div class="w-full h-2 rounded-full bg-surface-container shadow-[inset_1px_1px_3px_rgba(15,43,77,0.12)] overflow-hidden">
+<div class="h-full bg-primary-container rounded-full" style="width: 96.5%"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- RIGHT COLUMN: Detailed Inspection Modal & Verification Engine (7 cols) -->
+<div class="xl:col-span-7 flex flex-col gap-space-lg">
+<!-- Primary Inspection Container -->
+<div class="bg-surface p-space-lg rounded-[24px] shadow-[6px_6px_16px_rgba(15,43,77,0.07),-6px_-6px_16px_rgba(255,255,255,0.95)]">
+<!-- Inspection Header -->
+<div class="flex flex-wrap items-center justify-between gap-space-md pb-space-md">
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-md text-headline-md text-on-surface">Inspection #VER-8942</span>
+<span class="px-space-xs py-0.5 rounded-full font-label-sm text-label-sm bg-primary-container text-on-primary-container flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">bolt</span>
+                  Auto-Processed
+                </span>
+</div>
+<div class="font-label-md text-label-md text-on-surface-variant mt-0.5">
+                St. Jude Community Hospital • Submitted Oct 24, 2024 at 14:22 EST
+              </div>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="w-9 h-9 rounded-xl bg-surface flex items-center justify-center text-on-surface-variant hover:text-on-surface shadow-[3px_3px_8px_rgba(15,43,77,0.06),-3px_-3px_8px_rgba(255,255,255,0.9)] transition-all" title="Zoom in">
+<span class="material-symbols-outlined text-[18px]">zoom_in</span>
+</button>
+<button class="w-9 h-9 rounded-xl bg-surface flex items-center justify-center text-on-surface-variant hover:text-on-surface shadow-[3px_3px_8px_rgba(15,43,77,0.06),-3px_-3px_8px_rgba(255,255,255,0.9)] transition-all" title="Zoom out">
+<span class="material-symbols-outlined text-[18px]">zoom_out</span>
+</button>
+<button class="w-9 h-9 rounded-xl bg-surface flex items-center justify-center text-on-surface-variant hover:text-on-surface shadow-[3px_3px_8px_rgba(15,43,77,0.06),-3px_-3px_8px_rgba(255,255,255,0.9)] transition-all" title="Rotate 90 deg">
+<span class="material-symbols-outlined text-[18px]">rotate_right</span>
+</button>
+<button class="w-9 h-9 rounded-xl bg-surface flex items-center justify-center text-on-surface-variant hover:text-on-surface shadow-[3px_3px_8px_rgba(15,43,77,0.06),-3px_-3px_8px_rgba(255,255,255,0.9)] transition-all" title="Reset viewport">
+<span class="material-symbols-outlined text-[18px]">center_focus_strong</span>
+</button>
+</div>
+</div>
+<!-- Viewport with Interactive Computer Vision Bounding Box -->
+<div class="relative w-full h-[400px] rounded-[18px] overflow-hidden bg-surface-container-highest shadow-[inset_2px_2px_6px_rgba(15,43,77,0.12)]">
+<img class="w-full h-full object-cover" data-alt="Architectural daylight photograph of an accessible wheelchair entrance ramp leading up to double glass hospital doors with dual stainless steel handrails and level threshold landing." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBa2XPWq-a29w3KHYjnF1aKjWfxa4UBnkql58GvXqqi0l_kpS4FhCWDKpyf6VrIXhce58ayS0rqbGuHAbcfUEoFmLy2LJwy9agT9FImeluUZQfKgwiVp52hrR0KPDchJTI7OF-EOwJ4jmJgjb_jVZktRgS3T7ElstzCgKIuQTl9DxEEb8yRmvZOLJ3xFGOtuf-iVHh7AxNR-PDlcwSxvErCj0K03_KIvBAwuXbgi40BCvNGZQy6ZkQe_A">
+<!-- AI Bounding Box Overlay 1: Ramp -->
+<div class="absolute inset-x-[18%] inset-y-[22%] rounded-lg shadow-[0_0_0_2px_#5bc66b,0_0_15px_rgba(91,198,107,0.5)] bg-primary-container/10 pointer-events-none transition-all">
+<div class="absolute -top-7 left-0 bg-surface text-primary font-label-sm text-label-sm px-2.5 py-1 rounded-md shadow-md flex items-center gap-1 backdrop-blur-md">
+<span class="material-symbols-outlined text-[14px]">view_in_ar</span>
+<span class="">Ramp: 94.2% Conf | Slope 1:12 OK</span>
+</div>
+<div class="absolute bottom-2 left-2 bg-surface/90 text-on-surface font-label-sm text-label-sm px-2 py-0.5 rounded shadow">
+                Est. Width: 42.4" (&gt;36" Min)
+              </div>
+</div>
+<!-- AI Bounding Box Overlay 2: Handrail -->
+<div class="absolute left-[16%] top-[24%] bottom-[20%] w-[12%] rounded border border-dashed border-secondary bg-secondary-container/15 pointer-events-none">
+<div class="absolute -bottom-6 left-0 bg-secondary text-on-secondary font-label-sm text-label-sm px-1.5 py-0.5 rounded shadow whitespace-nowrap">
+                Handrail: Continuous (34")
+              </div>
+</div>
+<!-- Floating Overlay Pill for Model Diagnostics -->
+<div class="absolute top-4 right-4 bg-surface/90 backdrop-blur-md px-space-md py-1.5 rounded-full shadow-[2px_2px_8px_rgba(15,43,77,0.15)] flex items-center gap-space-xs text-on-surface font-label-sm text-label-sm">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="">Inference: 142ms • Vision-V4-Pro</span>
+</div>
+</div>
+<!-- AI Diagnostic Breakdown Strip -->
+<div class="mt-space-lg grid grid-cols-2 md:grid-cols-4 gap-space-sm">
+<div class="p-space-md rounded-xl bg-surface-container shadow-[inset_2px_2px_4px_rgba(15,43,77,0.06),inset_-2px_-2px_4px_rgba(255,255,255,0.85)] flex flex-col justify-between">
+<div class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-primary">straighten</span>
+<span class="">Slope Gradient</span>
+</div>
+<div class="font-headline-sm text-headline-sm text-primary font-bold mt-1">1:12 ADA</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Max allowed: 1:12</div>
+</div>
+<div class="p-space-md rounded-xl bg-surface-container shadow-[inset_2px_2px_4px_rgba(15,43,77,0.06),inset_-2px_-2px_4px_rgba(255,255,255,0.85)] flex flex-col justify-between">
+<div class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-primary">handshake</span>
+<span class="">Handrails</span>
+</div>
+<div class="font-headline-sm text-headline-sm text-on-surface font-bold mt-1">Dual-Sided</div>
+<div class="font-label-sm text-label-sm text-primary font-semibold">Continuous Grip</div>
+</div>
+<div class="p-space-md rounded-xl bg-surface-container shadow-[inset_2px_2px_4px_rgba(15,43,77,0.06),inset_-2px_-2px_4px_rgba(255,255,255,0.85)] flex flex-col justify-between">
+<div class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-primary">grain</span>
+<span class="">Surface Quality</span>
+</div>
+<div class="font-headline-sm text-headline-sm text-on-surface font-bold mt-1">Broomed Conc.</div>
+<div class="font-label-sm text-label-sm text-primary font-semibold">Slip-Resistant</div>
+</div>
+<div class="p-space-md rounded-xl bg-surface-container shadow-[inset_2px_2px_4px_rgba(15,43,77,0.06),inset_-2px_-2px_4px_rgba(255,255,255,0.85)] flex flex-col justify-between">
+<div class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-primary">warning</span>
+<span class="">Tactile Strip</span>
+</div>
+<div class="font-headline-sm text-headline-sm text-primary font-bold mt-1">Present</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">24" Base &amp; Crest</div>
+</div>
+</div>
+<!-- Two Column Metadata: Contributor Trust & Spatial Verification -->
+<div class="mt-space-lg grid grid-cols-1 md:grid-cols-2 gap-space-lg">
+<!-- Contributor Trust Card -->
+<div class="p-space-md rounded-[18px] bg-surface shadow-[4px_4px_12px_rgba(15,43,77,0.05),-4px_-4px_12px_rgba(255,255,255,0.9)] flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Contributor Profile</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm">Level 4 Field Auditor</span>
+</div>
+<div class="flex items-center gap-space-sm mt-space-md">
+<div class="w-11 h-11 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold shadow-[2px_2px_5px_rgba(15,43,77,0.08)]">
+                    JR
+                  </div>
+<div>
+<div class="font-label-lg text-label-lg text-on-surface font-bold">June Ramirez</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">j.ramirez@cityaccess.org</div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-space-xs mt-space-md pt-space-xs">
+<div class="bg-surface-container-low p-2 rounded-lg text-center shadow-[inset_1px_1px_3px_rgba(15,43,77,0.04)]">
+<div class="font-headline-sm text-headline-sm text-primary font-bold">98.4%</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Historical Accuracy</div>
+</div>
+<div class="bg-surface-container-low p-2 rounded-lg text-center shadow-[inset_1px_1px_3px_rgba(15,43,77,0.04)]">
+<div class="font-headline-sm text-headline-sm text-on-surface font-bold">142</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Verified Submissions</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Spatial Ground Truth & Coordinates -->
+<div class="p-space-md rounded-[18px] bg-surface shadow-[4px_4px_12px_rgba(15,43,77,0.05),-4px_-4px_12px_rgba(255,255,255,0.9)] flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Geographic Verification</span>
+<span class="flex items-center gap-1 text-primary font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px]">gps_fixed</span>
+                    High Precision
+                  </span>
+</div>
+<div class="mt-space-md">
+<div class="font-label-lg text-label-lg text-on-surface font-semibold">St. Jude Community Hospital</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">1200 Health Boulevard, Main West Gate</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant mt-1">Lat: 40.7128° N • Lng: 74.0060° W (±1.4m accuracy)</div>
+</div>
+</div>
+<!-- Location Snapshot map -->
+<div class="w-full h-20 rounded-xl mt-space-sm bg-cover bg-center shadow-[inset_1px_1px_4px_rgba(15,43,77,0.1)]" data-location="St. Jude Hospital, New York" style="background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuAKIH826Rd9YzySERHcil5xerxCAEymh4dyW52ntZwQYSg8QDQnRhyNTPZHRs89_5HnvyJKlCNo-kUSTsuzy_8qhge1BOcbVY4FHROW07E7-z6NHLKXIROso9vbemyhM-uB3wR3qMrui4VU1g4dwevI_1IguSbgEyhVy_niMPS8ab_uw1kcVDI7z-H4PLSZUkzxK6YmZl66uVGRFyJNMkmXkHBpatxZL_mW0mjL-2PS6y8ObiHqeS7v9Q&quot;);"></div>
+</div>
+</div>
+<!-- Administrative Annotation Input -->
+<div class="mt-space-lg">
+<label class="block font-label-lg text-label-lg text-on-surface mb-2" for="adminNote">Moderator Annotations &amp; Audit Trail</label>
+<textarea class="w-full bg-surface-container rounded-xl p-space-md text-on-surface font-body-sm text-body-sm shadow-[inset_3px_3px_6px_rgba(15,43,77,0.07),inset_-3px_-3px_6px_rgba(255,255,255,0.9)] placeholder:text-on-surface-variant focus:outline-none transition-all resize-none" id="adminNote" placeholder="Add moderator notes or accessibility annotations before publishing..." rows="2"></textarea>
+</div>
+<!-- Action Decision Bar -->
+<div class="mt-space-xl pt-space-md flex flex-col sm:flex-row items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-sm w-full sm:w-auto">
+<!-- Reject Dropdown Button Combo -->
+<div class="relative w-full sm:w-auto">
+<button class="w-full sm:w-auto flex items-center justify-center gap-space-xs px-space-md py-3 rounded-xl bg-surface text-error hover:bg-error-container hover:text-on-error-container shadow-[4px_4px_10px_rgba(15,43,77,0.07),-4px_-4px_10px_rgba(255,255,255,0.95)] active:shadow-[inset_2px_2px_5px_rgba(15,43,77,0.1)] font-label-lg text-label-lg transition-all" id="rejectBtn">
+<span class="material-symbols-outlined text-[18px]">close</span>
+<span class="">Reject Submission</span>
+</button>
+</div>
+<button class="w-full sm:w-auto flex items-center justify-center gap-space-xs px-space-md py-3 rounded-xl bg-surface text-on-surface-variant hover:text-on-surface shadow-[4px_4px_10px_rgba(15,43,77,0.07),-4px_-4px_10px_rgba(255,255,255,0.95)] active:shadow-[inset_2px_2px_5px_rgba(15,43,77,0.1)] font-label-lg text-label-lg transition-all">
+<span class="material-symbols-outlined text-[18px]">add_a_photo</span>
+<span class="">Request Re-shoot</span>
+</button>
+</div>
+<!-- Primary Approve & Sync Trigger -->
+<button class="w-full sm:w-auto flex items-center justify-center gap-space-sm px-space-lg py-3 rounded-xl bg-primary text-on-primary font-headline-sm text-headline-sm font-bold shadow-[4px_4px_14px_rgba(0,110,40,0.3),-2px_-2px_8px_rgba(255,255,255,0.8)] hover:brightness-105 active:shadow-[inset_3px_3px_6px_rgba(0,33,7,0.4)] transition-all" id="approveBtn">
+<span class="material-symbols-outlined text-[20px]">check_circle</span>
+<span class="">Approve &amp; Publish To Live Map</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const approveBtn = document.getElementById('approveBtn');
+      const rejectBtn = document.getElementById('rejectBtn');
+      const batchApproveBtn = document.getElementById('batchApproveBtn');
+
+      if (approveBtn) {
+        approveBtn.addEventListener('click', () => {
+          approveBtn.innerHTML = `
+            <span class="material-symbols-outlined text-[20px] animate-spin">sync</span>
+            <span>Syncing to Map...</span>
+          `;
+          approveBtn.classList.add('opacity-80', 'pointer-events-none');
+          setTimeout(() => {
+            approveBtn.innerHTML = `
+              <span class="material-symbols-outlined text-[20px]">verified</span>
+              <span>Published Live!</span>
+            `;
+            approveBtn.classList.remove('bg-primary');
+            approveBtn.classList.add('bg-primary-container', 'text-on-primary-container');
+          }, 900);
+        });
+      }
+
+      if (rejectBtn) {
+        rejectBtn.addEventListener('click', () => {
+          const reason = prompt("Enter Rejection Reason for Field Contributor:", "Slope non-compliant or unclear photo");
+          if (reason) {
+            rejectBtn.innerHTML = `<span class="material-symbols-outlined text-[18px]">block</span> Rejected`;
+            rejectBtn.classList.add('bg-error-container', 'text-on-error-container');
+          }
+        });
+      }
+
+      if (batchApproveBtn) {
+        batchApproveBtn.addEventListener('click', () => {
+          batchApproveBtn.innerHTML = `
+            <span class="material-symbols-outlined text-[18px] text-primary">check</span>
+            <span>8 Submissions Auto-Verified</span>
+          `;
+          setTimeout(() => {
+            batchApproveBtn.innerHTML = `
+              <span class="material-symbols-outlined text-[18px] text-primary">done_all</span>
+              <span>Batch Approve (>95%)</span>
+            `;
+          }, 2400);
+        });
+      }
+    });
+  </script>
+</div></main></div>
+
+
+
+<script>
+  const staffSidebar = document.getElementById('staffSidebar');
+  const sidebarToggle = document.getElementById('sidebarToggle');
+  const sidebarClose = document.getElementById('sidebarClose');
+  const sidebarBackdrop = document.getElementById('sidebarBackdrop');
+  const desktopSidebar = window.matchMedia('(min-width: 1024px)');
+  let sidebarWasOpen = false;
+
+  function setSidebar(open, returnFocus = false) {
+    const mobileOpen = open && !desktopSidebar.matches;
+    staffSidebar.classList.toggle('-translate-x-full', !open);
+    sidebarBackdrop.classList.toggle('hidden', !mobileOpen);
+    sidebarToggle.setAttribute('aria-expanded', String(mobileOpen));
+    sidebarToggle.setAttribute('aria-label', mobileOpen ? 'Close navigation' : 'Open navigation');
+    document.body.classList.toggle('overflow-hidden', mobileOpen);
+    staffSidebar.inert = !open;
+
+    if (mobileOpen) {
+      sidebarWasOpen = true;
+      window.requestAnimationFrame(() => sidebarClose.focus());
+    } else if (returnFocus && sidebarWasOpen) {
+      sidebarToggle.focus();
+      sidebarWasOpen = false;
+    }
+  }
+
+  function syncSidebarLayout() {
+    if (desktopSidebar.matches) {
+      setSidebar(true);
+      staffSidebar.inert = false;
+    } else {
+      setSidebar(false);
+    }
+  }
+
+  sidebarToggle.addEventListener('click', () => setSidebar(sidebarToggle.getAttribute('aria-expanded') !== 'true'));
+  sidebarClose.addEventListener('click', () => setSidebar(false, true));
+  sidebarBackdrop.addEventListener('click', () => setSidebar(false, true));
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && sidebarToggle.getAttribute('aria-expanded') === 'true') setSidebar(false, true);
+  });
+  desktopSidebar.addEventListener('change', syncSidebarLayout);
+  syncSidebarLayout();
+
+  document.querySelectorAll('[data-unavailable="true"]').forEach((link) => {
+    link.addEventListener('click', (event) => {
+      event.preventDefault();
+      alert(link.querySelector('span').textContent.trim() + ' is not available in this preview yet.');
+    });
+  });
+
+  document.getElementById('staffLogout').addEventListener('click', () => {
+    sessionStorage.removeItem('navableStaffPreview');
+    window.location.href = 'staff-login.html';
+  });
+</script>
+</body>
+</html>
