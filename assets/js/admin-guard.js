@@ -1,6 +1,14 @@
 (() => {
   "use strict";
 
+  document.documentElement.classList.add("admin-ui-booting");
+
+  try {
+    document.documentElement.dataset.sidebarCollapsed = String(localStorage.getItem("navableSidebarCollapsed") === "true");
+  } catch (_) {
+    document.documentElement.dataset.sidebarCollapsed = "false";
+  }
+
   const loginPage = "../staff-login.html";
   const currentPage = window.location.pathname.split("/").pop() || "dashboard.html";
   let previewSession = false;

@@ -35,8 +35,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.querySelectorAll("main button").forEach((button) => {
       const label = button.textContent.replace(/\s+/g, " ").trim();
-      if (label === "View All 14 Submissions") button.addEventListener("click", () => { window.location.href = "verification.html"; });
-      if (label === "Inspect") button.addEventListener("click", () => { window.location.href = "verification.html"; });
+      if (label === "View All 14 Submissions") button.addEventListener("click", () => { NavAbleAdmin.navigate("verification.html"); });
+      if (label === "Inspect") button.addEventListener("click", () => { NavAbleAdmin.navigate("verification.html"); });
       if (label === "Verify") {
         button.addEventListener("click", () => {
           if (!NavAbleAdmin.confirmAction("Mark this audit as verified in the local prototype?")) return;
