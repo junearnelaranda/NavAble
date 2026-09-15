@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  const exportButton = [...document.querySelectorAll("main button")].find((button) => button.textContent.includes("Export Reviews"));
+  const exportButton = document.querySelector('main [data-admin-action="export"]');
   exportButton?.addEventListener("click", () => {
     const rows = [["Status", "Review"], ...cards.filter((card) => !card.hidden).map((card) => [card.dataset.status, card.innerText.replace(/\s+/g, " ").trim()])];
     NavAbleAdmin.downloadCsv("navable-reviews.csv", rows);

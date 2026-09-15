@@ -1,7 +1,7 @@
 (() => {
   "use strict";
 
-  const loginPage = "staff-login.html";
+  const loginPage = "../staff-login.html";
   const currentPage = window.location.pathname.split("/").pop() || "dashboard.html";
   let previewSession = false;
 
@@ -12,7 +12,7 @@
   }
 
   if (!previewSession) {
-    const returnTo = encodeURIComponent(currentPage + window.location.search + window.location.hash);
+    const returnTo = encodeURIComponent(`datas/${currentPage}${window.location.search}${window.location.hash}`);
     window.location.replace(`${loginPage}?returnTo=${returnTo}`);
   }
 })();

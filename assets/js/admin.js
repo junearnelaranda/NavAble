@@ -74,6 +74,21 @@
     showToast(`${filename} downloaded.`);
   }
 
+  function promotePageHeading(title, description) {
+    const main = document.querySelector("main");
+    const heading = main?.querySelector(":scope > h1.sr-only");
+    const content = main ? [...main.children].find((child) => child !== heading) : null;
+    if (!main || !heading || !content) return;
+    const intro = document.createElement("div");
+    intro.className = "admin-page-intro";
+    heading.className = "";
+    heading.textContent = title;
+    const copy = document.createElement("p");
+    copy.textContent = description;
+    intro.append(heading, copy);
+    content.prepend(intro);
+  }
+
   function ensureSkipLink(main) {
     if (!main.id) main.id = "main-content";
     if (document.querySelector(".admin-skip-link")) return;
@@ -84,18 +99,9 @@
     document.body.prepend(skipLink);
   }
 
-  function ensureEnvironmentBanner(main) {
-    if (main.querySelector(".admin-environment-banner")) return;
-    const banner = document.createElement("div");
-    banner.className = "admin-environment-banner";
-    banner.setAttribute("role", "status");
-    banner.textContent = "Prototype mode: Firebase, database, and backend services are not connected in this workspace.";
-    main.prepend(banner);
-  }
-
   function setupSidebar() {
     const sidebar = document.getElementById("staffSidebar") || document.querySelector("body > aside");
-    const header = document.querySelector("body > div > header, body > aside + div header, header");
+    const header = document.querySelector("body > div.min-h-screen > header, body > aside + div header, header:not(.dashboard-skeleton-header)");
     if (!sidebar || !header) return;
 
     sidebar.id = "staffSidebar";
@@ -135,6 +141,15 @@
     } else {
       backdrop.classList.add("admin-sidebar-backdrop");
     }
+
+    sidebar.querySelectorAll("nav a").forEach((link) => {
+      const href = link.getAttribute("href");
+      if (!href || !ADMIN_PAGES.has(href)) return;
+      const current = href === (window.location.pathname.split("/").pop() || "dashboard.html");
+      link.classList.toggle("admin-current-link", current);
+      if (current) link.setAttribute("aria-current", "page");
+      else link.removeAttribute("aria-current");
+    });
 
     const desktop = window.matchMedia("(min-width: 1024px)");
     let wasOpen = false;
@@ -206,16 +221,54 @@
     logout.addEventListener("click", () => {
       try {
         sessionStorage.removeItem("navableStaffPreview");
+        sessionStorage.removeItem("navableStaffRole");
+        sessionStorage.removeItem("navableDashboardLoadState");
       } catch (error) {
         console.warn("Could not clear the preview session.", error);
       }
-      window.location.href = "staff-login.html";
+      window.location.href = "../staff-login.html";
     });
   }
 
+  function setupBrand() {
+    const sidebar = document.getElementById("staffSidebar") || document.querySelector("body > aside");
+    if (!sidebar) return;
+
+    if (document.body.dataset.adminPage === "user.html") {
+      const sidebarContent = sidebar.querySelector(":scope > div:first-of-type");
+      const brand = sidebarContent?.querySelector(":scope > div:first-child");
+      if (brand) {
+        brand.className = "mb-space-xl flex items-center justify-between gap-space-sm";
+        brand.innerHTML = `
+          <a class="flex min-w-0 items-center gap-space-sm" href="dashboard.html" aria-label="NavAble staff dashboard">
+            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-surface shadow-[4px_4px_10px_rgba(15,43,77,0.08),-4px_-4px_10px_rgba(255,255,255,0.9)]">
+              <img class="h-9 w-9 object-cover mix-blend-multiply" src="../logOnly.png" alt="">
+            </div>
+            <div class="min-w-0">
+              <div class="font-headline-sm text-headline-sm leading-tight text-on-surface">Nav<span class="text-primary">Able</span></div>
+              <div class="truncate font-label-sm text-label-sm text-on-surface-variant">Accessibility &amp; Verification</div>
+            </div>
+          </a>`;
+        return;
+      }
+    }
+
+    if (sidebar.querySelector('img[src="../logOnly.png"]')) return;
+    const icon = sidebar.querySelector("a .material-symbols-outlined, aside > div:first-child > div:first-child .material-symbols-outlined");
+    if (!icon) return;
+    const logo = document.createElement("img");
+    logo.src = "../logOnly.png";
+    logo.alt = "";
+    logo.className = "w-9 h-9 object-cover mix-blend-multiply";
+    icon.replaceWith(logo);
+  }
+
   function setupGlobalControls() {
-    const header = document.querySelector("body > div > header, body > aside + div header, header");
+    const header = document.querySelector("body > div.min-h-screen > header, body > aside + div header, header:not(.dashboard-skeleton-header)");
     if (!header) return;
+    [...header.querySelectorAll("span")].forEach((status) => {
+      if (status.textContent.trim() === "Live: Firebase Online") status.textContent = "Prototype data";
+    });
     const globalSearch = header.querySelector('input[type="text"], input[type="search"]');
     if (globalSearch) {
       globalSearch.setAttribute("aria-label", "Search the admin dashboard");
@@ -264,6 +317,11 @@
     const labelsByFor = new Map([...document.querySelectorAll("label[for]")].map((label) => [label.htmlFor, textLabel(label)]));
     let selectionIndex = 0;
 
+    document.querySelectorAll('a[href="#"]').forEach((link) => {
+      link.href = "dashboard.html";
+      if (!link.getAttribute("aria-label") && !textLabel(link)) link.setAttribute("aria-label", "Go to dashboard");
+    });
+
     document.querySelectorAll("input, select, textarea").forEach((control) => {
       if (control.type === "hidden" || control.getAttribute("aria-label") || control.getAttribute("aria-labelledby")) return;
       if (control.id && labelsByFor.has(control.id)) return;
@@ -293,6 +351,70 @@
     document.querySelectorAll("img").forEach((image) => {
       if (image.hasAttribute("alt")) return;
       image.alt = image.dataset.alt || "";
+    });
+  }
+
+  function standardizeExportButtons() {
+    document.querySelectorAll("main button").forEach((button) => {
+      const label = textLabel(button);
+      const title = button.title || "";
+      if (!/^Export\b/i.test(label) && !/^Export\b/i.test(title)) return;
+      button.dataset.adminAction = "export";
+      button.classList.add("admin-export-button");
+      button.setAttribute("aria-label", button.getAttribute("aria-label") || title || "Export data");
+      button.innerHTML = '<span class="material-symbols-outlined" aria-hidden="true">download</span><span>Export</span>';
+    });
+
+    const placeExportButton = () => {
+      const main = document.querySelector("main");
+      const button = main?.querySelector('[data-admin-action="export"]');
+      const heading = [...(main?.querySelectorAll("h1") || [])].find((item) => !item.classList.contains("sr-only"));
+      if (!main || !button || !heading) return;
+
+      const titleBlock = heading.closest(".admin-page-intro") || heading.parentElement;
+      const existingRow = titleBlock?.parentElement;
+      const isResponsiveRow = existingRow?.classList.contains("flex") && [...existingRow.classList].some((name) => name.includes("flex-row"));
+
+      if (isResponsiveRow) {
+        existingRow.classList.add("admin-page-heading-row");
+        const actions = [...existingRow.children].find((child) => child !== titleBlock && child.matches("div") && child.querySelector("button, input, select"));
+        if (!actions) return;
+        actions.classList.add("admin-page-actions");
+        if (!actions.contains(button)) {
+          const primary = [...actions.children].find((child) => child.matches("button") && /(?:^|\s)bg-primary(?:-container)?(?:\s|$)/.test(child.className));
+          if (primary) actions.insertBefore(button, primary);
+          else actions.append(button);
+        }
+        return;
+      }
+
+      const row = document.createElement("div");
+      const actions = document.createElement("div");
+      row.className = "admin-page-heading-row flex flex-col sm:flex-row";
+      actions.className = "admin-page-actions";
+      titleBlock.before(row);
+      row.append(titleBlock, actions);
+      actions.append(button);
+    };
+
+    // Page-specific scripts can promote a screen-reader heading during the same
+    // DOMContentLoaded event. Run placement on the next task so that heading is
+    // available before Export is moved into the shared top-right action area.
+    window.setTimeout(placeExportButton, 0);
+  }
+
+  function protectDestructiveControls() {
+    document.querySelectorAll("button").forEach((button) => {
+      const icon = button.querySelector(".material-symbols-outlined")?.textContent.trim();
+      if (icon !== "delete") return;
+      button.addEventListener("click", (event) => {
+        if (!confirmAction("Remove this record from the local prototype view?")) {
+          event.preventDefault();
+          event.stopImmediatePropagation();
+          return;
+        }
+        showToast("Removal recorded in this local session.", { assertive: true });
+      }, true);
     });
   }
 
@@ -328,19 +450,62 @@
     }
   }
 
+  function modernizeRemoteImages() {
+    const page = document.body.dataset.adminPage;
+    const icon = page === "user.html" ? "person" : page === "location.html" ? "location_on" : page === "verification.html" ? "frame_inspect" : "accessible";
+    document.querySelectorAll('[data-admin-visual="true"]').forEach((visual) => {
+      if (visual.matches("img")) {
+        const replacement = document.createElement("div");
+        replacement.className = `${visual.className} admin-media-placeholder`;
+        replacement.setAttribute("role", "img");
+        replacement.setAttribute("aria-label", visual.alt || visual.dataset.alt || "Administrative record visual");
+        replacement.innerHTML = `<span class="material-symbols-outlined" aria-hidden="true">${icon}</span>`;
+        visual.replaceWith(replacement);
+        return;
+      }
+
+      visual.classList.add("admin-media-placeholder");
+      visual.setAttribute("role", "img");
+      visual.setAttribute("aria-label", visual.dataset.location || "Administrative record visual");
+      visual.innerHTML = `<span class="material-symbols-outlined" aria-hidden="true">${icon}</span>`;
+    });
+  }
+
+  function clarifyPrototypeStatus() {
+    const replacements = new Map([
+      ["Live Synced", "Prototype View"],
+      ["Live Synced (v4.8)", "Prototype Dataset"],
+      ["Real-time sync active", "Static preview data"],
+      ["JWT session verification", "Preview session only"],
+      ["Cluster Healthy (us-east1)", "Not connected"]
+    ]);
+    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+    const nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+    nodes.forEach((node) => {
+      const value = node.nodeValue.trim();
+      if (replacements.has(value)) node.nodeValue = node.nodeValue.replace(value, replacements.get(value));
+    });
+  }
+
   document.addEventListener("DOMContentLoaded", () => {
     document.body.classList.add("admin-page");
+    document.body.dataset.adminPage = window.location.pathname.split("/").pop() || "dashboard.html";
     const main = document.querySelector("main");
     if (main) {
       ensureSkipLink(main);
-      ensureEnvironmentBanner(main);
     }
     setupSidebar();
+    setupBrand();
     setupSessionControls();
     setupGlobalControls();
+    standardizeExportButtons();
     improveControlNames();
+    protectDestructiveControls();
     improveStructuredContent();
+    modernizeRemoteImages();
+    clarifyPrototypeStatus();
   });
 
-  window.NavAbleAdmin = Object.freeze({ showToast, confirmAction, downloadCsv });
+  window.NavAbleAdmin = Object.freeze({ showToast, confirmAction, downloadCsv, promotePageHeading });
 })();

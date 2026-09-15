@@ -1,6 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
   "use strict";
 
+  NavAbleAdmin.promotePageHeading(
+    "AI Verification Queue",
+    "Review flagged evidence and high-confidence submissions before accessibility records are published."
+  );
+
   const approveButton = document.getElementById("approveBtn");
   const rejectButton = document.getElementById("rejectBtn");
   const batchButton = document.getElementById("batchApproveBtn");
@@ -36,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
     queueItems.forEach((item) => { item.hidden = Boolean(query) && !item.textContent.toLowerCase().includes(query); });
   });
 
-  const exportButton = [...document.querySelectorAll("main button")].find((button) => button.textContent.includes("Export Queue"));
+  const exportButton = document.querySelector('main [data-admin-action="export"]');
   exportButton?.addEventListener("click", () => {
     const rows = [["Verification queue item"], ...queueItems.filter((item) => !item.hidden).map((item) => [item.innerText.replace(/\s+/g, " ").trim()])];
     NavAbleAdmin.downloadCsv("navable-verification-queue.csv", rows);

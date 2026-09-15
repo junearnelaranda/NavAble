@@ -1,10 +1,16 @@
 document.addEventListener("DOMContentLoaded", () => {
   "use strict";
 
+  NavAbleAdmin.promotePageHeading(
+    "Reports & Incident Management",
+    "Triage urgent access hazards, assign follow-up work, and track resolution status."
+  );
+  const breadcrumb = document.querySelector("main header > div:first-child");
+  if (breadcrumb) breadcrumb.hidden = true;
+
   const search = document.getElementById("reportSearchInput");
   const reports = [...document.querySelectorAll("main article")];
   const severitySelect = document.querySelector("main header select");
-  let previousSeverity = "all";
 
   const applyFilters = () => {
     const query = search?.value.trim().toLowerCase() || "";
@@ -27,7 +33,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   severitySelect?.setAttribute("aria-label", "Filter reports by severity");
   severitySelect?.addEventListener("change", () => {
-    previousSeverity = severitySelect.value;
     applyFilters();
   });
 

@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   const table = document.querySelector("main table");
-  const exportButton = [...document.querySelectorAll("main button")].find((button) => button.textContent.includes("Export Report"));
+  const exportButton = document.querySelector('main [data-admin-action="export"]');
   exportButton?.addEventListener("click", () => {
     if (!table) return;
     const rows = [...table.querySelectorAll("tr")].map((row) => [...row.cells].map((cell) => cell.innerText.trim()));

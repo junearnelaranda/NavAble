@@ -1,16 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><title>NavAble Admin</title><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>*,*::before,*::after{box-sizing:border-box;}@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "primary-fixed-dim": "#71dd7f", "secondary-fixed-dim": "#afc8f2", "surface-container-lowest": "#ffffff", "outline": "#6e7a6c", "secondary": "#475f84", "surface": "#f3fcf5", "on-surface-variant": "#3f4a3d", "on-secondary-fixed": "#001c3b", "on-error": "#ffffff", "error": "#ba1a1a", "background": "#f3fcf5", "surface-container-high": "#e1eae4", "secondary-fixed": "#d5e3ff", "on-background": "#151d19", "surface-tint": "#006e28", "primary": "#006e28", "on-tertiary": "#ffffff", "surface-variant": "#dce5de", "surface-bright": "#f3fcf5", "tertiary-fixed-dim": "#b4c5ff", "inverse-primary": "#71dd7f", "tertiary-fixed": "#dbe1ff", "on-secondary-fixed-variant": "#2f486b", "on-primary-fixed-variant": "#00531c", "surface-container-low": "#edf6ef", "on-tertiary-fixed": "#00174b", "surface-container-highest": "#dce5de", "secondary-container": "#bad3fe", "on-secondary-container": "#425b7f", "surface-container": "#e7f0e9", "inverse-on-surface": "#eaf3ec", "on-primary-container": "#004f1b", "on-primary": "#ffffff", "inverse-surface": "#2a322e", "on-tertiary-container": "#003ba1", "on-error-container": "#93000a", "on-secondary": "#ffffff", "on-surface": "#151d19", "outline-variant": "#becaba", "surface-dim": "#d3dcd5", "on-tertiary-fixed-variant": "#003ea8", "primary-fixed": "#8dfa98", "on-primary-fixed": "#002107", "tertiary-container": "#94aeff", "tertiary": "#0053db", "primary-container": "#5bc66b", "error-container": "#ffdad6" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "gutter": "1.5rem", "gutter-mobile": "1rem", "space-sm": "0.5rem", "space-xs": "0.25rem", "space-lg": "1.5rem", "margin": "2rem", "space-xl": "2rem", "space-md": "1rem", "margin-mobile": "1rem" }, "fontFamily": { "body-md": [ "Plus Jakarta Sans" ], "headline-sm": [ "Plus Jakarta Sans" ], "body-lg": [ "Plus Jakarta Sans" ], "headline-lg": [ "Plus Jakarta Sans" ], "headline-xl-mobile": [ "Plus Jakarta Sans" ], "label-lg": [ "Plus Jakarta Sans" ], "label-sm": [ "Plus Jakarta Sans" ], "headline-md": [ "Plus Jakarta Sans" ], "label-md": [ "Plus Jakarta Sans" ], "headline-lg-mobile": [ "Plus Jakarta Sans" ], "body-sm": [ "Plus Jakarta Sans" ], "headline-xl": [ "Plus Jakarta Sans" ] }, "fontSize": { "body-md": [ "1rem", { "lineHeight": "1.5rem", "letterSpacing": "0em", "fontWeight": "400" } ], "headline-sm": [ "1.125rem", { "lineHeight": "1.5rem", "letterSpacing": "0em", "fontWeight": "600" } ], "body-lg": [ "1.125rem", { "lineHeight": "1.75rem", "letterSpacing": "0em", "fontWeight": "400" } ], "headline-lg": [ "1.75rem", { "lineHeight": "2.25rem", "letterSpacing": "-0.02em", "fontWeight": "700" } ], "headline-xl-mobile": [ "1.75rem", { "lineHeight": "2.25rem", "letterSpacing": "-0.01em", "fontWeight": "700" } ], "label-lg": [ "0.875rem", { "lineHeight": "1.25rem", "letterSpacing": "0.01em", "fontWeight": "600" } ], "label-sm": [ "0.6875rem", { "lineHeight": "0.875rem", "letterSpacing": "0.04em", "fontWeight": "700" } ], "headline-md": [ "1.375rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.01em", "fontWeight": "600" } ], "label-md": [ "0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.02em", "fontWeight": "600" } ], "headline-lg-mobile": [ "1.375rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.01em", "fontWeight": "700" } ], "body-sm": [ "0.875rem", { "lineHeight": "1.25rem", "letterSpacing": "0.01em", "fontWeight": "400" } ], "headline-xl": [ "2.25rem", { "lineHeight": "2.75rem", "letterSpacing": "-0.02em", "fontWeight": "700" } ] } } } };</script>
-<link rel="icon" type="image/png" href="logOnly.png">
+<meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><title>Dashboard - NavAble Admin</title><meta name="description" content="Dashboard management interface for the NavAble accessibility administration prototype."><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><script defer src="https://cdn.tailwindcss.com"></script><script defer src="../assets/js/tailwind-config.js"></script>
+<link rel="icon" type="image/png" href="../logOnly.png">
+<link rel="stylesheet" href="../assets/css/admin.css">
+<script src="../assets/js/admin-guard.js"></script>
+<script src="../assets/js/dashboard-loader.js"></script>
 </head>
-<body class="bg-background font-body-md text-body-md text-on-background">
+<body class="bg-background font-body-md text-body-md text-on-background admin-page">
+<div id="dashboardSkeleton" class="dashboard-skeleton" role="status" aria-live="polite" aria-label="Loading dashboard">
+<aside class="dashboard-skeleton-sidebar" aria-hidden="true">
+<div class="dashboard-skeleton-brand"><div class="dashboard-skeleton-block is-square"></div><div class="dashboard-skeleton-block is-medium"></div></div>
+<div class="dashboard-skeleton-nav">
+<div class="dashboard-skeleton-block is-wide"></div><div class="dashboard-skeleton-block is-wide"></div>
+<div class="dashboard-skeleton-block is-wide"></div><div class="dashboard-skeleton-block is-wide"></div>
+<div class="dashboard-skeleton-block is-wide"></div><div class="dashboard-skeleton-block is-wide"></div>
+<div class="dashboard-skeleton-block is-wide"></div><div class="dashboard-skeleton-block is-wide"></div>
+</div>
+</aside>
+<header class="dashboard-skeleton-header" aria-hidden="true">
+<div class="dashboard-skeleton-block is-medium"></div>
+<div class="dashboard-skeleton-brand"><div class="dashboard-skeleton-block is-square"></div><div class="dashboard-skeleton-block is-square"></div></div>
+</header>
+<div class="dashboard-skeleton-main" aria-hidden="true">
+<div class="dashboard-skeleton-title"><div class="dashboard-skeleton-block is-medium"></div><div class="dashboard-skeleton-block is-wide"></div></div>
+<section class="dashboard-skeleton-stats" aria-label="Loading summary statistics">
+<div class="dashboard-skeleton-card"><div class="dashboard-skeleton-block is-square"></div><div><div class="dashboard-skeleton-block is-medium"></div><div class="dashboard-skeleton-block is-wide"></div></div></div>
+<div class="dashboard-skeleton-card"><div class="dashboard-skeleton-block is-square"></div><div><div class="dashboard-skeleton-block is-medium"></div><div class="dashboard-skeleton-block is-wide"></div></div></div>
+<div class="dashboard-skeleton-card"><div class="dashboard-skeleton-block is-square"></div><div><div class="dashboard-skeleton-block is-medium"></div><div class="dashboard-skeleton-block is-wide"></div></div></div>
+<div class="dashboard-skeleton-card"><div class="dashboard-skeleton-block is-square"></div><div><div class="dashboard-skeleton-block is-medium"></div><div class="dashboard-skeleton-block is-wide"></div></div></div>
+</section>
+<section class="dashboard-skeleton-content" aria-label="Loading charts and priority queue">
+<div class="dashboard-skeleton-panel"><div class="dashboard-skeleton-block is-medium"></div><div class="dashboard-skeleton-block is-chart"></div></div>
+<div class="dashboard-skeleton-panel"><div class="dashboard-skeleton-block is-medium"></div><div class="dashboard-skeleton-block is-wide"></div><div class="dashboard-skeleton-block is-wide"></div><div class="dashboard-skeleton-block is-medium"></div></div>
+</section>
+<section class="dashboard-skeleton-table" aria-label="Loading recent activity">
+<div class="dashboard-skeleton-block is-short"></div>
+<div class="dashboard-skeleton-row"><div class="dashboard-skeleton-block"></div><div class="dashboard-skeleton-block"></div><div class="dashboard-skeleton-block"></div><div class="dashboard-skeleton-block"></div></div>
+<div class="dashboard-skeleton-row"><div class="dashboard-skeleton-block"></div><div class="dashboard-skeleton-block"></div><div class="dashboard-skeleton-block"></div><div class="dashboard-skeleton-block"></div></div>
+<div class="dashboard-skeleton-row"><div class="dashboard-skeleton-block"></div><div class="dashboard-skeleton-block"></div><div class="dashboard-skeleton-block"></div><div class="dashboard-skeleton-block"></div></div>
+</section>
+</div>
+<div class="dashboard-load-error" role="alert">
+<div>
+<h1>Dashboard unavailable</h1>
+<p id="dashboardLoadErrorMessage">The dashboard could not be prepared. Check this browser session and try again.</p>
+<div class="dashboard-load-error-actions"><button id="dashboardLoadRetry" type="button">Retry</button><a href="../staff-login.html">Return to sign in</a></div>
+</div>
+</div>
+</div>
+<a class="admin-skip-link" href="#main-content">Skip to main content</a>
 <aside id="staffSidebar" class="fixed left-0 top-0 z-50 flex h-full w-72 -translate-x-full flex-col justify-between overflow-y-auto bg-surface-container-low shadow-[6px_0_16px_rgba(15,43,77,0.08)] transition-transform duration-300 lg:translate-x-0" aria-label="Staff navigation">
 <div class="p-space-lg">
 <div class="mb-space-xl flex items-center justify-between gap-space-sm">
 <a class="flex min-w-0 items-center gap-space-sm" href="dashboard.html" aria-label="NavAble staff dashboard">
-<div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-surface shadow-[4px_4px_10px_rgba(15,43,77,0.08),-4px_-4px_10px_rgba(255,255,255,0.9)]"><img class="h-9 w-9 object-cover mix-blend-multiply" src="logOnly.png" alt=""></div>
+<div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-surface shadow-[4px_4px_10px_rgba(15,43,77,0.08),-4px_-4px_10px_rgba(255,255,255,0.9)]"><img class="h-9 w-9 object-cover mix-blend-multiply" src="../logOnly.png" alt=""></div>
 <div class="min-w-0"><div class="font-headline-sm text-headline-sm leading-tight text-on-surface">Nav<span class="text-primary">Able</span></div><div class="truncate font-label-sm text-label-sm text-on-surface-variant">Accessibility &amp; Verification</div></div>
 </a>
 <button id="sidebarClose" class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface lg:hidden" type="button" aria-label="Close navigation"><span class="material-symbols-outlined">close</span></button>
@@ -29,20 +74,15 @@
 </nav>
 </div>
 <div class="p-space-lg">
-<div class="mb-space-md rounded-xl bg-surface p-space-md shadow-[4px_4px_12px_rgba(15,43,77,0.06),-4px_-4px_12px_rgba(255,255,255,0.9)]"><div class="flex items-center gap-space-sm"><div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary"><span class="material-symbols-outlined text-[18px] text-on-primary">person</span></div><div class="overflow-hidden"><div class="truncate font-label-lg text-label-lg text-on-surface">Sarah Jenkins</div><div class="truncate font-label-sm text-label-sm text-on-surface-variant">Senior Moderator</div></div></div></div>
+<div class="mb-space-md rounded-xl bg-surface p-space-md shadow-[4px_4px_12px_rgba(15,43,77,0.06),-4px_-4px_12px_rgba(255,255,255,0.9)]"><div class="flex items-center gap-space-sm"><div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary"><span class="material-symbols-outlined text-[18px] text-on-primary">person</span></div><div class="overflow-hidden"><div class="truncate font-label-lg text-label-lg text-on-surface">June Arnel</div><div class="truncate font-label-sm text-label-sm text-on-surface-variant">Super Admin</div></div></div></div>
 <button id="staffLogout" class="flex w-full items-center justify-center gap-space-xs rounded-xl bg-surface-container py-space-sm font-label-lg text-label-lg text-on-surface-variant shadow-[inset_2px_2px_5px_rgba(15,43,77,0.08),inset_-2px_-2px_5px_rgba(255,255,255,0.8)] transition-all hover:text-on-surface" type="button"><span class="material-symbols-outlined text-[18px]">logout</span><span>Log Out</span></button>
 </div>
 </aside>
 <div id="sidebarBackdrop" class="fixed inset-0 z-40 hidden bg-inverse-surface/40 backdrop-blur-sm lg:hidden" aria-hidden="true"></div>
-<div class="min-h-screen overflow-x-hidden bg-background lg:pl-72"><header class="fixed left-0 right-0 top-0 h-20 lg:left-72 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(15,43,77,0.04)] z-30 px-space-md lg:px-space-xl flex items-center justify-between gap-space-sm lg:gap-space-lg"><button id="sidebarToggle" class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-surface text-on-surface-variant shadow-[4px_4px_10px_rgba(15,43,77,0.07),-4px_-4px_10px_rgba(255,255,255,0.95)] lg:hidden" type="button" aria-controls="staffSidebar" aria-expanded="false" aria-label="Open navigation"><span class="material-symbols-outlined">menu</span></button><div class="hidden sm:flex items-center gap-space-sm text-on-surface-variant font-label-md text-label-md"><span class="material-symbols-outlined text-[18px]">home</span><span class="">/</span><span class="hover:text-on-surface cursor-pointer">Admin Cockpit</span><span class="">/</span><span class="text-on-surface font-label-lg text-label-lg font-semibold">Dashboard</span></div><div class="hidden flex-1 md:block md:max-w-md"><div class="relative flex items-center"><span class="material-symbols-outlined absolute left-space-md text-on-surface-variant text-[20px]">search</span><input class="w-full bg-surface-container-high/60 rounded-xl pl-11 pr-16 py-2.5 text-on-surface font-body-sm text-body-sm shadow-[inset_2px_2px_4px_rgba(15,43,77,0.07),inset_-2px_-2px_4px_rgba(255,255,255,0.85)] placeholder:text-on-surface-variant focus:outline-none focus:ring-2 focus:ring-secondary transition-all" placeholder="Search ramps, IDs, locations..." type="text"><kbd class="absolute right-space-md font-label-sm text-label-sm bg-surface-container px-space-xs py-0.5 rounded shadow-sm text-on-surface-variant">Ctrl K</kbd></div></div><div class="flex items-center gap-space-xs sm:gap-space-md"><div class="hidden xl:flex items-center gap-space-xs px-space-md py-1.5 rounded-full bg-surface shadow-[inset_2px_2px_4px_rgba(15,43,77,0.05),inset_-2px_-2px_4px_rgba(255,255,255,0.8)]"><span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span><span class="font-label-sm text-label-sm text-on-surface-variant">Live: Firebase Online</span></div><button class="w-10 h-10 rounded-xl bg-surface flex items-center justify-center text-on-surface-variant hover:text-on-surface shadow-[4px_4px_10px_rgba(15,43,77,0.07),-4px_-4px_10px_rgba(255,255,255,0.95)] hover:shadow-[2px_2px_5px_rgba(15,43,77,0.07),-2px_-2px_5px_rgba(255,255,255,0.95)] transition-all relative"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-error"></span></button><button class="hidden w-10 h-10 rounded-xl bg-surface sm:flex items-center justify-center text-on-surface-variant hover:text-on-surface shadow-[4px_4px_10px_rgba(15,43,77,0.07),-4px_-4px_10px_rgba(255,255,255,0.95)] transition-all" title="High Contrast &amp; Accessibility Mode"><span class="material-symbols-outlined text-[20px]">contrast</span></button><div class="hidden items-center gap-space-sm pl-space-sm sm:flex"><div class="relative"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-primary ring-2 ring-surface"></span></div><div class="hidden md:block text-left"><div class="font-label-lg text-label-lg text-on-surface leading-none">Sarah Jenkins</div><div class="font-label-sm text-label-sm text-on-surface-variant mt-0.5">Lead Verifier</div></div></div></div></header><main class="w-full min-w-0 px-space-md pt-20 lg:px-space-xl pb-space-xl bg-background flex-1"><div class="flex min-w-0 w-full flex-col gap-space-xl">
+<div class="min-h-screen overflow-x-hidden bg-background lg:pl-72"><header class="fixed left-0 right-0 top-0 h-20 lg:left-72 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(15,43,77,0.04)] z-30 px-space-md lg:px-space-xl flex items-center justify-between gap-space-sm lg:gap-space-lg"><button id="sidebarToggle" class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-surface text-on-surface-variant shadow-[4px_4px_10px_rgba(15,43,77,0.07),-4px_-4px_10px_rgba(255,255,255,0.95)] lg:hidden" type="button" aria-controls="staffSidebar" aria-expanded="false" aria-label="Open navigation"><span class="material-symbols-outlined">menu</span></button><div class="hidden sm:flex items-center gap-space-sm text-on-surface-variant font-label-md text-label-md"><span class="material-symbols-outlined text-[18px]">home</span><span class="">/</span><span class="hover:text-on-surface cursor-pointer">Admin Cockpit</span><span class="">/</span><span class="text-on-surface font-label-lg text-label-lg font-semibold">Dashboard</span></div><div class="hidden flex-1 md:block md:max-w-md"><div class="relative flex items-center"><span class="material-symbols-outlined absolute left-space-md text-on-surface-variant text-[20px]">search</span><input class="w-full bg-surface-container-high/60 rounded-xl pl-11 pr-16 py-2.5 text-on-surface font-body-sm text-body-sm shadow-[inset_2px_2px_4px_rgba(15,43,77,0.07),inset_-2px_-2px_4px_rgba(255,255,255,0.85)] placeholder:text-on-surface-variant focus:outline-none focus:ring-2 focus:ring-secondary transition-all" placeholder="Search ramps, IDs, locations..." type="text"><kbd class="absolute right-space-md font-label-sm text-label-sm bg-surface-container px-space-xs py-0.5 rounded shadow-sm text-on-surface-variant">Ctrl K</kbd></div></div><div class="flex items-center gap-space-xs sm:gap-space-md"><div class="hidden xl:flex items-center gap-space-xs px-space-md py-1.5 rounded-full bg-surface shadow-[inset_2px_2px_4px_rgba(15,43,77,0.05),inset_-2px_-2px_4px_rgba(255,255,255,0.8)]"><span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span><span class="font-label-sm text-label-sm text-on-surface-variant">Live: Firebase Online</span></div><button class="w-10 h-10 rounded-xl bg-surface flex items-center justify-center text-on-surface-variant hover:text-on-surface shadow-[4px_4px_10px_rgba(15,43,77,0.07),-4px_-4px_10px_rgba(255,255,255,0.95)] hover:shadow-[2px_2px_5px_rgba(15,43,77,0.07),-2px_-2px_5px_rgba(255,255,255,0.95)] transition-all relative"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-error"></span></button><button class="hidden w-10 h-10 rounded-xl bg-surface sm:flex items-center justify-center text-on-surface-variant hover:text-on-surface shadow-[4px_4px_10px_rgba(15,43,77,0.07),-4px_-4px_10px_rgba(255,255,255,0.95)] transition-all" title="High Contrast &amp; Accessibility Mode"><span class="material-symbols-outlined text-[20px]">contrast</span></button><div class="hidden items-center gap-space-sm pl-space-sm sm:flex"><div class="relative"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-primary ring-2 ring-surface"></span></div><div class="hidden md:block text-left"><div class="font-label-lg text-label-lg text-on-surface leading-none">June Arnel</div><div class="font-label-sm text-label-sm text-on-surface-variant mt-0.5">Super Admin</div></div></div></div></header><main id="main-content" class="w-full min-w-0 px-space-md pt-20 lg:px-space-xl pb-space-xl bg-background flex-1"><div class="flex min-w-0 w-full flex-col gap-space-xl">
 <!-- Top Welcome & Operational Status Strip -->
 <div class="flex min-w-0 flex-col justify-between gap-space-md md:flex-row md:items-center">
 <div>
-<div class="flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider">
-<span class="">System Cockpit</span>
-<span class="">•</span>
-<span class="text-primary font-bold">Live Synced</span>
-</div>
 <h1 class="font-headline-lg text-headline-lg text-on-surface font-bold mt-1">Platform Verification &amp; Metric Overview</h1>
 <p class="font-body-sm text-body-sm text-on-surface-variant">Real-time accessibility audits across transit nodes, medical infrastructure, and municipal venues.</p>
 </div>
@@ -51,9 +91,9 @@
 <span class="material-symbols-outlined text-primary text-[18px]">calendar_today</span>
 <span class="font-label-lg text-label-lg text-on-surface">Last 30 Days: Oct 1 - Oct 31</span>
 </div>
-<button class="flex items-center gap-space-xs px-space-md py-2.5 rounded-xl bg-surface text-on-surface font-label-lg text-label-lg shadow-[4px_4px_10px_rgba(15,43,77,0.07),-4px_-4px_10px_rgba(255,255,255,0.95)] hover:shadow-[2px_2px_5px_rgba(15,43,77,0.08),-2px_-2px_5px_rgba(255,255,255,0.95)] transition-all">
+<button class="admin-export-button flex items-center gap-space-xs px-space-md py-2.5 rounded-xl bg-surface text-on-surface font-label-lg text-label-lg shadow-[4px_4px_10px_rgba(15,43,77,0.07),-4px_-4px_10px_rgba(255,255,255,0.95)] hover:shadow-[2px_2px_5px_rgba(15,43,77,0.08),-2px_-2px_5px_rgba(255,255,255,0.95)] transition-all" data-admin-action="export" type="button" aria-label="Export dashboard data">
 <span class="material-symbols-outlined text-[18px]">download</span>
-<span class="">Export CSV</span>
+<span>Export</span>
 </button>
 </div>
 </div>
@@ -293,7 +333,7 @@
 <!-- Urgent Item 1 -->
 <div class="p-space-md rounded-xl bg-surface-container-low shadow-[inset_2px_2px_5px_rgba(15,43,77,0.04),inset_-2px_-2px_5px_rgba(255,255,255,0.8)] flex flex-col gap-space-sm">
 <div class="flex gap-space-sm">
-<img class="w-20 h-20 rounded-xl object-cover shadow-[2px_2px_6px_rgba(15,43,77,0.1)] flex-shrink-0" data-alt="Clear photographic perspective of an outdoor public entrance ramp featuring stainless steel continuous dual-height handrails, non-slip concrete grooved surface, and tactile warning tiles at the threshold." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6Htco-oIYaAZv37xLNh1vCGtd3o_UJ_ZXyRebNkVnU0AgwiR1_vnvcxXv3XeAOFuEoFlPmRLK58dBXWnwLLrDxodM0GIltBlJXlNsg8XxvPDQU8i03OkeeRxRi8-va97PMjJNOHsaO-seW0w_KxgGEeLypYG9gw-2KggzMaTmwOE3wX5B1m35-KjNZ9BfGUhDRtJAF9-KCS_H_0vq9q_s14PsdUug8BU6BLTBO5CyVHx1jfI4IN3a8g">
+<img class="w-20 h-20 rounded-xl object-cover shadow-[2px_2px_6px_rgba(15,43,77,0.1)] flex-shrink-0" data-alt="Clear photographic perspective of an outdoor public entrance ramp featuring stainless steel continuous dual-height handrails, non-slip concrete grooved surface, and tactile warning tiles at the threshold." src="../logOnly.png" data-admin-visual="true">
 <div class="flex-1 min-w-0">
 <div class="flex items-center justify-between">
 <span class="font-label-sm text-label-sm text-primary font-bold">96% Confident</span>
@@ -321,7 +361,7 @@
 <!-- Urgent Item 2 -->
 <div class="p-space-md rounded-xl bg-surface-container-low shadow-[inset_2px_2px_5px_rgba(15,43,77,0.04),inset_-2px_-2px_5px_rgba(255,255,255,0.8)] flex flex-col gap-space-sm">
 <div class="flex gap-space-sm">
-<img class="w-20 h-20 rounded-xl object-cover shadow-[2px_2px_6px_rgba(15,43,77,0.1)] flex-shrink-0" data-alt="Modern indoor public elevator door entryway showing illuminated directional floor indicators, textured floor tactile indicators, and clearly positioned braille floor buttons with high color contrast." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVs5AGrUTMXOp-jwoFzMfcL98-W2QK860hkbzDMmmBRTYqQQuvItfYZnB3Rw_g9UiVJHdHRK62u1x0LjHZImkJdbyHpr9keQf0koWkWbTkT55yaevT0ERlv15nuSxMWVb7hUnvRTb7uImg-tbbPPYhJJh9lDmsmn0_s0bGEhraP_MTlJUUBbbyldv0uU1EkYkDwiuobz9rTpJPN_eEe3zdzN0B_Z4W7N7CIjjLtBZL2eklcO5pv6BX4g">
+<img class="w-20 h-20 rounded-xl object-cover shadow-[2px_2px_6px_rgba(15,43,77,0.1)] flex-shrink-0" data-alt="Modern indoor public elevator door entryway showing illuminated directional floor indicators, textured floor tactile indicators, and clearly positioned braille floor buttons with high color contrast." src="../logOnly.png" data-admin-visual="true">
 <div class="flex-1 min-w-0">
 <div class="flex items-center justify-between">
 <span class="font-label-sm text-label-sm text-tertiary font-bold">88% Confident</span>
@@ -673,61 +713,8 @@
 
 
 
-<script>
-  const staffSidebar = document.getElementById('staffSidebar');
-  const sidebarToggle = document.getElementById('sidebarToggle');
-  const sidebarClose = document.getElementById('sidebarClose');
-  const sidebarBackdrop = document.getElementById('sidebarBackdrop');
-  const desktopSidebar = window.matchMedia('(min-width: 1024px)');
-  let sidebarWasOpen = false;
 
-  function setSidebar(open, returnFocus = false) {
-    const mobileOpen = open && !desktopSidebar.matches;
-    staffSidebar.classList.toggle('-translate-x-full', !open);
-    sidebarBackdrop.classList.toggle('hidden', !mobileOpen);
-    sidebarToggle.setAttribute('aria-expanded', String(mobileOpen));
-    sidebarToggle.setAttribute('aria-label', mobileOpen ? 'Close navigation' : 'Open navigation');
-    document.body.classList.toggle('overflow-hidden', mobileOpen);
-    staffSidebar.inert = !open;
-
-    if (mobileOpen) {
-      sidebarWasOpen = true;
-      window.requestAnimationFrame(() => sidebarClose.focus());
-    } else if (returnFocus && sidebarWasOpen) {
-      sidebarToggle.focus();
-      sidebarWasOpen = false;
-    }
-  }
-
-  function syncSidebarLayout() {
-    if (desktopSidebar.matches) {
-      setSidebar(true);
-      staffSidebar.inert = false;
-    } else {
-      setSidebar(false);
-    }
-  }
-
-  sidebarToggle.addEventListener('click', () => setSidebar(sidebarToggle.getAttribute('aria-expanded') !== 'true'));
-  sidebarClose.addEventListener('click', () => setSidebar(false, true));
-  sidebarBackdrop.addEventListener('click', () => setSidebar(false, true));
-  document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && sidebarToggle.getAttribute('aria-expanded') === 'true') setSidebar(false, true);
-  });
-  desktopSidebar.addEventListener('change', syncSidebarLayout);
-  syncSidebarLayout();
-
-  document.querySelectorAll('[data-unavailable="true"]').forEach((link) => {
-    link.addEventListener('click', (event) => {
-      event.preventDefault();
-      alert(link.querySelector('span').textContent.trim() + ' is not available in this preview yet.');
-    });
-  });
-
-  document.getElementById('staffLogout').addEventListener('click', () => {
-    sessionStorage.removeItem('navableStaffPreview');
-    window.location.href = 'staff-login.html';
-  });
-</script>
+<script src="../assets/js/admin.js"></script>
+<script src="../assets/js/pages/dashboard.js"></script>
 </body>
 </html>

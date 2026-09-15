@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const selectAllIcon = document.getElementById("selectAllIcon");
   const checkboxes = [...document.querySelectorAll(".user-chk")];
   const cards = checkboxes.map((checkbox) => checkbox.closest("div.bg-surface.rounded-2xl")).filter(Boolean);
+  cards.forEach((card) => card.classList.add("admin-user-card"));
 
   checkboxes.forEach((checkbox, index) => {
     const name = cards[index]?.querySelector("h2")?.textContent.trim() || `user ${index + 1}`;
@@ -50,15 +51,18 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!drawer) return;
     previousFocus = document.activeElement;
     drawer.classList.remove("hidden");
+    drawer.setAttribute("aria-hidden", "false");
     requestAnimationFrame(() => closeButton?.focus());
   };
   const closeDrawer = () => {
     if (!drawer) return;
     drawer.classList.add("hidden");
+    drawer.setAttribute("aria-hidden", "true");
     previousFocus?.focus();
   };
 
   trigger?.addEventListener("click", openDrawer);
+  drawer?.setAttribute("aria-hidden", "true");
   closeButton?.addEventListener("click", closeDrawer);
   cancelButton?.addEventListener("click", closeDrawer);
   drawer?.addEventListener("click", (event) => { if (event.target === drawer) closeDrawer(); });
@@ -73,7 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.querySelectorAll("main button").forEach((button) => {
     const label = button.textContent.replace(/\s+/g, " ").trim();
-    if (label === "Export CSV") {
+    if (button.dataset.adminAction === "export") {
       button.addEventListener("click", () => {
         const rows = [["Name", "Record details"], ...cards.filter((card) => !card.hidden).map((card) => [card.querySelector("h2")?.textContent.trim() || "", card.innerText.replace(/\s+/g, " ").trim()])];
         NavAbleAdmin.downloadCsv("navable-users.csv", rows);

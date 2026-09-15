@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const drawer = document.getElementById("inspectorDrawer");
   const drawerCloseButtons = drawer ? [...drawer.querySelectorAll('[data-close-drawer], button[onclick*="closeQuickDrawer"]')] : [];
   let previousFocus = null;
+  drawer?.setAttribute("aria-hidden", "true");
 
   const openDrawer = (button) => {
     if (!drawer) return;
@@ -59,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("addLocationBtn")?.addEventListener("click", () => NavAbleAdmin.showToast("Location creator is not connected to a backend in this prototype."));
 
   document.querySelectorAll("main button").forEach((button) => {
-    if (button.textContent.replace(/\s+/g, " ").trim() !== "Export CSV") return;
+    if (button.dataset.adminAction !== "export") return;
     button.addEventListener("click", () => {
       const rows = [["Location", "Details"], ...cards.filter((card) => !card.hidden).map((card) => [card.querySelector("h2")?.textContent.trim() || "", card.innerText.replace(/\s+/g, " ").trim()])];
       NavAbleAdmin.downloadCsv("navable-locations.csv", rows);

@@ -11,350 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --green: #17884a;
-      --green-dark: #0b6937;
-      --green-soft: #d9f5e2;
-      --navy: #061b38;
-      --muted: #657267;
-      --surface: #f4faf5;
-      --white: #ffffff;
-      --error: #a93434;
-      --shadow: 14px 14px 34px rgba(37, 75, 50, 0.11), -14px -14px 34px rgba(255,255,255,0.96);
-      --soft-shadow: 7px 7px 18px rgba(37,75,50,0.09), -7px -7px 18px rgba(255,255,255,0.95);
-      --inset: inset 4px 4px 9px rgba(37,75,50,0.09), inset -4px -4px 9px rgba(255,255,255,0.95);
-    }
-
-    * { box-sizing: border-box; }
-
-    body {
-      min-width: 320px;
-      min-height: 100vh;
-      margin: 0;
-      background:
-        radial-gradient(circle at 12% 15%, rgba(217,245,226,0.9), transparent 28%),
-        radial-gradient(circle at 88% 85%, rgba(217,245,226,0.65), transparent 27%),
-        var(--surface);
-      color: var(--navy);
-      font-family: "Manrope", system-ui, sans-serif;
-      line-height: 1.5;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    a { color: inherit; text-decoration: none; }
-    .navable-word { white-space: nowrap; }
-    .navable-able { color: var(--green); }
-    button, input { font: inherit; }
-
-    :focus-visible {
-      outline: 3px solid rgba(23,136,74,0.32);
-      outline-offset: 3px;
-    }
-
-    .page {
-      width: min(1080px, calc(100% - 32px));
-      min-height: 100vh;
-      display: grid;
-      grid-template-rows: auto 1fr auto;
-      margin-inline: auto;
-    }
-
-    header {
-      min-height: 86px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-    }
-
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 11px;
-      font-size: 1.05rem;
-      font-weight: 800;
-      letter-spacing: -0.03em;
-    }
-
-    .brand-mark {
-      width: 42px;
-      height: 42px;
-      display: grid;
-      place-items: center;
-      border-radius: 14px;
-      background: var(--surface);
-      color: var(--green);
-      box-shadow: var(--soft-shadow);
-    }
-
-    .brand-mark img { width: 35px; height: 35px; object-fit: cover; mix-blend-mode: multiply; }
-
-    .back-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--muted);
-      font-size: 0.78rem;
-      font-weight: 750;
-    }
-
-    .back-link:hover { color: var(--green-dark); }
-
-    main {
-      display: grid;
-      place-items: center;
-      padding: 44px 0 70px;
-    }
-
-    .login-layout {
-      width: min(920px, 100%);
-      display: grid;
-      grid-template-columns: minmax(0, 0.9fr) minmax(390px, 1.1fr);
-      align-items: center;
-      gap: 80px;
-    }
-
-    h1 {
-      margin: 0 0 18px;
-      transform: translateX(-10px);
-      font-size: clamp(2.8rem, 5vw, 3.6rem);
-      line-height: 1.02;
-      letter-spacing: -0.06em;
-    }
-
-    .title-line {
-      display: block;
-      white-space: nowrap;
-    }
-
-    .title-line:first-child {
-      transform: translateX(-10px);
-    }
-
-    .intro p {
-      max-width: 430px;
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.94rem;
-    }
-
-    .security-note {
-      display: grid;
-      grid-template-columns: 38px 1fr;
-      gap: 13px;
-      margin-top: 28px;
-      padding: 17px;
-      border-radius: 17px;
-      background: rgba(244,250,245,0.72);
-      box-shadow: var(--soft-shadow);
-    }
-
-    .security-icon {
-      width: 38px;
-      height: 38px;
-      display: grid;
-      place-items: center;
-      border-radius: 12px;
-      background: var(--green-soft);
-      color: var(--green-dark);
-      font-weight: 900;
-    }
-
-    .security-note strong {
-      display: block;
-      margin-bottom: 2px;
-      font-size: 0.78rem;
-    }
-
-    .security-note span {
-      color: var(--muted);
-      font-size: 0.67rem;
-    }
-
-    .login-card {
-      padding: 38px;
-      border: 1px solid rgba(255,255,255,0.72);
-      border-radius: 28px;
-      background: rgba(244,250,245,0.88);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(16px);
-    }
-
-    .card-heading { margin-bottom: 28px; }
-
-    .card-heading span {
-      color: var(--green);
-      font-size: 0.68rem;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .card-heading h2 {
-      margin: 5px 0 5px;
-      font-size: 1.55rem;
-      letter-spacing: -0.04em;
-    }
-
-    .card-heading p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.76rem;
-    }
-
-    .field { margin-bottom: 18px; }
-
-    label {
-      display: block;
-      margin-bottom: 7px;
-      color: #34463a;
-      font-size: 0.73rem;
-      font-weight: 800;
-    }
-
-    .input-wrap { position: relative; }
-
-    input[type="email"],
-    input[type="password"],
-    input[type="text"] {
-      width: 100%;
-      min-height: 52px;
-      padding: 0 48px 0 16px;
-      border: 1px solid transparent;
-      border-radius: 14px;
-      background: var(--surface);
-      color: var(--navy);
-      box-shadow: var(--inset);
-      font-size: 0.82rem;
-    }
-
-    input::placeholder { color: #879188; }
-
-    input:focus {
-      border-color: rgba(23,136,74,0.25);
-      outline: none;
-    }
-
-    .field-icon,
-    .password-toggle {
-      position: absolute;
-      top: 50%;
-      right: 15px;
-      transform: translateY(-50%);
-      color: var(--muted);
-    }
-
-    .field-icon { font-size: 0.85rem; }
-
-    .password-toggle {
-      width: 30px;
-      height: 30px;
-      padding: 0;
-      border: 0;
-      background: transparent;
-      cursor: pointer;
-      font-size: 0.68rem;
-      font-weight: 800;
-    }
-
-    .form-options {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      margin: 4px 0 24px;
-      font-size: 0.68rem;
-    }
-
-    .remember {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin: 0;
-      color: var(--muted);
-      font-weight: 650;
-    }
-
-    input[type="checkbox"] { accent-color: var(--green); }
-
-    .help-link {
-      color: var(--green-dark);
-      font-weight: 800;
-    }
-
-    .submit-button {
-      width: 100%;
-      min-height: 54px;
-      border: 0;
-      border-radius: 15px;
-      background: var(--navy);
-      color: white;
-      box-shadow: 7px 8px 18px rgba(6,27,56,0.20), -4px -4px 12px white;
-      cursor: pointer;
-      font-size: 0.82rem;
-      font-weight: 800;
-      transition: transform 160ms ease, box-shadow 160ms ease;
-    }
-
-    .submit-button:hover {
-      transform: translateY(-2px);
-      box-shadow: 4px 5px 12px rgba(6,27,56,0.23), -3px -3px 9px white;
-    }
-
-    .status {
-      display: none;
-      margin: 18px 0 0;
-      padding: 12px 14px;
-      border-radius: 12px;
-      background: #fae8e8;
-      color: var(--error);
-      font-size: 0.7rem;
-      font-weight: 700;
-    }
-
-    .status.show { display: block; }
-
-    .status.success {
-      background: var(--green-soft);
-      color: var(--green-dark);
-    }
-
-    footer {
-      min-height: 62px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-      border-top: 1px solid rgba(14,83,47,0.10);
-      color: var(--muted);
-      font-size: 0.65rem;
-    }
-
-    @media (max-width: 780px) {
-      .login-layout {
-        grid-template-columns: 1fr;
-        gap: 42px;
-      }
-
-      .intro { text-align: center; }
-      .intro p { margin-inline: auto; }
-      .security-note { text-align: left; }
-    }
-
-    @media (max-width: 480px) {
-      header { min-height: 72px; }
-      .back-link span { display: none; }
-      main { padding-top: 28px; }
-      .login-card { padding: 26px 20px; }
-      .form-options { align-items: flex-start; flex-direction: column; }
-      footer { align-items: flex-start; flex-direction: column; padding: 20px 0; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      * { transition-duration: 0.01ms !important; }
-    }
-  </style>
+  <link rel="stylesheet" href="assets/css/login.css">
 </head>
 <body>
   <div class="page">
@@ -370,21 +27,21 @@
       <div class="login-layout">
         <section class="intro" aria-labelledby="login-title">
           <h1 id="login-title"><span class="title-line">Welcome back,</span><span class="title-line">NavAble staff</span></h1>
-          <p>Sign in with an authorized administrator or moderator account to manage accessibility data, review submissions, and monitor the platform.</p>
+          <p>Open the local administration prototype to review accessibility data, submissions, reports, and dashboard workflows.</p>
           <div class="security-note">
             <div class="security-icon" aria-hidden="true">✓</div>
             <div>
-              <strong>Development preview access</strong>
-              <span>A temporary local account is enabled for reviewing the admin interface. Replace it with Firebase Authentication before deployment.</span>
+              <strong>Local preview—not production authentication</strong>
+              <span>No Firebase Authentication configuration is present in this workspace. This form opens a tab-scoped preview and does not verify identity.</span>
             </div>
           </div>
         </section>
 
         <section class="login-card" aria-labelledby="form-title">
           <div class="card-heading">
-            <span>Authorized personnel only</span>
-            <h2 id="form-title">Staff sign in</h2>
-            <p>Use the credentials assigned by your NavAble administrator.</p>
+            <span>Interface review access</span>
+            <h2 id="form-title">Open staff preview</h2>
+            <p>Enter test values to inspect the local interface. Nothing is transmitted.</p>
           </div>
 
           <form id="staffLoginForm" novalidate>
@@ -405,11 +62,11 @@
             </div>
 
             <div class="form-options">
-              <label class="remember"><input type="checkbox" name="remember"> Keep me signed in</label>
+              <label class="remember"><input type="checkbox" name="remember"> Keep this preview active in this tab</label>
               <a class="help-link" href="index.html#contact">Need access help?</a>
             </div>
 
-            <button class="submit-button" type="submit">Continue securely&nbsp; →</button>
+            <button class="submit-button" type="submit">Open dashboard preview&nbsp; →</button>
             <p class="status" id="loginStatus" role="alert" tabindex="-1"></p>
           </form>
         </section>
@@ -418,83 +75,11 @@
 
     <footer>
       <span>© <span id="year"></span> NavAble</span>
-      <span>Authentication does not rely on this page being hidden.</span>
+      <span>Connect Firebase Authentication and server-enforced roles before deployment.</span>
     </footer>
   </div>
 
-  <script>
-    function applyNavAbleWordmark(root = document.body) {
-      const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
-        acceptNode(node) {
-          const parent = node.parentElement;
-          if (!parent || !node.nodeValue.includes("NavAble") || parent.closest("script, style, textarea, option")) return NodeFilter.FILTER_REJECT;
-          return NodeFilter.FILTER_ACCEPT;
-        }
-      });
-      const matches = [];
-      while (walker.nextNode()) matches.push(walker.currentNode);
-      matches.forEach((node) => {
-        const container = document.createElement("span");
-        node.nodeValue.split(/(NavAble)/g).forEach((part) => {
-          if (part !== "NavAble") { container.append(part); return; }
-          const word = document.createElement("span");
-          word.className = "navable-word";
-          word.append("Nav");
-          const accent = document.createElement("span");
-          accent.className = "navable-able";
-          accent.textContent = "Able";
-          word.append(accent);
-          container.append(word);
-        });
-        node.replaceWith(container);
-      });
-    }
 
-    applyNavAbleWordmark();
-
-    const password = document.getElementById("staffPassword");
-    const passwordToggle = document.getElementById("passwordToggle");
-    const loginForm = document.getElementById("staffLoginForm");
-    const loginStatus = document.getElementById("loginStatus");
-
-    passwordToggle.addEventListener("click", () => {
-      const isHidden = password.type === "password";
-      password.type = isHidden ? "text" : "password";
-      passwordToggle.textContent = isHidden ? "Hide" : "Show";
-      passwordToggle.setAttribute("aria-label", isHidden ? "Hide password" : "Show password");
-    });
-
-    loginForm.addEventListener("submit", (event) => {
-      event.preventDefault();
-
-      if (!loginForm.checkValidity()) {
-        loginForm.reportValidity();
-        return;
-      }
-
-      // DEVELOPMENT PREVIEW ONLY. Never ship plaintext credentials in client code.
-      const demoEmail = "superadmin@nav.org";
-      const demoPassword = "superadmin";
-      const submittedEmail = document.getElementById("staffEmail").value.trim().toLowerCase();
-
-      if (submittedEmail === demoEmail && password.value === demoPassword) {
-        sessionStorage.setItem("navableStaffPreview", "superadmin");
-        loginStatus.textContent = "Access granted. Opening the admin dashboard…";
-        loginStatus.classList.add("show", "success");
-        document.querySelector(".submit-button").textContent = "Opening dashboard…";
-        window.setTimeout(() => {
-          window.location.href = "dashboard.html";
-        }, 450);
-        return;
-      }
-
-      loginStatus.textContent = "The staff email or password is incorrect.";
-      loginStatus.classList.remove("success");
-      loginStatus.classList.add("show");
-      loginStatus.focus();
-    });
-
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
+<script src="assets/js/login.js"></script>
 </body>
 </html>

@@ -10,6 +10,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const badge = document.getElementById("previewBadge");
   const radius = document.getElementById("geoRadiusInput");
   const radiusLabel = document.getElementById("geoRadiusLabel");
+  if (title) title.required = true;
+  if (body) body.required = true;
 
   title?.addEventListener("input", () => {
     previewTitle.textContent = title.value || "Notification Title";
@@ -78,5 +80,10 @@ document.addEventListener("DOMContentLoaded", () => {
   search?.addEventListener("input", () => {
     const query = search.value.trim().toLowerCase();
     historyItems.forEach((item) => { item.hidden = Boolean(query) && !item.textContent.toLowerCase().includes(query); });
+  });
+
+  document.querySelector('main [data-admin-action="export"]')?.addEventListener("click", () => {
+    const rows = [["Notification history"], ...historyItems.filter((item) => !item.hidden).map((item) => [item.innerText.replace(/\s+/g, " ").trim()])];
+    NavAbleAdmin.downloadCsv("navable-notification-history.csv", rows);
   });
 });
