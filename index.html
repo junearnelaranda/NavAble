@@ -461,9 +461,38 @@
 
     .hero-visual {
       position: relative;
-      min-height: 550px;
+      min-height: 620px;
       display: grid;
       place-items: center;
+    }
+
+    .hero-app-preview {
+      position: relative;
+      z-index: 2;
+      width: min(276px, 78vw);
+      margin: 0;
+      padding: 8px;
+      overflow: hidden;
+      border: 1px solid rgba(10, 74, 39, 0.12);
+      border-radius: 42px;
+      background: #edf5ef;
+      box-shadow: 25px 28px 55px rgba(31, 69, 44, 0.20),
+                  -18px -18px 42px rgba(255, 255, 255, 0.95);
+      transform: rotate(2deg);
+      transition: transform 240ms ease, box-shadow 240ms ease;
+    }
+
+    .hero-app-preview:hover {
+      box-shadow: 20px 24px 46px rgba(31, 69, 44, 0.17),
+                  -14px -14px 34px rgba(255, 255, 255, 0.95);
+      transform: translateY(-4px) rotate(0deg);
+    }
+
+    .hero-app-preview img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 34px;
     }
 
     .orbit {
@@ -1474,6 +1503,98 @@
       box-shadow: 0 -4px 0 -2.4px var(--surface), 0 -4px 0 -1px currentColor;
     }
 
+    body.video-open {
+      overflow: hidden;
+    }
+
+    .video-dialog {
+      width: min(940px, calc(100% - 32px));
+      max-width: none;
+      max-height: calc(100dvh - 32px);
+      padding: 0;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.82);
+      border-radius: 28px;
+      background: rgba(247, 252, 248, 0.98);
+      color: var(--navy);
+      box-shadow: 22px 26px 70px rgba(6, 27, 56, 0.24), -10px -10px 28px rgba(255, 255, 255, 0.72);
+      opacity: 0;
+      transform: translateY(18px) scale(0.985);
+      transition: opacity 180ms ease, transform 220ms ease, overlay 220ms allow-discrete, display 220ms allow-discrete;
+    }
+
+    .video-dialog[open] {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    @starting-style {
+      .video-dialog[open] {
+        opacity: 0;
+        transform: translateY(18px) scale(0.985);
+      }
+    }
+
+    .video-dialog::backdrop {
+      background: rgba(6, 27, 56, 0.54);
+      backdrop-filter: blur(7px);
+    }
+
+    .video-dialog-card {
+      padding: 24px;
+    }
+
+    .video-dialog-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 18px;
+    }
+
+    .video-dialog-header .kicker {
+      margin-bottom: 5px;
+    }
+
+    .video-dialog-header h2 {
+      margin: 0;
+      font-size: clamp(1.45rem, 3vw, 2rem);
+      letter-spacing: -0.045em;
+    }
+
+    .video-dialog-close {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      flex: 0 0 44px;
+      padding: 0;
+      border: 0;
+      border-radius: 14px;
+      background: var(--surface);
+      color: var(--navy);
+      box-shadow: var(--shadow-soft);
+      cursor: pointer;
+      font-size: 1.55rem;
+      line-height: 1;
+      transition: color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+    }
+
+    .video-dialog-close:hover {
+      color: var(--green);
+      transform: translateY(-1px);
+      box-shadow: 4px 5px 12px rgba(37, 75, 50, 0.11), -3px -3px 10px white;
+    }
+
+    .video-dialog video {
+      width: 100%;
+      max-height: calc(100dvh - 150px);
+      display: block;
+      border-radius: 19px;
+      background: #061b38;
+      box-shadow: var(--shadow-inset);
+    }
+
     .reveal {
       opacity: 0;
       transform: translateY(18px);
@@ -1622,6 +1743,26 @@
         width: 100%;
       }
 
+      .video-dialog {
+        width: calc(100% - 20px);
+        max-height: calc(100dvh - 20px);
+        border-radius: 22px;
+      }
+
+      .video-dialog-card {
+        padding: 16px;
+      }
+
+      .video-dialog-header {
+        gap: 14px;
+        margin-bottom: 14px;
+      }
+
+      .video-dialog video {
+        max-height: calc(100dvh - 124px);
+        border-radius: 15px;
+      }
+
       .trust-row {
         align-items: flex-start;
       }
@@ -1631,9 +1772,19 @@
       }
 
       .hero-visual {
-        min-height: 525px;
-        transform: scale(0.90);
-        margin: -22px -20px -42px;
+        min-height: 555px;
+        margin: -16px 0 -28px;
+        transform: none;
+      }
+
+      .hero-app-preview {
+        width: min(238px, 70vw);
+        padding: 7px;
+        border-radius: 36px;
+      }
+
+      .hero-app-preview img {
+        border-radius: 29px;
       }
 
       .orbit {
@@ -1844,7 +1995,7 @@
           <p>NavAble helps PWDs, older adults, caregivers, and everyday travelers find routes and places that match their mobility needs—before the journey begins.</p>
           <div class="hero-actions">
             <a class="button button-dark" href="#features">Discover NavAble <span class="arrow" aria-hidden="true">→</span></a>
-            <a class="button button-soft" href="#how-it-works">How the app works</a>
+            <button class="button button-soft" id="openExplainerVideo" type="button" aria-haspopup="dialog" aria-controls="explainerDialog">How the app works</button>
           </div>
           <div class="trust-row" aria-label="Trusted by more than 14,000 community members">
             <div class="avatars" aria-hidden="true">
@@ -1857,66 +2008,11 @@
           </div>
         </div>
 
-        <div class="hero-visual reveal" aria-label="Preview of the NavAble mobile route finder">
+        <div class="hero-visual reveal">
           <div class="orbit" aria-hidden="true"></div>
-
-          <div class="float-card rating" aria-hidden="true">
-            <div class="float-icon">✓</div>
-            <div>
-              <strong>Human verified</strong>
-              <span>AI-assisted community data</span>
-            </div>
-          </div>
-
-          <div class="phone" aria-hidden="true">
-            <div class="phone-screen">
-              <span class="phone-speaker"></span>
-              <div class="app-top">
-                <div class="app-logo">
-                  <img src="logOnly.png" alt="">
-                  NavAble
-                </div>
-                <span class="app-avatar">JD</span>
-              </div>
-              <div class="map">
-                <svg viewBox="0 0 250 300" preserveAspectRatio="none">
-                  <path d="M-20 248 C43 205 39 153 91 128 C145 103 177 134 270 53" fill="none" stroke="#ffffff" stroke-width="19" stroke-linecap="round"/>
-                  <path d="M-20 248 C43 205 39 153 91 128 C145 103 177 134 270 53" fill="none" stroke="#38a961" stroke-width="6" stroke-linecap="round" stroke-dasharray="2 1"/>
-                  <path d="M61 -10 C75 58 129 53 133 111 C139 191 205 190 218 310" fill="none" stroke="#d5e2d6" stroke-width="13"/>
-                  <path d="M-20 57 C41 65 50 100 96 91 C157 79 197 31 270 36" fill="none" stroke="#dbe6dc" stroke-width="11"/>
-                  <rect x="18" y="19" width="46" height="32" rx="6" fill="#dceadd"/>
-                  <rect x="162" y="201" width="62" height="48" rx="7" fill="#dceadd"/>
-                  <rect x="19" y="138" width="39" height="44" rx="6" fill="#e0ebe1"/>
-                </svg>
-                <span class="map-label label-a">Central Park</span>
-                <span class="map-label label-b">Civic Center</span>
-                <span class="location-pin"></span>
-              </div>
-              <div class="route-card">
-                <small>Best accessible route</small>
-                <strong>12 min · Step-free all the way</strong>
-                <div class="route-meta">
-                  <span>0.8 km</span>
-                  <span>Low incline</span>
-                  <span>2 elevators</span>
-                </div>
-              </div>
-              <div class="app-tabs">
-                <span class="app-tab active"><i></i>Explore</span>
-                <span class="app-tab"><i></i>Routes</span>
-                <span class="app-tab"><i></i>Saved</span>
-                <span class="app-tab"><i></i>Profile</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="float-card access" aria-hidden="true">
-            <div class="float-icon">↗</div>
-            <div>
-              <strong>Accessible route found</strong>
-              <span>Step-free · Low incline</span>
-            </div>
-          </div>
+          <figure class="hero-app-preview">
+            <img src="imgs&vids/home.png" width="847" height="1857" loading="eager" decoding="async" fetchpriority="high" alt="NavAble home screen showing accessible places and route filters on a map">
+          </figure>
         </div>
       </div>
     </section>
@@ -2203,6 +2299,22 @@
     </section>
   </main>
 
+  <dialog class="video-dialog" id="explainerDialog" aria-labelledby="explainerTitle">
+    <div class="video-dialog-card">
+      <header class="video-dialog-header">
+        <div>
+          <span class="kicker">See NavAble in action</span>
+          <h2 id="explainerTitle">How the app works</h2>
+        </div>
+        <button class="video-dialog-close" id="closeExplainerVideo" type="button" aria-label="Close video">×</button>
+      </header>
+      <video id="explainerVideo" controls preload="metadata" playsinline>
+        <source src="imgs&amp;vids/NavAble_Explainer_Video.mp4" type="video/mp4">
+        Your browser does not support embedded MP4 video.
+      </video>
+    </div>
+  </dialog>
+
   <footer>
     <div class="shell footer-row">
       <a class="brand" href="#" aria-label="Back to top">
@@ -2292,6 +2404,41 @@
     window.addEventListener("scroll", () => {
       siteHeader.classList.toggle("scrolled", window.scrollY > 8);
     }, { passive: true });
+
+    const explainerTrigger = document.getElementById("openExplainerVideo");
+    const explainerDialog = document.getElementById("explainerDialog");
+    const explainerClose = document.getElementById("closeExplainerVideo");
+    const explainerVideo = document.getElementById("explainerVideo");
+
+    function closeExplainer() {
+      if (explainerDialog.open) explainerDialog.close();
+    }
+
+    explainerTrigger.addEventListener("click", () => {
+      closeMenu();
+      explainerDialog.showModal();
+      document.body.classList.add("video-open");
+      explainerVideo.play().catch(() => {
+        // Browser autoplay preferences can require the user to press play.
+      });
+    });
+
+    explainerClose.addEventListener("click", closeExplainer);
+
+    explainerDialog.addEventListener("click", (event) => {
+      if (event.target === explainerDialog) closeExplainer();
+    });
+
+    explainerDialog.addEventListener("close", () => {
+      document.body.classList.remove("video-open");
+      explainerVideo.pause();
+      explainerVideo.currentTime = 0;
+      explainerTrigger.focus();
+    });
+
+    explainerDialog.addEventListener("cancel", () => {
+      document.body.classList.remove("video-open");
+    });
 
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const revealItems = document.querySelectorAll(".reveal");

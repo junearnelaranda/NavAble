@@ -650,6 +650,18 @@
     });
   }
 
+  function setupDashboardPeriod() {
+    const range = document.getElementById("dashboardDateRange");
+    if (!range) return;
+
+    const end = new Date();
+    const start = new Date(end);
+    start.setDate(end.getDate() - 29);
+    const format = new Intl.DateTimeFormat(undefined, { month: "short", day: "numeric" });
+    range.textContent = `${format.format(start)} – ${format.format(end)}`;
+    range.setAttribute("aria-label", `Dashboard period from ${format.format(start)} to ${format.format(end)}`);
+  }
+
   function revealAdminUi() {
     window.setTimeout(() => {
       window.requestAnimationFrame(() => {
@@ -678,6 +690,7 @@
       improveHeadingHierarchy();
       modernizeRemoteImages();
       clarifyPrototypeStatus();
+      setupDashboardPeriod();
     } finally {
       revealAdminUi();
     }
