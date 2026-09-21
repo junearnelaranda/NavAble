@@ -1060,77 +1060,9 @@
 
     .discover-panel {
       position: relative;
-      min-height: 510px;
+      min-height: 620px;
       display: grid;
       place-items: center;
-      border-radius: var(--radius-xl);
-      background: var(--green-pale);
-      box-shadow: var(--shadow-inset);
-    }
-
-    .mini-map {
-      position: relative;
-      width: calc(100% - 62px);
-      height: 388px;
-      overflow: hidden;
-      border: 10px solid var(--surface);
-      border-radius: 27px;
-      background: #e7f1e9;
-      box-shadow: var(--shadow-raised);
-    }
-
-    .mini-map svg {
-      width: 100%;
-      height: 100%;
-    }
-
-    .map-result {
-      position: absolute;
-      right: 7px;
-      bottom: 35px;
-      width: 218px;
-      padding: 17px;
-      border-radius: 18px;
-      background: rgba(251, 254, 251, 0.95);
-      box-shadow: 10px 12px 30px rgba(37, 75, 50, 0.16), -5px -5px 16px white;
-      backdrop-filter: blur(12px);
-    }
-
-    .map-result-top {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 10px;
-    }
-
-    .map-result strong {
-      font-size: 0.76rem;
-      line-height: 1.35;
-    }
-
-    .score {
-      padding: 4px 7px;
-      border-radius: 8px;
-      background: var(--green-soft);
-      color: var(--green-dark);
-      font-size: 0.58rem;
-      font-weight: 800;
-    }
-
-    .amenities {
-      display: flex;
-      gap: 6px;
-    }
-
-    .amenities span {
-      padding: 5px 7px;
-      border-radius: 8px;
-      background: var(--surface);
-      color: var(--muted);
-      box-shadow: var(--shadow-inset);
-      font-size: 0.5rem;
-      font-weight: 700;
     }
 
     .check-list {
@@ -1872,17 +1804,7 @@
       }
 
       .discover-panel {
-        min-height: 430px;
-      }
-
-      .mini-map {
-        width: calc(100% - 34px);
-        height: 344px;
-      }
-
-      .map-result {
-        right: 1px;
-        bottom: 18px;
+        min-height: 555px;
       }
 
       .cta {
@@ -2146,40 +2068,17 @@
 
     <section class="section" id="discover" aria-labelledby="discover-title">
       <div class="shell split">
-        <div class="discover-panel reveal" aria-hidden="true">
-          <div class="mini-map">
-            <svg viewBox="0 0 520 390" preserveAspectRatio="none">
-              <rect width="520" height="390" fill="#e8f1e9"/>
-              <path d="M-30 320C75 291 92 220 176 220s112 61 197 18 85-93 177-110" fill="none" stroke="#fff" stroke-width="31"/>
-              <path d="M-30 320C75 291 92 220 176 220s112 61 197 18 85-93 177-110" fill="none" stroke="#2ca35b" stroke-width="9" stroke-linecap="round"/>
-              <path d="M88-20c-9 78 55 102 48 176-6 62-55 93-41 254" fill="none" stroke="#d2dfd4" stroke-width="22"/>
-              <path d="M-20 75c95 6 141 41 227 12S386 27 550 42" fill="none" stroke="#d5e2d6" stroke-width="18"/>
-              <path d="M320-20c-33 100 11 130-7 201-19 75-65 111-44 229" fill="none" stroke="#d7e3d8" stroke-width="18"/>
-              <g fill="#dbe7dc">
-                <rect x="25" y="101" width="77" height="58" rx="11"/>
-                <rect x="169" y="119" width="91" height="71" rx="12"/>
-                <rect x="372" y="67" width="108" height="72" rx="12"/>
-                <rect x="350" y="278" width="112" height="79" rx="12"/>
-                <rect x="113" y="284" width="68" height="67" rx="11"/>
-              </g>
-              <g fill="#17884a" stroke="#fff" stroke-width="5">
-                <circle cx="175" cy="220" r="13"/>
-                <circle cx="374" cy="237" r="13"/>
-                <circle cx="470" cy="157" r="13"/>
-              </g>
-            </svg>
-          </div>
-          <div class="map-result">
-            <div class="map-result-top">
-              <strong>Riverside Community Library</strong>
-              <span class="score">98%</span>
-            </div>
-            <div class="amenities">
-              <span>Ramp</span>
-              <span>Elevator</span>
-              <span>Parking</span>
-            </div>
-          </div>
+        <div class="discover-panel reveal">
+          <figure class="hero-app-preview">
+            <img
+              src="imgs&amp;vids/explore.png"
+              alt="NavAble Explore screen showing accessible places near Ayala Center Cebu"
+              width="855"
+              height="1840"
+              loading="lazy"
+              decoding="async"
+            >
+          </figure>
         </div>
 
         <div class="split-copy reveal">
