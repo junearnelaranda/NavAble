@@ -363,14 +363,9 @@
   function setupSessionControls() {
     const logout = document.getElementById("staffLogout");
     if (!logout) return;
-    logout.addEventListener("click", () => {
-      try {
-        sessionStorage.removeItem("navableStaffPreview");
-        sessionStorage.removeItem("navableStaffRole");
-        sessionStorage.removeItem("navableDashboardLoadState");
-      } catch (error) {
-        console.warn("Could not clear the preview session.", error);
-      }
+    logout.addEventListener("click", async () => {
+      logout.disabled = true;
+      await window.NavAbleDB?.signOut();
       navigate("../staff-login.html");
     });
   }
@@ -446,6 +441,8 @@
       });
     }
 
+    setupThemeToggle(header);
+
     const contrastButton = [...header.querySelectorAll("button")].find((button) => button.querySelector(".material-symbols-outlined")?.textContent.trim() === "contrast");
     if (contrastButton) {
       let enabled = false;
@@ -465,6 +462,61 @@
         showToast(`High contrast mode ${enabled ? "enabled" : "disabled"}.`);
       });
     }
+  }
+
+  // Light/dark switch. Dark is the default (set early by admin-guard.js).
+  function setupThemeToggle(header) {
+    let button = document.getElementById("themeToggle");
+    if (!button) {
+      button = document.createElement("button");
+      button.id = "themeToggle";
+      button.type = "button";
+      button.className = "admin-icon-button flex h-10 w-10 items-center justify-center rounded-xl";
+      button.innerHTML = '<span class="material-symbols-outlined" aria-hidden="true"></span>';
+      const contrast = [...header.querySelectorAll("button")].find((item) => item.querySelector(".material-symbols-outlined")?.textContent.trim() === "contrast");
+      if (contrast) contrast.before(button);
+      else (header.lastElementChild || header).append(button);
+    }
+
+    const render = () => {
+      const light = document.documentElement.dataset.theme === "light";
+      button.querySelector(".material-symbols-outlined").textContent = light ? "dark_mode" : "light_mode";
+      button.setAttribute("aria-label", light ? "Switch to dark theme" : "Switch to light theme");
+      button.title = button.getAttribute("aria-label");
+    };
+
+    button.addEventListener("click", () => {
+      const next = document.documentElement.dataset.theme === "light" ? "dark" : "light";
+      document.documentElement.dataset.theme = next;
+      try {
+        localStorage.setItem("navableTheme", next);
+      } catch (_) {}
+      render();
+      showToast(`${next === "light" ? "Light" : "Dark"} theme on.`);
+    });
+    render();
+  }
+
+  // Replace the placeholder staff name with the signed-in admin from the database.
+  function setupStaffIdentity() {
+    const apply = (staff) => {
+      if (!staff) return;
+      // Only the shell (sidebar + top bar) shows the signed-in admin; page content may list other people.
+      const nodes = [];
+      [document.getElementById("staffSidebar"), document.querySelector(".admin-header")].filter(Boolean).forEach((root) => {
+        const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+        while (walker.nextNode()) nodes.push(walker.currentNode);
+      });
+      nodes.forEach((node) => {
+        const value = node.nodeValue.trim();
+        if (value === "June Arnel") node.nodeValue = node.nodeValue.replace(value, staff.display_name || staff.email);
+        if (value === "Super Admin") node.nodeValue = node.nodeValue.replace(value, staff.role);
+      });
+      document.querySelectorAll("[data-staff-name]").forEach((element) => { element.textContent = staff.display_name || staff.email; });
+      document.querySelectorAll("[data-staff-role]").forEach((element) => { element.textContent = staff.role; });
+    };
+    if (window.NavAbleStaff) apply(window.NavAbleStaff);
+    else document.addEventListener("navable:admin-ready", (event) => apply(event.detail), { once: true });
   }
 
   function improveControlNames() {
@@ -650,18 +702,6 @@
     });
   }
 
-  function setupDashboardPeriod() {
-    const range = document.getElementById("dashboardDateRange");
-    if (!range) return;
-
-    const end = new Date();
-    const start = new Date(end);
-    start.setDate(end.getDate() - 29);
-    const format = new Intl.DateTimeFormat(undefined, { month: "short", day: "numeric" });
-    range.textContent = `${format.format(start)} – ${format.format(end)}`;
-    range.setAttribute("aria-label", `Dashboard period from ${format.format(start)} to ${format.format(end)}`);
-  }
-
   function revealAdminUi() {
     window.setTimeout(() => {
       window.requestAnimationFrame(() => {
@@ -683,6 +723,7 @@
       setupSidebar();
       setupSessionControls();
       setupGlobalControls();
+      setupStaffIdentity();
       standardizeExportButtons();
       improveControlNames();
       protectDestructiveControls();
@@ -690,7 +731,6 @@
       improveHeadingHierarchy();
       modernizeRemoteImages();
       clarifyPrototypeStatus();
-      setupDashboardPeriod();
     } finally {
       revealAdminUi();
     }

@@ -27,21 +27,21 @@
       <div class="login-layout">
         <section class="intro" aria-labelledby="login-title">
           <h1 id="login-title"><span class="title-line">Welcome back,</span><span class="title-line">NavAble staff</span></h1>
-          <p>Open the local administration prototype to review accessibility data, submissions, reports, and dashboard workflows.</p>
+          <p>Sign in to review accessibility data, submissions, reports, and dashboard workflows.</p>
           <div class="security-note">
             <div class="security-icon" aria-hidden="true">✓</div>
             <div>
-              <strong>Local preview—not production authentication</strong>
-              <span>No Firebase Authentication configuration is present in this workspace. This form opens a tab-scoped preview and does not verify identity.</span>
+              <strong>Admin accounts only</strong>
+              <span>Sign-in is verified by NavAble's secure account service. Only active staff accounts with the Admin role can open the dashboard.</span>
             </div>
           </div>
         </section>
 
         <section class="login-card" aria-labelledby="form-title">
           <div class="card-heading">
-            <span>Interface review access</span>
-            <h2 id="form-title">Open staff preview</h2>
-            <p>Enter test values to inspect the local interface. Nothing is transmitted.</p>
+            <span>Staff access</span>
+            <h2 id="form-title">Sign in</h2>
+            <p>Use the email and password for your NavAble admin account.</p>
           </div>
 
           <form id="staffLoginForm" novalidate>
@@ -62,11 +62,10 @@
             </div>
 
             <div class="form-options">
-              <label class="remember"><input type="checkbox" name="remember"> Keep this preview active in this tab</label>
-              <a class="help-link" href="index.html#contact">Need access help?</a>
+                            <a class="help-link" href="index.html#contact">Need access help?</a>
             </div>
 
-            <button class="submit-button" type="submit">Open dashboard preview&nbsp; →</button>
+            <button class="submit-button" type="submit">Sign in&nbsp; →</button>
             <p class="status" id="loginStatus" role="alert" tabindex="-1"></p>
           </form>
         </section>
@@ -75,11 +74,13 @@
 
     <footer>
       <span>© <span id="year"></span> NavAble</span>
-      <span>Connect Firebase Authentication and server-enforced roles before deployment.</span>
+      <span>Authorized staff only.</span>
     </footer>
   </div>
 
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.58.0/dist/umd/supabase.min.js"></script>
+<script src="assets/js/supabase-client.js"></script>
 <script src="assets/js/login.js"></script>
 </body>
 </html>

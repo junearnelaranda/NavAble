@@ -49,33 +49,69 @@
     passwordToggle.setAttribute("aria-label", hidden ? "Hide password" : "Show password");
   });
 
-  form.addEventListener("submit", (event) => {
+  const db = window.NavAbleDB;
+  const params = new URLSearchParams(window.location.search);
+  const submitLabel = submit.innerHTML;
+
+  const showStatus = (message, kind = "") => {
+    status.textContent = message;
+    status.className = `status show${kind ? ` ${kind}` : ""}`;
+    if (kind !== "success") status.focus();
+  };
+
+  const destinationFor = (requested) => {
+    const target = (requested || "datas/dashboard.html").split(/[?#]/)[0].replace(/\\/g, "/");
+    const pageName = target.split("/").pop();
+    const safe = target.startsWith("datas/") && ADMIN_PAGE_NAMES.has(pageName);
+    return { url: safe ? requested : "datas/dashboard.html", pageName: safe ? pageName : "dashboard.html" };
+  };
+
+  const openAdmin = ({ url }) => {
+    window.location.href = url;
+  };
+
+  const REASONS = {
+    denied: "That account is signed in but does not have active admin access.",
+    unavailable: "The database connection could not load. Check your internet connection and try again."
+  };
+  if (!db) showStatus(REASONS.unavailable);
+  else if (REASONS[params.get("reason")]) showStatus(REASONS[params.get("reason")]);
+
+  form.addEventListener("submit", async (event) => {
     event.preventDefault();
     if (!form.checkValidity()) return form.reportValidity();
+    if (!db) return showStatus(REASONS.unavailable);
 
-    try {
-      sessionStorage.setItem("navableStaffPreview", "active");
-      sessionStorage.setItem("navableStaffRole", "preview-admin");
-    } catch (error) {
-      status.textContent = "This browser blocked local session storage. Allow site data to open the dashboard preview.";
-      status.className = "status show";
-      status.focus();
-      return;
+    const email = document.getElementById("staffEmail").value.trim();
+    submit.disabled = true;
+    submit.textContent = "Signing in...";
+    status.className = "status";
+
+    const { error } = await db.client.auth.signInWithPassword({ email, password: password.value });
+    if (error) {
+      submit.disabled = false;
+      submit.innerHTML = submitLabel;
+      const message = /invalid login credentials/i.test(error.message)
+        ? "Incorrect email or password."
+        : /email not confirmed/i.test(error.message)
+          ? "Confirm your email address before signing in."
+          : `Sign-in failed: ${error.message}`;
+      return showStatus(message);
     }
 
-    const requested = new URLSearchParams(window.location.search).get("returnTo") || "datas/dashboard.html";
-    const target = requested.split(/[?#]/)[0].replace(/\\/g, "/");
-    const pageName = target.split("/").pop();
-    const destination = target.startsWith("datas/") && ADMIN_PAGE_NAMES.has(pageName)
-      ? requested
-      : "datas/dashboard.html";
-    status.textContent = "Local preview session opened. No credentials were transmitted or verified.";
-    status.className = "status show success";
-    submit.disabled = true;
+    try {
+      await db.requireAdmin();
+    } catch (accessError) {
+      await db.signOut();
+      submit.disabled = false;
+      submit.innerHTML = submitLabel;
+      return showStatus(accessError.message);
+    }
+
+    password.value = "";
+    showStatus("Signed in. Opening dashboard...", "success");
     submit.textContent = "Opening dashboard...";
-    if (pageName === "dashboard.html") sessionStorage.setItem("navableDashboardLoadState", "pending");
-    else sessionStorage.removeItem("navableDashboardLoadState");
-    window.location.href = destination;
+    openAdmin(destinationFor(params.get("returnTo")));
   });
 
   document.getElementById("year").textContent = new Date().getFullYear();
