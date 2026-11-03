@@ -6,6 +6,7 @@
 //   Locations to verify     locations.verification_status = Pending
 //   AI detections to confirm ai_results.detection_status = Needs Verification and verified = false
 //   Reviews to moderate     reviews.review_status = Pending Review
+//   New bug reports         bug_reports.status = New
 //   Registered users        users.role = User (staff accounts excluded)
 //   Verified locations      locations.verification_status = Verified, out of all locations
 //   Average rating          mean of reviews.rating where review_status = Published
@@ -146,6 +147,8 @@ document.addEventListener("DOMContentLoaded", () => {
     pendingLocations: () => count("locations", (q) => q.eq("verification_status", "Pending")),
     aiToReview: () => count("ai_results", (q) => q.eq("detection_status", "Needs Verification").eq("verified", false)),
     reviewsToModerate: () => count("reviews", (q) => q.eq("review_status", "Pending Review")),
+    newBugs: () => count("bug_reports", (q) => q.eq("status", "New")),
+    newHighBugs: () => count("bug_reports", (q) => q.eq("status", "New").eq("priority", "High")),
     users: () => count("users", (q) => q.eq("role", "User")),
     activeUsers: () => count("users", (q) => q.eq("role", "User").eq("account_status", "Active")),
     locations: () => count("locations"),
@@ -213,6 +216,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const moderate = ok(r.reviewsToModerate);
     if (moderate === undefined) setStat("reviewsToModerate", { error: true });
     else setStat("reviewsToModerate", { value: number.format(moderate), meta: "Held as Pending Review" });
+
+    const bugs = ok(r.newBugs);
+    const highBugs = ok(r.newHighBugs);
+    if (bugs === undefined) setStat("newBugs", { error: true });
+    else setStat("newBugs", { value: number.format(bugs), meta: highBugs ? `${number.format(highBugs)} high priority` : "Not looked at yet" });
+    add("New bug reports", bugs, "Bug reports with status New");
     add("Reviews to moderate", moderate, "Reviews with status Pending Review");
 
     // Platform overview

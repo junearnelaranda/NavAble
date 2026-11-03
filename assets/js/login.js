@@ -3,7 +3,7 @@
 
   const ADMIN_PAGE_NAMES = new Set([
     "dashboard.html", "user.html", "location.html", "accss-data.html",
-    "verification.html", "reports.html", "ratings.html", "notifications.html",
+    "verification.html", "reports.html", "ratings.html", "bugs.html", "notifications.html",
     "analytics.html", "settings.html"
   ]);
 
@@ -59,11 +59,15 @@
     if (kind !== "success") status.focus();
   };
 
+  // Where to go after signing in: the requested admin page, or the dashboard
+  // when none was requested (opening staff-login.html directly) or it isn't safe.
   const destinationFor = (requested) => {
-    const target = (requested || "datas/dashboard.html").split(/[?#]/)[0].replace(/\\/g, "/");
+    const fallback = { url: "datas/dashboard.html", pageName: "dashboard.html" };
+    if (!requested) return fallback;
+    const target = requested.split(/[?#]/)[0].replace(/\\/g, "/");
     const pageName = target.split("/").pop();
     const safe = target.startsWith("datas/") && ADMIN_PAGE_NAMES.has(pageName);
-    return { url: safe ? requested : "datas/dashboard.html", pageName: safe ? pageName : "dashboard.html" };
+    return safe ? { url: requested, pageName } : fallback;
   };
 
   const openAdmin = ({ url }) => {

@@ -25,7 +25,7 @@
 
   const ADMIN_PAGES = new Set([
     "dashboard.html", "user.html", "location.html", "accss-data.html",
-    "verification.html", "reports.html", "ratings.html", "notifications.html",
+    "verification.html", "reports.html", "ratings.html", "bugs.html", "notifications.html",
     "analytics.html", "settings.html"
   ]);
 
@@ -37,6 +37,7 @@
     "verification.html": "verified",
     "reports.html": "description",
     "ratings.html": "reviews",
+    "bugs.html": "bug_report",
     "notifications.html": "notifications",
     "analytics.html": "analytics",
     "settings.html": "settings"
@@ -50,6 +51,7 @@
     "verification.html": "AI Verification",
     "reports.html": "Reports",
     "ratings.html": "Ratings & Reviews",
+    "bugs.html": "Bug Reports",
     "notifications.html": "Notifications",
     "analytics.html": "Analytics",
     "settings.html": "Settings"
@@ -415,9 +417,6 @@
       breadcrumb.textContent = PAGE_LABELS[pageName] || "Administration";
     }
 
-    [...header.querySelectorAll("span")].forEach((status) => {
-      if (status.textContent.trim() === "Live: Firebase Online") status.textContent = "Prototype data";
-    });
     const globalSearch = header.querySelector('input[type="text"], input[type="search"]');
     if (globalSearch) {
       globalSearch.setAttribute("aria-label", "Search the admin dashboard");
@@ -609,21 +608,6 @@
     window.setTimeout(placeExportButton, 0);
   }
 
-  function protectDestructiveControls() {
-    document.querySelectorAll("button").forEach((button) => {
-      const icon = button.querySelector(".material-symbols-outlined")?.textContent.trim();
-      if (icon !== "delete") return;
-      button.addEventListener("click", (event) => {
-        if (!confirmAction("Remove this record from the local prototype view?")) {
-          event.preventDefault();
-          event.stopImmediatePropagation();
-          return;
-        }
-        showToast("Removal recorded in this local session.", { assertive: true });
-      }, true);
-    });
-  }
-
   function improveStructuredContent() {
     document.querySelectorAll("table").forEach((table) => {
       table.querySelectorAll("thead th").forEach((heading) => heading.setAttribute("scope", "col"));
@@ -685,23 +669,6 @@
     });
   }
 
-  function clarifyPrototypeStatus() {
-    const replacements = new Map([
-      ["Live Synced", "Prototype View"],
-      ["Live Synced (v4.8)", "Prototype Dataset"],
-      ["Real-time sync active", "Static preview data"],
-      ["JWT session verification", "Preview session only"],
-      ["Cluster Healthy (us-east1)", "Not connected"]
-    ]);
-    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
-    const nodes = [];
-    while (walker.nextNode()) nodes.push(walker.currentNode);
-    nodes.forEach((node) => {
-      const value = node.nodeValue.trim();
-      if (replacements.has(value)) node.nodeValue = node.nodeValue.replace(value, replacements.get(value));
-    });
-  }
-
   function revealAdminUi() {
     window.setTimeout(() => {
       window.requestAnimationFrame(() => {
@@ -726,11 +693,9 @@
       setupStaffIdentity();
       standardizeExportButtons();
       improveControlNames();
-      protectDestructiveControls();
       improveStructuredContent();
       improveHeadingHierarchy();
       modernizeRemoteImages();
-      clarifyPrototypeStatus();
     } finally {
       revealAdminUi();
     }

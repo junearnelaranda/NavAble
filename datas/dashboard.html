@@ -26,6 +26,7 @@
 <a class="flex items-center justify-between rounded-xl px-space-md py-3 font-label-lg text-label-lg text-on-surface-variant transition-all hover:bg-surface-container-high hover:text-on-surface" href="verification.html"><span>AI Verification</span><span class="material-symbols-outlined text-[19px]">verified</span></a>
 <a class="flex items-center justify-between rounded-xl px-space-md py-3 font-label-lg text-label-lg text-on-surface-variant transition-all hover:bg-surface-container-high hover:text-on-surface" href="reports.html"><span>Reports</span><span class="material-symbols-outlined text-[19px]">description</span></a>
 <a class="flex items-center justify-between rounded-xl px-space-md py-3 font-label-lg text-label-lg text-on-surface-variant transition-all hover:bg-surface-container-high hover:text-on-surface" href="ratings.html"><span>Ratings &amp; Reviews</span><span class="material-symbols-outlined text-[19px]">reviews</span></a>
+<a class="flex items-center justify-between rounded-xl px-space-md py-3 font-label-lg text-label-lg text-on-surface-variant transition-all hover:bg-surface-container-high hover:text-on-surface" href="bugs.html"><span>Bug Reports</span><span class="material-symbols-outlined text-[19px]">bug_report</span></a>
 <a class="flex items-center justify-between rounded-xl px-space-md py-3 font-label-lg text-label-lg text-on-surface-variant transition-all hover:bg-surface-container-high hover:text-on-surface" href="notifications.html"><span>Notifications</span><span class="material-symbols-outlined text-[19px]">notifications</span></a>
 <a class="flex items-center justify-between rounded-xl px-space-md py-3 font-label-lg text-label-lg text-on-surface-variant transition-all hover:bg-surface-container-high hover:text-on-surface" href="analytics.html"><span>Analytics</span><span class="material-symbols-outlined text-[19px]">analytics</span></a>
 <a class="flex items-center justify-between rounded-xl px-space-md py-3 font-label-lg text-label-lg text-on-surface-variant transition-all hover:bg-surface-container-high hover:text-on-surface" href="settings.html"><span>Settings</span><span class="material-symbols-outlined text-[19px]">settings</span></a>
@@ -72,7 +73,7 @@
 <h2 id="attentionTitle">Needs your review</h2>
 <p>Open items waiting on an admin. Select a card to work through it.</p>
 </div>
-<div class="nv-grid-4">
+<div class="nv-grid-5">
 <a class="nv-card nv-stat" href="reports.html" data-metric="openReports" data-tone="danger">
 <span class="nv-stat-icon"><span class="material-symbols-outlined" aria-hidden="true">report</span></span>
 <span class="nv-stat-label">Open reports</span>
@@ -80,7 +81,7 @@
 <span class="nv-stat-meta" data-meta>Loading…</span>
 <span class="material-symbols-outlined nv-stat-go" aria-hidden="true">chevron_right</span>
 </a>
-<a class="nv-card nv-stat" href="location.html" data-metric="pendingLocations" data-tone="warning">
+<a class="nv-card nv-stat" href="location.html?status=Pending" data-metric="pendingLocations" data-tone="warning">
 <span class="nv-stat-icon"><span class="material-symbols-outlined" aria-hidden="true">add_location_alt</span></span>
 <span class="nv-stat-label">Locations to verify</span>
 <span class="nv-stat-value" data-value><span class="nv-skeleton is-value"></span></span>
@@ -94,9 +95,16 @@
 <span class="nv-stat-meta" data-meta>Loading…</span>
 <span class="material-symbols-outlined nv-stat-go" aria-hidden="true">chevron_right</span>
 </a>
-<a class="nv-card nv-stat" href="ratings.html" data-metric="reviewsToModerate" data-tone="warning">
+<a class="nv-card nv-stat" href="ratings.html?status=Pending%20Review" data-metric="reviewsToModerate" data-tone="warning">
 <span class="nv-stat-icon"><span class="material-symbols-outlined" aria-hidden="true">rate_review</span></span>
 <span class="nv-stat-label">Reviews to moderate</span>
+<span class="nv-stat-value" data-value><span class="nv-skeleton is-value"></span></span>
+<span class="nv-stat-meta" data-meta>Loading…</span>
+<span class="material-symbols-outlined nv-stat-go" aria-hidden="true">chevron_right</span>
+</a>
+<a class="nv-card nv-stat" href="bugs.html?status=New" data-metric="newBugs" data-tone="danger">
+<span class="nv-stat-icon"><span class="material-symbols-outlined" aria-hidden="true">bug_report</span></span>
+<span class="nv-stat-label">New bug reports</span>
 <span class="nv-stat-value" data-value><span class="nv-skeleton is-value"></span></span>
 <span class="nv-stat-meta" data-meta>Loading…</span>
 <span class="material-symbols-outlined nv-stat-go" aria-hidden="true">chevron_right</span>

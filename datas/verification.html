@@ -1,8 +1,15 @@
-<!DOCTYPE html><html lang="en" style=""><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><title>AI Verification - NavAble Admin</title><meta name="description" content="AI Verification management interface for the NavAble accessibility administration prototype."><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><script src="https://cdn.tailwindcss.com"></script><script src="../assets/js/tailwind-config.js"></script><link rel="stylesheet" href="../assets/css/admin.css">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><title>AI Verification - NavAble Admin</title><meta name="description" content="Confirm or reject accessibility features detected by AI in uploaded photos."><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><script defer src="https://cdn.tailwindcss.com"></script><script defer src="../assets/js/tailwind-config.js"></script>
+<link rel="icon" type="image/png" href="../logOnly.png">
+<link rel="stylesheet" href="../assets/css/admin.css">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.58.0/dist/umd/supabase.min.js"></script><script src="../assets/js/supabase-client.js"></script><script src="../assets/js/admin-guard.js"></script>
-</head><body class="bg-background font-body-md text-body-md text-on-background admin-page">
-<a class="admin-skip-link" href="#main-content">Skip to main content</a><aside id="staffSidebar" class="fixed left-0 top-0 z-50 flex h-full w-72 -translate-x-full flex-col justify-between overflow-y-auto bg-surface-container-low shadow-[6px_0_16px_rgba(15,43,77,0.08)] transition-transform duration-300 lg:translate-x-0" aria-label="Staff navigation">
+</head>
+<body class="bg-background font-body-md text-body-md text-on-background admin-page">
+<a class="admin-skip-link" href="#main-content">Skip to main content</a>
+<aside id="staffSidebar" class="fixed left-0 top-0 z-50 flex h-full w-72 -translate-x-full flex-col justify-between overflow-y-auto bg-surface-container-low shadow-[6px_0_16px_rgba(15,43,77,0.08)] transition-transform duration-300 lg:translate-x-0" aria-label="Staff navigation">
 <div class="p-space-lg">
 <div class="mb-space-xl flex items-center justify-between gap-space-sm">
 <a class="flex min-w-0 items-center gap-space-sm" href="dashboard.html" aria-label="NavAble staff dashboard">
@@ -19,409 +26,123 @@
 <a aria-current="page" class="flex items-center justify-between rounded-xl bg-surface px-space-md py-3 font-label-lg text-label-lg font-bold text-on-secondary-fixed shadow-[4px_4px_12px_rgba(91,198,107,0.22),-4px_-4px_12px_rgba(255,255,255,0.95),inset_4px_0_0_#5bc66b]" href="verification.html"><span>AI Verification</span><span class="material-symbols-outlined text-[19px]">verified</span></a>
 <a class="flex items-center justify-between rounded-xl px-space-md py-3 font-label-lg text-label-lg text-on-surface-variant transition-all hover:bg-surface-container-high hover:text-on-surface" href="reports.html"><span>Reports</span><span class="material-symbols-outlined text-[19px]">description</span></a>
 <a class="flex items-center justify-between rounded-xl px-space-md py-3 font-label-lg text-label-lg text-on-surface-variant transition-all hover:bg-surface-container-high hover:text-on-surface" href="ratings.html"><span>Ratings &amp; Reviews</span><span class="material-symbols-outlined text-[19px]">reviews</span></a>
+<a class="flex items-center justify-between rounded-xl px-space-md py-3 font-label-lg text-label-lg text-on-surface-variant transition-all hover:bg-surface-container-high hover:text-on-surface" href="bugs.html"><span>Bug Reports</span><span class="material-symbols-outlined text-[19px]">bug_report</span></a>
 <a class="flex items-center justify-between rounded-xl px-space-md py-3 font-label-lg text-label-lg text-on-surface-variant transition-all hover:bg-surface-container-high hover:text-on-surface" href="notifications.html"><span>Notifications</span><span class="material-symbols-outlined text-[19px]">notifications</span></a>
 <a class="flex items-center justify-between rounded-xl px-space-md py-3 font-label-lg text-label-lg text-on-surface-variant transition-all hover:bg-surface-container-high hover:text-on-surface" href="analytics.html"><span>Analytics</span><span class="material-symbols-outlined text-[19px]">analytics</span></a>
 <a class="flex items-center justify-between rounded-xl px-space-md py-3 font-label-lg text-label-lg text-on-surface-variant transition-all hover:bg-surface-container-high hover:text-on-surface" href="settings.html"><span>Settings</span><span class="material-symbols-outlined text-[19px]">settings</span></a>
 </nav>
 </div>
 <div class="p-space-lg">
-<div class="mb-space-md rounded-xl bg-surface p-space-md shadow-[4px_4px_12px_rgba(15,43,77,0.06),-4px_-4px_12px_rgba(255,255,255,0.9)]"><div class="flex items-center gap-space-sm"><div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary"><span class="material-symbols-outlined text-[18px] text-on-primary">person</span></div><div class="overflow-hidden"><div class="truncate font-label-lg text-label-lg text-on-surface">June Arnel</div><div class="truncate font-label-sm text-label-sm text-on-surface-variant">Super Admin</div></div></div></div>
+<div class="mb-space-md rounded-xl bg-surface p-space-md shadow-[4px_4px_12px_rgba(15,43,77,0.06),-4px_-4px_12px_rgba(255,255,255,0.9)]"><div class="flex items-center gap-space-sm"><div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary"><span class="material-symbols-outlined text-[18px] text-on-primary">person</span></div><div class="overflow-hidden"><div class="truncate font-label-lg text-label-lg text-on-surface" data-staff-name>June Arnel</div><div class="truncate font-label-sm text-label-sm text-on-surface-variant" data-staff-role>Super Admin</div></div></div></div>
 <button id="staffLogout" class="flex w-full items-center justify-center gap-space-xs rounded-xl bg-surface-container py-space-sm font-label-lg text-label-lg text-on-surface-variant shadow-[inset_2px_2px_5px_rgba(15,43,77,0.08),inset_-2px_-2px_5px_rgba(255,255,255,0.8)] transition-all hover:text-on-surface" type="button"><span class="material-symbols-outlined text-[18px]">logout</span><span>Log Out</span></button>
 </div>
 </aside>
-<div id="sidebarBackdrop" class="fixed inset-0 z-40 hidden bg-inverse-surface/40 backdrop-blur-sm lg:hidden" aria-hidden="true"></div><div class="min-h-screen overflow-x-hidden bg-background lg:pl-72"><header class="fixed left-0 right-0 top-0 h-20 lg:left-72 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(15,43,77,0.04)] z-30 px-space-md lg:px-space-xl flex items-center justify-between gap-space-sm lg:gap-space-lg"><button id="sidebarToggle" class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-surface text-on-surface-variant shadow-[4px_4px_10px_rgba(15,43,77,0.07),-4px_-4px_10px_rgba(255,255,255,0.95)] lg:hidden" type="button" aria-controls="staffSidebar" aria-expanded="false" aria-label="Open navigation"><span class="material-symbols-outlined">menu</span></button><div class="hidden sm:flex items-center gap-space-sm text-on-surface-variant font-label-md text-label-md"><a href="#" class="flex items-center text-on-surface-variant hover:text-primary transition-all"><span class="material-symbols-outlined text-[18px]">home</span></a><span class="text-outline-variant text-label-md">/</span><a href="#" class="text-on-surface-variant hover:text-primary transition-all font-label-md text-label-md">Admin Cockpit</a><span class="text-outline-variant text-label-md">/</span><span class="text-primary font-label-lg text-label-lg font-bold">AI Verification Queue</span></div><div class="hidden flex-1 md:block md:max-w-md"><div class="relative flex items-center"><span class="material-symbols-outlined absolute left-space-md text-on-surface-variant text-[20px]">search</span><input class="w-full bg-surface-container-high/60 rounded-xl pl-11 pr-16 py-2.5 text-on-surface font-body-sm text-body-sm shadow-[inset_2px_2px_4px_rgba(15,43,77,0.07),inset_-2px_-2px_4px_rgba(255,255,255,0.85)] placeholder:text-on-surface-variant focus:outline-none focus:ring-2 focus:ring-secondary transition-all" placeholder="Search ramps, IDs, locations..." type="text"><kbd class="absolute right-space-md font-label-sm text-label-sm bg-surface-container px-space-xs py-0.5 rounded shadow-sm text-on-surface-variant">Ctrl K</kbd></div></div><div class="flex items-center gap-space-xs sm:gap-space-md"><div class="hidden xl:flex items-center gap-space-xs px-space-md py-1.5 rounded-full bg-surface shadow-[inset_2px_2px_4px_rgba(15,43,77,0.05),inset_-2px_-2px_4px_rgba(255,255,255,0.8)]"><span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span><span class="font-label-sm text-label-sm text-on-surface-variant">Live: Firebase Online</span></div><button class="w-10 h-10 rounded-xl bg-surface flex items-center justify-center text-on-surface-variant hover:text-on-surface shadow-[4px_4px_10px_rgba(15,43,77,0.07),-4px_-4px_10px_rgba(255,255,255,0.95)] hover:shadow-[2px_2px_5px_rgba(15,43,77,0.07),-2px_-2px_5px_rgba(255,255,255,0.95)] transition-all relative"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-error"></span></button><button class="hidden w-10 h-10 rounded-xl bg-surface sm:flex items-center justify-center text-on-surface-variant hover:text-on-surface shadow-[4px_4px_10px_rgba(15,43,77,0.07),-4px_-4px_10px_rgba(255,255,255,0.95)] transition-all" title="High Contrast &amp; Accessibility Mode"><span class="material-symbols-outlined text-[20px]">contrast</span></button><div class="hidden items-center gap-space-sm pl-space-sm sm:flex"><div class="relative"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-primary ring-2 ring-surface"></span></div><div class="hidden md:block text-left"><div class="font-label-lg text-label-lg text-on-surface leading-none">June Arnel</div><div class="font-label-sm text-label-sm text-on-surface-variant mt-0.5">Super Admin</div></div></div></div></header><main id="main-content" class="w-full min-w-0 px-space-md pt-20 lg:px-space-xl pb-space-xl bg-background flex-1">
-<div class="flex min-w-0 w-full flex-col">
-<div class="flex flex-col gap-space-lg w-full">
-<div class="admin-page-heading-row flex flex-col sm:flex-row">
-<div class="admin-page-intro">
-<h1>AI Verification Queue</h1>
-<p>Review flagged evidence and high-confidence submissions before accessibility records are published.</p>
+<div id="sidebarBackdrop" class="fixed inset-0 z-40 hidden bg-inverse-surface/40 backdrop-blur-sm lg:hidden" aria-hidden="true"></div>
+<div class="min-h-screen overflow-x-hidden bg-background lg:pl-72">
+<header class="fixed left-0 right-0 top-0 h-20 lg:left-72 z-30 px-space-md lg:px-space-xl flex items-center justify-between gap-space-sm lg:gap-space-lg">
+<button id="sidebarToggle" class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl lg:hidden" type="button" aria-controls="staffSidebar" aria-expanded="false" aria-label="Open navigation"><span class="material-symbols-outlined" aria-hidden="true">menu</span></button>
+<div class="hidden sm:flex items-center">Admin Cockpit</div>
+<div class="ml-auto flex items-center gap-space-sm">
+<button class="flex h-10 w-10 items-center justify-center rounded-xl" type="button" aria-label="Open notifications" title="Notifications"><span class="material-symbols-outlined" aria-hidden="true">notifications</span></button>
+<button class="flex h-10 w-10 items-center justify-center rounded-xl" type="button" title="High contrast mode"><span class="material-symbols-outlined" aria-hidden="true">contrast</span></button>
 </div>
-<div class="admin-page-actions">
-<button class="admin-export-button" data-admin-action="export" type="button" aria-label="Export verification queue">
-<span class="material-symbols-outlined" aria-hidden="true">download</span>
-<span>Export</span>
-</button>
+</header>
+<main id="main-content" class="w-full min-w-0 px-space-md pt-20 lg:px-space-xl pb-space-xl flex-1" aria-busy="true">
+<div class="nv-dash">
+<div class="nv-page-head">
+<div>
+<h1>AI Verification</h1>
+<p>Accessibility features the AI detected in photos uploaded by NavAble users. Confirm what it found, or mark the feature as not present.</p>
 </div>
-</div>
-<!-- Top Action & Filter Deck -->
-<div class="flex flex-col xl:flex-row items-stretch xl:items-center justify-between gap-space-md bg-surface-container-low p-space-lg rounded-[24px] shadow-[6px_6px_16px_rgba(15,43,77,0.06),-6px_-6px_16px_rgba(255,255,255,0.9)]">
-<!-- Filter Nav Tabs -->
-<div class="flex flex-wrap items-center gap-space-xs">
-<button class="flex items-center gap-space-xs px-space-md py-2.5 rounded-full bg-surface text-primary shadow-[inset_2px_2px_4px_rgba(15,43,77,0.08),inset_-2px_-2px_4px_rgba(255,255,255,0.9)] font-label-lg text-label-lg transition-all">
-<span class="w-2 h-2 rounded-full bg-primary"></span>
-<span class="">All Pending</span>
-<span class="px-space-xs py-0.5 rounded-full font-label-sm text-label-sm bg-primary-container text-on-primary-container">14</span>
-</button>
-<button class="flex items-center gap-space-xs px-space-md py-2.5 rounded-full bg-surface text-on-surface-variant hover:text-on-surface shadow-[4px_4px_10px_rgba(15,43,77,0.06),-4px_-4px_10px_rgba(255,255,255,0.95)] hover:shadow-[2px_2px_5px_rgba(15,43,77,0.05),-2px_-2px_5px_rgba(255,255,255,0.9)] font-label-lg text-label-lg transition-all">
-<span class="material-symbols-outlined text-[16px] text-primary">verified</span>
-<span class="">High Confidence (90%+)</span>
-<span class="px-space-xs py-0.5 rounded-full font-label-sm text-label-sm bg-surface-container text-on-surface-variant">8</span>
-</button>
-<button class="flex items-center gap-space-xs px-space-md py-2.5 rounded-full bg-surface text-on-surface-variant hover:text-on-surface shadow-[4px_4px_10px_rgba(15,43,77,0.06),-4px_-4px_10px_rgba(255,255,255,0.95)] hover:shadow-[2px_2px_5px_rgba(15,43,77,0.05),-2px_-2px_5px_rgba(255,255,255,0.9)] font-label-lg text-label-lg transition-all">
-<span class="material-symbols-outlined text-[16px] text-error">priority_high</span>
-<span class="">Low Confidence (&lt;70%)</span>
-<span class="px-space-xs py-0.5 rounded-full font-label-sm text-label-sm bg-error-container text-on-error-container">3</span>
-</button>
-<button class="flex items-center gap-space-xs px-space-md py-2.5 rounded-full bg-surface text-on-surface-variant hover:text-on-surface shadow-[4px_4px_10px_rgba(15,43,77,0.06),-4px_-4px_10px_rgba(255,255,255,0.95)] hover:shadow-[2px_2px_5px_rgba(15,43,77,0.05),-2px_-2px_5px_rgba(255,255,255,0.9)] font-label-lg text-label-lg transition-all">
-<span class="material-symbols-outlined text-[16px] text-secondary">contact_support</span>
-<span class="">Manual Review</span>
-<span class="px-space-xs py-0.5 rounded-full font-label-sm text-label-sm bg-secondary-container text-on-secondary-container">3</span>
-</button>
-<button class="flex items-center gap-space-xs px-space-md py-2.5 rounded-full bg-surface text-on-surface-variant hover:text-on-surface shadow-[4px_4px_10px_rgba(15,43,77,0.06),-4px_-4px_10px_rgba(255,255,255,0.95)] hover:shadow-[2px_2px_5px_rgba(15,43,77,0.05),-2px_-2px_5px_rgba(255,255,255,0.9)] font-label-lg text-label-lg transition-all">
-<span class="material-symbols-outlined text-[16px]">history</span>
-<span class="">Resolved History</span>
-</button>
-</div>
-<!-- Quick Control Actions -->
-<div class="flex items-center flex-wrap gap-space-sm">
-<button class="flex items-center gap-space-xs px-space-md py-2.5 rounded-xl bg-surface text-on-surface hover:text-primary shadow-[4px_4px_10px_rgba(15,43,77,0.07),-4px_-4px_10px_rgba(255,255,255,0.95)] active:shadow-[inset_2px_2px_5px_rgba(15,43,77,0.1),inset_-2px_-2px_5px_rgba(255,255,255,0.8)] font-label-lg text-label-lg transition-all" id="batchApproveBtn">
-<span class="material-symbols-outlined text-[18px] text-primary">done_all</span>
-<span class="">Batch Approve (&gt;95%)</span>
-</button>
+<div class="nv-page-actions">
+<span class="nv-updated" id="pageUpdated" aria-live="polite">Loading data…</span>
+<button class="nv-btn" id="pageRefresh" type="button" disabled><span class="material-symbols-outlined" aria-hidden="true">refresh</span><span>Refresh</span></button>
+<button class="nv-btn" id="resultsDownload" type="button" disabled aria-label="Download the filtered AI results as CSV"><span class="material-symbols-outlined" aria-hidden="true">download</span><span>Download CSV</span></button>
 </div>
 </div>
-<!-- Search & Feature Selector Bar -->
-<div class="grid grid-cols-1 md:grid-cols-12 gap-space-md">
-<div class="md:col-span-8">
-<div class="relative flex items-center">
-<span class="material-symbols-outlined absolute left-space-md text-on-surface-variant text-[20px]">search</span>
-<input class="w-full bg-surface-container rounded-xl pl-11 pr-4 py-3 text-on-surface font-body-sm text-body-sm shadow-[inset_3px_3px_6px_rgba(15,43,77,0.07),inset_-3px_-3px_6px_rgba(255,255,255,0.9)] placeholder:text-on-surface-variant focus:outline-none transition-all" id="queueSearch" placeholder="Filter queue by facility name, address, or contributor tag..." type="text">
+
+<div class="nv-banner" id="pageBanner" role="alert" hidden>
+<span class="material-symbols-outlined" aria-hidden="true">error</span>
+<p id="pageBannerText">Some data could not be loaded.</p>
+<button class="nv-btn" type="button" data-retry><span class="material-symbols-outlined" aria-hidden="true">refresh</span><span>Try again</span></button>
+</div>
+
+<section class="nv-section" aria-labelledby="summaryTitle">
+<div class="nv-section-head">
+<h2 id="summaryTitle">Summary</h2>
+<p>Counts across all AI results.</p>
+</div>
+<div class="nv-grid-4">
+<div class="nv-card nv-stat" data-metric="waiting" data-tone="info">
+<span class="nv-stat-icon"><span class="material-symbols-outlined" aria-hidden="true">frame_inspect</span></span>
+<span class="nv-stat-label">Waiting for review</span>
+<span class="nv-stat-value" data-value><span class="nv-skeleton is-value"></span></span>
+<span class="nv-stat-meta" data-meta>Loading…</span>
+</div>
+<div class="nv-card nv-stat" data-metric="confidence">
+<span class="nv-stat-icon"><span class="material-symbols-outlined" aria-hidden="true">speed</span></span>
+<span class="nv-stat-label">Average confidence (waiting)</span>
+<span class="nv-stat-value" data-value><span class="nv-skeleton is-value"></span></span>
+<span class="nv-stat-meta" data-meta>Loading…</span>
+</div>
+<div class="nv-card nv-stat" data-metric="confirmed">
+<span class="nv-stat-icon"><span class="material-symbols-outlined" aria-hidden="true">task_alt</span></span>
+<span class="nv-stat-label">Reviewed by an admin</span>
+<span class="nv-stat-value" data-value><span class="nv-skeleton is-value"></span></span>
+<span class="nv-stat-meta" data-meta>Loading…</span>
+</div>
+<div class="nv-card nv-stat" data-metric="total">
+<span class="nv-stat-icon"><span class="material-symbols-outlined" aria-hidden="true">photo_library</span></span>
+<span class="nv-stat-label">All AI results</span>
+<span class="nv-stat-value" data-value><span class="nv-skeleton is-value"></span></span>
+<span class="nv-stat-meta" data-meta>Loading…</span>
 </div>
 </div>
-<div class="md:col-span-4 flex items-center gap-space-sm">
-<div class="relative w-full">
-<select class="w-full appearance-none bg-surface rounded-xl px-space-md py-3 pr-10 text-on-surface font-label-lg text-label-lg shadow-[4px_4px_10px_rgba(15,43,77,0.06),-4px_-4px_10px_rgba(255,255,255,0.9)] focus:outline-none cursor-pointer">
-<option>All Features (Ramps, Elevators, Entrances, Paving)</option>
-<option>Wheelchair Ramps</option>
-<option>Accessible Entrances</option>
-<option>Elevators &amp; Lifts</option>
-<option>Tactile Ground Surfaces</option>
+</section>
+
+<section class="nv-section" aria-labelledby="listTitle">
+<div class="nv-card">
+<div class="nv-card-head">
+<div>
+<h2 id="listTitle" tabindex="-1" data-focus-fallback>Detections</h2>
+<p id="listSummary" aria-live="polite">Newest first.</p>
+</div>
+</div>
+<form class="nv-filters" id="resultFilters" role="search" aria-label="Filter AI results">
+<div class="nv-field is-grow">
+<label for="filterSearch">Detected feature</label>
+<input class="nv-input" id="filterSearch" name="search" type="search" placeholder="For example ramp" autocomplete="off">
+</div>
+<div class="nv-field">
+<label for="filterQueue">Show</label>
+<select class="nv-select" id="filterQueue" name="queue">
+<option value="waiting">Waiting for review</option>
+<option value="unreviewed">All not yet reviewed</option>
+<option value="reviewed">Reviewed</option>
+<option value="">All results</option>
 </select>
-<span class="material-symbols-outlined absolute right-space-md top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant text-[20px]">expand_more</span>
 </div>
+<div class="nv-field">
+<label for="filterConfidence">Confidence</label>
+<select class="nv-select" id="filterConfidence" name="confidence">
+<option value="">Any confidence</option>
+<option value="low">Below 70%</option>
+<option value="mid">70% to 89%</option>
+<option value="high">90% or higher</option>
+</select>
 </div>
+<button class="nv-btn" type="reset"><span class="material-symbols-outlined" aria-hidden="true">filter_alt_off</span><span>Reset filters</span></button>
+</form>
+<div data-panel="list">
+<span class="nv-skeleton is-line"></span><span class="nv-skeleton is-line"></span><span class="nv-skeleton is-line"></span><span class="nv-skeleton is-line is-short"></span>
 </div>
-<!-- Main Workspace Split Grid -->
-<div class="grid grid-cols-1 xl:grid-cols-12 gap-space-xl items-start">
-<!-- LEFT COLUMN: Verification List (5 cols) -->
-<div class="xl:col-span-5 flex flex-col gap-space-md">
-<div class="flex items-center justify-between px-space-xs">
-<div class="flex items-center gap-space-xs">
-<span class="font-headline-sm text-headline-sm text-on-surface">Submissions</span>
-<span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container">14 In Queue</span>
 </div>
-<span class="font-label-sm text-label-sm text-on-surface-variant">Realtime Computer Vision v4.2</span>
+</section>
 </div>
-<div class="flex flex-col gap-space-md max-h-[calc(100vh-280px)] overflow-y-auto pr-1">
-<!-- ITEM 1: Active Focus Item #VER-8942 -->
-<div class="relative p-space-md rounded-[20px] bg-surface shadow-[inset_2px_2px_4px_rgba(15,43,77,0.06),inset_-2px_-2px_4px_rgba(255,255,255,0.9)] cursor-pointer transition-all">
-<div class="absolute left-0 top-3 bottom-3 w-1.5 rounded-r-full bg-primary"></div>
-<div class="flex gap-space-md">
-<div class="relative w-20 h-20 rounded-xl overflow-hidden shrink-0 shadow-[2px_2px_6px_rgba(15,43,77,0.08)]">
-<img class="w-full h-full object-cover" data-alt="Close-up crisp photo of concrete accessibility ramp with safety handrails and yellow tactile paving tiles at modern hospital entrance under bright natural sunlight." src="../logOnly.png" data-admin-visual="true">
-<span class="absolute bottom-1 right-1 bg-surface/90 backdrop-blur-sm px-1 rounded font-label-sm text-label-sm text-primary">94.2%</span>
+</main>
 </div>
-<div class="flex-1 min-w-0 flex flex-col justify-between">
-<div class="flex items-center justify-between gap-space-xs">
-<div class="flex items-center gap-space-xs">
-<span class="font-label-lg text-label-lg text-primary font-bold">#VER-8942</span>
-<span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-primary-container/20 text-primary font-semibold">Ramp</span>
-</div>
-<span class="font-label-sm text-label-sm text-on-surface-variant">3m ago</span>
-</div>
-<div class="font-label-lg text-label-lg text-on-surface truncate">St. Jude Community Hospital</div>
-<div class="flex items-center justify-between pt-1">
-<div class="flex items-center gap-1.5">
-<span class="w-2 h-2 rounded-full bg-primary"></span>
-<span class="font-label-sm text-label-sm text-on-surface-variant">June Ramirez (Lvl 4)</span>
-</div>
-<span class="font-label-sm text-label-sm text-primary font-bold">Slope: 1:12 ADA OK</span>
-</div>
-</div>
-</div>
-<!-- Inset Confidence Gauge Bar -->
-<div class="mt-space-sm pt-space-xs">
-<div class="w-full h-2 rounded-full bg-surface-container shadow-[inset_1px_1px_3px_rgba(15,43,77,0.12)] overflow-hidden">
-<div class="h-full bg-primary-container rounded-full" style="width: 94.2%"></div>
-</div>
-</div>
-</div>
-<!-- ITEM 2: #VER-8941 -->
-<div class="p-space-md rounded-[20px] bg-surface shadow-[4px_4px_12px_rgba(15,43,77,0.06),-4px_-4px_12px_rgba(255,255,255,0.95)] hover:shadow-[2px_2px_6px_rgba(15,43,77,0.06),-2px_-2px_6px_rgba(255,255,255,0.95)] cursor-pointer transition-all">
-<div class="flex gap-space-md">
-<div class="relative w-20 h-20 rounded-xl overflow-hidden shrink-0 shadow-[2px_2px_6px_rgba(15,43,77,0.08)]">
-<img class="w-full h-full object-cover" data-alt="Automatic sliding glass entrance doors with wide threshold and Braille push plate at public civic library, soft daylight lighting." src="../logOnly.png" data-admin-visual="true">
-<span class="absolute bottom-1 right-1 bg-surface/90 backdrop-blur-sm px-1 rounded font-label-sm text-label-sm text-primary">91.8%</span>
-</div>
-<div class="flex-1 min-w-0 flex flex-col justify-between">
-<div class="flex items-center justify-between gap-space-xs">
-<div class="flex items-center gap-space-xs">
-<span class="font-label-lg text-label-lg text-on-surface font-semibold">#VER-8941</span>
-<span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container">Entrance</span>
-</div>
-<span class="font-label-sm text-label-sm text-on-surface-variant">14m ago</span>
-</div>
-<div class="font-label-lg text-label-lg text-on-surface truncate">Central Public Library - North Wing</div>
-<div class="flex items-center justify-between pt-1">
-<div class="flex items-center gap-1.5">
-<span class="w-2 h-2 rounded-full bg-secondary"></span>
-<span class="font-label-sm text-label-sm text-on-surface-variant">Marcus Chen (Verified)</span>
-</div>
-<span class="font-label-sm text-label-sm text-on-surface-variant">Width: 38" Validated</span>
-</div>
-</div>
-</div>
-<div class="mt-space-sm pt-space-xs">
-<div class="w-full h-2 rounded-full bg-surface-container shadow-[inset_1px_1px_3px_rgba(15,43,77,0.12)] overflow-hidden">
-<div class="h-full bg-primary-container rounded-full" style="width: 91.8%"></div>
-</div>
-</div>
-</div>
-<!-- ITEM 3: #VER-8940 (Low Confidence Alert) -->
-<div class="p-space-md rounded-[20px] bg-surface shadow-[4px_4px_12px_rgba(15,43,77,0.06),-4px_-4px_12px_rgba(255,255,255,0.95)] hover:shadow-[2px_2px_6px_rgba(15,43,77,0.06),-2px_-2px_6px_rgba(255,255,255,0.95)] cursor-pointer transition-all">
-<div class="flex gap-space-md">
-<div class="relative w-20 h-20 rounded-xl overflow-hidden shrink-0 shadow-[2px_2px_6px_rgba(15,43,77,0.08)]">
-<img class="w-full h-full object-cover" data-alt="Grainy photograph of steep brick ramp near subway entrance at night with partial glare obscuring slope angle and no visible handrail." src="../logOnly.png" data-admin-visual="true">
-<span class="absolute bottom-1 right-1 bg-surface/90 backdrop-blur-sm px-1 rounded font-label-sm text-label-sm text-error">58.4%</span>
-</div>
-<div class="flex-1 min-w-0 flex flex-col justify-between">
-<div class="flex items-center justify-between gap-space-xs">
-<div class="flex items-center gap-space-xs">
-<span class="font-label-lg text-label-lg text-on-surface font-semibold">#VER-8940</span>
-<span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-error-container text-on-error-container">Low Conf</span>
-</div>
-<span class="font-label-sm text-label-sm text-on-surface-variant">29m ago</span>
-</div>
-<div class="font-label-lg text-label-lg text-on-surface truncate">Metro Station 8th Ave Underpass</div>
-<div class="flex items-center justify-between pt-1">
-<div class="flex items-center gap-1.5">
-<span class="w-2 h-2 rounded-full bg-error"></span>
-<span class="font-label-sm text-label-sm text-on-surface-variant">Guest User #1092</span>
-</div>
-<span class="font-label-sm text-label-sm text-error font-semibold">Incline &gt; 1:8 Warning</span>
-</div>
-</div>
-</div>
-<div class="mt-space-sm pt-space-xs">
-<div class="w-full h-2 rounded-full bg-surface-container shadow-[inset_1px_1px_3px_rgba(15,43,77,0.12)] overflow-hidden">
-<div class="h-full bg-error rounded-full" style="width: 58.4%"></div>
-</div>
-</div>
-</div>
-<!-- ITEM 4: #VER-8939 -->
-<div class="p-space-md rounded-[20px] bg-surface shadow-[4px_4px_12px_rgba(15,43,77,0.06),-4px_-4px_12px_rgba(255,255,255,0.95)] hover:shadow-[2px_2px_6px_rgba(15,43,77,0.06),-2px_-2px_6px_rgba(255,255,255,0.95)] cursor-pointer transition-all">
-<div class="flex gap-space-md">
-<div class="relative w-20 h-20 rounded-xl overflow-hidden shrink-0 shadow-[2px_2px_6px_rgba(15,43,77,0.08)]">
-<img class="w-full h-full object-cover" data-alt="High quality overhead view of clean yellow blister tactile warning paving studs aligned along sidewalk pedestrian crossing curb edge." src="../logOnly.png" data-admin-visual="true">
-<span class="absolute bottom-1 right-1 bg-surface/90 backdrop-blur-sm px-1 rounded font-label-sm text-label-sm text-primary">96.5%</span>
-</div>
-<div class="flex-1 min-w-0 flex flex-col justify-between">
-<div class="flex items-center justify-between gap-space-xs">
-<div class="flex items-center gap-space-xs">
-<span class="font-label-lg text-label-lg text-on-surface font-semibold">#VER-8939</span>
-<span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container">Tactile</span>
-</div>
-<span class="font-label-sm text-label-sm text-on-surface-variant">48m ago</span>
-</div>
-<div class="font-label-lg text-label-lg text-on-surface truncate">Pine &amp; 4th St Pedestrian Crossing</div>
-<div class="flex items-center justify-between pt-1">
-<div class="flex items-center gap-1.5">
-<span class="w-2 h-2 rounded-full bg-primary"></span>
-<span class="font-label-sm text-label-sm text-on-surface-variant">Elena Rostova (Lvl 5)</span>
-</div>
-<span class="font-label-sm text-label-sm text-primary font-bold">Contrast: 84%</span>
-</div>
-</div>
-</div>
-<div class="mt-space-sm pt-space-xs">
-<div class="w-full h-2 rounded-full bg-surface-container shadow-[inset_1px_1px_3px_rgba(15,43,77,0.12)] overflow-hidden">
-<div class="h-full bg-primary-container rounded-full" style="width: 96.5%"></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<!-- RIGHT COLUMN: Detailed Inspection Modal & Verification Engine (7 cols) -->
-<div class="xl:col-span-7 flex flex-col gap-space-lg">
-<!-- Primary Inspection Container -->
-<div class="bg-surface p-space-lg rounded-[24px] shadow-[6px_6px_16px_rgba(15,43,77,0.07),-6px_-6px_16px_rgba(255,255,255,0.95)]">
-<!-- Inspection Header -->
-<div class="flex flex-wrap items-center justify-between gap-space-md pb-space-md">
-<div>
-<div class="flex items-center gap-space-xs">
-<span class="font-headline-md text-headline-md text-on-surface">Inspection #VER-8942</span>
-<span class="px-space-xs py-0.5 rounded-full font-label-sm text-label-sm bg-primary-container text-on-primary-container flex items-center gap-1">
-<span class="material-symbols-outlined text-[14px]">bolt</span>
-                  Auto-Processed
-                </span>
-</div>
-<div class="font-label-md text-label-md text-on-surface-variant mt-0.5">
-                St. Jude Community Hospital • Submitted Oct 24, 2024 at 14:22 EST
-              </div>
-</div>
-<div class="flex items-center gap-space-xs">
-<button class="w-9 h-9 rounded-xl bg-surface flex items-center justify-center text-on-surface-variant hover:text-on-surface shadow-[3px_3px_8px_rgba(15,43,77,0.06),-3px_-3px_8px_rgba(255,255,255,0.9)] transition-all" title="Zoom in">
-<span class="material-symbols-outlined text-[18px]">zoom_in</span>
-</button>
-<button class="w-9 h-9 rounded-xl bg-surface flex items-center justify-center text-on-surface-variant hover:text-on-surface shadow-[3px_3px_8px_rgba(15,43,77,0.06),-3px_-3px_8px_rgba(255,255,255,0.9)] transition-all" title="Zoom out">
-<span class="material-symbols-outlined text-[18px]">zoom_out</span>
-</button>
-<button class="w-9 h-9 rounded-xl bg-surface flex items-center justify-center text-on-surface-variant hover:text-on-surface shadow-[3px_3px_8px_rgba(15,43,77,0.06),-3px_-3px_8px_rgba(255,255,255,0.9)] transition-all" title="Rotate 90 deg">
-<span class="material-symbols-outlined text-[18px]">rotate_right</span>
-</button>
-<button class="w-9 h-9 rounded-xl bg-surface flex items-center justify-center text-on-surface-variant hover:text-on-surface shadow-[3px_3px_8px_rgba(15,43,77,0.06),-3px_-3px_8px_rgba(255,255,255,0.9)] transition-all" title="Reset viewport">
-<span class="material-symbols-outlined text-[18px]">center_focus_strong</span>
-</button>
-</div>
-</div>
-<!-- Viewport with Interactive Computer Vision Bounding Box -->
-<div class="relative w-full h-[400px] rounded-[18px] overflow-hidden bg-surface-container-highest shadow-[inset_2px_2px_6px_rgba(15,43,77,0.12)]">
-<img class="w-full h-full object-cover" data-alt="Architectural daylight photograph of an accessible wheelchair entrance ramp leading up to double glass hospital doors with dual stainless steel handrails and level threshold landing." src="../logOnly.png" data-admin-visual="true">
-<!-- AI Bounding Box Overlay 1: Ramp -->
-<div class="absolute inset-x-[18%] inset-y-[22%] rounded-lg shadow-[0_0_0_2px_#5bc66b,0_0_15px_rgba(91,198,107,0.5)] bg-primary-container/10 pointer-events-none transition-all">
-<div class="absolute -top-7 left-0 bg-surface text-primary font-label-sm text-label-sm px-2.5 py-1 rounded-md shadow-md flex items-center gap-1 backdrop-blur-md">
-<span class="material-symbols-outlined text-[14px]">view_in_ar</span>
-<span class="">Ramp: 94.2% Conf | Slope 1:12 OK</span>
-</div>
-<div class="absolute bottom-2 left-2 bg-surface/90 text-on-surface font-label-sm text-label-sm px-2 py-0.5 rounded shadow">
-                Est. Width: 42.4" (&gt;36" Min)
-              </div>
-</div>
-<!-- AI Bounding Box Overlay 2: Handrail -->
-<div class="absolute left-[16%] top-[24%] bottom-[20%] w-[12%] rounded border border-dashed border-secondary bg-secondary-container/15 pointer-events-none">
-<div class="absolute -bottom-6 left-0 bg-secondary text-on-secondary font-label-sm text-label-sm px-1.5 py-0.5 rounded shadow whitespace-nowrap">
-                Handrail: Continuous (34")
-              </div>
-</div>
-<!-- Floating Overlay Pill for Model Diagnostics -->
-<div class="absolute top-4 right-4 bg-surface/90 backdrop-blur-md px-space-md py-1.5 rounded-full shadow-[2px_2px_8px_rgba(15,43,77,0.15)] flex items-center gap-space-xs text-on-surface font-label-sm text-label-sm">
-<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-<span class="">Inference: 142ms • Vision-V4-Pro</span>
-</div>
-</div>
-<!-- AI Diagnostic Breakdown Strip -->
-<div class="mt-space-lg grid grid-cols-2 md:grid-cols-4 gap-space-sm">
-<div class="p-space-md rounded-xl bg-surface-container shadow-[inset_2px_2px_4px_rgba(15,43,77,0.06),inset_-2px_-2px_4px_rgba(255,255,255,0.85)] flex flex-col justify-between">
-<div class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
-<span class="material-symbols-outlined text-[16px] text-primary">straighten</span>
-<span class="">Slope Gradient</span>
-</div>
-<div class="font-headline-sm text-headline-sm text-primary font-bold mt-1">1:12 ADA</div>
-<div class="font-label-sm text-label-sm text-on-surface-variant">Max allowed: 1:12</div>
-</div>
-<div class="p-space-md rounded-xl bg-surface-container shadow-[inset_2px_2px_4px_rgba(15,43,77,0.06),inset_-2px_-2px_4px_rgba(255,255,255,0.85)] flex flex-col justify-between">
-<div class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
-<span class="material-symbols-outlined text-[16px] text-primary">handshake</span>
-<span class="">Handrails</span>
-</div>
-<div class="font-headline-sm text-headline-sm text-on-surface font-bold mt-1">Dual-Sided</div>
-<div class="font-label-sm text-label-sm text-primary font-semibold">Continuous Grip</div>
-</div>
-<div class="p-space-md rounded-xl bg-surface-container shadow-[inset_2px_2px_4px_rgba(15,43,77,0.06),inset_-2px_-2px_4px_rgba(255,255,255,0.85)] flex flex-col justify-between">
-<div class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
-<span class="material-symbols-outlined text-[16px] text-primary">grain</span>
-<span class="">Surface Quality</span>
-</div>
-<div class="font-headline-sm text-headline-sm text-on-surface font-bold mt-1">Broomed Conc.</div>
-<div class="font-label-sm text-label-sm text-primary font-semibold">Slip-Resistant</div>
-</div>
-<div class="p-space-md rounded-xl bg-surface-container shadow-[inset_2px_2px_4px_rgba(15,43,77,0.06),inset_-2px_-2px_4px_rgba(255,255,255,0.85)] flex flex-col justify-between">
-<div class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
-<span class="material-symbols-outlined text-[16px] text-primary">warning</span>
-<span class="">Tactile Strip</span>
-</div>
-<div class="font-headline-sm text-headline-sm text-primary font-bold mt-1">Present</div>
-<div class="font-label-sm text-label-sm text-on-surface-variant">24" Base &amp; Crest</div>
-</div>
-</div>
-<!-- Two Column Metadata: Contributor Trust & Spatial Verification -->
-<div class="mt-space-lg grid grid-cols-1 md:grid-cols-2 gap-space-lg">
-<!-- Contributor Trust Card -->
-<div class="p-space-md rounded-[18px] bg-surface shadow-[4px_4px_12px_rgba(15,43,77,0.05),-4px_-4px_12px_rgba(255,255,255,0.9)] flex flex-col justify-between">
-<div>
-<div class="flex items-center justify-between">
-<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Contributor Profile</span>
-<span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm">Super Admin</span>
-</div>
-<div class="flex items-center gap-space-sm mt-space-md">
-<div class="w-11 h-11 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold shadow-[2px_2px_5px_rgba(15,43,77,0.08)]">
-                    JR
-                  </div>
-<div>
-<div class="font-label-lg text-label-lg text-on-surface font-bold">June Ramirez</div>
-<div class="font-label-sm text-label-sm text-on-surface-variant">j.ramirez@cityaccess.org</div>
-</div>
-</div>
-<div class="grid grid-cols-2 gap-space-xs mt-space-md pt-space-xs">
-<div class="bg-surface-container-low p-2 rounded-lg text-center shadow-[inset_1px_1px_3px_rgba(15,43,77,0.04)]">
-<div class="font-headline-sm text-headline-sm text-primary font-bold">98.4%</div>
-<div class="font-label-sm text-label-sm text-on-surface-variant">Historical Accuracy</div>
-</div>
-<div class="bg-surface-container-low p-2 rounded-lg text-center shadow-[inset_1px_1px_3px_rgba(15,43,77,0.04)]">
-<div class="font-headline-sm text-headline-sm text-on-surface font-bold">142</div>
-<div class="font-label-sm text-label-sm text-on-surface-variant">Verified Submissions</div>
-</div>
-</div>
-</div>
-</div>
-<!-- Spatial Ground Truth & Coordinates -->
-<div class="p-space-md rounded-[18px] bg-surface shadow-[4px_4px_12px_rgba(15,43,77,0.05),-4px_-4px_12px_rgba(255,255,255,0.9)] flex flex-col justify-between">
-<div>
-<div class="flex items-center justify-between">
-<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Geographic Verification</span>
-<span class="flex items-center gap-1 text-primary font-label-sm text-label-sm">
-<span class="material-symbols-outlined text-[14px]">gps_fixed</span>
-                    High Precision
-                  </span>
-</div>
-<div class="mt-space-md">
-<div class="font-label-lg text-label-lg text-on-surface font-semibold">St. Jude Community Hospital</div>
-<div class="font-body-sm text-body-sm text-on-surface-variant">1200 Health Boulevard, Main West Gate</div>
-<div class="font-label-sm text-label-sm text-on-surface-variant mt-1">Lat: 40.7128° N • Lng: 74.0060° W (±1.4m accuracy)</div>
-</div>
-</div>
-<!-- Location Snapshot map -->
-<div class="w-full h-20 rounded-xl mt-space-sm bg-cover bg-center shadow-[inset_1px_1px_4px_rgba(15,43,77,0.1)]" data-location="St. Jude Hospital, New York" data-admin-visual="true"></div>
-</div>
-</div>
-<!-- Administrative Annotation Input -->
-<div class="mt-space-lg">
-<label class="block font-label-lg text-label-lg text-on-surface mb-2" for="adminNote">Moderator Annotations &amp; Audit Trail</label>
-<textarea class="w-full bg-surface-container rounded-xl p-space-md text-on-surface font-body-sm text-body-sm shadow-[inset_3px_3px_6px_rgba(15,43,77,0.07),inset_-3px_-3px_6px_rgba(255,255,255,0.9)] placeholder:text-on-surface-variant focus:outline-none transition-all resize-none" id="adminNote" placeholder="Add moderator notes or accessibility annotations before publishing..." rows="2"></textarea>
-</div>
-<!-- Action Decision Bar -->
-<div class="mt-space-xl pt-space-md flex flex-col sm:flex-row items-center justify-between gap-space-md">
-<div class="flex items-center gap-space-sm w-full sm:w-auto">
-<!-- Reject Dropdown Button Combo -->
-<div class="relative w-full sm:w-auto">
-<button class="w-full sm:w-auto flex items-center justify-center gap-space-xs px-space-md py-3 rounded-xl bg-surface text-error hover:bg-error-container hover:text-on-error-container shadow-[4px_4px_10px_rgba(15,43,77,0.07),-4px_-4px_10px_rgba(255,255,255,0.95)] active:shadow-[inset_2px_2px_5px_rgba(15,43,77,0.1)] font-label-lg text-label-lg transition-all" id="rejectBtn">
-<span class="material-symbols-outlined text-[18px]">close</span>
-<span class="">Reject Submission</span>
-</button>
-</div>
-<button class="w-full sm:w-auto flex items-center justify-center gap-space-xs px-space-md py-3 rounded-xl bg-surface text-on-surface-variant hover:text-on-surface shadow-[4px_4px_10px_rgba(15,43,77,0.07),-4px_-4px_10px_rgba(255,255,255,0.95)] active:shadow-[inset_2px_2px_5px_rgba(15,43,77,0.1)] font-label-lg text-label-lg transition-all">
-<span class="material-symbols-outlined text-[18px]">add_a_photo</span>
-<span class="">Request Re-shoot</span>
-</button>
-</div>
-<!-- Primary Approve & Sync Trigger -->
-<button class="w-full sm:w-auto flex items-center justify-center gap-space-sm px-space-lg py-3 rounded-xl bg-primary text-on-primary font-headline-sm text-headline-sm font-bold shadow-[4px_4px_14px_rgba(0,110,40,0.3),-2px_-2px_8px_rgba(255,255,255,0.8)] hover:brightness-105 active:shadow-[inset_3px_3px_6px_rgba(0,33,7,0.4)] transition-all" id="approveBtn">
-<span class="material-symbols-outlined text-[20px]">check_circle</span>
-<span class="">Approve &amp; Publish To Live Map</span>
-</button>
-</div>
-</div>
-</div>
-</div>
-</div>
-
-</div></main></div>
-
-
-
-
 <script src="../assets/js/admin.js"></script>
+<script src="../assets/js/nv-kit.js"></script>
 <script src="../assets/js/pages/verification.js"></script>
 </body>
 </html>

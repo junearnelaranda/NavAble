@@ -495,6 +495,80 @@
       border-radius: 34px;
     }
 
+    .home-theme-flip {
+      aspect-ratio: 276 / 407;
+      overflow: visible;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      box-shadow: none;
+      cursor: pointer;
+      perspective: 1400px;
+      transform: none;
+    }
+
+    .home-theme-flip:hover {
+      box-shadow: none;
+      transform: translateY(-4px);
+    }
+
+    .theme-flip-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 700ms cubic-bezier(0.2, 0.72, 0.2, 1);
+    }
+
+    .home-theme-flip.is-flipped .theme-flip-inner {
+      transform: rotateY(180deg);
+    }
+
+    .theme-flip-face {
+      position: absolute;
+      inset: 0;
+      padding: 8px;
+      overflow: hidden;
+      border: 1px solid rgba(10, 74, 39, 0.12);
+      border-radius: 42px;
+      background: #edf5ef;
+      box-shadow: 25px 28px 55px rgba(31, 69, 44, 0.20),
+                  -18px -18px 42px rgba(255, 255, 255, 0.95);
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+    }
+
+    .theme-flip-face--back {
+      transform: rotateY(180deg);
+    }
+
+    .home-theme-flip:focus-visible {
+      outline: 3px solid var(--green);
+      outline-offset: 8px;
+    }
+
+    .theme-flip-hint {
+      position: absolute;
+      z-index: 4;
+      bottom: 18px;
+      left: 50%;
+      width: max-content;
+      max-width: calc(100% - 28px);
+      padding: 9px 13px;
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      border-radius: 999px;
+      background: rgba(6, 27, 56, 0.82);
+      box-shadow: 0 8px 24px rgba(6, 27, 56, 0.18);
+      color: white;
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+      text-align: center;
+      transform: translateX(-50%);
+      pointer-events: none;
+      backdrop-filter: blur(8px);
+    }
+
     .orbit {
       position: absolute;
       width: 470px;
@@ -1348,6 +1422,7 @@
     }
 
     .contact-field input,
+    .contact-field select,
     .contact-field textarea {
       width: 100%;
       border: 1px solid transparent;
@@ -1360,9 +1435,35 @@
       transition: border-color 160ms ease, box-shadow 160ms ease;
     }
 
-    .contact-field input {
+    .contact-field input,
+    .contact-field select {
       min-height: 54px;
       padding: 0 17px;
+    }
+
+    .contact-field .contact-hint {
+      margin: 6px 0 0;
+      color: #66736a;
+      font-size: 0.72rem;
+    }
+
+    .contact-status {
+      margin: 0;
+      padding: 12px 15px;
+      border-radius: 13px;
+      background: rgba(23,136,74,0.1);
+      color: #0b6937;
+      font-size: 0.84rem;
+      font-weight: 700;
+    }
+
+    .contact-status.is-error {
+      background: rgba(169,52,52,0.1);
+      color: #a93434;
+    }
+
+    .contact-form [hidden] {
+      display: none !important;
     }
 
     .contact-field textarea {
@@ -1377,6 +1478,7 @@
     }
 
     .contact-field input:focus,
+    .contact-field select:focus,
     .contact-field textarea:focus {
       border-color: rgba(23,136,74,0.28);
       outline: none;
@@ -1719,6 +1821,15 @@
         border-radius: 29px;
       }
 
+      .theme-flip-face {
+        padding: 7px;
+        border-radius: 36px;
+      }
+
+      .theme-flip-hint {
+        bottom: 15px;
+      }
+
       .orbit {
         width: 390px;
         height: 390px;
@@ -1932,8 +2043,16 @@
 
         <div class="hero-visual reveal">
           <div class="orbit" aria-hidden="true"></div>
-          <figure class="hero-app-preview">
-            <img src="imgs&vids/home.png" width="847" height="1857" loading="eager" decoding="async" fetchpriority="high" alt="NavAble home screen showing accessible places and route filters on a map">
+          <figure class="hero-app-preview home-theme-flip" id="homeThemePreview" role="button" tabindex="0" aria-label="Show dark mode preview" aria-pressed="false">
+            <div class="theme-flip-inner" aria-hidden="true">
+              <div class="theme-flip-face theme-flip-face--front">
+                <img src="imgs&amp;vids/home-hd.png" width="1024" height="1536" loading="eager" decoding="async" fetchpriority="high" alt="">
+              </div>
+              <div class="theme-flip-face theme-flip-face--back">
+                <img src="imgs&amp;vids/home-dark-hd.png" width="1024" height="1536" loading="eager" decoding="async" alt="">
+              </div>
+            </div>
+            <figcaption class="theme-flip-hint"><span id="homeThemeMode">Light mode</span> &middot; Click to flip</figcaption>
           </figure>
         </div>
       </div>
@@ -2175,7 +2294,33 @@
             <a class="contact-email" href="mailto:nav4ble@gmail.com">nav4ble@gmail.com</a>
           </div>
 
-          <form class="contact-form" action="mailto:nav4ble@gmail.com" method="post" enctype="text/plain">
+          <form class="contact-form" id="contactForm" action="mailto:nav4ble@gmail.com" method="post" enctype="text/plain">
+            <div class="contact-field">
+              <label for="contactTopic">Topic</label>
+              <select id="contactTopic" name="topic">
+                <option value="question">Question, idea, or feedback</option>
+                <option value="bug">Report a bug in NavAble</option>
+              </select>
+            </div>
+
+            <div class="contact-field" data-bug-only hidden>
+              <label for="bugTitle">Short summary of the problem</label>
+              <input id="bugTitle" name="bug_title" type="text" maxlength="150" placeholder="For example: The map stays blank on my phone">
+            </div>
+
+            <div class="contact-field" data-bug-only hidden>
+              <label for="bugArea">Where did it happen?</label>
+              <select id="bugArea" name="bug_area">
+                <option value="Map &amp; Navigation">Map and navigation</option>
+                <option value="Accessibility Reports">Reporting an accessibility issue</option>
+                <option value="Reviews">Ratings and reviews</option>
+                <option value="Account &amp; Sign-in">Account and sign-in</option>
+                <option value="Notifications">Notifications</option>
+                <option value="Website">This website</option>
+                <option value="Other" selected>Somewhere else</option>
+              </select>
+            </div>
+
             <div class="contact-field">
               <label for="contactName">Name</label>
               <input id="contactName" name="name" type="text" autocomplete="name" placeholder="Your name or organization" required>
@@ -2188,8 +2333,16 @@
 
             <div class="contact-field">
               <label for="contactMessage">How can we help?</label>
-              <textarea id="contactMessage" name="message" placeholder="Tell us about your question, idea, or accessibility feedback…" required></textarea>
+              <textarea id="contactMessage" name="message" maxlength="2000" placeholder="Tell us about your question, idea, or accessibility feedback…" required></textarea>
             </div>
+
+            <div class="contact-field" data-bug-only hidden>
+              <label for="bugDevice">Device and browser (optional)</label>
+              <input id="bugDevice" name="bug_device" type="text" maxlength="255" placeholder="For example: Android 14, Chrome">
+              <p class="contact-hint">This helps us reproduce the problem.</p>
+            </div>
+
+            <p class="contact-status" id="contactStatus" role="status" hidden></p>
 
             <button class="button button-dark contact-submit" type="submit">Send message <span class="arrow" aria-hidden="true">→</span></button>
           </form>
@@ -2265,6 +2418,24 @@
     }
 
     applyNavAbleWordmark();
+
+    const homeThemePreview = document.getElementById("homeThemePreview");
+    const homeThemeMode = document.getElementById("homeThemeMode");
+
+    function toggleHomeThemePreview() {
+      const isDark = homeThemePreview.classList.toggle("is-flipped");
+      homeThemePreview.setAttribute("aria-pressed", String(isDark));
+      homeThemePreview.setAttribute("aria-label", isDark ? "Show light mode preview" : "Show dark mode preview");
+      homeThemeMode.textContent = isDark ? "Dark mode" : "Light mode";
+    }
+
+    homeThemePreview.addEventListener("click", toggleHomeThemePreview);
+    homeThemePreview.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        toggleHomeThemePreview();
+      }
+    });
 
     const menuToggle = document.getElementById("menuToggle");
     const mobileMenu = document.getElementById("mobileMenu");
@@ -2359,5 +2530,8 @@
 
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.58.0/dist/umd/supabase.min.js"></script>
+  <script src="assets/js/supabase-client.js"></script>
+  <script src="assets/js/bug-report-form.js"></script>
 </body>
 </html>
