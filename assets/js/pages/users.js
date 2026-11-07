@@ -93,16 +93,22 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Point totals for the accounts on this page: a Map of user_id to total,
-  // or null when they couldn't load (the list still shows).
+  // or null when they couldn't load (the list still shows). Levels load
+  // alongside; without them the totals show on their own.
+  let levels = null;
   async function loadPointTotals(rows) {
     if (!rows.length) return new Map();
-    try {
-      const data = await K.rows(db.from("user_point_totals").select("user_id, total_points").in("user_id", rows.map((u) => u.user_id)));
-      return new Map(data.map((row) => [row.user_id, row.total_points]));
-    } catch (error) {
-      console.error("NavAble: point totals could not load.", error);
+    const [totals, settings] = await Promise.allSettled([
+      K.rows(db.from("user_point_totals").select("user_id, total_points").in("user_id", rows.map((u) => u.user_id))),
+      K.loadPointSettings()
+    ]);
+    levels = settings.status === "fulfilled" ? settings.value.levels : null;
+    if (settings.status === "rejected") console.error("NavAble: levels could not load.", settings.reason);
+    if (totals.status === "rejected") {
+      console.error("NavAble: point totals could not load.", totals.reason);
       return null;
     }
+    return new Map(totals.value.map((row) => [row.user_id, row.total_points]));
   }
 
   function renderList({ rows, total }, totals) {
@@ -127,7 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
         el("td", { className: "nv-hide-sm" }, badge("role", user.role)),
         el("td", {}, badge("accountStatus", user.account_status)),
         el("td", { className: "nv-hide-sm" }, totals
-          ? el("strong", { text: K.format.number.format(totals.get(user.user_id) || 0) })
+          ? K.pointsWithLevel(totals.get(user.user_id) || 0, levels)
           : el("span", { className: "nv-cell-sub", title: "Point totals could not load", text: "—" })),
         el("td", { className: "nv-hide-sm nv-cell-sub" }, el("time", { datetime: user.created_at, title: K.format.fullDate.format(new Date(user.created_at)), text: K.format.mediumDate.format(new Date(user.created_at)) })),
         el("td", { className: "is-actions" },
@@ -138,7 +144,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     listPanel.replaceChildren(
-      K.tableEl("Accounts", [["Person"], ["Role", "nv-hide-sm"], ["Status"], ["Points", "nv-hide-sm"], ["Joined", "nv-hide-sm"], ["Actions", "is-actions"]], body),
+      K.tableEl("Accounts", [["Person"], ["Role", "nv-hide-sm"], ["Status"], ["Points & level", "nv-hide-sm"], ["Joined", "nv-hide-sm"], ["Actions", "is-actions"]], body),
       K.pager({ page, size: PAGE_SIZE, total, noun: "accounts", onChange: (next) => { page = next; loadList(); listPanel.closest(".nv-card").scrollIntoView({ block: "start" }); } }));
   }
 
@@ -175,7 +181,10 @@ document.addEventListener("DOMContentLoaded", () => {
     let pointsHistory = K.errorBox("Points could not load", pointsResult.reason);
     if (pointsResult.status === "fulfilled") {
       const awards = pointsResult.value;
-      pointsTotal = `${K.format.number.format(awards.reduce((sum, a) => sum + a.points, 0))} from ${K.plural(awards.length, "award")}`;
+      const total = awards.reduce((sum, a) => sum + a.points, 0);
+      pointsTotal = el("span", { className: "nv-points-total" },
+        K.pointsWithLevel(total, levels),
+        el("span", { className: "nv-cell-sub", text: `from ${K.plural(awards.length, "award")}` }));
       pointsHistory = awards.length
         ? el("ul", { className: "nv-list" }, awards.slice(0, 10).map((award) => {
           const what = award.source_type === "Report"
@@ -263,16 +272,18 @@ document.addEventListener("DOMContentLoaded", () => {
   async function download() {
     downloadButton.disabled = true;
     try {
-      const [data, totalsRows] = await Promise.all([
+      const [data, totalsRows, settings] = await Promise.all([
         K.allRows(() => listQuery(`user_id, email, role, account_status, created_at, updated_at, user_profiles(${PROFILE})`)),
-        K.allRows(() => db.from("user_point_totals").select("user_id, total_points").order("user_id"))
+        K.allRows(() => db.from("user_point_totals").select("user_id, total_points").order("user_id")),
+        K.loadPointSettings()
       ]);
       const totals = new Map(totalsRows.map((row) => [row.user_id, row.total_points]));
       K.downloadCsv(`navable-users-${K.today()}.csv`, [
-        ["User ID", "Email", "First name", "Last name", "Role", "Status", "Points", "Phone", "Address", "Disability", "Gender", "Date of birth", "Joined", "Last updated"],
+        ["User ID", "Email", "First name", "Last name", "Role", "Status", "Points", "Level", "Phone", "Address", "Disability", "Gender", "Date of birth", "Joined", "Last updated"],
         ...data.map((u) => {
           const p = K.one(u.user_profiles) || {};
-          return [u.user_id, u.email, p.first_name, p.last_name, u.role, u.account_status, totals.get(u.user_id) || 0, p.phone_number, p.address, p.disability_type, p.gender, p.date_of_birth, u.created_at, u.updated_at];
+          const points = totals.get(u.user_id) || 0;
+          return [u.user_id, u.email, p.first_name, p.last_name, u.role, u.account_status, points, K.levelFor(points, settings.levels)?.level, p.phone_number, p.address, p.disability_type, p.gender, p.date_of_birth, u.created_at, u.updated_at];
         })
       ]);
     } catch (error) {

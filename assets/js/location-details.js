@@ -23,7 +23,7 @@
     async function loadPhotos() {
       try {
         const photos = await K.rows(db.from("images")
-          .select("image_id, image_url, image_name, upload_date")
+          .select("image_id, image_url, image_name, upload_date, users(role, account_status)")
           .eq("location_id", location.location_id)
           .order("upload_date")
           .order("image_id"));
@@ -39,7 +39,15 @@
       return index === -1 ? null : decodeURIComponent(url.slice(index + marker.length));
     };
 
+    // The app shows only photos an active admin uploaded (users' report
+    // photos stay private), so the cover is the first admin photo.
+    const byAdmin = (photo) => {
+      const user = K.one(photo.users);
+      return user?.role === "Admin" && user?.account_status === "Active";
+    };
+
     function renderPhotos(photos) {
+      const coverId = photos.find(byAdmin)?.image_id;
       const status = el("p", { className: "nv-cell-sub", role: "status", style: "margin:8px 0 0" });
       const fileInput = el("input", { type: "file", accept: Object.keys(TYPES).join(","), multiple: true, className: "sr-only", "aria-label": `Choose photos of ${location.location_name}` });
       const linkInput = el("input", { type: "url", className: "nv-input", placeholder: "https://…/photo.jpg", "aria-label": "Photo link", style: "flex:1 1 220px" });
@@ -51,7 +59,11 @@
             isHttp
               ? el("img", { src: photo.image_url, alt: photo.image_name ? `Photo: ${photo.image_name}` : `Photo ${index + 1} of ${location.location_name}`, loading: "lazy" })
               : el("div", { className: "nv-thumb" }, K.icon("image_not_supported")),
-            index === 0 ? el("span", { className: "nv-badge nv-photo-cover", "data-tone": "success" }, K.icon("star"), "Cover") : null,
+            photo.image_id === coverId
+              ? el("span", { className: "nv-badge nv-photo-cover", "data-tone": "success" }, K.icon("star"), "Cover")
+              : byAdmin(photo)
+                ? null
+                : el("span", { className: "nv-badge nv-photo-cover", "data-tone": "warning", title: "From a user's report. Not shown in the app." }, K.icon("visibility_off"), "Report photo"),
             K.button("", {
               iconName: "delete", small: true, tone: "danger", ariaLabel: `Remove photo ${index + 1}${photo.image_name ? ` (${photo.image_name})` : ""}`,
               onClick: (event) => K.withBusy(event.currentTarget, () => removePhoto(photo))
@@ -75,7 +87,7 @@
       photosPanel.replaceChildren(
         grid,
         el("div", { className: "nv-row-actions", style: "justify-content:flex-start;margin-top:12px" }, upload, fileInput),
-        el("p", { className: "nv-hint", style: "margin-top:6px", text: "JPG, PNG, or WebP up to 5 MB each. The first photo is the cover shown in the app." }),
+        el("p", { className: "nv-hint", style: "margin-top:6px", text: "JPG, PNG, or WebP up to 5 MB each. The first photo you upload is the cover shown in the app. Report photos from users stay private." }),
         el("div", { className: "nv-row-actions", style: "justify-content:flex-start;margin-top:10px" }, linkInput, addLink),
         status);
     }
@@ -179,53 +191,74 @@
       const rows = shown.map((feature) => {
         const record = byFeature.get(feature.feature_id);
         const current = record ? (record.availability ? "yes" : "no") : "";
+        const note = el("span", { text: featureNote(feature, record) });
         const select = el("select", { className: "nv-select", "data-feature": feature.feature_id, "aria-label": `${feature.feature_name} at ${location.location_name}`, style: "width:auto;min-width:170px" },
           [["", "Not recorded"], ["yes", "Available"], ["no", "Not available"]].map(([value, text]) => el("option", { value, selected: value === current }, text)));
-        select.dataset.initial = current;
+        select.dataset.saved = current;
+        // Each change saves right away, so nothing is lost if the dialog is closed
+        // or its main "Save changes" button is used.
+        select.addEventListener("change", () => saveFeature(feature, select, note, byFeature));
         return el("li", { className: "nv-setting" },
           el("div", {},
             el("strong", { style: "display:flex;align-items:center;gap:8px" }, feature.icon ? K.icon(feature.icon) : null, feature.feature_name),
-            el("span", { text: feature.status === "Active" ? (record?.verified_at ? `Verified ${K.format.relativeTime(record.verified_at)}` : record ? "Not yet verified" : "") : "Inactive feature" })),
+            note),
           select);
       });
 
       const list = el("ul", { className: "nv-list", style: "gap:0", "aria-label": `Accessibility features at ${location.location_name}` }, rows);
-      const save = K.button("Save features", {
-        iconName: "save", small: true, tone: "primary",
-        onClick: (event) => K.withBusy(event.currentTarget, () => saveFeatures(list, byFeature))
-      });
       featuresPanel.replaceChildren(list,
-        el("p", { className: "nv-hint", style: "margin-top:8px", text: "Saving records you as the admin who verified each feature." }),
-        el("div", { className: "nv-row-actions", style: "justify-content:flex-start;margin-top:10px" }, save));
+        el("p", { className: "nv-hint", style: "margin-top:8px", text: "Each change saves as soon as you pick an option, and records you as the admin who verified it." }));
     }
 
-    async function saveFeatures(list, byFeature) {
+    function featureNote(feature, record) {
+      if (feature.status !== "Active") return "Inactive feature";
+      if (!record) return "";
+      return record.verified_at ? `Verified ${K.format.relativeTime(record.verified_at)}` : "Not yet verified";
+    }
+
+    async function saveFeature(feature, select, note, byFeature) {
+      const value = select.value;
+      const previous = select.dataset.saved;
+      const record = byFeature.get(feature.feature_id);
       const me = window.NavAbleStaff.user_id;
       const now = K.nowIso();
-      const edits = [...list.querySelectorAll("select[data-feature]")].filter((s) => s.value !== s.dataset.initial);
-      if (!edits.length) {
-        K.toast("No feature changes to save.");
+      select.disabled = true;
+      note.textContent = "Saving…";
+
+      let result;
+      if (!value) {
+        result = record
+          ? await db.from("location_features").delete().eq("location_feature_id", record.location_feature_id).select("location_feature_id")
+          : { data: [], error: null };
+      } else if (record) {
+        result = await db.from("location_features")
+          .update({ availability: value === "yes", verified_by: me, verified_at: now })
+          .eq("location_feature_id", record.location_feature_id)
+          .select("location_feature_id, feature_id, availability, verified_at");
+      } else {
+        result = await db.from("location_features")
+          .insert({ location_id: location.location_id, feature_id: feature.feature_id, availability: value === "yes", verified_by: me, verified_at: now })
+          .select("location_feature_id, feature_id, availability, verified_at");
+      }
+      select.disabled = false;
+
+      // A change that matched no row (removed meanwhile, or not allowed) counts as a failure.
+      const missed = record && Array.isArray(result.data) && !result.data.length;
+      if (result.error || missed) {
+        select.value = previous;
+        note.textContent = featureNote(feature, record);
+        const reason = result.error ? K.friendlyError(result.error) : "The record was not found. Reopen this place and try again.";
+        K.toast(`${feature.feature_name} wasn't saved. ${reason}`, { assertive: true, duration: 7000 });
         return;
       }
-      const failures = [];
-      for (const select of edits) {
-        const featureId = select.dataset.feature;
-        const record = byFeature.get(featureId);
-        let result;
-        if (!select.value) {
-          result = await db.from("location_features").delete().eq("location_feature_id", record.location_feature_id);
-        } else if (record) {
-          result = await db.from("location_features").update({ availability: select.value === "yes", verified_by: me, verified_at: now }).eq("location_feature_id", record.location_feature_id);
-        } else {
-          result = await db.from("location_features").insert({ location_id: location.location_id, feature_id: featureId, availability: select.value === "yes", verified_by: me, verified_at: now });
-        }
-        if (result.error) failures.push(`${select.getAttribute("aria-label").split(" at ")[0]}: ${K.friendlyError(result.error)}`);
-      }
-      const saved = edits.length - failures.length;
-      if (saved) K.toast(`${K.plural(saved, "feature")} saved for ${location.location_name}.`);
-      if (failures.length) K.toast(`Some features weren't saved. ${failures.join("; ")}`, { assertive: true, duration: 8000 });
-      await loadFeatures();
-      if (saved) changed();
+
+      if (!value) byFeature.delete(feature.feature_id);
+      else byFeature.set(feature.feature_id, result.data[0]);
+      select.dataset.saved = value;
+      note.textContent = value ? "Saved · verified just now" : "Saved · not recorded";
+      const label = { "": "not recorded", yes: "available", no: "not available" }[value];
+      K.toast(`${feature.feature_name} is now ${label} at ${location.location_name}.`);
+      changed();
     }
 
     loadPhotos();

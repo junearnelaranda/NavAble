@@ -141,6 +141,17 @@ document.addEventListener("DOMContentLoaded", () => {
     return start;
   }
 
+  const TOP_CONTRIBUTORS = 5;
+  // "This month" starts on the 1st in Philippine time, as in the phone app.
+  const manilaMonth = new Intl.DateTimeFormat(undefined, { month: "short", timeZone: "Asia/Manila" });
+
+  // The same ranking as the phone app's Top Contributors (get_leaderboard):
+  // active accounts with the User role only, levels from lifetime points.
+  // Pictures aren't needed here, so they're left out of the response.
+  const loadTopContributors = () => rows(db
+    .rpc("get_leaderboard", { period: "month", max_rows: TOP_CONTRIBUTORS })
+    .select("rank, user_id, full_name, points, level_name"));
+
   const QUERIES = {
     openReports: () => count("reports", (q) => q.in("status", OPEN_REPORT_STATUSES)),
     openHighPriority: () => count("reports", (q) => q.in("status", OPEN_REPORT_STATUSES).eq("priority_level", "High")),
@@ -165,6 +176,7 @@ document.addEventListener("DOMContentLoaded", () => {
       from.setDate(from.getDate() - (WEEKS - 1) * 7);
       return allRows(() => db.from("reports").select("created_at").gte("created_at", from.toISOString()).order("report_id"));
     },
+    topContributors: () => loadTopContributors(),
     features: () => allRows(() => db.from("accessibility_features").select("feature_id, feature_name").eq("status", "Active").order("feature_id")),
     locationFeatures: () => allRows(() => db.from("location_features").select("feature_id, location_id").eq("availability", true).order("location_feature_id"))
   };
@@ -344,6 +356,29 @@ document.addEventListener("DOMContentLoaded", () => {
     target.replaceChildren(list);
   }
 
+  function renderTopContributors(result) {
+    const target = panel("topContributors");
+    const note = document.getElementById("topContributorsNote");
+    if (note) note.textContent = `The ${TOP_CONTRIBUTORS} users with the most points awarded since ${manilaMonth.format(new Date())} 1 (Philippine time). Admins and deactivated accounts aren't ranked.`;
+    if (result.status === "rejected") {
+      target.replaceChildren(stateBox("error", "Top contributors could not load", result.reason?.message, retryButton()));
+      return;
+    }
+    const top = result.value;
+    if (!top.length) {
+      target.replaceChildren(stateBox("empty", "No points awarded yet this month", "Award points from the Reports or Ratings & Reviews pages."));
+      return;
+    }
+    target.replaceChildren(el("ol", { className: "nv-leaders", "aria-label": "Top contributors this month" },
+      top.map((entry) => el("li", { className: "nv-leader" },
+        el("span", { className: "nv-leader-rank", "aria-hidden": "true", text: String(entry.rank) }),
+        el("span", { className: "nv-leader-name" },
+          el("span", { className: "sr-only", text: `${entry.rank}. ` }),
+          entry.full_name,
+          entry.level_name ? el("span", { className: "nv-level", "data-level": entry.level_name, text: entry.level_name }) : null),
+        el("span", { className: "nv-leader-points", text: `+${number.format(entry.points)} pts` })))));
+  }
+
   function renderFeatures(featuresResult, linksResult, locationsResult) {
     const target = panel("features");
     const failed = [featuresResult, linksResult, locationsResult].find((item) => item.status === "rejected");
@@ -410,6 +445,7 @@ document.addEventListener("DOMContentLoaded", () => {
     summaryRows = renderStats(results);
     renderRecentReports(results.recentReports);
     renderWeeklyReports(results.weeklyReports);
+    renderTopContributors(results.topContributors);
     renderFeatures(results.features, results.locationFeatures, results.locations);
 
     const failures = settled.filter((item) => item.status === "rejected");

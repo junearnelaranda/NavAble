@@ -496,7 +496,8 @@
     }
 
     .home-theme-flip {
-      aspect-ratio: 276 / 407;
+      /* Width / height of the phone card; screens other than Home set their own. */
+      aspect-ratio: var(--flip-ratio, 276 / 407);
       overflow: visible;
       padding: 0;
       border: 0;
@@ -2046,13 +2047,13 @@
           <figure class="hero-app-preview home-theme-flip" id="homeThemePreview" role="button" tabindex="0" aria-label="Show dark mode preview" aria-pressed="false">
             <div class="theme-flip-inner" aria-hidden="true">
               <div class="theme-flip-face theme-flip-face--front">
-                <img src="imgs&amp;vids/home-hd.png" width="1024" height="1536" loading="eager" decoding="async" fetchpriority="high" alt="">
+                <img src="imgs&amp;vids/home-light.webp" width="640" height="960" loading="eager" decoding="async" fetchpriority="high" alt="">
               </div>
               <div class="theme-flip-face theme-flip-face--back">
-                <img src="imgs&amp;vids/home-dark-hd.png" width="1024" height="1536" loading="eager" decoding="async" alt="">
+                <img src="imgs&amp;vids/home-dark.webp" width="640" height="960" loading="lazy" decoding="async" alt="">
               </div>
             </div>
-            <figcaption class="theme-flip-hint"><span id="homeThemeMode">Light mode</span> &middot; Click to flip</figcaption>
+            <figcaption class="theme-flip-hint"><span id="homeThemeMode" data-flip-mode>Light mode</span> &middot; Click to flip</figcaption>
           </figure>
         </div>
       </div>
@@ -2188,15 +2189,16 @@
     <section class="section" id="discover" aria-labelledby="discover-title">
       <div class="shell split">
         <div class="discover-panel reveal">
-          <figure class="hero-app-preview">
-            <img
-              src="imgs&amp;vids/explore.png"
-              alt="NavAble Explore screen showing accessible places near Ayala Center Cebu"
-              width="855"
-              height="1840"
-              loading="lazy"
-              decoding="async"
-            >
+          <figure class="hero-app-preview home-theme-flip" id="exploreThemePreview" style="--flip-ratio: 276 / 559" role="button" tabindex="0" aria-label="Show dark mode preview of the Explore screen" aria-pressed="false">
+            <div class="theme-flip-inner" aria-hidden="true">
+              <div class="theme-flip-face theme-flip-face--front">
+                <img src="imgs&amp;vids/explore-light.webp" width="640" height="1337" loading="lazy" decoding="async" alt="">
+              </div>
+              <div class="theme-flip-face theme-flip-face--back">
+                <img src="imgs&amp;vids/explore-dark.webp" width="640" height="1340" loading="lazy" decoding="async" alt="">
+              </div>
+            </div>
+            <figcaption class="theme-flip-hint"><span data-flip-mode>Light mode</span> &middot; Click to flip</figcaption>
           </figure>
         </div>
 
@@ -2419,22 +2421,25 @@
 
     applyNavAbleWordmark();
 
-    const homeThemePreview = document.getElementById("homeThemePreview");
-    const homeThemeMode = document.getElementById("homeThemeMode");
+    // Phone previews (Home, Explore) flip between light and dark mode on click.
+    document.querySelectorAll(".home-theme-flip").forEach((preview) => {
+      const mode = preview.querySelector("[data-flip-mode]");
+      const screen = preview.id === "exploreThemePreview" ? " of the Explore screen" : "";
 
-    function toggleHomeThemePreview() {
-      const isDark = homeThemePreview.classList.toggle("is-flipped");
-      homeThemePreview.setAttribute("aria-pressed", String(isDark));
-      homeThemePreview.setAttribute("aria-label", isDark ? "Show light mode preview" : "Show dark mode preview");
-      homeThemeMode.textContent = isDark ? "Dark mode" : "Light mode";
-    }
-
-    homeThemePreview.addEventListener("click", toggleHomeThemePreview);
-    homeThemePreview.addEventListener("keydown", (event) => {
-      if (event.key === "Enter" || event.key === " ") {
-        event.preventDefault();
-        toggleHomeThemePreview();
+      function toggleThemePreview() {
+        const isDark = preview.classList.toggle("is-flipped");
+        preview.setAttribute("aria-pressed", String(isDark));
+        preview.setAttribute("aria-label", `${isDark ? "Show light mode preview" : "Show dark mode preview"}${screen}`);
+        if (mode) mode.textContent = isDark ? "Dark mode" : "Light mode";
       }
+
+      preview.addEventListener("click", toggleThemePreview);
+      preview.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          toggleThemePreview();
+        }
+      });
     });
 
     const menuToggle = document.getElementById("menuToggle");

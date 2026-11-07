@@ -25,7 +25,7 @@
 
   const ADMIN_PAGES = new Set([
     "dashboard.html", "user.html", "location.html", "accss-data.html",
-    "verification.html", "reports.html", "ratings.html", "bugs.html", "notifications.html",
+    "verification.html", "reports.html", "ratings.html", "points.html", "bugs.html", "notifications.html",
     "analytics.html", "settings.html"
   ]);
 
@@ -37,6 +37,7 @@
     "verification.html": "verified",
     "reports.html": "description",
     "ratings.html": "reviews",
+    "points.html": "military_tech",
     "bugs.html": "bug_report",
     "notifications.html": "notifications",
     "analytics.html": "analytics",
@@ -51,6 +52,7 @@
     "verification.html": "AI Verification",
     "reports.html": "Reports",
     "ratings.html": "Ratings & Reviews",
+    "points.html": "Points & Levels",
     "bugs.html": "Bug Reports",
     "notifications.html": "Notifications",
     "analytics.html": "Analytics",
@@ -435,8 +437,10 @@
     const notificationButton = [...header.querySelectorAll("button")].find((button) => button.querySelector(".material-symbols-outlined")?.textContent.trim() === "notifications");
     if (notificationButton) {
       notificationButton.setAttribute("aria-label", "Open notifications");
+      notificationButton.id = "adminAlertsButton";
+      // admin-alerts.js turns the bell into a recent-activity panel; without it, open the page.
       notificationButton.addEventListener("click", () => {
-        navigate("notifications.html");
+        if (!window.NavAbleAlerts) navigate("notifications.html");
       });
     }
 

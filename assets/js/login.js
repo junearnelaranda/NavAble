@@ -3,7 +3,7 @@
 
   const ADMIN_PAGE_NAMES = new Set([
     "dashboard.html", "user.html", "location.html", "accss-data.html",
-    "verification.html", "reports.html", "ratings.html", "bugs.html", "notifications.html",
+    "verification.html", "reports.html", "ratings.html", "points.html", "bugs.html", "notifications.html",
     "analytics.html", "settings.html"
   ]);
 

@@ -26,6 +26,7 @@
 <a class="flex items-center justify-between rounded-xl px-space-md py-3 font-label-lg text-label-lg text-on-surface-variant transition-all hover:bg-surface-container-high hover:text-on-surface" href="verification.html"><span>AI Verification</span><span class="material-symbols-outlined text-[19px]">verified</span></a>
 <a class="flex items-center justify-between rounded-xl px-space-md py-3 font-label-lg text-label-lg text-on-surface-variant transition-all hover:bg-surface-container-high hover:text-on-surface" href="reports.html"><span>Reports</span><span class="material-symbols-outlined text-[19px]">description</span></a>
 <a class="flex items-center justify-between rounded-xl px-space-md py-3 font-label-lg text-label-lg text-on-surface-variant transition-all hover:bg-surface-container-high hover:text-on-surface" href="ratings.html"><span>Ratings &amp; Reviews</span><span class="material-symbols-outlined text-[19px]">reviews</span></a>
+<a class="flex items-center justify-between rounded-xl px-space-md py-3 font-label-lg text-label-lg text-on-surface-variant transition-all hover:bg-surface-container-high hover:text-on-surface" href="points.html"><span>Points &amp; Levels</span><span class="material-symbols-outlined text-[19px]">military_tech</span></a>
 <a class="flex items-center justify-between rounded-xl px-space-md py-3 font-label-lg text-label-lg text-on-surface-variant transition-all hover:bg-surface-container-high hover:text-on-surface" href="bugs.html"><span>Bug Reports</span><span class="material-symbols-outlined text-[19px]">bug_report</span></a>
 <a class="flex items-center justify-between rounded-xl px-space-md py-3 font-label-lg text-label-lg text-on-surface-variant transition-all hover:bg-surface-container-high hover:text-on-surface" href="notifications.html"><span>Notifications</span><span class="material-symbols-outlined text-[19px]">notifications</span></a>
 <a class="flex items-center justify-between rounded-xl px-space-md py-3 font-label-lg text-label-lg text-on-surface-variant transition-all hover:bg-surface-container-high hover:text-on-surface" href="analytics.html"><span>Analytics</span><span class="material-symbols-outlined text-[19px]">analytics</span></a>
@@ -150,6 +151,7 @@
 <h2 id="activityTitle">Recent activity</h2>
 </div>
 <div class="nv-grid-split">
+<div class="nv-stack">
 <div class="nv-card">
 <div class="nv-card-head">
 <div>
@@ -160,6 +162,19 @@
 </div>
 <div data-panel="recentReports">
 <span class="nv-skeleton is-line"></span><span class="nv-skeleton is-line"></span><span class="nv-skeleton is-line"></span><span class="nv-skeleton is-line is-short"></span>
+</div>
+</div>
+<div class="nv-card">
+<div class="nv-card-head">
+<div>
+<h3>Top contributors this month</h3>
+<p id="topContributorsNote">The five people with the most points awarded this month.</p>
+</div>
+<a class="nv-link" href="user.html">All users <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></a>
+</div>
+<div data-panel="topContributors">
+<span class="nv-skeleton is-line"></span><span class="nv-skeleton is-line"></span><span class="nv-skeleton is-line is-short"></span>
+</div>
 </div>
 </div>
 <div class="nv-stack">
@@ -191,6 +206,7 @@
 </main>
 </div>
 <script src="../assets/js/admin.js"></script>
+<script src="../assets/js/admin-alerts.js"></script>
 <script src="../assets/js/pages/dashboard.js"></script>
 </body>
 </html>

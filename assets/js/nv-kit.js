@@ -173,14 +173,14 @@
     return el("span", { className: "nv-badge", "data-tone": tone }, icon(iconName), label);
   }
 
-  // Contribution points: one award per report or review, in fixed tiers.
-  // The amount is stored with each award, so changing these numbers later
-  // only affects new awards.
-  const POINT_TIERS = [
-    { tier: "Small", points: 5 },
-    { tier: "Regular", points: 10 },
-    { tier: "Big", points: 25 }
-  ];
+  // Contribution points: one award per report or review, either a preset box
+  // (Small, Regular, Big; values set on the Points & Levels page) or a custom
+  // amount. Each award stores its own points, so changing the boxes later only
+  // affects new awards. Level names are fixed; only their thresholds change.
+  const POINT_TIER_NAMES = ["Small", "Regular", "Big"];
+  // Newcomer is everyone below Explorer; it isn't stored, so it always needs 0.
+  const LEVEL_NAMES = ["Newcomer", "Explorer", "Bronze", "Silver", "Gold", "Platinum"];
+  const CUSTOM_POINTS = { min: 1, max: 1000 };
 
   const REPORT_TYPES = ["Broken Ramp", "Broken Elevator", "Blocked Entrance", "Construction", "Others"];
   const REPORT_TYPE_ICONS = {
@@ -338,6 +338,7 @@
       if (lastLoadedAt && updated) updated.textContent = "Refreshing…";
 
       let settled;
+      pointSettings = null; // award boxes and level badges re-read current values
       try {
         settled = await run();
       } catch (error) {
@@ -368,6 +369,8 @@
     }
 
     refresh?.addEventListener("click", () => load({ announce: true }));
+    // Add-on scripts (for example the Google importer) announce saved changes this way.
+    document.addEventListener("navable:data-changed", () => load());
     banner?.querySelector("[data-retry]")?.addEventListener("click", () => load({ announce: true }));
     document.addEventListener("visibilitychange", () => {
       if (document.visibilityState === "visible" && lastLoadedAt && Date.now() - lastLoadedAt > autoRefreshMs) load();
@@ -489,20 +492,63 @@
     return { dialog, form, close: closeDialog };
   }
 
-  // Award buttons for one contribution (source "Report" or "Review"). Shows the
-  // tier buttons, or the existing award with Undo. The database credits the
-  // contribution's author and records the awarding admin.
+  // Point box values and level thresholds, shared by every control on a page.
+  // Cached for a minute; pass fresh: true after changing them.
+  const SETTINGS_TTL_MS = 60_000;
+  let pointSettings = null;
+  function loadPointSettings({ fresh = false } = {}) {
+    if (!fresh && pointSettings && Date.now() - pointSettings.at < SETTINGS_TTL_MS) return pointSettings.promise;
+    // Same tables the phone app, leaderboard and alerts use (point_presets,
+    // contributor_levels), shaped as { tiers, levels } for the admin pages.
+    const promise = Promise.all([
+      rows(db().from("point_presets").select("tier, points, updated_at")),
+      rows(db().from("contributor_levels").select("level, name, min_points, updated_at").order("level"))
+    ]).then(([presets, stored]) => ({
+      tiers: POINT_TIER_NAMES
+        .map((tier, index) => ({ ...presets.find((row) => row.tier === tier), sort_order: index + 1 }))
+        .filter((row) => row.tier),
+      levels: [
+        { level: "Newcomer", rank: 1, min_points: 0, updated_at: null },
+        ...stored.map((row) => ({ level: row.name, rank: row.level + 1, min_points: row.min_points, updated_at: row.updated_at }))
+      ]
+    }));
+    pointSettings = { promise, at: Date.now() };
+    promise.catch(() => { if (pointSettings?.promise === promise) pointSettings = null; });
+    return promise;
+  }
+
+  // The highest level whose threshold the total reaches. levels: sorted by rank.
+  function levelFor(points, levels) {
+    let found = levels?.[0] || null;
+    (levels || []).forEach((level) => { if ((points || 0) >= level.min_points) found = level; });
+    return found;
+  }
+
+  const levelBadge = (name) => el("span", { className: "nv-level", "data-level": name }, name);
+
+  // "420 pts · Silver". Without levels (they failed to load) only the total shows.
+  function pointsWithLevel(points, levels) {
+    const level = levels?.length ? levelFor(points, levels) : null;
+    return el("span", { className: "nv-points-total" },
+      el("strong", { text: `${number.format(points || 0)} pts` }),
+      level ? [el("span", { className: "nv-points-sep", "aria-hidden": "true", text: "·" }), levelBadge(level.level)] : null);
+  }
+
+  // Award panel for one contribution (source "Report" or "Review"): the three
+  // preset boxes and a Custom amount, or the existing award with Undo. The
+  // database credits the contribution's author, records the awarding admin,
+  // and applies the current box value to preset awards.
   function pointsControl({ source, sourceId, award, eligible = true, ineligibleHint, label, onChange }) {
     const group = el("div", { className: "nv-points", role: "group", "aria-label": `Points for ${label}` });
     const refresh = async () => { await onChange?.(); };
 
     if (award) {
       group.append(
-        el("span", { className: "nv-badge", "data-tone": "success" }, icon("stars"), `+${award.points} points · ${award.tier}`),
+        el("span", { className: "nv-badge", "data-tone": "success" }, icon("stars"), `+${number.format(award.points)} points · ${award.tier}`),
         button("Undo", {
           iconName: "undo", small: true, ariaLabel: `Remove the ${award.points} points awarded for ${label}`,
           onClick: (event) => withBusy(event.currentTarget, async () => {
-            if (!window.NavAbleAdmin.confirmAction(`Remove the ${award.points} points awarded for ${label}?`)) return;
+            if (!window.NavAbleAdmin.confirmAction(`Remove the ${award.points} points awarded for ${label}? You can award again afterwards.`)) return;
             const removed = await mutate(() => db().from("contribution_points").delete().eq("point_id", award.point_id).select("point_id"), {
               success: `${award.points} points removed.`,
               failure: "The points were not removed."
@@ -513,21 +559,103 @@
       return group;
     }
 
-    group.append(el("span", { className: "nv-points-label", text: "Award points" }));
-    POINT_TIERS.forEach(({ tier, points }) => group.append(button(`${tier} +${points}`, {
-      iconName: tier === "Big" ? "stars" : "star", small: true, disabled: !eligible,
-      ariaLabel: `Award ${tier.toLowerCase()} points (${points}) for ${label}`,
-      onClick: (event) => withBusy(event.currentTarget, async () => {
+    const controls = [];
+    let busy = false;
+    const setBusy = (value) => {
+      busy = value;
+      controls.forEach((control) => { control.disabled = value || !eligible || control.dataset.unavailable === "true"; });
+      group.setAttribute("aria-busy", String(value));
+    };
+
+    async function give(tier, points) {
+      if (busy) return;
+      setBusy(true);
+      try {
         const values = { points, tier, source_type: source, [source === "Report" ? "report_id" : "review_id"]: sourceId };
-        await mutate(() => db().from("contribution_points").insert(values).select("point_id"), {
-          success: `${points} points awarded for ${label}.`,
+        const saved = await mutate(() => db().from("contribution_points").insert(values).select("point_id, points"), {
           failure: "The points were not awarded."
         });
+        if (saved) toast(`${number.format(saved[0]?.points ?? points)} points awarded for ${label}.`);
         // Refresh either way: a failed award may mean another admin already awarded it.
         await refresh();
-      })
-    })));
+      } finally {
+        if (group.isConnected) setBusy(false);
+      }
+    }
+
+    // Preset boxes: placeholders until the current values load.
+    const boxes = el("div", { className: "nv-point-boxes" });
+    const presets = POINT_TIER_NAMES.map((tier) => {
+      const box = el("button", { className: "nv-point-box", type: "button", disabled: true, "data-unavailable": "true", "aria-label": `${tier} points, loading` },
+        el("span", { className: "nv-point-box-name", text: tier }),
+        el("span", { className: "nv-point-box-value", text: "…" }));
+      controls.push(box);
+      boxes.append(box);
+      return box;
+    });
+
+    // Custom amount. Not a <form>: this panel can sit inside a dialog's form.
+    const inputId = uid("nv-custom-points");
+    const errorNode = el("span", { id: `${inputId}-error`, className: "nv-points-error", role: "alert", hidden: true });
+    const input = el("input", {
+      id: inputId, type: "number", className: "nv-input nv-points-input", min: CUSTOM_POINTS.min, max: CUSTOM_POINTS.max, step: 1,
+      inputmode: "numeric", placeholder: "1–1,000", disabled: !eligible, "aria-describedby": `${inputId}-error`
+    });
+    const customButton = button("Award", { iconName: "add", small: true, disabled: !eligible, ariaLabel: `Award a custom amount of points for ${label}` });
+    controls.push(input, customButton);
+    const showCustomError = (message) => {
+      errorNode.textContent = message;
+      errorNode.hidden = !message;
+      input.setAttribute("aria-invalid", String(Boolean(message)));
+    };
+    const awardCustom = () => {
+      const raw = input.value.trim();
+      const points = Number(raw);
+      if (!raw || !Number.isInteger(points) || points < CUSTOM_POINTS.min || points > CUSTOM_POINTS.max) {
+        showCustomError("Enter a whole number from 1 to 1,000.");
+        input.focus();
+        return;
+      }
+      showCustomError("");
+      give("Custom", points);
+    };
+    customButton.addEventListener("click", awardCustom);
+    input.addEventListener("input", () => showCustomError(""));
+    input.addEventListener("keydown", (event) => {
+      if (event.key !== "Enter") return;
+      event.preventDefault(); // don't submit a surrounding dialog
+      awardCustom();
+    });
+    boxes.append(el("div", { className: "nv-point-box is-custom" },
+      el("label", { className: "nv-point-box-name", for: inputId, text: "Custom" }), input, customButton));
+
+    group.append(el("span", { className: "nv-points-label", text: "Award points" }), boxes, errorNode);
     if (!eligible && ineligibleHint) group.append(el("span", { className: "nv-cell-sub", text: ineligibleHint }));
+
+    loadPointSettings().then(({ tiers }) => {
+      const byTier = new Map(tiers.map((row) => [row.tier, row.points]));
+      presets.forEach((box, index) => {
+        const tier = POINT_TIER_NAMES[index];
+        const points = byTier.get(tier);
+        if (!points) {
+          box.setAttribute("aria-label", `${tier} points unavailable`);
+          box.querySelector(".nv-point-box-value").textContent = "—";
+          return;
+        }
+        box.dataset.unavailable = "false";
+        box.disabled = busy || !eligible;
+        box.setAttribute("aria-label", `Award ${tier} points (+${points}) for ${label}`);
+        box.querySelector(".nv-point-box-value").textContent = `+${number.format(points)}`;
+        box.addEventListener("click", () => give(tier, points));
+      });
+    }).catch((error) => {
+      console.error("NavAble: point values could not load.", error);
+      presets.forEach((box) => {
+        box.setAttribute("aria-label", `${POINT_TIER_NAMES[presets.indexOf(box)]} points unavailable`);
+        box.querySelector(".nv-point-box-value").textContent = "—";
+      });
+      group.insertBefore(el("span", { className: "nv-cell-sub", text: "Preset values couldn't load. Use Custom, or refresh the page." }), errorNode);
+    });
     return group;
   }
 
@@ -619,7 +747,8 @@
 
   window.NavAbleKit = Object.freeze({
     db, el, icon, button, timeEl, stateBox, errorBox, retryButton, skeletonLines, loadingPanel, tableEl, stars, details,
-    BADGES, badge, REPORT_TYPES, REPORT_TYPE_ICONS, POINT_TIERS, pointsControl,
+    BADGES, badge, REPORT_TYPES, REPORT_TYPE_ICONS,
+    POINT_TIER_NAMES, LEVEL_NAMES, CUSTOM_POINTS, loadPointSettings, levelFor, levelBadge, pointsWithLevel, pointsControl,
     count, rows, allRows, pageOf, searchPattern, one, personName, friendlyError, ok, mutate,
     toast, nowIso, param, whenAdminReady, setStat, createPage, pager, field, formText, openDialog,
     latestOnly, debounce, bindFilters, withBusy, settleFocus, downloadCsv, today, plural, percent,
