@@ -1,0 +1,11 @@
+# Cloudflare Pages response headers.
+# Admin pages and the staff sign-in page stay out of search results. This is
+# on top of the noindex tag in each page, and also covers non-HTML files.
+/datas/*
+  X-Robots-Tag: noindex, nofollow
+
+/staff-login.html
+  X-Robots-Tag: noindex, nofollow
+
+/staff-login
+  X-Robots-Tag: noindex, nofollow
