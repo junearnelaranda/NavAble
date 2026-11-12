@@ -65,7 +65,9 @@
     const fallback = { url: "datas/dashboard.html", pageName: "dashboard.html" };
     if (!requested) return fallback;
     const target = requested.split(/[?#]/)[0].replace(/\\/g, "/");
-    const pageName = target.split("/").pop();
+    // Accept addresses without ".html" too (Cloudflare Pages serves both).
+    const file = target.split("/").pop();
+    const pageName = file.endsWith(".html") ? file : `${file}.html`;
     const safe = target.startsWith("datas/") && ADMIN_PAGE_NAMES.has(pageName);
     return safe ? { url: requested, pageName } : fallback;
   };

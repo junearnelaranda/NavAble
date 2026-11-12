@@ -18,7 +18,9 @@
   }
 
   const loginPage = "../staff-login.html";
-  const currentPage = window.location.pathname.split("/").pop() || "dashboard.html";
+  // Cloudflare Pages serves /datas/dashboard for dashboard.html; keep ".html".
+  const pageFile = window.location.pathname.split("/").pop() || "dashboard.html";
+  const currentPage = pageFile.endsWith(".html") ? pageFile : `${pageFile}.html`;
   const returnTo = encodeURIComponent(`datas/${currentPage}${window.location.search}${window.location.hash}`);
 
   const sendToLogin = (reason) => {

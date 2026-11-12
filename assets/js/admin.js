@@ -60,6 +60,14 @@
   };
 
   const PAGE_TRANSITION_MS = 140;
+
+  // Page file name such as "dashboard.html". Hosts like Cloudflare Pages serve
+  // pages without ".html" (/datas/dashboard), so it is added back here.
+  function pageNameOf(pathname) {
+    const name = pathname.split("/").pop() || "dashboard.html";
+    return name.endsWith(".html") ? name : `${name}.html`;
+  }
+  const currentPageName = () => pageNameOf(window.location.pathname);
   let navigationPending = false;
 
   function textLabel(element) {
@@ -251,7 +259,7 @@
     sidebar.querySelectorAll("nav a").forEach((link) => {
       const href = link.getAttribute("href");
       if (!href || !ADMIN_PAGES.has(href)) return;
-      const current = href === (window.location.pathname.split("/").pop() || "dashboard.html");
+      const current = href === (currentPageName());
       link.classList.toggle("admin-current-link", current);
       if (current) link.setAttribute("aria-current", "page");
       else link.removeAttribute("aria-current");
@@ -341,7 +349,7 @@
     sidebar.querySelectorAll("nav a").forEach((link) => {
       const href = link.getAttribute("href");
       if (!href || !ADMIN_PAGES.has(href)) return;
-      const current = href === (window.location.pathname.split("/").pop() || "dashboard.html");
+      const current = href === (currentPageName());
       link.classList.toggle("admin-current-link", current);
       if (current) link.setAttribute("aria-current", "page");
       else link.removeAttribute("aria-current");
@@ -354,7 +362,7 @@
       link.addEventListener("click", (event) => {
         if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || link.target === "_blank") return;
         const target = new URL(link.href, window.location.href);
-        const pageName = target.pathname.split("/").pop();
+        const pageName = pageNameOf(target.pathname);
         if (target.origin !== window.location.origin || !ADMIN_PAGES.has(pageName)) return;
         event.preventDefault();
         navigate(target.href);
@@ -411,7 +419,7 @@
     const header = document.querySelector("body > div.min-h-screen > header, body > aside + div header, header:not(.dashboard-skeleton-header)");
     if (!header) return;
 
-    const pageName = window.location.pathname.split("/").pop() || "dashboard.html";
+    const pageName = currentPageName();
     const breadcrumb = [...header.querySelectorAll(":scope > div")].find((element) => element.textContent.includes("Admin Cockpit"));
     if (breadcrumb) {
       breadcrumb.classList.add("admin-page-context");
@@ -685,7 +693,7 @@
   document.addEventListener("DOMContentLoaded", () => {
     try {
       document.body.classList.add("admin-page");
-      document.body.dataset.adminPage = window.location.pathname.split("/").pop() || "dashboard.html";
+      document.body.dataset.adminPage = currentPageName();
       const main = document.querySelector("main");
       if (main) {
         ensureSkipLink(main);
