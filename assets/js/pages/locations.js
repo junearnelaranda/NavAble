@@ -302,6 +302,7 @@ document.addEventListener("DOMContentLoaded", () => {
       description: `${location.category} · added ${K.format.mediumDate.format(new Date(location.created_at))}`,
       wide: true,
       returnFocus: trigger,
+      submitLabel: "Save details",
       content: [
         K.details([
           ["Status", badge("locationStatus", location.verification_status)],
@@ -322,7 +323,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const values = readLocation(dialogForm, location);
         const changed = Object.keys(values).filter((key) => String(values[key] ?? "") !== String(location[key] ?? ""));
         if (!changed.length) {
-          K.toast("Nothing changed, so nothing was saved.");
+          K.toast("No details changed. Photos and accessibility features save as soon as you change them.");
           return true;
         }
         const saved = await K.mutate(() => db.from("locations")
