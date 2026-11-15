@@ -537,8 +537,10 @@
   // Award panel for one contribution (source "Report" or "Review"): the three
   // preset boxes and a Custom amount, or the existing award with Undo. The
   // database credits the contribution's author, records the awarding admin,
-  // and applies the current box value to preset awards.
-  function pointsControl({ source, sourceId, award, eligible = true, ineligibleHint, label, onChange }) {
+  // and applies the current box value to preset awards. beforeAward (optional)
+  // runs first, for example to save a status picked but not yet saved; it
+  // returns false to cancel the award.
+  function pointsControl({ source, sourceId, award, eligible = true, ineligibleHint, label, onChange, beforeAward }) {
     const group = el("div", { className: "nv-points", role: "group", "aria-label": `Points for ${label}` });
     const refresh = async () => { await onChange?.(); };
 
@@ -571,6 +573,7 @@
       if (busy) return;
       setBusy(true);
       try {
+        if (beforeAward && (await beforeAward()) === false) return;
         const values = { points, tier, source_type: source, [source === "Report" ? "report_id" : "review_id"]: sourceId };
         const saved = await mutate(() => db().from("contribution_points").insert(values).select("point_id, points"), {
           failure: "The points were not awarded."

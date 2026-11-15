@@ -182,23 +182,46 @@ document.addEventListener("DOMContentLoaded", () => {
           entry.remarks ? el("p", { className: "nv-quote", text: entry.remarks }) : null)))
         : el("p", { className: "nv-cell-sub", text: "No status changes or remarks recorded yet." });
 
-    // Points re-render in place after an award or undo, and the list refreshes.
+    const statusField = K.field({ label: "Status", name: "status", type: "select", value: report.status, options: STATUSES.map((s) => [s, s]) });
+    const statusSelect = statusField.querySelector("select");
+
+    // The award buttons follow the Status picked below, so there's no need to
+    // save and reopen first. Points re-render in place after an award or undo,
+    // and the list refreshes.
     const pointsHolder = el("div");
-    const renderPoints = (award) => pointsHolder.replaceChildren(K.pointsControl({
+    let currentAward = K.one(report.contribution_points) || null;
+    const renderPoints = () => pointsHolder.replaceChildren(K.pointsControl({
       source: "Report",
       sourceId: report.report_id,
-      award,
-      eligible: POINTS_ELIGIBLE.includes(report.status),
-      ineligibleHint: "Save the report as Verified or Resolved first, then award points.",
+      award: currentAward,
+      eligible: POINTS_ELIGIBLE.includes(statusSelect.value),
+      ineligibleHint: "Set Status to Verified or Resolved to award points.",
       label: `${K.personName(reporter)}'s ${report.report_type} report`,
+      // A status picked but not saved yet is saved first, with any remarks and
+      // the notify choice, exactly as Save changes would.
+      beforeAward: async () => {
+        const form = statusSelect.form;
+        if (!form || statusSelect.value === report.status) return true;
+        if (!(await saveReport(report, location, form, () => {}))) return false;
+        // Now saved: a later Save changes mustn't repeat the history entry or notification.
+        report.status = form.elements.status.value;
+        report.priority_level = form.elements.priority.value;
+        form.elements.remarks.value = "";
+        form.elements.notify.checked = false;
+        return true;
+      },
       onChange: async () => {
         const { data, error } = await db.from("contribution_points").select("point_id, points, tier").eq("report_id", report.report_id).maybeSingle();
         if (error) K.toast(`The points could not be refreshed. ${K.friendlyError(error)}`, { assertive: true });
-        else renderPoints(data);
+        else {
+          currentAward = data;
+          renderPoints();
+        }
         view.load();
       }
     }));
-    renderPoints(K.one(report.contribution_points) || null);
+    statusSelect.addEventListener("change", renderPoints);
+    renderPoints();
 
     const content = [
       K.details([
@@ -216,7 +239,7 @@ document.addEventListener("DOMContentLoaded", () => {
       pointsHolder,
       el("h3", { className: "nv-subhead", text: "Update" }),
       el("div", { className: "nv-form-grid" },
-        K.field({ label: "Status", name: "status", type: "select", value: report.status, options: STATUSES.map((s) => [s, s]) }),
+        statusField,
         K.field({ label: "Priority", name: "priority", type: "select", value: report.priority_level, options: PRIORITIES.map((p) => [p, p]) }),
         el("div", { className: "is-full" }, K.field({ label: "Remarks", name: "remarks", type: "textarea", rows: 3, maxLength: 500, hint: "Optional. Saved to this report's history with your name and any status change." })),
         el("div", { className: "is-full" }, K.field({ label: "Notify the reporter in the NavAble app", name: "notify", type: "checkbox", hint: "Sends a Report Update notification when the status changes." }))),
