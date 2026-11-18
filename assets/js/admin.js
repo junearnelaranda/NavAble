@@ -25,7 +25,7 @@
 
   const ADMIN_PAGES = new Set([
     "dashboard.html", "user.html", "location.html", "accss-data.html",
-    "verification.html", "reports.html", "ratings.html", "points.html", "bugs.html", "notifications.html",
+    "verification.html", "guides.html", "reports.html", "ratings.html", "points.html", "bugs.html", "notifications.html",
     "analytics.html", "settings.html"
   ]);
 
@@ -35,6 +35,7 @@
     "location.html": "location_on",
     "accss-data.html": "accessible",
     "verification.html": "verified",
+    "guides.html": "signpost",
     "reports.html": "description",
     "ratings.html": "reviews",
     "points.html": "military_tech",
@@ -50,6 +51,7 @@
     "location.html": "Locations",
     "accss-data.html": "Accessibility Data",
     "verification.html": "AI Verification",
+    "guides.html": "Route Guides",
     "reports.html": "Reports",
     "ratings.html": "Ratings & Reviews",
     "points.html": "Points & Levels",

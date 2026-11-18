@@ -1,6 +1,7 @@
 // Place details managed inside the Locations dialog: photos (Supabase Storage
 // bucket "location-photos" plus rows in public.images) and which accessibility
-// features the place has (public.location_features). Each section saves on its
+// features the place has (public.location_features), and route guides that say
+// where to find each feature (public.feature_guides). Each section saves on its
 // own; the dialog's Save button still saves the location's main fields.
 // Usage: content: [..., NavAbleLocationDetails.section(location, { onChange })]
 (() => {
@@ -16,6 +17,7 @@
     const db = K.db();
     const photosPanel = el("div", {}, K.skeletonLines(2));
     const featuresPanel = el("div", {}, K.skeletonLines(3));
+    const guidesPanel = el("div", {}, K.skeletonLines(2));
     const changed = () => onChange?.();
 
     // ---------- photos ----------
@@ -261,14 +263,206 @@
       changed();
     }
 
+    // ---------- route guides ----------
+
+    const GUIDE_STATUS = {
+      Pending: ["warning", "schedule", "Pending"],
+      Approved: ["success", "check_circle", "Approved"],
+      Rejected: ["neutral", "cancel", "Rejected"]
+    };
+
+    async function loadGuides() {
+      try {
+        const guides = await K.rows(db.from("feature_guides")
+          .select("guide_id, where_text, floor, status, created_at, feature_photo_url, nearby_photo_url, accessibility_features(feature_name)")
+          .eq("location_id", location.location_id)
+          .order("created_at", { ascending: false }));
+        renderGuides(guides);
+      } catch (error) {
+        guidesPanel.replaceChildren(K.errorBox("Route guides could not load", error, loadGuides));
+      }
+    }
+
+    function renderGuides(guides) {
+      const rows = guides.map((guide) => {
+        const feature = K.one(guide.accessibility_features)?.feature_name || "Feature";
+        return el("li", { className: "nv-item" },
+          el("div", { className: "nv-item-head" },
+            el("div", { style: "display:grid;gap:4px;min-width:0" },
+              el("strong", { text: feature }),
+              el("span", { style: "overflow-wrap:anywhere", text: [guide.where_text, guide.floor].filter(Boolean).join(" · ") })),
+            el("div", { className: "nv-item-meta" },
+              K.badge(GUIDE_STATUS, guide.status),
+              K.button("Delete", { iconName: "delete", small: true, ariaLabel: `Delete the ${feature} guide`, onClick: (event) => confirmDeleteGuide(guide, feature, event.currentTarget) }))));
+      });
+      guidesPanel.replaceChildren(
+        rows.length
+          ? el("ul", { className: "nv-list", "aria-label": `Route guides for ${location.location_name}` }, rows)
+          : el("p", { className: "nv-hint", text: "No route guides for this place yet." }),
+        K.button("Add guide", { iconName: "add_location_alt", small: true, onClick: (event) => openAddGuide(event.currentTarget) }));
+    }
+
+    function confirmDeleteGuide(guide, feature, trigger) {
+      K.openDialog({
+        title: `Delete the ${feature} guide?`,
+        description: "It will no longer be shown in the NavAble app. This can't be undone.",
+        returnFocus: trigger,
+        submitLabel: "Delete guide",
+        submitIcon: "delete",
+        danger: true,
+        content: el("p", { style: "margin:0;overflow-wrap:anywhere", text: guide.where_text }),
+        onSubmit: async (form, { showError }) => {
+          const saved = await K.mutate(() => db.from("feature_guides").delete().eq("guide_id", guide.guide_id).select("guide_id"), {
+            success: `${feature} guide deleted.`,
+            failure: "The guide was not deleted.",
+            onError: showError
+          });
+          if (!saved) return false;
+          await removeGuidePhotos(guide);
+          await loadGuides();
+          return true;
+        }
+      });
+    }
+
+    // Removes photos stored for this guide. Scan photos reused from a report
+    // stay, because the report still needs them.
+    async function removeGuidePhotos(guide) {
+      for (const bucket of [BUCKET, "report-photos"]) {
+        const marker = `/storage/v1/object/public/${bucket}/`;
+        const paths = [guide.feature_photo_url, guide.nearby_photo_url]
+          .filter((url) => (url || "").includes(marker))
+          .map((url) => decodeURIComponent(url.slice(url.indexOf(marker) + marker.length).split(/[?#]/)[0]))
+          .filter((path) => path.includes("/guides/"));
+        if (!paths.length) continue;
+        const { error } = await db.storage.from(bucket).remove(paths);
+        if (error) console.warn("NavAble: guide photos were not removed.", error);
+      }
+    }
+
+    // Straight-line distance in meters between two map points.
+    function metersBetween(lat1, lon1, lat2, lon2) {
+      const rad = (degrees) => degrees * Math.PI / 180;
+      const a = Math.sin(rad(lat2 - lat1) / 2) ** 2
+        + Math.cos(rad(lat1)) * Math.cos(rad(lat2)) * Math.sin(rad(lon2 - lon1) / 2) ** 2;
+      return 6371000 * 2 * Math.asin(Math.sqrt(a));
+    }
+
+    function guidePhotoProblem(file, label) {
+      if (!file) return `Choose the ${label}.`;
+      if (!TYPES[file.type]) return `The ${label} must be a JPG, PNG, or WebP image.`;
+      if (file.size > MAX_BYTES) return `The ${label} must be 5 MB or smaller.`;
+      return null;
+    }
+
+    async function openAddGuide(trigger) {
+      let features;
+      try {
+        features = await K.rows(db.from("accessibility_features")
+          .select("feature_id, feature_name")
+          .eq("status", "Active")
+          .order("feature_name"));
+      } catch (error) {
+        K.toast(`The features could not load. ${K.friendlyError(error)}`, { assertive: true });
+        return;
+      }
+      const photoField = (label, name) => el("div", { className: "nv-field" },
+        el("label", { for: `guide-${name}` }, label, el("span", { className: "nv-req", "aria-hidden": "true", text: " *" })),
+        el("input", { id: `guide-${name}`, name, type: "file", accept: Object.keys(TYPES).join(","), required: true, className: "nv-input" }));
+
+      K.openDialog({
+        title: "Add a route guide",
+        description: `Approved right away for ${location.location_name}.`,
+        returnFocus: trigger,
+        submitLabel: "Add guide",
+        submitIcon: "add_location_alt",
+        wide: true,
+        content: el("div", { style: "display:grid;gap:12px" },
+          K.field({ label: "Feature", name: "feature", type: "select", required: true, options: features.map((feature) => [feature.feature_id, feature.feature_name]) }),
+          K.field({ label: "Where to find it", name: "where", required: true, maxLength: 200, placeholder: "Right side of the main entrance" }),
+          K.field({ label: "Floor", name: "floor", maxLength: 40, placeholder: "Ground floor" }),
+          K.field({ label: "Nearby sign or landmark", name: "landmark", maxLength: 120, placeholder: "Beside the blue sign" }),
+          photoField("Photo of the feature", "featurePhoto"),
+          photoField("Photo of what's nearby", "nearbyPhoto"),
+          K.field({ label: "Pin latitude", name: "latitude", type: "number", step: "any", min: -90, max: 90, hint: "Optional. Enter both latitude and longitude for outdoor spots, within 500 m of this place." }),
+          K.field({ label: "Pin longitude", name: "longitude", type: "number", step: "any", min: -180, max: 180 })),
+        onSubmit: (form, { showError }) => saveGuide(form, showError)
+      });
+    }
+
+    async function saveGuide(form, showError) {
+      const where = K.formText(form, "where");
+      const latitudeText = K.formText(form, "latitude");
+      const longitudeText = K.formText(form, "longitude");
+      const featureFile = form.elements.featurePhoto.files[0];
+      const nearbyFile = form.elements.nearbyPhoto.files[0];
+      const problem = !where ? "Tell people where to find it."
+        : guidePhotoProblem(featureFile, "photo of the feature")
+          || guidePhotoProblem(nearbyFile, "photo of what's nearby")
+          || (Boolean(latitudeText) !== Boolean(longitudeText) ? "Enter both the pin latitude and longitude, or neither." : null);
+      if (problem) {
+        showError(problem);
+        return false;
+      }
+      const latitude = latitudeText ? Number(latitudeText) : null;
+      const longitude = longitudeText ? Number(longitudeText) : null;
+      if (latitude !== null && metersBetween(location.latitude, location.longitude, latitude, longitude) > 500) {
+        showError("Pin a spot within 500 m of this place.");
+        return false;
+      }
+
+      const folder = `${location.location_id}/guides/${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+      const paths = [];
+      const upload = async (file, name) => {
+        const path = `${folder}/${name}.${TYPES[file.type]}`;
+        const { error } = await db.storage.from(BUCKET).upload(path, file, { contentType: file.type, upsert: false });
+        if (error) throw error;
+        paths.push(path);
+        return db.storage.from(BUCKET).getPublicUrl(path).data.publicUrl;
+      };
+      const me = window.NavAbleStaff.user_id;
+      try {
+        const featureUrl = await upload(featureFile, "feature");
+        const nearbyUrl = await upload(nearbyFile, "nearby");
+        const { error } = await db.from("feature_guides").insert({
+          location_id: location.location_id,
+          feature_id: form.elements.feature.value,
+          user_id: me,
+          where_text: where,
+          floor: K.formText(form, "floor"),
+          landmark: K.formText(form, "landmark"),
+          latitude,
+          longitude,
+          feature_photo_url: featureUrl,
+          nearby_photo_url: nearbyUrl,
+          status: "Approved",
+          reviewed_by: me,
+          reviewed_at: K.nowIso()
+        });
+        if (error) throw error;
+      } catch (error) {
+        // Don't leave orphaned files behind if the guide wasn't saved.
+        if (paths.length) await db.storage.from(BUCKET).remove(paths);
+        showError(`The guide was not added. ${K.friendlyError(error)}`);
+        return false;
+      }
+      K.toast(`Route guide added to ${location.location_name}.`);
+      await Promise.all([loadGuides(), loadFeatures()]);
+      changed();
+      return true;
+    }
+
     loadPhotos();
     loadFeatures();
+    loadGuides();
 
     return el("div", { className: "nv-location-details" },
       el("h3", { className: "nv-subhead", text: "Photos" }),
       photosPanel,
       el("h3", { className: "nv-subhead", text: "Accessibility features" }),
-      featuresPanel);
+      featuresPanel,
+      el("h3", { className: "nv-subhead", text: "Route guides" }),
+      guidesPanel);
   }
 
   window.NavAbleLocationDetails = Object.freeze({ section });

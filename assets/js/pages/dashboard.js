@@ -157,6 +157,7 @@ document.addEventListener("DOMContentLoaded", () => {
     openHighPriority: () => count("reports", (q) => q.in("status", OPEN_REPORT_STATUSES).eq("priority_level", "High")),
     pendingLocations: () => count("locations", (q) => q.eq("verification_status", "Pending")),
     aiToReview: () => count("ai_results", (q) => q.eq("detection_status", "Needs Verification").eq("verified", false)),
+    guidesToReview: () => count("feature_guides", (q) => q.eq("status", "Pending")),
     reviewsToModerate: () => count("reviews", (q) => q.eq("review_status", "Pending Review")),
     newBugs: () => count("bug_reports", (q) => q.eq("status", "New")),
     newHighBugs: () => count("bug_reports", (q) => q.eq("status", "New").eq("priority", "High")),
@@ -223,6 +224,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const ai = ok(r.aiToReview);
     if (ai === undefined) setStat("aiToReview", { error: true });
     else setStat("aiToReview", { value: number.format(ai), meta: "Flagged Needs Verification" });
+    const guides = ok(r.guidesToReview);
+    if (guides === undefined) setStat("guidesToReview", { error: true });
+    else setStat("guidesToReview", { value: number.format(guides), meta: "Waiting for an admin" });
     add("AI detections to confirm", ai, "AI results marked Needs Verification and not yet verified");
 
     const moderate = ok(r.reviewsToModerate);
