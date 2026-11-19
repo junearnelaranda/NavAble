@@ -2,6 +2,8 @@
 // Admins open a report, set its status and priority, and can add remarks.
 // Every status change or remark is recorded in `verification` with the admin
 // who made it, and the reporter can optionally get a Report Update notification.
+// Verifying or resolving a report also publishes its photos to the place's
+// gallery in the app (see publishPhotos).
 document.addEventListener("DOMContentLoaded", () => {
   "use strict";
 
@@ -24,6 +26,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const LIST_COLUMNS = "report_id, report_type, description, status, priority_level, created_at, locations!inner(location_name, address), users(email, user_profiles(first_name, last_name)), contribution_points(points)";
   const POINTS_ELIGIBLE = ["Verified", "Resolved"];
   const PERSON = "email, user_profiles(first_name, last_name)";
+  const REPORT_BUCKET = "report-photos";
+  const PLACE_BUCKET = "location-photos";
+  const PHOTO_TYPES = { "image/jpeg": "jpg", "image/png": "png", "image/webp": "webp" };
 
   let filters = {};
   let page = 0;
@@ -148,7 +153,7 @@ document.addEventListener("DOMContentLoaded", () => {
   async function openReport(reportId, trigger) {
     const [reportResult, historyResult] = await Promise.allSettled([
       db.from("reports")
-        .select(`report_id, user_id, report_type, description, status, priority_level, created_at, updated_at, locations(location_name, address, category), users(${PERSON}), images(image_url, image_name, upload_date), contribution_points(point_id, points, tier)`)
+        .select(`report_id, user_id, location_id, report_type, description, status, priority_level, created_at, updated_at, locations(location_name, address, category), users(${PERSON}), images(image_url, image_name, upload_date), contribution_points(point_id, points, tier)`)
         .eq("report_id", reportId)
         .maybeSingle()
         .then(({ data, error }) => { if (error) throw error; return data; }),
@@ -266,6 +271,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const priorityChanged = priority !== report.priority_level;
 
     if (!statusChanged && !priorityChanged && !remarks) {
+      // Saving a verified report again publishes any photos not shown yet.
+      if (POINTS_ELIGIBLE.includes(status)) {
+        try {
+          const published = await syncPlacePhotos(report, status);
+          K.toast(published ? `Nothing else changed. ${published} photo${published === 1 ? "" : "s"} added to the place's gallery.` : "Nothing changed, so nothing was saved.");
+        } catch (error) {
+          console.error("NavAble: report photos were not published.", error);
+          K.toast(`The photos were not added to the place's gallery. ${K.friendlyError(error)}`, { assertive: true, duration: 7000 });
+        }
+        return true;
+      }
       K.toast("Nothing changed, so nothing was saved.");
       return true;
     }
@@ -279,6 +295,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const problems = [];
+    if (statusChanged || POINTS_ELIGIBLE.includes(status)) {
+      try {
+        await syncPlacePhotos(report, status);
+      } catch (error) {
+        console.error("NavAble: report photos were not published.", error);
+        problems.push(`the photos were not added to the place's gallery (${K.friendlyError(error)})`);
+      }
+    }
     if (statusChanged || remarks) {
       const { error } = await db.from("verification").insert({
         report_id: report.report_id,
@@ -310,6 +334,67 @@ document.addEventListener("DOMContentLoaded", () => {
     else K.toast(`Report saved: ${changes}${notify && statusChanged ? ". Reporter notified." : "."}`);
     view.load();
     return true;
+  }
+
+  // ---------- Place gallery ----------
+
+  // The file's path inside a public storage bucket, or null for other links.
+  function bucketPath(url, bucket) {
+    const marker = `/storage/v1/object/public/${bucket}/`;
+    const start = (url || "").indexOf(marker);
+    return start < 0 ? null : decodeURIComponent(url.slice(start + marker.length).split(/[?#]/)[0]);
+  }
+
+  // Verified and Resolved reports show their photos in the place's gallery in
+  // the app; other statuses hide them again. Publishing copies each photo into
+  // the admin-only location-photos bucket first, because the contributor's
+  // link contains their account id, then removes the original.
+  // Returns how many photos were newly published.
+  async function syncPlacePhotos(report, status) {
+    if (!report.location_id || !report.user_id) return 0;
+    const images = await K.rows(db.from("images")
+      .select("image_id, image_url, is_public")
+      .eq("location_id", report.location_id)
+      .eq("user_id", report.user_id)
+      .like("image_url", `%/${report.report_id}/%`));
+    const publish = POINTS_ELIGIBLE.includes(status);
+    let published = 0;
+    const originals = [];
+    for (const image of images) {
+      if (!publish) {
+        if (image.is_public) {
+          const { error } = await db.from("images").update({ is_public: false }).eq("image_id", image.image_id);
+          if (error) throw error;
+        }
+        continue;
+      }
+      let url = image.image_url;
+      if (!bucketPath(url, PLACE_BUCKET)) {
+        const original = bucketPath(url, REPORT_BUCKET);
+        if (!original) continue; // Not a NavAble photo; leave it private.
+        const response = await fetch(url, { cache: "no-store" });
+        if (!response.ok) throw new Error("A photo could not be read.");
+        const photo = await response.blob();
+        const extension = PHOTO_TYPES[photo.type];
+        if (!extension) throw new Error("A photo is not a JPG, PNG, or WebP image.");
+        const path = `${report.location_id}/reports/${report.report_id}/${image.image_id}.${extension}`;
+        const { error: uploadError } = await db.storage.from(PLACE_BUCKET).upload(path, photo, { contentType: photo.type, upsert: true });
+        if (uploadError) throw uploadError;
+        url = db.storage.from(PLACE_BUCKET).getPublicUrl(path).data.publicUrl;
+        originals.push(original);
+      }
+      if (image.is_public && url === image.image_url) continue;
+      const { error } = await db.from("images")
+        .update({ image_url: url, is_public: true })
+        .eq("image_id", image.image_id);
+      if (error) throw error;
+      published += 1;
+    }
+    if (originals.length) {
+      const { error } = await db.storage.from(REPORT_BUCKET).remove(originals);
+      if (error) console.warn("NavAble: original report photos were not removed.", error);
+    }
+    return published;
   }
 
   // ---------- CSV ----------

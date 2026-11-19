@@ -18,22 +18,42 @@
   <main class="page">
     <a class="back" href="index.html">← Back to NavAble</a>
     <article class="card">
-      <span class="kicker">NavAble public website</span>
+      <span class="kicker">NavAble app and website</span>
       <h1>Privacy Policy</h1>
-      <p>This page outlines the privacy areas that should be finalized before the NavAble website and mobile application are released publicly.</p>
-      <p class="notice">Draft project notice: replace this content with a policy reviewed for your actual Firebase, Google Maps, Roboflow, analytics, and mobile-app configuration before deployment.</p>
-      <h2>Information NavAble may process</h2>
-      <p>Depending on the final implementation, NavAble may process account details, accessibility preferences, saved locations, map searches, contributed photographs, reports, reviews, and approximate or precise location data.</p>
-      <h2>Why information is used</h2>
-      <p>Information should only be used to provide accessible navigation, maintain user accounts, analyze submitted accessibility features, moderate community data, improve accuracy, and protect the service.</p>
-      <h2>Third-party services</h2>
-      <p>The final policy should explain how Firebase, Google Maps, and Roboflow process information and link to their applicable privacy documentation.</p>
+      <p>Last updated November 19, 2026</p>
+      <p class="notice">This policy covers the NavAble mobile app and this website. It describes what NavAble actually collects, who can see it, and how to ask for a copy, correction or deletion of your data.</p>
+
+      <h2>What NavAble collects</h2>
+      <p>Your name, email address and password (handled by Supabase Authentication; NavAble never sees your password); your profile photo, if you add one; the reports, photos, pinned locations and AI scan results you submit; bug reports you send, including basic device information; and the points you earn.</p>
+
+      <h2>What other users can see</h2>
+      <p>Your full name, profile photo, level and points appear on the Top Contributors leaderboard. Places and photos that admins approve are shown to everyone. Your email address, reports in review and bug reports are visible only to you and NavAble admins.</p>
+
+      <h2>Your location</h2>
+      <p>With your permission, your location is used on your phone to show the map, find nearby places and plan routes. It is sent to the place search and routing services below as the search or route starting point, and is stored by NavAble only when you pin a location in a report.</p>
+
+      <h2>On your phone only</h2>
+      <p>Saved places, your theme and text size choices, and which level-up celebrations you have seen are stored only on your device.</p>
+
+      <h2>Services NavAble uses</h2>
+      <p>Supabase stores accounts, reports and photos. Google Maps Platform powers Explore search, and Directions opens Google Maps. OpenStreetMap services provide the map, place search and routes. Photo scanning runs on your phone when possible; otherwise the photo is sent to Roboflow for analysis.</p>
+
+      <h2>This website</h2>
+      <p>The website does not use accounts, cookies or analytics for visitors. When you send a bug report through the contact form, your name, email address, the bug details and any device information you type are saved to NavAble's database so the team can follow up. Other messages from the contact form open your own email app and are sent from your email account. The website is hosted on Cloudflare Pages and GitHub Pages and loads its fonts from Google Fonts; these services receive your IP address when the page loads.</p>
+
       <h2>Administrative access</h2>
-      <p>Authorized staff access should be logged and limited through authentication, role-based authorization, and database security rules.</p>
-      <h2>User choices</h2>
-      <p>Users should be able to review applicable permissions and request access, correction, or deletion of personal information according to the policies and laws that apply to the deployed service.</p>
+      <p>Only NavAble staff with an active admin account can review reports, photos, bug reports and user accounts. Access is checked by sign-in and by the database's security rules.</p>
+
+      <h2>Your choices</h2>
+      <p>You can edit your name and photo, or remove your photo, in your profile. To ask for a copy, correction or deletion of your data, including your reports, send a request through Report a bug in the app's Reports tab, or email <a href="mailto:nav4ble@gmail.com">nav4ble@gmail.com</a>.</p>
+
+      <h2>Data Privacy Act</h2>
+      <p>NavAble handles personal information in line with the Data Privacy Act of 2012 (Republic Act No. 10173).</p>
+
+      <h2>Changes</h2>
+      <p>This policy may be updated. The date at the top shows the latest version.</p>
     </article>
-    <footer>© <span id="year"></span> NavAble · Draft for project development</footer>
+    <footer>© <span id="year"></span> NavAble</footer>
   </main>
   <script>
     const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,{acceptNode(node){const parent=node.parentElement;return parent&&node.nodeValue.includes("NavAble")&&!parent.closest("script,style")?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT}});const nodes=[];while(walker.nextNode())nodes.push(walker.currentNode);nodes.forEach(node=>{const container=document.createElement("span");node.nodeValue.split(/(NavAble)/g).forEach(part=>{if(part!=="NavAble"){container.append(part);return}const word=document.createElement("span");word.className="navable-word";word.append("Nav");const accent=document.createElement("span");accent.className="navable-able";accent.textContent="Able";word.append(accent);container.append(word)});node.replaceWith(container)});
